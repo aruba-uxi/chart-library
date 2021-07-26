@@ -34,6 +34,16 @@ entries:
   servicelib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-07-26T13:31:46.443252021Z"
+    description: A Helm chart library for Kubernetes services
+    digest: 08a6218d9c40bf48fe600f7f9f3e6abbfab51dc08717356ab9b5ba02369e636a
+    name: servicelib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.1/servicelib-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-07-26T13:25:49.30099778Z"
     description: A Helm chart library for Kubernetes services
     digest: 5fa866322fcd342cb3295a6037dec164fce6100ccf7f8bdd86c7c2c0d4a6215a
@@ -42,4 +52,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-07-26T13:25:49.30114908Z"
+generated: "2021-07-26T13:31:46.44328334Z"
