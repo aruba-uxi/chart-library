@@ -1,3 +1,4 @@
+{{- define "servicelib.webapp" -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -12,3 +13,4 @@ spec:
       targetPort: {{ .Values.port }}
   selector:
     app: {{ .Chart.Name }}
+{{- end }}
