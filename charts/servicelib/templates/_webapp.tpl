@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ Chart.Name }}-service
+  name: {{ .Chart.Name }}-service
   labels:
-    app: {{ Chart.Name }}
+    app: {{ .Chart.Name }}
 spec:
   ports:
     - name: http
@@ -11,4 +11,4 @@ spec:
       protocol: TCP
       targetPort: {{ .Values.port }}
   selector:
-    app: {{ Chart.Name }}
+    app: {{ .Chart.Name }}
