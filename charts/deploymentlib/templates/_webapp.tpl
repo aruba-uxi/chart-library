@@ -19,6 +19,7 @@ spec:
       - name: {{ .Chart.Name }}
         env:
         {{- include "deploymentlib.env-variables" . | indent 8 }}
+        {{- include "deploymentlib.env-variables-from-secrets" . | indent 8 }}
         image: {{ .Values.image }}:{{ $.Chart.AppVersion }}
         imagePullPolicy: IfNotPresent
         readinessProbe:
