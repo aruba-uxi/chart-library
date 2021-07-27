@@ -12,7 +12,7 @@
 - name: {{ $key }}
   valueFrom:
    secretKeyRef:
-     name: {{ $key | lower }}
+     name: {{ $key | lower | replace "_" "-" }}
      key:  {{ $key }}
 {{- end -}}
 {{- end -}}

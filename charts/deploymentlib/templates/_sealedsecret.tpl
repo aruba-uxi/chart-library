@@ -5,7 +5,7 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: {{ $key | lower }}
+  name: {{ $key | lower | replace "_" "-" }}
   namespace: {{ $.Values.secretNamespace }}
 spec:
   encryptedData:
@@ -13,7 +13,7 @@ spec:
   template:
     metadata:
       creationTimestamp: null
-      name: {{ $key | lower }}
+      name: {{ $key | lower | replace "_" "-" }}
       namespace: {{ $.Values.secretNamespace }}
 ---
 {{- end -}}
