@@ -10,7 +10,7 @@ To run an example:
 
 1. `cd` into the example directory:
 
-   `cd example/deploymentexample`
+   `cd charts/deploymentexample`
 
 2. Update the dependencies:
 
