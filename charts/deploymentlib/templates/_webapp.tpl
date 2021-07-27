@@ -1,5 +1,4 @@
 {{- define "deploymentlib.webapp" -}}
-namespace: {{ .Values.secretNamespace }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
