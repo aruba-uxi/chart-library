@@ -1,0 +1,6 @@
+dependencies:
+- name: deploymentlib
+  repository: file://../../charts/deploymentlib
+  version: 0.1.3
+digest: sha256:05ba07aa13983f6d976243e8339be13ba8f0835e476dd9e45e705ca70e40279b
+generated: "2021-07-27T14:24:33.32993+02:00"

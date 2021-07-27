@@ -2,5 +2,18 @@
 {{- range $key, $val := .Values.env }}
 - name: {{ $key }}
   value: {{ $val | quote }}
-{{- end}}
 {{- end }}
+{{- end }}
+
+
+{{- define "deploymentlib.env-secrets" -}}
+{{- if .Values.envSecrets -}}
+{{- range $key, $val := .Values.envSecrets }}
+- name: {{ $key }}
+  valueFrom:
+   secretKeyRef:
+     name: {{ $key | lower }}
+     key:  {{ $key }}
+{{- end -}}
+{{- end -}}
+{{- end -}}
