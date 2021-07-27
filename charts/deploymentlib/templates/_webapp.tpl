@@ -6,7 +6,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCount | default 1 }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
@@ -19,9 +19,13 @@ spec:
       - name: {{ .Chart.Name }}
         env:
         {{- include "deploymentlib.env-variables" . | indent 8 }}
-        {{- include "deploymentlib.env-variables-from-secrets" . | indent 8 }}
+        {{- include "deploymentlib.env-secrets" . | indent 8 }}
         image: {{ .Values.image }}:{{ $.Chart.AppVersion }}
         imagePullPolicy: IfNotPresent
+        {{- if .Values.command }}
+        command: [ {{ .Values.command | quote }} ]
+        {{- end -}}
+        {{ if .Values.readinessPath }}
         readinessProbe:
           httpGet:
             httpHeaders:
@@ -31,6 +35,8 @@ spec:
             port: {{ .Values.port }}
           initialDelaySeconds: 5
           periodSeconds: 3
+        {{- end }}
+        {{ if .Values.livenessPath }}
         livenessProbe:
           httpGet:
             httpHeaders:
@@ -40,6 +46,7 @@ spec:
             port: {{ .Values.port }}
           initialDelaySeconds: 5
           periodSeconds: 3
+        {{- end }}
         ports:
         - containerPort: {{ .Values.port }}
         resources:
@@ -55,4 +62,6 @@ spec:
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
       {{- end }}
+---
+{{- include "deploymentlib.sealedsecret" . }}
 {{- end }}
