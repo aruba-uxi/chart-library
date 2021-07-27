@@ -3,6 +3,20 @@ entries:
   deploymentexample:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-07-27T14:43:18.786362209Z"
+    dependencies:
+    - name: deploymentlib
+      repository: file://../../charts/deploymentlib
+      version: '*'
+    description: A Helm chart for Kubernetes
+    digest: edc2b3985a8af7351696d67f89dbc251c910d211e4205bf15ec0f1006908f1d7
+    name: deploymentexample
+    type: application
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/deploymentexample-0.1.8/deploymentexample-0.1.8.tgz
+    version: 0.1.8
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-07-27T14:38:16.224038324Z"
     dependencies:
     - name: deploymentlib
@@ -116,6 +130,16 @@ entries:
   deploymentlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-07-27T14:43:18.94190774Z"
+    description: A Helm chart library for Kubernetes deployments
+    digest: 979c4a4cfb9731050700555787fe99b0b31333357c952a2177e89702ba5a4a48
+    name: deploymentlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/deploymentlib-0.1.6/deploymentlib-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-07-27T14:17:45.591942042Z"
     description: A Helm chart library for Kubernetes deployments
     digest: 17300647ab25b7ce5e4c7e68bec02c4e3069f068f11e0fe6104d73dbfa7e7a3b
@@ -205,4 +229,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-07-27T14:38:16.224087726Z"
+generated: "2021-07-27T14:43:18.941972572Z"
