@@ -10,11 +10,6 @@ metadata:
 spec:
   encryptedData:
     {{ $key }}: {{ $val }}
-  template:
-    metadata:
-      creationTimestamp: null
-      name: {{ $key | lower | replace "_" "-" }}
-      namespace: {{ $.Values.secretNamespace }}
 ---
 {{- end -}}
 {{- end -}}
