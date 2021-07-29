@@ -6,7 +6,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: {{ $key | lower | replace "_" "-" }}
-  namespace: {{ $.Values.secretNamespace }}
+  namespace: {{ $.Values.namespace }}
 spec:
   encryptedData:
     {{ $key }}: {{ $val }}
