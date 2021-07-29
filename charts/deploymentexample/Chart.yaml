@@ -8,3 +8,9 @@ dependencies:
 - name: deploymentlib
   version: "*"
   repository: "file://../../charts/deploymentlib"
+- name: servicelib
+  version: "*"
+  repository: "file://../../charts/servicelib"
+- name: namespacelib
+  version: "*"
+  repository: "file://../../charts/namespacelib"

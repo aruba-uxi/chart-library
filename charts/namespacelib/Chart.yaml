@@ -1,0 +1,6 @@
+apiVersion: v2
+name: namespacelib
+description: A Helm chart library for Kubernetes namespaces
+type: library
+version: 0.1.0
+appVersion: "1.16.0"
