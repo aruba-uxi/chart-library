@@ -16,6 +16,9 @@ spec:
       labels:
         app: deploymentexample
     spec:
+      
+      serviceAccountName: deploy-service-account
+      
       containers:
       - name: deploymentexample
         env:        
@@ -25,7 +28,11 @@ spec:
           valueFrom:
            secretKeyRef:
              name: test-secret
-             key:  TEST_SECRET
+             key:  TEST_SECRET        
+        - name: TEST_FIELD
+          valueFrom:
+           fieldRef:
+             fieldPath: metadata.uid
         image: busybox:latest
         imagePullPolicy: IfNotPresent
         command: [ "printenv" ]
