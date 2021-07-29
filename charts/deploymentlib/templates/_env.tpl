@@ -17,3 +17,15 @@
 {{- end -}}
 {{- end -}}
 {{- end -}}
+
+
+{{- define "deploymentlib.env-fields" -}}
+{{- if .Values.envFields -}}
+{{- range $key, $val := .Values.envFields }}
+- name: {{ $key }}
+  valueFrom:
+   fieldRef:
+     fieldPath: {{ $val }}
+{{- end -}}
+{{- end -}}
+{{- end -}}

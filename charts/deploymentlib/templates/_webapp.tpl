@@ -23,6 +23,7 @@ spec:
         env:
         {{- include "deploymentlib.env-variables" . | indent 8 }}
         {{- include "deploymentlib.env-secrets" . | indent 8 }}
+        {{- include "deploymentlib.env-fields" . | indent 8 }}
         image: {{ .Values.image }}:{{ $.Chart.AppVersion }}
         imagePullPolicy: IfNotPresent
         {{- if .Values.command }}
