@@ -35,6 +35,8 @@ spec:
             httpHeaders:
             - name: Host
               value: readinessProbe
+            - name: content-type
+              value: application/json
             path: {{ .Values.readinessPath }}
             port: {{ .Values.port }}
           initialDelaySeconds: 5
@@ -46,6 +48,8 @@ spec:
             httpHeaders:
             - name: Host
               value: livenessProbe
+            - name: content-type
+              value: application/json
             path: {{ .Values.livenessPath }}
             port: {{ .Values.port }}
           initialDelaySeconds: 5
