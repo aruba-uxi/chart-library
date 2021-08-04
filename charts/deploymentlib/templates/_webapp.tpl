@@ -35,7 +35,7 @@ spec:
             httpHeaders:
             - name: Host
               value: readinessProbe
-            - name: content-type
+            - name: Content-Type
               value: application/json
             path: {{ .Values.readinessPath }}
             port: {{ .Values.port }}
@@ -48,7 +48,7 @@ spec:
             httpHeaders:
             - name: Host
               value: livenessProbe
-            - name: content-type
+            - name: Content-Type
               value: application/json
             path: {{ .Values.livenessPath }}
             port: {{ .Values.port }}
