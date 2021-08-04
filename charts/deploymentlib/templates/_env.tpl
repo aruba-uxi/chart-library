@@ -1,3 +1,6 @@
+{{/*
+Inject extra environment variables
+*/}}
 {{- define "deploymentlib.env-variables" -}}
 {{- range $key, $val := .Values.env }}
 - name: {{ $key }}
@@ -6,19 +9,25 @@
 {{- end }}
 
 
+{{/*
+Inject extra environment variables from secrets
+*/}}
 {{- define "deploymentlib.env-secrets" -}}
 {{- if .Values.envSecrets -}}
-{{- range $key, $val := .Values.envSecrets }}
-- name: {{ $key }}
+{{- range .Values.envSecrets }}
+- name: {{ .envName }}
   valueFrom:
    secretKeyRef:
-     name: {{ $key | lower | replace "_" "-" }}
-     key:  {{ $key }}
+     name: {{ .secretName }}
+     key: {{ .secretKey }}
 {{- end -}}
 {{- end -}}
 {{- end -}}
 
 
+{{/*
+Inject extra environment variables from fields
+*/}}
 {{- define "deploymentlib.env-fields" -}}
 {{- if .Values.envFields -}}
 {{- range $key, $val := .Values.envFields }}
