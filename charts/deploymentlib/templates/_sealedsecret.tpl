@@ -1,15 +1,18 @@
 {{- define "deploymentlib.sealedsecret" -}}
 {{- if .Values.envSecrets -}}
-{{- range .Values.envSecrets }}
+{{- $secretNamespace := .Values.secretNamespace -}}
+{{- range $secretName, $secretData := .Values.envSecrets }}
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: {{ .secretName }}
-  namespace: {{ .secretNamespace }}
+  name: {{ $secretName }}
+  namespace: {{ $secretNamespace }}
 spec:
   encryptedData:
-    {{ .secretKey }}: {{ .secretValue }}
+    {{- range $secretKey, $secretValue := $secretData }}
+    {{ $secretKey }}: {{ $secretValue }}
+    {{- end }}
 ---
 {{- end -}}
 {{- end -}}

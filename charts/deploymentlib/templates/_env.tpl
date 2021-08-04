@@ -14,12 +14,14 @@ Inject extra environment variables from secrets
 */}}
 {{- define "deploymentlib.env-secrets" -}}
 {{- if .Values.envSecrets -}}
-{{- range .Values.envSecrets }}
-- name: {{ .envName }}
+{{- range $secretName, $secretData := .Values.envSecrets }}
+{{- range $envName, $secretValue := $secretData }}
+- name: {{ $envName }}
   valueFrom:
    secretKeyRef:
-     name: {{ .secretName }}
-     key: {{ .secretKey }}
+     name: {{ $secretName }}
+     key: {{ $envName }}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
