@@ -290,6 +290,32 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/deploymentlib-0.1.0/deploymentlib-0.1.0.tgz
     version: 0.1.0
+  ingressexample:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-08-05T09:02:11.572100504Z"
+    dependencies:
+    - name: ingresslib
+      repository: file://../../charts/ingresslib
+      version: '*'
+    description: A Helm chart for Kubernetes
+    digest: f9f489d413fe475af8fb527f4a52f1fd0c86410e31a0b69e0d44628750f15813
+    name: ingressexample
+    type: application
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/ingressexample-1.0.0/ingressexample-1.0.0.tgz
+    version: 1.0.0
+  ingresslib:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-08-05T09:02:11.782912415Z"
+    description: A Helm chart library for Kubernetes ingress
+    digest: 3ceeb5c8689913ab74501ddd20361d72b86378229cbcd5457bc96b023c8295c5
+    name: ingresslib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/ingresslib-0.1.0/ingresslib-0.1.0.tgz
+    version: 0.1.0
   servicelib:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -331,4 +357,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-08-05T07:10:13.053331502Z"
+generated: "2021-08-05T09:02:11.783013716Z"
