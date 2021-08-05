@@ -1,10 +1,10 @@
 apiVersion: v2
-name: deploymentexample
+name: ingressexample
 description: A Helm chart for Kubernetes
 type: application
-version: 0.1.11
+version: 1.0.0
 appVersion: "latest"
 dependencies:
-- name: deploymentlib
+- name: ingresslib
   version: "*"
-  repository: "file://../../charts/deploymentlib"
+  repository: "file://../../charts/ingresslib"

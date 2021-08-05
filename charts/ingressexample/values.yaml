@@ -1,0 +1,8 @@
+port: 8000
+
+legacyIngress:
+  enabled: true
+  hosts:
+  - host: deploymentexample.legacy-ingress.local
+    paths:
+    - /

@@ -22,10 +22,3 @@ serviceAccountName: deploy-service-account
 
 envFields:
   TEST_FIELD: metadata.uid
-
-legacyIngress:
-  enabled: true
-  hosts:
-  - host: deploymentexample.legacy-ingress.local
-    paths:
-    - /
