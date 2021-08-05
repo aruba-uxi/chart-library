@@ -22,7 +22,7 @@ spec:
       - name: {{ .Chart.Name }}
         env:
         {{- include "deploymentlib.env-variables" . | indent 8 }}
-        {{- include "deploymentlib.env-secrets" . | indent 8 }}
+        {{- include "deploymentlib.env-sealed-secrets" . | indent 8 }}
         {{- include "deploymentlib.env-fields" . | indent 8 }}
         image: {{ .Values.image }}:{{ $.Chart.AppVersion }}
         imagePullPolicy: {{ .Values.imagePullPolicy | default "IfNotPresent" }}
