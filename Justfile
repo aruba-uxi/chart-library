@@ -2,9 +2,10 @@
 help:
 	@just list
 
-helm-dependency-update:
+template-deployment +ARGS='':
   helm dependency update charts/deploymentexample
-
-template-example +ARGS='':
-  @just helm-dependency-update
   helm template charts/deploymentexample {{ARGS}}
+
+template-ingress +ARGS='':
+  helm dependency update charts/ingressexample
+  helm template charts/ingressexample {{ARGS}}
