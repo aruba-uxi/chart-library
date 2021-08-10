@@ -1,4 +1,4 @@
-{{- define "servicelib.external_ip" -}}
+{{- define "servicelib.externalip" -}}
 {{- range $key, $val := .Values.externalIps }}
 apiVersion: v1
 kind: Service

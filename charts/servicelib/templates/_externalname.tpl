@@ -1,4 +1,4 @@
-{{- define "servicelib.external_name" -}}
+{{- define "servicelib.externalname" -}}
 {{- range $key, $val := .Values.externalNames }}
 apiVersion: v1
 kind: Service
