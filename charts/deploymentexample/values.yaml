@@ -24,5 +24,8 @@ envFields:
   TEST_FIELD: metadata.uid
 
 livenessProbe:
-  path: /healthz
+  path: /livez
   initialDelaySeconds: 10
+
+readinessProbe:
+  path: /readyz
