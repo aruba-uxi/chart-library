@@ -316,7 +316,32 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/ingresslib-0.1.0/ingresslib-0.1.0.tgz
     version: 0.1.0
+  serviceexample:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-08-10T12:52:05.532165544Z"
+    dependencies:
+    - name: servicelib
+      repository: file://../../charts/servicelib
+      version: '*'
+    description: A Helm chart for Kubernetes
+    digest: b2615ab7674bdaef677805204c35ef1561f9d493f7686c54138cef9c995da963
+    name: serviceexample
+    type: application
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/serviceexample-0.1.11/serviceexample-0.1.11.tgz
+    version: 0.1.11
   servicelib:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-08-10T12:52:05.677057904Z"
+    description: A Helm chart library for Kubernetes services
+    digest: 9fe2d4755030725e18def918de6e7f6998678c82ae1f604cca64a3461bb7b1d3
+    name: servicelib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.4/servicelib-0.1.4.tgz
+    version: 0.1.4
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-07-28T07:29:46.565936208Z"
@@ -357,4 +382,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-08-05T09:02:11.783013716Z"
+generated: "2021-08-10T12:52:05.677143509Z"
