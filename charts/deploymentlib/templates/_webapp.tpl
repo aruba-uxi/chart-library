@@ -29,7 +29,7 @@ spec:
         {{- if .Values.command }}
         command: [ {{ .Values.command | quote }} ]
         {{- end -}}
-        {{ if .Values.readinessPath }}
+        {{- if .Values.readinessProbe }}
         readinessProbe:
           httpGet:
             httpHeaders:
@@ -37,12 +37,12 @@ spec:
               value: readinessProbe
             - name: Content-Type
               value: application/json
-            path: {{ .Values.readinessPath }}
+            path: {{ .Values.readinessProbe.path }}
             port: {{ .Values.port }}
-          initialDelaySeconds: 5
-          periodSeconds: 3
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds | default "5" }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds | default "3" }}
         {{- end }}
-        {{ if .Values.livenessPath }}
+        {{- if .Values.livenessProbe }}
         livenessProbe:
           httpGet:
             httpHeaders:
@@ -50,10 +50,10 @@ spec:
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: {{ .Values.livenessPath }}
+            path: {{ .Values.livenessProbe.path }}
             port: {{ .Values.port }}
-          initialDelaySeconds: 5
-          periodSeconds: 3
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds | default "5" }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds | default "3" }}
         {{- end }}
         ports:
         - containerPort: {{ .Values.port }}
