@@ -22,3 +22,9 @@ serviceAccountName: deploy-service-account
 
 envFields:
   TEST_FIELD: metadata.uid
+
+livenessProbe:
+  path: /healthz
+  initialDelaySeconds: 10
+
+  readinessProbe: {}
