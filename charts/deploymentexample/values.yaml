@@ -26,5 +26,3 @@ envFields:
 livenessProbe:
   path: /healthz
   initialDelaySeconds: 10
-
-  readinessProbe: {}
