@@ -1,5 +1,5 @@
 {{- define "ingresslib.legacyingress" -}}
-{{- if .Values.legacyIngress.enabled -}}
+{{- if .Values.legacyIngress -}}
 {{- $chartName := .Chart.Name -}}
 {{- $servicePort := .Values.port -}}
 apiVersion: extensions/v1beta1
