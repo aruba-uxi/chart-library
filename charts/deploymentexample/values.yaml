@@ -13,8 +13,7 @@ limitMemory: 256Mi
 
 livenessProbe:
   path: /livez
-  periodSeconds: 5
+  initialDelaySeconds: 10
 
 readinessProbe:
   path: /readyz
-  initialDelaySeconds: 10
