@@ -10,3 +10,11 @@ command: "printenv"
 
 limitCpu: 100m
 limitMemory: 256Mi
+
+livenessProbe:
+  path: /livez
+  periodSeconds: 5
+
+readinessProbe:
+  path: /readyz
+  initialDelaySeconds: 10
