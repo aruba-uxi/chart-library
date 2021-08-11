@@ -318,6 +318,16 @@ entries:
   ingresslib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-08-11T10:34:10.568968726Z"
+    description: A Helm chart library for Kubernetes ingress
+    digest: c8bb5aeeb574c39537645c0c554c98a3d4a15a3e2be5615976241b0558b10dad
+    name: ingresslib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/ingresslib-0.1.1/ingresslib-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-05T09:02:11.782912415Z"
     description: A Helm chart library for Kubernetes ingress
     digest: 3ceeb5c8689913ab74501ddd20361d72b86378229cbcd5457bc96b023c8295c5
@@ -392,4 +402,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-08-10T15:12:15.295800269Z"
+generated: "2021-08-11T10:34:10.569093929Z"
