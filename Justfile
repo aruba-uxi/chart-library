@@ -9,3 +9,7 @@ template-deployment +ARGS='':
 template-ingress +ARGS='':
   helm dependency update charts/ingressexample
   helm template charts/ingressexample {{ARGS}}
+
+template-service +ARGS='':
+  helm dependency update charts/serviceexample
+  helm template charts/serviceexample {{ARGS}}
