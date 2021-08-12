@@ -4,7 +4,6 @@ env:
 envFields:
   HOST_IP: status.hostIP
 
-secretNamespace: deploymentexample
 envSealedSecrets:
   database-url:
     DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
