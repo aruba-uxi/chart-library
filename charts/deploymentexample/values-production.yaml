@@ -5,7 +5,6 @@ envField:
   HOST_IP: status.hostIP
   CONTAINER_UID: metadata.uid
 
-secretNamespace: deploymentexample
 envSealedSecrets:
   database_url:
     DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...

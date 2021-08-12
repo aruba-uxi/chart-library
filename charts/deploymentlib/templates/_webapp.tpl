@@ -66,9 +66,9 @@ spec:
             memory: {{ .Values.limitMemory }}
             {{- end }}
 
-      {{- if .Values.imagePullSecret }}
+      {{- if .Values.sealedImagePullSecret }}
       imagePullSecrets:
-      - name: {{ .Values.imagePullSecret }}
+      - name: sealed-image-pull-secret
       {{- end }}
 ---
 {{- include "deploymentlib.sealedsecret" . }}
