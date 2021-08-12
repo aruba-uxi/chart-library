@@ -6,10 +6,12 @@ envFields:
 
 secretNamespace: deploymentexample
 envSealedSecrets:
-  database_url:
+  database-url:
     DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
   aws-access:
     AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
     AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
 
 serviceAccountName: deploy-service-account
+
+sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson

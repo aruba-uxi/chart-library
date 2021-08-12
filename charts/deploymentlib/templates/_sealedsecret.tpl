@@ -16,4 +16,19 @@ spec:
 ---
 {{- end -}}
 {{- end -}}
+
+{{- if .Values.sealedImagePullSecret -}}
+{{- $secretNamespace := .Values.secretNamespace -}}
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: sealed-image-pull-secret
+  namespace: {{ $secretNamespace }}
+spec:
+  encryptedData:
+    .dockerconfigjson: {{ .Values.sealedImagePullSecret }}
+---
+{{- end -}}
+
 {{- end -}}
