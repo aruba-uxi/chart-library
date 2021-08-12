@@ -24,6 +24,8 @@ metadata:
 spec:
   encryptedData:
     .dockerconfigjson: {{ .Values.sealedImagePullSecret }}
+  template:
+    type: kubernetes.io/dockerconfigjson
 ---
 {{- end -}}
 
