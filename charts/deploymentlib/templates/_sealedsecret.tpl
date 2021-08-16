@@ -21,6 +21,7 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: sealed-image-pull-secret
+  namesapce: {{ .Release.Namespace }}
 spec:
   encryptedData:
     .dockerconfigjson: {{ .Values.sealedImagePullSecret }}
@@ -28,6 +29,7 @@ spec:
     data: null
     metadata:
       name: uxi-uxi-staging-pull-secret
+      namesapce: {{ .Release.Namespace }}
     type: kubernetes.io/dockerconfigjson
 
 ---
