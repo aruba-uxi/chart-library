@@ -186,6 +186,16 @@ entries:
   deploymentlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-08-16T10:39:05.156142581Z"
+    description: A Helm chart library for webapp deployments
+    digest: 6f2b55fe2918fb34e5f61dd6eeefec0cc953a31a34eefa732ded682b0d5dc9d0
+    name: deploymentlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/deploymentlib-0.4.3/deploymentlib-0.4.3.tgz
+    version: 0.4.3
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-16T10:30:20.48755912Z"
     description: A Helm chart library for webapp deployments
     digest: 5d417bae06e1c5d848aed6e000a225e6d241666e52ed2a437b4c703565fa8254
@@ -446,4 +456,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-08-16T10:30:20.487779722Z"
+generated: "2021-08-16T10:39:05.156318379Z"
