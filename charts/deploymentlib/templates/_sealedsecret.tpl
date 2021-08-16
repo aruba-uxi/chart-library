@@ -25,7 +25,11 @@ spec:
   encryptedData:
     .dockerconfigjson: {{ .Values.sealedImagePullSecret }}
   template:
+    data: null
+    metadata:
+      name: uxi-uxi-staging-pull-secret
     type: kubernetes.io/dockerconfigjson
+
 ---
 {{- end -}}
 
