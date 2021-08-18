@@ -1,0 +1,16 @@
+image: busybox
+imagePullPolicy: Never
+
+port: 8000
+
+command: "printenv"
+
+limitCpu: 100m
+limitMemory: 256Mi
+
+livenessProbe:
+  path: /livez
+  initialDelaySeconds: 10
+
+readinessProbe:
+  path: /readyz

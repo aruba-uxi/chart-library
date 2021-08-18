@@ -13,3 +13,7 @@ template-ingress +ARGS='':
 template-service +ARGS='':
   helm dependency update charts/serviceexample
   helm template charts/serviceexample {{ARGS}}
+
+template-serviceaccount +ARGS='':
+  helm dependency update charts/serviceaccountexample
+  helm template charts/serviceaccountexample {{ARGS}}
