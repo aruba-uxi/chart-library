@@ -1,0 +1,10 @@
+apiVersion: v2
+name: serviceaccountexample
+description: A Helm chart for Kubernetes service account
+type: application
+version: 0.1.11
+appVersion: "latest"
+dependencies:
+- name: serviceaccountlib
+  version: "*"
+  repository: "file://../../charts/serviceaccountlib"
