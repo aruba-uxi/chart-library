@@ -1,4 +1,4 @@
-{{- define "serviceaccountlib.webapp" -}}
+{{- define "serviceaccountlib.serviceaccount" -}}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
