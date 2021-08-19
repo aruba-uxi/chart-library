@@ -1,6 +1,0 @@
-env:
-  CAPE_ROLE: DEV
-  DATABASE_URL: plaintext_url
-
-envField:
-  HOST_IP: status.hostIP

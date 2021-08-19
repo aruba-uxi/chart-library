@@ -1,5 +1,0 @@
-legacyIngress:
-  hosts:
-  - host: ingressexample.legacy-ingress.local
-    paths:
-    - /
