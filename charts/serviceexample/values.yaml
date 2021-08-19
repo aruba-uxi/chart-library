@@ -1,17 +1,1 @@
 port: 8000
-
-externalNames:
-  storage-service:
-    url: google.com
-
-externalIps:
-  backend-service:
-    ips:
-      - 192.168.0.0
-      - 197.0.0.1
-    ports:
-      - name: http
-        port: 80
-      - name: https
-        port: 443
-        protocol: TCP # UDP|TCP

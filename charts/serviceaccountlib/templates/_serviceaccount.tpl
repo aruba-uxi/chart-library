@@ -1,4 +1,5 @@
 {{- define "serviceaccountlib.serviceaccount" -}}
+{{ if .Values.serviceAccount }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -9,4 +10,5 @@ metadata:
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+{{- end }}
 {{- end }}
