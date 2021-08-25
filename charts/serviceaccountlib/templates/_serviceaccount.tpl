@@ -1,5 +1,5 @@
 {{- define "serviceaccountlib.serviceaccount" -}}
-{{ if .Values.serviceAccount }}
+{{- if .Values.serviceAccount }}
 apiVersion: v1
 kind: ServiceAccount
 metadata:

@@ -15,9 +15,9 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
-      {{ if .Values.serviceAccount }}
+      {{- if .Values.serviceAccount }}
       serviceAccountName: {{ .Values.serviceAccount.name }}
-      {{ end }}
+      {{- end }}
       containers:
       - name: {{ .Chart.Name }}
         env:
