@@ -186,6 +186,16 @@ entries:
   deploymentlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-08-25T21:04:35.225945754Z"
+    description: A Helm chart library for webapp deployments
+    digest: 7eabeb6731acc9c9b9b7ca9e7065d98c656c4fc66d624a3a75ac6b391c024f08
+    name: deploymentlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/deploymentlib-0.5.5/deploymentlib-0.5.5.tgz
+    version: 0.5.5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-19T07:57:04.248611071Z"
     description: A Helm chart library for webapp deployments
     digest: 363107162a43f2bc139f344f0dfd8db46972449e276de6cefaee59a9a2f7f95b
@@ -428,6 +438,16 @@ entries:
   serviceaccountlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-08-25T21:04:35.333257241Z"
+    description: A Helm chart library for role based service account
+    digest: ae2d078314f66d6cb21916f8394033f32f418d49919194f16b3435dc12428cc5
+    name: serviceaccountlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/serviceaccountlib-0.1.6/serviceaccountlib-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-19T07:57:04.724726492Z"
     description: A Helm chart library for role based service account
     digest: f2b305e8af44cc15f87768df6ec032dc34961fb65f7d9facdfecc34d651986b6
@@ -512,4 +532,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-08-19T07:57:04.860619184Z"
+generated: "2021-08-25T21:04:35.333496641Z"
