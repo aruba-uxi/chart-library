@@ -27,7 +27,7 @@ spec:
   template:
     data: null
     metadata:
-      name: uxi-uxi-staging-pull-secret
+      name: sealed-image-pull-secret
       namesapce: {{ .Release.Namespace }}
     type: kubernetes.io/dockerconfigjson
 
