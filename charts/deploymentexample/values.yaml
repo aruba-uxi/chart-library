@@ -17,3 +17,6 @@ livenessProbe:
 
 readinessProbe:
   path: /readyz
+
+env:
+  CAPE_ROLE: DEV

@@ -21,9 +21,9 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         env:
-        {{- include "deploymentlib.env-variables" . | indent 8 }}
-        {{- include "deploymentlib.env-sealed-secrets" . | indent 8 }}
-        {{- include "deploymentlib.env-fields" . | indent 8 }}
+        {{- include "podlib.env-variables" .Values | indent 8 }}
+        {{- include "podlib.env-sealed-secrets" .Values | indent 8 }}
+        {{- include "podlib.env-fields" .Values | indent 8 }}
         image: {{ .Values.image }}:{{ $.Chart.AppVersion }}
         imagePullPolicy: {{ .Values.imagePullPolicy | default "IfNotPresent" }}
         {{- if .Values.command }}
@@ -71,5 +71,5 @@ spec:
       - name: sealed-image-pull-secret
       {{- end }}
 ---
-{{- include "deploymentlib.sealedsecret" . }}
+{{- include "podlib.sealedsecret" . }}
 {{- end }}

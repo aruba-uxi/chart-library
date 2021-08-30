@@ -7,3 +7,10 @@ jobs:
     command: ["perl", -Mbignum=bpi", "-wle", "print bpi(2000)"]
     restartPolicy: Never
     imagePullPolicy: Always
+    limitCpu: 10m
+    limitMemory: 200Mi
+
+env:
+  CAPE_ROLE: STAGING
+envFields:
+  HOST_IP: status.hostIP

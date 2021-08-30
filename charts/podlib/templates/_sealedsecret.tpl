@@ -1,4 +1,4 @@
-{{- define "deploymentlib.sealedsecret" -}}
+{{- define "podlib.sealedsecret" -}}
 {{- if .Values.envSealedSecrets -}}
 {{- range $secretName, $secretData := .Values.envSealedSecrets }}
 ---

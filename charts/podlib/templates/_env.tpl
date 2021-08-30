@@ -1,8 +1,8 @@
 {{/*
 Inject extra environment variables
 */}}
-{{- define "deploymentlib.env-variables" -}}
-{{- range $key, $val := .Values.env }}
+{{- define "podlib.env-variables" -}}
+{{- range $key, $val := $.env }}
 - name: {{ $key }}
   value: {{ $val | quote }}
 {{- end }}
@@ -12,9 +12,9 @@ Inject extra environment variables
 {{/*
 Inject extra environment variables from secrets
 */}}
-{{- define "deploymentlib.env-sealed-secrets" -}}
-{{- if .Values.envSealedSecrets -}}
-{{- range $secretName, $secretData := .Values.envSealedSecrets }}
+{{- define "podlib.env-sealed-secrets" -}}
+{{- if $.envSealedSecrets -}}
+{{- range $secretName, $secretData := $.envSealedSecrets }}
 {{- range $envName, $secretValue := $secretData }}
 - name: {{ $envName }}
   valueFrom:
@@ -30,9 +30,9 @@ Inject extra environment variables from secrets
 {{/*
 Inject extra environment variables from fields
 */}}
-{{- define "deploymentlib.env-fields" -}}
-{{- if .Values.envFields -}}
-{{- range $key, $val := .Values.envFields }}
+{{- define "podlib.env-fields" -}}
+{{- if $.envFields -}}
+{{- range $key, $val := $.envFields }}
 - name: {{ $key }}
   valueFrom:
    fieldRef:
