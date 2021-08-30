@@ -10,6 +10,10 @@ template-ingress +ARGS='':
   helm dependency update charts/ingressexample
   helm template charts/ingressexample {{ARGS}}
 
+template-job +ARGS='':
+  helm dependency update charts/jobexample
+  helm template charts/jobexample {{ARGS}}
+
 template-service +ARGS='':
   helm dependency update charts/serviceexample
   helm template charts/serviceexample {{ARGS}}
