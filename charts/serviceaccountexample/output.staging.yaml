@@ -1,0 +1,10 @@
+---
+# Source: serviceaccountexample/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: serviceaccountexample
+  labels:
+    app: serviceaccountexample
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::976748715263:role/service-account-example

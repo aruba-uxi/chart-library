@@ -1,0 +1,54 @@
+---
+# Source: deploymentexample/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploymentexample
+  labels:
+    app: deploymentexample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploymentexample
+  template:
+    metadata:
+      labels:
+        app: deploymentexample
+    spec:
+      containers:
+      - name: deploymentexample
+        env:        
+        - name: CAPE_ROLE
+          value: "DEV"                
+        image: busybox:latest
+        imagePullPolicy: Never
+        command: [ "printenv" ]
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: readinessProbe
+            - name: Content-Type
+              value: application/json
+            path: /readyz
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: livenessProbe
+            - name: Content-Type
+              value: application/json
+            path: /livez
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 3
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
