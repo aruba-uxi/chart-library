@@ -1,10 +1,13 @@
 jobs:
   pi:
-    command: ["perl", -Mbignum=bpi", "-wle", "print bpi(2000)"]
+    command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
   pi-with-timeout:
     image: ubuntu
-    command: ["perl", -Mbignum=bpi", "-wle", "print bpi(2000)"]
+    command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
     restartPolicy: Never
     imagePullPolicy: Always
     env:
       DEBUG: false
+
+env:
+  CAPE_ROLE: STAGING

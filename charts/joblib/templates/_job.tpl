@@ -14,7 +14,7 @@ spec:
       - name: {{ $jobName }}
         image: {{ $jobData.image | default $defaultImage }}
         imagePullPolicy: {{ $jobData.imagePullPolicy | default $.Values.imagePullPolicy | default "IfNotPresent" }}
-        command: {{ $jobData.command }}
+        command: {{ toRawJson $jobData.command }}
         env:
         {{- include "podlib.env-variables" $.Values | indent 8 }}
         {{- include "podlib.env-variables" . | indent 8 }}

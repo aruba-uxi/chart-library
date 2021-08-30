@@ -13,10 +13,10 @@ spec:
       - name: pi-with-timeout
         image: perl
         imagePullPolicy: Always
-        command: [perl -Mbignum=bpi" -wle print bpi(2000)]
+        command: ["perl","-Mbignum=bpi\"","-wle","print bpi(2000)"]
         env:        
         - name: CAPE_ROLE
-          value: "STAGING"                                
+          value: "DEV"                                
         - name: HOST_IP
           valueFrom:
            fieldRef:
