@@ -24,6 +24,8 @@ spec:
         resources:
           limits:
       restartPolicy: OnFailure
+---
+# Source: jobexample/templates/job.yaml
 apiVersion: batch/v1
 kind: Job
 metadata:
