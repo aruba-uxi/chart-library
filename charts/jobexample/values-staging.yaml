@@ -1,0 +1,8 @@
+jobs:
+  pi:
+    command: ["perl", -Mbignum=bpi", "-wle", "print bpi(2000)"]
+  pi-with-timeout:
+    image: ubuntu
+    command: ["perl", -Mbignum=bpi", "-wle", "print bpi(2000)"]
+    restartPolicy: Never
+    imagePullPolicy: Always

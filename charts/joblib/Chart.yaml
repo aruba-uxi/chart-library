@@ -1,0 +1,6 @@
+apiVersion: v2
+name: joblib
+description: A Helm chart library for Kubernetes jobs
+type: library
+version: 0.1.4
+appVersion: "1.16.0"

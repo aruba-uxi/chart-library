@@ -30,6 +30,12 @@ jobs:
       - name: Template ingress with values
         run: just template-ingress -f charts/ingressexample/values.yaml -f charts/ingressexample/values-staging.yaml
 
+      - name: Template job
+        run: just template-job
+
+      - name: Template job with values
+        run: just template-job\ -f charts/jobexample/values.yaml -f charts/jobexample/values-staging.yaml
+
       - name: Template service
         run: just template-service
 
