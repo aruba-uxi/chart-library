@@ -19,31 +19,51 @@ jobs:
           version: v3.4.0
 
       - name: Template deployment
-        run: just template-deployment "> charts/deploymentexample/output.yaml"
+        run: |
+          just template-deployment "> charts/deploymentexample/output.yaml"
+          git diff --exit-code -- output.yaml
 
       - name: Template deployment with values
-        run: just template-deployment-staging "> charts/deploymentexample/output.staging.yaml"
+        run: |
+          just template-deployment-staging "> charts/deploymentexample/output.staging.yaml"
+          git diff --exit-code -- output.staging.yaml
 
       - name: Template ingress
-        run: just template-ingress "> charts/ingressexample/output.yaml"
+        run: |
+          just template-ingress "> charts/ingressexample/output.yaml"
+          git diff --exit-code -- output.yaml
 
       - name: Template ingress with values
-        run: just template-ingress-staging "> charts/ingressexample/output.staging.yaml"
+        run: |
+          just template-ingress-staging "> charts/ingressexample/output.staging.yaml"
+          git diff --exit-code -- output.staging.yaml
 
       - name: Template job
-        run: just template-job "> charts/jobexample/output.yaml"
+        run: |
+          just template-job "> charts/jobexample/output.yaml"
+          git diff --exit-code -- output.yaml
 
       - name: Template job with values
-        run: just template-job-staging "> charts/jobexample/output.staging.yaml"
+        run: |
+          just template-job-staging "> charts/jobexample/output.staging.yaml"
+          git diff --exit-code -- output.staging.yaml
 
       - name: Template service
-        run: just template-service "> charts/serviceexample/output.yaml"
+        run: |
+          just template-service "> charts/serviceexample/output.yaml"
+          git diff --exit-code -- output.yaml
 
       - name: Template service with values
-        run: just template-service-staging "> charts/serviceexample/output.staging.yaml"
+        run: |
+          just template-service-staging "> charts/serviceexample/output.staging.yaml"
+          git diff --exit-code -- output.staging.yaml
 
       - name: Template serviceaccount
-        run: just template-serviceaccount "> charts/serviceaccountexample/output.yaml"
+        run: |
+          just template-serviceaccount "> charts/serviceaccountexample/output.yaml"
+          git diff --exit-code -- output.yaml
 
       - name: Template serviceaccount with values
-        run: just template-serviceaccount-staging "> charts/serviceaccountexample/output.staging.yaml"
+        run: |
+          just template-serviceaccount-staging "> charts/serviceaccountexample/output.staging.yaml"
+          git diff --exit-code -- output.staging.yaml
