@@ -65,10 +65,20 @@ spec:
             {{- if .Values.limitMemory }}
             memory: {{ .Values.limitMemory }}
             {{- end }}
-
+        {{- if .Values.configmap }}
+        volumeMounts:
+        - name: config
+          mountPath: {{ .Values.configmap.path }}
+        {{- end }}
       {{- if .Values.sealedImagePullSecret }}
       imagePullSecrets:
       - name: sealed-image-pull-secret
+      {{- end }}
+      {{- if .Values.configmap }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ .Values.configmap.name }}
       {{- end }}
 ---
 {{- include "podlib.sealedsecret" . }}

@@ -72,8 +72,15 @@ spec:
           limits:
             cpu: 100m
             memory: 256Mi
+        volumeMounts:
+        - name: config
+          mountPath: /app/config.json
       imagePullSecrets:
       - name: sealed-image-pull-secret
+      volumes:
+      - name: config
+        configMap:
+          name: myconfig
 ---
 # Source: deploymentexample/templates/deployment.yaml
 ---

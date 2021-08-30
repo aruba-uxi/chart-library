@@ -31,10 +31,21 @@ spec:
             {{- if $jobData.limitMemory }}
             memory: {{ $jobData.limitMemory }}
             {{- end }}
+        {{- if $jobData.configmap }}
+        volumeMounts:
+        - name: config
+          mountPath: {{ $jobData.configmap.path }}
+        {{- end }}
       restartPolicy: {{ $jobData.restartPolicy | default "OnFailure"}}
       {{- if $.Values.sealedImagePullSecret }}
       imagePullSecrets:
       - name: sealed-image-pull-secret
+      {{- end }}
+      {{- if $jobData.configmap }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ $jobData.configmap.name }}
       {{- end }}
 {{- end }}
 {{- end }}

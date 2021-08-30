@@ -9,7 +9,6 @@ jobs:
     imagePullPolicy: Always
     limitCpu: 10m
     limitMemory: 200Mi
-
 env:
   CAPE_ROLE: DEV
 envFields:
