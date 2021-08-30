@@ -430,6 +430,32 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/ingresslib-0.1.0/ingresslib-0.1.0.tgz
     version: 0.1.0
+  jobexample:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-08-30T09:03:28.413879712Z"
+    dependencies:
+    - name: joblib
+      repository: file://../../charts/joblib
+      version: '*'
+    description: A Helm chart for Kubernetes jobs
+    digest: db8dbd96ad7c4c88758e0a6226e73406a72e68a41dc40b167e1cbe4a9b81de8a
+    name: jobexample
+    type: application
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/jobexample-0.1.11/jobexample-0.1.11.tgz
+    version: 0.1.11
+  joblib:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-08-30T09:03:28.519065702Z"
+    description: A Helm chart library for Kubernetes jobs
+    digest: 61f42fc79e4e0a2bf1b999896079e8af37e3e8a552b7b0296b83a54873ab73e3
+    name: joblib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/joblib-0.1.4/joblib-0.1.4.tgz
+    version: 0.1.4
   serviceaccountexample:
   - apiVersion: v2
     appVersion: latest
@@ -542,4 +568,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-08-27T09:45:47.776636515Z"
+generated: "2021-08-30T09:03:28.519281902Z"
