@@ -25,4 +25,5 @@ spec:
           limits:
             cpu: 10m
             memory: 200Mi
+        parallelism: 1
       restartPolicy: Never

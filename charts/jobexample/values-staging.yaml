@@ -3,6 +3,7 @@ jobs:
     command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
     limitCpu: 10m
     limitMemory: 200Mi
+    parallel: 3
   pi-with-timeout:
     image: ubuntu
     command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]

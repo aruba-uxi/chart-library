@@ -31,6 +31,7 @@ spec:
             {{- if $jobData.limitMemory }}
             memory: {{ $jobData.limitMemory }}
             {{- end }}
+        parallelism: {{ $jobData.parallel | default 1}}
         {{- if $jobData.configmap }}
         volumeMounts:
         - name: config
