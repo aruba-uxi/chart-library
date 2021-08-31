@@ -3,7 +3,7 @@
 {{- range $jobData := $.Values.jobs }}
 ---
 {{- if not $jobData.image }}
-{{ $_ := set $jobData "image" $defaultImage }}
+{{ $_ := set $jobData "imageVersion" $defaultImage }}
 {{- end }}
 {{- if not $jobData.imagePullPolicy }}
 {{ $_ := set $jobData "imagePullPolicy" $.Values.imagePullPolicy }}

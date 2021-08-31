@@ -16,14 +16,15 @@ spec:
       labels:
         app: deploymentexample
     spec:
+      revisionHistoryLimit: 3
       containers:
       - name: deploymentexample
-        env:        
-        - name: CAPE_ROLE
-          value: "DEV"                
         image: busybox:latest
         imagePullPolicy: Never
-        command: [ "printenv" ]
+        command: ["printenv"]
+        env:  
+        - name: CAPE_ROLE
+          value: "DEV"    
         readinessProbe:
           httpGet:
             httpHeaders:

@@ -16,12 +16,16 @@ spec:
       labels:
         app: deploymentexample
     spec:
+      revisionHistoryLimit: 3
       serviceAccountName: deploy-service-account
       containers:
       - name: deploymentexample
-        env:        
+        image: busybox:latest
+        imagePullPolicy: Never
+        command: ["printenv"]
+        env:  
         - name: CAPE_ROLE
-          value: "STAGING"        
+          value: "STAGING"  
         - name: AWS_ACCESS_ID
           valueFrom:
            secretKeyRef:
@@ -36,14 +40,11 @@ spec:
           valueFrom:
            secretKeyRef:
              name: database-url
-             key: DATABASE_URL        
+             key: DATABASE_URL  
         - name: HOST_IP
           valueFrom:
            fieldRef:
              fieldPath: status.hostIP
-        image: busybox:latest
-        imagePullPolicy: Never
-        command: [ "printenv" ]
         readinessProbe:
           httpGet:
             httpHeaders:

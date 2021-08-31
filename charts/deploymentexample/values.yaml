@@ -6,7 +6,7 @@ imagePullPolicy: Never
 
 port: 8000
 
-command: "printenv"
+command: [ "printenv" ]
 
 limitCpu: 100m
 limitMemory: 256Mi
