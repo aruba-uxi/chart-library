@@ -1,1 +1,1 @@
-{{- include "joblib.job" . }}
+{{- include "joblib.jobs" . }}

@@ -1,6 +1,6 @@
-{{- define "joblib.job" -}}
+{{- define "joblib.workers" -}}
 {{- $defaultImage := print $.Values.image  ":" $.Chart.AppVersion -}}
-{{- range $jobData := $.Values.jobs }}
+{{- range $jobData := $.Values.workers }}
 ---
 {{- if not $jobData.image }}
 {{ $_ := set $jobData "imageVersion" $defaultImage }}
@@ -27,15 +27,23 @@
 {{- if $.Values.envFields }}
 {{ $_ := set $jobData "envFields" $.Values.envFields }}
 {{- end }}
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ $jobData.name }}
+  labels:
+    app: {{ $jobData.name }}
 spec:
+  replicas: {{ $jobData.parallel | default 1 }}
   template:
     metadata:
-      name: {{ $jobData.name }}
+      labels:
+        app: {{ $jobData.name }}
     spec:
+      revisionHistoryLimit: 3
+      {{- if $.Values.serviceAccount }}
+      serviceAccountName: {{ $.Values.serviceAccount.name }}
+      {{- end }}
       containers:
 {{ include "podlib.container" $jobData | indent 6}}
       restartPolicy: {{ $jobData.restartPolicy | default "OnFailure"}}
