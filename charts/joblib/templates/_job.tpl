@@ -4,6 +4,8 @@
 ---
 {{- if not $jobData.image }}
 {{ $_ := set $jobData "imageVersion" $defaultImage }}
+{{ else }}
+{{ $_ := set $jobData "imageVersion" $jobData.image }}
 {{- end }}
 {{- if not $jobData.imagePullPolicy }}
 {{ $_ := set $jobData "imagePullPolicy" $.Values.imagePullPolicy }}
