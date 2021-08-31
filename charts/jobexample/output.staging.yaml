@@ -14,13 +14,13 @@ spec:
         image: busybox:latest
         imagePullPolicy: Never
         command: ["perl","-Mbignum=bpi","-wle","print bpi(2000)"]
-        env:        
+        env:  
         - name: CAPE_ROLE
-          value: "STAGING"                                
+          value: "STAGING"    
         - name: HOST_IP
           valueFrom:
            fieldRef:
-             fieldPath: status.hostIP        
+             fieldPath: status.hostIP
         resources:
           limits:
             cpu: 10m
@@ -43,20 +43,20 @@ spec:
         image: ubuntu
         imagePullPolicy: Always
         command: ["perl","-Mbignum=bpi","-wle","print bpi(2000)"]
-        env:        
+        env:  
         - name: CAPE_ROLE
-          value: "STAGING"        
+          value: "TEST"
         - name: DEBUG
-          value: "false"                        
+          value: "false"    
         - name: HOST_IP
           valueFrom:
            fieldRef:
-             fieldPath: status.hostIP        
+             fieldPath: status.hostIP
         resources:
           limits:
             cpu: 10m
             memory: 200Mi
-        parallelism: 1
+        parallelism: 4
         volumeMounts:
         - name: config
           mountPath: /app/config.json

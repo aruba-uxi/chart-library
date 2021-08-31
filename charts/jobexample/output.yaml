@@ -14,16 +14,15 @@ spec:
         image: perl
         imagePullPolicy: Always
         command: ["perl","-Mbignum=bpi\"","-wle","print bpi(2000)"]
-        env:        
+        env:  
         - name: CAPE_ROLE
-          value: "DEV"                                
+          value: "DEV"    
         - name: HOST_IP
           valueFrom:
            fieldRef:
-             fieldPath: status.hostIP        
+             fieldPath: status.hostIP
         resources:
           limits:
             cpu: 10m
             memory: 200Mi
-        parallelism: 1
       restartPolicy: Never
