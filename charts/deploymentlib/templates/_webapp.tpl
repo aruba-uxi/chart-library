@@ -15,6 +15,7 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      revisionHistoryLimit: 3
       {{- if .Values.serviceAccount }}
       serviceAccountName: {{ .Values.serviceAccount.name }}
       {{- end }}
