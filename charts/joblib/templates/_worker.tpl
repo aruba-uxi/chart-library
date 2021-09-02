@@ -35,6 +35,9 @@ metadata:
     app: {{ $jobData.name }}
 spec:
   replicas: {{ $jobData.parallel | default 1 }}
+  selector:
+    matchLabels:
+      app: {{ $jobData.name }}
   template:
     metadata:
       labels:
