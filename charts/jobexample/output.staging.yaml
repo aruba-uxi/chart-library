@@ -1,0 +1,103 @@
+---
+# Source: jobexample/templates/worker.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-with-timeout
+  labels:
+    app: pi-with-timeout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pi-with-timeout
+  template:
+    metadata:
+      labels:
+        app: pi-with-timeout
+    spec:
+      revisionHistoryLimit: 3
+      containers:
+      - name: pi-with-timeout
+        image: perl
+        imagePullPolicy: Always
+        command: ["perl","-Mbignum=bpi","-wle","print bpi(2000)"]
+        env:  
+        - name: CAPE_ROLE
+          value: "STAGING"    
+        - name: HOST_IP
+          valueFrom:
+           fieldRef:
+             fieldPath: status.hostIP
+        resources:
+          limits:
+            cpu: 10m
+            memory: 200Mi
+      restartPolicy: Never
+---
+# Source: jobexample/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  template:
+    metadata:
+      name: pi
+    spec:
+      containers:
+      - name: pi
+        image: busybox:latest
+        imagePullPolicy: Never
+        command: ["perl","-Mbignum=bpi","-wle","print bpi(2000)"]
+        env:  
+        - name: CAPE_ROLE
+          value: "STAGING"    
+        - name: HOST_IP
+          valueFrom:
+           fieldRef:
+             fieldPath: status.hostIP
+        resources:
+          limits:
+            cpu: 10m
+            memory: 200Mi
+        parallelism: 3
+      restartPolicy: OnFailure
+---
+# Source: jobexample/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi-with-timeout
+spec:
+  template:
+    metadata:
+      name: pi-with-timeout
+    spec:
+      containers:
+      - name: pi-with-timeout
+        image: ubuntu
+        imagePullPolicy: Always
+        command: ["perl","-Mbignum=bpi","-wle","print bpi(2000)"]
+        env:  
+        - name: CAPE_ROLE
+          value: "TEST"
+        - name: DEBUG
+          value: "false"    
+        - name: HOST_IP
+          valueFrom:
+           fieldRef:
+             fieldPath: status.hostIP
+        resources:
+          limits:
+            cpu: 10m
+            memory: 200Mi
+        parallelism: 4
+        volumeMounts:
+        - name: config
+          mountPath: /app/config.json
+      restartPolicy: Never
+      volumes:
+      - name: config
+        configMap:
+          name: myconfig

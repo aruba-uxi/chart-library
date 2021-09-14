@@ -19,31 +19,51 @@ jobs:
           version: v3.4.0
 
       - name: Template deployment
-        run: just template-deployment
+        run: |
+          just template-deployment "> charts/deploymentexample/output.yaml"
+          git diff --exit-code -- charts/deploymentexample/output.yaml
 
       - name: Template deployment with values
-        run: just template-deployment -f charts/deploymentexample/values.yaml -f charts/deploymentexample/values-staging.yaml
+        run: |
+          just template-deployment-staging "> charts/deploymentexample/output.staging.yaml"
+          git diff --exit-code -- charts/deploymentexample/output.staging.yaml
 
       - name: Template ingress
-        run: just template-ingress
+        run: |
+          just template-ingress "> charts/ingressexample/output.yaml"
+          git diff --exit-code -- charts/ingressexample/output.yaml
 
       - name: Template ingress with values
-        run: just template-ingress -f charts/ingressexample/values.yaml -f charts/ingressexample/values-staging.yaml
+        run: |
+          just template-ingress-staging "> charts/ingressexample/output.staging.yaml"
+          git diff --exit-code -- charts/ingressexample/output.staging.yaml
 
       - name: Template job
-        run: just template-job
+        run: |
+          just template-job "> charts/jobexample/output.yaml"
+          git diff --exit-code -- charts/jobexample/output.yaml
 
       - name: Template job with values
-        run: just template-job -f charts/jobexample/values.yaml -f charts/jobexample/values-staging.yaml
+        run: |
+          just template-job-staging "> charts/jobexample/output.staging.yaml"
+          git diff --exit-code -- charts/jobexample/output.staging.yaml
 
       - name: Template service
-        run: just template-service
+        run: |
+          just template-service "> charts/serviceexample/output.yaml"
+          git diff --exit-code -- charts/serviceexample/output.yaml
 
       - name: Template service with values
-        run: just template-service -f charts/serviceexample/values.yaml -f charts/serviceexample/values-staging.yaml
+        run: |
+          just template-service-staging "> charts/serviceexample/output.staging.yaml"
+          git diff --exit-code -- charts/serviceexample/output.staging.yaml
 
       - name: Template serviceaccount
-        run: just template-serviceaccount
+        run: |
+          just template-serviceaccount "> charts/serviceaccountexample/output.yaml"
+          git diff --exit-code -- charts/serviceaccountexample/output.yaml
 
       - name: Template serviceaccount with values
-        run: just template-serviceaccount -f charts/serviceaccountexample/values.yaml -f charts/serviceaccountexample/values-staging.yaml
+        run: |
+          just template-serviceaccount-staging "> charts/serviceaccountexample/output.staging.yaml"
+          git diff --exit-code -- charts/serviceaccountexample/output.staging.yaml

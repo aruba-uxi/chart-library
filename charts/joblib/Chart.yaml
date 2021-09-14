@@ -2,5 +2,9 @@ apiVersion: v2
 name: joblib
 description: A Helm chart library for Kubernetes jobs
 type: library
-version: 0.1.4
+version: 0.1.5
 appVersion: "1.16.0"
+dependencies:
+- name: podlib
+  version: "*"
+  repository: "file://../../charts/podlib"

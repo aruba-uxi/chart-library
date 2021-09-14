@@ -4,6 +4,10 @@ env:
 envFields:
   HOST_IP: status.hostIP
 
+configmap:
+  name: myconfig
+  path: /app/config.json
+
 envSealedSecrets:
   database-url:
     DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...

@@ -1,0 +1,17 @@
+---
+# Source: ingressexample/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingressexample-legacy-ingress
+  annotations:
+    kubernetes.io/ingress.class: legacy-ingress
+spec:
+  rules:
+  - host: ingressexample.legacy-ingress.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ingressexample
+          servicePort: 8000
