@@ -186,6 +186,20 @@ entries:
   deploymentlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-14T12:46:30.066263238Z"
+    dependencies:
+    - name: podlib
+      repository: file://../../charts/podlib
+      version: '*'
+    description: A Helm chart library for webapp deployments
+    digest: 99b94c5ad662e8352d8c7d09b16bf4e932ba0815533c9522631bc63c8c4ec94a
+    name: deploymentlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/deploymentlib-0.5.8/deploymentlib-0.5.8.tgz
+    version: 0.5.8
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-27T09:45:47.776046178Z"
     description: A Helm chart library for webapp deployments
     digest: fe276a87bb8a68fa9bd7ba33a4b2928624a910da0e0b24f6a0325a0274825e37
@@ -448,6 +462,20 @@ entries:
   joblib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-14T12:46:30.461428846Z"
+    dependencies:
+    - name: podlib
+      repository: file://../../charts/podlib
+      version: '*'
+    description: A Helm chart library for Kubernetes jobs
+    digest: f042d1727fa74ad5def096ccc2fd85479a5ce1ddf8d220f0a8bca162005e9675
+    name: joblib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/joblib-0.1.5/joblib-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-30T09:03:28.519065702Z"
     description: A Helm chart library for Kubernetes jobs
     digest: 61f42fc79e4e0a2bf1b999896079e8af37e3e8a552b7b0296b83a54873ab73e3
@@ -456,6 +484,17 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/joblib-0.1.4/joblib-0.1.4.tgz
     version: 0.1.4
+  podlib:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-09-14T12:46:30.586755434Z"
+    description: A Helm chart library for Kubernetes pods
+    digest: 6ae2f794e4abb3a8948814e0579a7fd85d7ea2e09d693b78dae10ff931d912cc
+    name: podlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/podlib-0.1.0/podlib-0.1.0.tgz
+    version: 0.1.0
   serviceaccountexample:
   - apiVersion: v2
     appVersion: latest
@@ -568,4 +607,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-08-30T09:03:28.519281902Z"
+generated: "2021-09-14T12:46:30.851718691Z"
