@@ -1,4 +1,40 @@
 ---
+# Source: jobexample/templates/worker.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-with-timeout
+  labels:
+    app: pi-with-timeout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pi-with-timeout
+  template:
+    metadata:
+      labels:
+        app: pi-with-timeout
+    spec:
+      revisionHistoryLimit: 3
+      containers:
+      - name: pi-with-timeout
+        image: perl
+        imagePullPolicy: Always
+        command: ["perl","-Mbignum=bpi","-wle","print bpi(2000)"]
+        env:  
+        - name: CAPE_ROLE
+          value: "STAGING"    
+        - name: HOST_IP
+          valueFrom:
+           fieldRef:
+             fieldPath: status.hostIP
+        resources:
+          limits:
+            cpu: 10m
+            memory: 200Mi
+      restartPolicy: Never
+---
 # Source: jobexample/templates/job.yaml
 apiVersion: batch/v1
 kind: Job
