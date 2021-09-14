@@ -1,8 +1,11 @@
 # bare minimum values that do not change
 # simple (non mapping values)
 
-image: busybox
-imagePullPolicy: Never
+image:
+  repository: busybox
+  pullPolicy: Never
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 port: 8000
 

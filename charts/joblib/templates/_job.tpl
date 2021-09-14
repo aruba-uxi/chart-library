@@ -1,5 +1,5 @@
 {{- define "joblib.job" -}}
-{{- $defaultImage := print $.Values.image  ":" $.Chart.AppVersion -}}
+{{- $defaultImage := print $.Values.image.repository  ":" $.Chart.AppVersion -}}
 {{- range $jobName, $jobData := .Values.jobs }}
 apiVersion: batch/v1
 kind: Job

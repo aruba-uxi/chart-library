@@ -3,4 +3,3 @@ name: servicelib
 description: A Helm chart library for Kubernetes services
 type: library
 version: 0.1.4
-appVersion: "1.16.0"

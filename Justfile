@@ -1,6 +1,6 @@
 # Show this message and exit.
 help:
-	@just list
+  @just list
 
 template-deployment +ARGS='':
   helm dependency update charts/deploymentexample

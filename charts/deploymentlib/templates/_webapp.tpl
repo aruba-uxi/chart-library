@@ -25,8 +25,8 @@ spec:
         {{- include "deploymentlib.env-variables" . | indent 8 }}
         {{- include "deploymentlib.env-sealed-secrets" . | indent 8 }}
         {{- include "deploymentlib.env-fields" . | indent 8 }}
-        image: {{ .Values.image }}:{{ $.Chart.AppVersion }}
-        imagePullPolicy: {{ .Values.imagePullPolicy | default "IfNotPresent" }}
+        image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
         {{- if .Values.command }}
         command: [ {{ .Values.command | quote }} ]
         {{- end -}}

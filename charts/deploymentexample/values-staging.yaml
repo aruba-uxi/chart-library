@@ -1,3 +1,6 @@
+image:
+  tag: "staging-tag"
+
 env:
   CAPE_ROLE: STAGING
 

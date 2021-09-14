@@ -3,4 +3,3 @@ name: serviceaccountlib
 description: A Helm chart library for role based service account
 type: library
 version: 0.1.6
-appVersion: "1.16.0"

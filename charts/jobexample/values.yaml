@@ -1,5 +1,8 @@
-image: busybox
-imagePullPolicy: Never
+image:
+  repository: busybox
+  pullPolicy: Never
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 jobs:
   pi-with-timeout:
