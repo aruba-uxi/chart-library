@@ -1,8 +1,11 @@
 jobs:
   pi:
+    image:
+      repository: perl
     command: ["perl", -Mbignum=bpi", "-wle", "print bpi(2000)"]
   pi-with-timeout:
-    image: ubuntu
+    image:
+      repository: perl
+      tag: "5"
     command: ["perl", -Mbignum=bpi", "-wle", "print bpi(2000)"]
     restartPolicy: Never
-    imagePullPolicy: Always

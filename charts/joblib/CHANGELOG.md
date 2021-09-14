@@ -30,8 +30,8 @@ Changed `_job_.tpl`
 
 Changed `_job_.tpl`
 
+- Jobs must always define their own image mapping.
 - Get image tag from `job.image.tag` but default to `.Chart.appVersion` if it is not defined in the values file.
-- Values file updated to use an `image` map for `tag`, `pullPolicy` and `repository` in each job
 
 ### Fixed
 
