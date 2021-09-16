@@ -186,6 +186,20 @@ entries:
   deploymentlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-16T13:05:49.123501017Z"
+    dependencies:
+    - name: podlib
+      repository: file://../../charts/podlib
+      version: '*'
+    description: A Helm chart library for webapp deployments
+    digest: fb154023f7aea6a7098ea6f37ce361bb9f2fe1bc6c2d7aabfff17ba2df7117aa
+    name: deploymentlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/deploymentlib-0.6.0/deploymentlib-0.6.0.tgz
+    version: 0.6.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-14T12:46:30.066263238Z"
     dependencies:
     - name: podlib
@@ -426,6 +440,16 @@ entries:
   ingresslib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-16T13:05:49.498543781Z"
+    description: A Helm chart library for Kubernetes ingress
+    digest: 835d4cf7b7522a94dabcd8bd8c55a0ff32420473fe775484ee6b774aa7dcae2e
+    name: ingresslib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/ingresslib-0.2.0/ingresslib-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-11T10:34:10.568968726Z"
     description: A Helm chart library for Kubernetes ingress
     digest: c8bb5aeeb574c39537645c0c554c98a3d4a15a3e2be5615976241b0558b10dad
@@ -462,6 +486,20 @@ entries:
   joblib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-16T13:05:49.869573042Z"
+    dependencies:
+    - name: podlib
+      repository: file://../../charts/podlib
+      version: '*'
+    description: A Helm chart library for Kubernetes jobs
+    digest: d73f39a4e3c4c38061ae84136d3f8abc855bf3f6393d6026fb47396dad5712bf
+    name: joblib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/joblib-0.2.0/joblib-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-14T12:46:30.461428846Z"
     dependencies:
     - name: podlib
@@ -485,6 +523,16 @@ entries:
     - https://github.com/Asimmetric/chart-library/releases/download/joblib-0.1.4/joblib-0.1.4.tgz
     version: 0.1.4
   podlib:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-09-16T13:05:50.065314751Z"
+    description: A Helm chart library for Kubernetes pods
+    digest: eacd23acdf8ddd52010b1f8e7b6c7cd29b08311eea56d80afee4173706c87923
+    name: podlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/podlib-0.2.0/podlib-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-09-14T12:46:30.586755434Z"
@@ -511,6 +559,16 @@ entries:
     - https://github.com/Asimmetric/chart-library/releases/download/serviceaccountexample-0.1.11/serviceaccountexample-0.1.11.tgz
     version: 0.1.11
   serviceaccountlib:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-09-16T13:05:50.43587728Z"
+    description: A Helm chart library for role based service account
+    digest: 49f1f4c8e95acbe9221b30e127fc21b0da2a25212b12e60b5edfb7d0779beb0d
+    name: serviceaccountlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/serviceaccountlib-0.2.0/serviceaccountlib-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-08-25T21:04:35.333257241Z"
@@ -557,6 +615,16 @@ entries:
     - https://github.com/Asimmetric/chart-library/releases/download/serviceexample-0.1.11/serviceexample-0.1.11.tgz
     version: 0.1.11
   servicelib:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-09-16T13:05:50.793982015Z"
+    description: A Helm chart library for Kubernetes services
+    digest: d9acaf2ff2ef927e9fa6030f85c95d2eed54a230dd074c603e3fd76c98524259
+    name: servicelib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.2.0/servicelib-0.2.0.tgz
+    version: 0.2.0
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-08-10T12:52:05.677057904Z"
@@ -607,4 +675,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-14T12:46:30.851718691Z"
+generated: "2021-09-16T13:05:50.794264415Z"
