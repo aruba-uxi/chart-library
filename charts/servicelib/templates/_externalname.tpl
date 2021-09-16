@@ -8,6 +8,7 @@ metadata:
     name: {{ $key }}
     app: {{ $.Chart.Name }}
     repo: {{ $.Values.labels.repo }}
+    version: {{ $.Chart.Version }}
 spec:
   ports:
 {{- range $portVal := $val.ports }}

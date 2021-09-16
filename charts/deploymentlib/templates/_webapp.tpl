@@ -7,6 +7,7 @@ metadata:
     name: {{ .Chart.Name }}
     app: {{ .Chart.Name }}
     repo: {{ .Values.labels.repo }}
+    version: {{ .Chart.Version }}
 spec:
   replicas: {{ .Values.replicaCount | default 1 }}
   selector:
@@ -18,6 +19,7 @@ spec:
         name: {{ .Chart.Name }}
         app: {{ .Chart.Name }}
         repo: {{ .Values.labels.repo }}
+        version: {{ .Chart.Version }}
     spec:
       revisionHistoryLimit: 3
       {{- if .Values.serviceAccount }}

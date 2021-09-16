@@ -8,6 +8,7 @@ metadata:
     name: ingressexample-legacy-ingress
     app: ingressexample
     repo: chart-library
+    version: 1.0.0
   annotations:
     kubernetes.io/ingress.class: legacy-ingress
 spec:

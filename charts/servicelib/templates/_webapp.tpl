@@ -7,6 +7,7 @@ metadata:
     name: {{ .Chart.Name }}
     app: {{ .Chart.Name }}
     repo: {{ .Values.labels.repo }}
+    version: {{ .Chart.Version }}
 spec:
   ports:
     - name: http

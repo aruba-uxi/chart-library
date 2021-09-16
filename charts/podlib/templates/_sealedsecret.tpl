@@ -10,6 +10,7 @@ metadata:
     name: {{ $secretName }}
     app: {{ $.Chart.Name }}
     repo: {{ $.Values.labels.repo }}
+    version: {{ $.Chart.Version }}
 spec:
   encryptedData:
     {{- range $secretKey, $secretValue := $secretData }}
@@ -30,6 +31,7 @@ metadata:
     name: sealed-image-pull-secret
     app: {{ .Chart.Name }}
     repo: {{ .Values.labels.repo }}
+    version: {{ .Chart.Version }}
 spec:
   encryptedData:
     .dockerconfigjson: {{ .Values.sealedImagePullSecret }}
@@ -42,6 +44,7 @@ spec:
         name: sealed-image-pull-secret
         app: {{ .Chart.Name }}
         repo: {{ .Values.labels.repo }}
+        version: {{ .Chart.Version }}
     type: kubernetes.io/dockerconfigjson
 
 ---

@@ -35,6 +35,7 @@ metadata:
     name: {{ $jobData.name }}
     app: {{ $.Chart.Name }}
     repo: {{ $.Values.labels.repo }}
+    version: {{ $.Chart.Version }}
 spec:
   replicas: {{ $jobData.parallel | default 1 }}
   selector:
@@ -46,6 +47,7 @@ spec:
         name: {{ $jobData.name }}
         app: {{ $.Chart.Name }}
         repo: {{ $.Values.labels.repo }}
+        version: {{ $.Chart.Version }}
     spec:
       revisionHistoryLimit: 3
       {{- if $.Values.serviceAccount }}
