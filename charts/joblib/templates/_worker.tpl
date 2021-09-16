@@ -32,7 +32,7 @@ kind: Deployment
 metadata:
   name: {{ $jobData.name }}
   labels:
-    app.kubernetes.io/name: {{ $jobData.name }}
+    name: {{ $jobData.name }}
     app: {{ $.Chart.Name }}
     repo: {{ $.Values.labels.repo }}
 spec:
@@ -43,7 +43,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ $jobData.name }}
+        name: {{ $jobData.name }}
         app: {{ $.Chart.Name }}
         repo: {{ $.Values.labels.repo }}
     spec:

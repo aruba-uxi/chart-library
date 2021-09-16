@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
   labels:
-    app.kubernetes.io/name: {{ .Chart.Name }}
+    name: {{ .Chart.Name }}
     app: {{ .Chart.Name }}
     repo: {{ required ".Values.labels.repo is required" .Values.labels.repo }}
 spec:
@@ -15,7 +15,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ .Chart.Name }}
+        name: {{ .Chart.Name }}
         app: {{ .Chart.Name }}
         repo: {{ required ".Values.labels.repo is required" .Values.labels.repo }}
     spec:

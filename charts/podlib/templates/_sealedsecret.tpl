@@ -7,7 +7,7 @@ kind: SealedSecret
 metadata:
   name: {{ $secretName }}
   labels:
-    app.kubernetes.io/name: {{ $secretName }}
+    name: {{ $secretName }}
     app: {{ $.Chart.Name }}
     repo: {{ $.Values.labels.repo }}
 spec:
@@ -27,7 +27,7 @@ metadata:
   name: sealed-image-pull-secret
   namesapce: {{ .Release.Namespace }}
   labels:
-    app.kubernetes.io/name: sealed-image-pull-secret
+    name: sealed-image-pull-secret
     app: {{ .Chart.Name }}
     repo: {{ .Values.labels.repo }}
 spec:
@@ -39,7 +39,7 @@ spec:
       name: sealed-image-pull-secret
       namesapce: {{ .Release.Namespace }}
       labels:
-        app.kubernetes.io/name: sealed-image-pull-secret
+        name: sealed-image-pull-secret
         app: {{ .Chart.Name }}
         repo: {{ .Values.labels.repo }}
     type: kubernetes.io/dockerconfigjson

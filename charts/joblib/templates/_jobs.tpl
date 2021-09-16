@@ -32,7 +32,7 @@ kind: Job
 metadata:
   name: {{ $jobData.name }}
   labels:
-    app.kubernetes.io/name: {{ $jobData.name }}
+    name: {{ $jobData.name }}
     app: {{ $.Chart.Name }}
     repo: {{ $.Values.labels.repo }}
 spec:
@@ -40,7 +40,7 @@ spec:
     metadata:
       name: {{ $jobData.name }}
       labels:
-        app.kubernetes.io/name: {{ $jobData.name }}
+        name: {{ $jobData.name }}
         app: {{ $.Chart.Name }}
         repo: {{ $.Values.labels.repo }}
     spec:

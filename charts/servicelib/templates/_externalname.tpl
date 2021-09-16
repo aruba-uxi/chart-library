@@ -5,7 +5,7 @@ kind: Service
 metadata:
   name: {{ $key }}
   labels:
-    app.kubernetes.io/name: {{ $key }}
+    name: {{ $key }}
     app: {{ $.Chart.Name }}
     repo: {{ $.Values.labels.repo }}
 spec:
