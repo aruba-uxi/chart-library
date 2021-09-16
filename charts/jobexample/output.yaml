@@ -5,7 +5,9 @@ kind: Deployment
 metadata:
   name: pi-with-timeout
   labels:
-    app: pi-with-timeout
+    name: pi-with-timeout
+    app: jobexample
+    repo: chart-library
 spec:
   replicas: 1
   selector:
@@ -14,7 +16,9 @@ spec:
   template:
     metadata:
       labels:
-        app: pi-with-timeout
+        name: pi-with-timeout
+        app: jobexample
+        repo: chart-library
     spec:
       revisionHistoryLimit: 3
       containers:
@@ -40,10 +44,18 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: pi-with-timeout
+  labels:
+    name: pi-with-timeout
+    app: jobexample
+    repo: chart-library
 spec:
   template:
     metadata:
       name: pi-with-timeout
+      labels:
+        name: pi-with-timeout
+        app: jobexample
+        repo: chart-library
     spec:
       containers:
       - name: pi-with-timeout

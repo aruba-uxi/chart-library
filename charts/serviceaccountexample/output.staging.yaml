@@ -5,6 +5,8 @@ kind: ServiceAccount
 metadata:
   name: serviceaccountexample
   labels:
+    name: serviceaccountexample
     app: serviceaccountexample
+    repo: chart-library
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::976748715263:role/service-account-example

@@ -5,7 +5,9 @@ kind: Service
 metadata:
   name: serviceexample
   labels:
+    name: serviceexample
     app: serviceexample
+    repo: chart-library
 spec:
   ports:
     - name: http

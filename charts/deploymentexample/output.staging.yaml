@@ -5,7 +5,9 @@ kind: Deployment
 metadata:
   name: deploymentexample
   labels:
+    name: deploymentexample
     app: deploymentexample
+    repo: chart-library
 spec:
   replicas: 1
   selector:
@@ -14,7 +16,9 @@ spec:
   template:
     metadata:
       labels:
+        name: deploymentexample
         app: deploymentexample
+        repo: chart-library
     spec:
       revisionHistoryLimit: 3
       serviceAccountName: deploy-service-account
@@ -89,6 +93,10 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: aws-access
+  labels:
+    name: aws-access
+    app: deploymentexample
+    repo: chart-library
 spec:
   encryptedData:
     AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
@@ -100,6 +108,10 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: database-url
+  labels:
+    name: database-url
+    app: deploymentexample
+    repo: chart-library
 spec:
   encryptedData:
     DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
@@ -110,6 +122,11 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: sealed-image-pull-secret
+  namesapce: default
+  labels:
+    name: sealed-image-pull-secret
+    app: deploymentexample
+    repo: chart-library
 spec:
   encryptedData:
     .dockerconfigjson: sealed_version_of_the_base64_encoded_dockerconfigjson
@@ -118,4 +135,8 @@ spec:
     metadata:
       name: sealed-image-pull-secret
       namesapce: default
+      labels:
+        name: sealed-image-pull-secret
+        app: deploymentexample
+        repo: chart-library
     type: kubernetes.io/dockerconfigjson

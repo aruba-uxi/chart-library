@@ -4,6 +4,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ingressexample-legacy-ingress
+  labels:
+    name: ingressexample-legacy-ingress
+    app: ingressexample
+    repo: chart-library
   annotations:
     kubernetes.io/ingress.class: legacy-ingress
 spec:
