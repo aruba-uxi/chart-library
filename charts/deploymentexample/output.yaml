@@ -5,7 +5,10 @@ kind: Deployment
 metadata:
   name: deploymentexample
   labels:
+    name: deploymentexample
     app: deploymentexample
+    repo: chart-library
+    version: 0.1.12
 spec:
   replicas: 1
   selector:
@@ -14,7 +17,10 @@ spec:
   template:
     metadata:
       labels:
+        name: deploymentexample
         app: deploymentexample
+        repo: chart-library
+        version: 0.1.12
     spec:
       revisionHistoryLimit: 3
       containers:

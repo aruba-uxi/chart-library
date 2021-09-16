@@ -31,10 +31,20 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ $jobData.name }}
+  labels:
+    name: {{ $jobData.name }}
+    app: {{ $.Chart.Name }}
+    repo: {{ $.Values.labels.repo }}
+    version: {{ $.Chart.Version }}
 spec:
   template:
     metadata:
       name: {{ $jobData.name }}
+      labels:
+        name: {{ $jobData.name }}
+        app: {{ $.Chart.Name }}
+        repo: {{ $.Values.labels.repo }}
+        version: {{ $.Chart.Version }}
     spec:
       containers:
 {{ include "podlib.container" $jobData | indent 6}}

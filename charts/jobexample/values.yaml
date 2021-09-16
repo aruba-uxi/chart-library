@@ -22,3 +22,6 @@ env:
   CAPE_ROLE: DEV
 envFields:
   HOST_IP: status.hostIP
+
+labels:
+  repo: chart-library

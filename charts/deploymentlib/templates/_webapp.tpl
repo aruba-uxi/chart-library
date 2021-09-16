@@ -4,7 +4,10 @@ kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
   labels:
+    name: {{ .Chart.Name }}
     app: {{ .Chart.Name }}
+    repo: {{ .Values.labels.repo }}
+    version: {{ .Chart.Version }}
 spec:
   replicas: {{ .Values.replicaCount | default 1 }}
   selector:
@@ -13,7 +16,10 @@ spec:
   template:
     metadata:
       labels:
+        name: {{ .Chart.Name }}
         app: {{ .Chart.Name }}
+        repo: {{ .Values.labels.repo }}
+        version: {{ .Chart.Version }}
     spec:
       revisionHistoryLimit: 3
       {{- if .Values.serviceAccount }}

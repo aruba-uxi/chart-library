@@ -6,6 +6,11 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: {{ $secretName }}
+  labels:
+    name: {{ $secretName }}
+    app: {{ $.Chart.Name }}
+    repo: {{ $.Values.labels.repo }}
+    version: {{ $.Chart.Version }}
 spec:
   encryptedData:
     {{- range $secretKey, $secretValue := $secretData }}
@@ -21,6 +26,12 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: sealed-image-pull-secret
+  namesapce: {{ .Release.Namespace }}
+  labels:
+    name: sealed-image-pull-secret
+    app: {{ .Chart.Name }}
+    repo: {{ .Values.labels.repo }}
+    version: {{ .Chart.Version }}
 spec:
   encryptedData:
     .dockerconfigjson: {{ .Values.sealedImagePullSecret }}
@@ -29,6 +40,11 @@ spec:
     metadata:
       name: sealed-image-pull-secret
       namesapce: {{ .Release.Namespace }}
+      labels:
+        name: sealed-image-pull-secret
+        app: {{ .Chart.Name }}
+        repo: {{ .Values.labels.repo }}
+        version: {{ .Chart.Version }}
     type: kubernetes.io/dockerconfigjson
 
 ---

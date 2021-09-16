@@ -20,3 +20,6 @@ readinessProbe:
 
 env:
   CAPE_ROLE: DEV
+
+labels:
+  repo: chart-library
