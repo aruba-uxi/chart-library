@@ -6,7 +6,7 @@ metadata:
   labels:
     name: {{ .Chart.Name }}
     app: {{ .Chart.Name }}
-    repo: {{ required ".Values.labels.repo is required" .Values.labels.repo }}
+    repo: {{ .Values.labels.repo }}
 spec:
   replicas: {{ .Values.replicaCount | default 1 }}
   selector:
@@ -17,7 +17,7 @@ spec:
       labels:
         name: {{ .Chart.Name }}
         app: {{ .Chart.Name }}
-        repo: {{ required ".Values.labels.repo is required" .Values.labels.repo }}
+        repo: {{ .Values.labels.repo }}
     spec:
       revisionHistoryLimit: 3
       {{- if .Values.serviceAccount }}
