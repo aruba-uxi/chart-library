@@ -5,7 +5,9 @@ kind: Service
 metadata:
   name: {{ $key }}
   labels:
-    app: {{ $key }}
+    app.kubernetes.io/name: {{ $key }}
+    app: {{ $.Chart.Name }}
+    repo: {{ $.Values.labels.repo }}
 spec:
   ports:
 {{- range $portVal := $val.ports }}

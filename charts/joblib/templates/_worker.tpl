@@ -32,7 +32,9 @@ kind: Deployment
 metadata:
   name: {{ $jobData.name }}
   labels:
-    app: {{ $jobData.name }}
+    app.kubernetes.io/name: {{ $jobData.name }}
+    app: {{ $.Chart.Name }}
+    repo: {{ $.Values.labels.repo }}
 spec:
   replicas: {{ $jobData.parallel | default 1 }}
   selector:
@@ -41,7 +43,9 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ $jobData.name }}
+        app.kubernetes.io/name: {{ $jobData.name }}
+        app: {{ $.Chart.Name }}
+        repo: {{ $.Values.labels.repo }}
     spec:
       revisionHistoryLimit: 3
       {{- if $.Values.serviceAccount }}

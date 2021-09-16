@@ -5,7 +5,9 @@ kind: ServiceAccount
 metadata:
   name: {{ .Values.serviceAccount.name }}
   labels:
-    app: {{ .Values.serviceAccount.name }}
+    app.kubernetes.io/name: {{ .Values.serviceAccount.name }}
+    app: {{ .Chart.Name }}
+    repo: {{ .Values.labels.repo }}
   {{- with .Values.serviceAccount.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

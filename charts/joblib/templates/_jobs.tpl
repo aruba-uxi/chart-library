@@ -31,10 +31,18 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ $jobData.name }}
+  labels:
+    app.kubernetes.io/name: {{ $jobData.name }}
+    app: {{ $.Chart.Name }}
+    repo: {{ $.Values.labels.repo }}
 spec:
   template:
     metadata:
       name: {{ $jobData.name }}
+      labels:
+        app.kubernetes.io/name: {{ $jobData.name }}
+        app: {{ $.Chart.Name }}
+        repo: {{ $.Values.labels.repo }}
     spec:
       containers:
 {{ include "podlib.container" $jobData | indent 6}}

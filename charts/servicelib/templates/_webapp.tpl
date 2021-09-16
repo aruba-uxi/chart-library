@@ -4,7 +4,9 @@ kind: Service
 metadata:
   name: {{ .Chart.Name }}
   labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
     app: {{ .Chart.Name }}
+    repo: {{ .Values.labels.repo }}
 spec:
   ports:
     - name: http

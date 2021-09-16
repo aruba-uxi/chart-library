@@ -4,7 +4,9 @@ kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
   labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
     app: {{ .Chart.Name }}
+    repo: {{ required ".Values.labels.repo is required" .Values.labels.repo }}
 spec:
   replicas: {{ .Values.replicaCount | default 1 }}
   selector:
@@ -13,7 +15,9 @@ spec:
   template:
     metadata:
       labels:
+        app.kubernetes.io/name: {{ .Chart.Name }}
         app: {{ .Chart.Name }}
+        repo: {{ required ".Values.labels.repo is required" .Values.labels.repo }}
     spec:
       revisionHistoryLimit: 3
       {{- if .Values.serviceAccount }}
