@@ -1,0 +1,105 @@
+cronjobs:
+- name: cronjob-1
+- name: cronjob-2
+
+workers:
+- name: worker-1
+- name: worker-2
+
+webapp:
+  enabled: true
+  applications:
+  - name: app-1
+    labels:
+      repo: chart-library
+          
+    replicaCount: 1
+
+    image:
+      repository: nginx
+      pullPolicy: IfNotPresent
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: ""
+
+    sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+
+    serviceAccount:
+      # Specifies whether a service account should be created
+      create: true
+      name: deploy-service-account
+      # Annotations to add to the service account
+      annotations: {}
+    
+    command: [ "printenv" ]
+    
+    port:
+      name: http
+      containerPort: 8000
+      protocol: TCP
+
+    service:
+      type: ClusterIP
+      port: 80
+
+    ingress:
+      enabled: false
+      className: ""
+      annotations: {}
+        # kubernetes.io/ingress.class: nginx
+        # kubernetes.io/tls-acme: "true"
+      hosts:
+        - host: chart-example.local
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls: []
+      #  - secretName: chart-example-tls
+      #    hosts:
+      #      - chart-example.local
+
+    resources: {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+    livenessProbe:
+      path: /livez
+      initialDelaySeconds: 10
+
+    readinessProbe:
+      path: /readyz
+
+    configmap:
+      name: myconfig
+      path: /app/config.json
+
+    env:
+      AWS_DEFAULT_REGION: us-west-1
+
+    envFields:
+      HOST_IP: status.hostIP
+
+    envSealedSecrets:
+      database-url:
+        DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
+      aws-access:
+        AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
+        AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
+
+---
+
+limitCpu: 100m
+limitMemory: 256Mi
