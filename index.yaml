@@ -186,6 +186,20 @@ entries:
   deploymentlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-17T13:20:13.709208221Z"
+    dependencies:
+    - name: podlib
+      repository: file://../../charts/podlib
+      version: '*'
+    description: A Helm chart library for webapp deployments
+    digest: d3b58e3f853706b1d9ba355b05d4c6170ec380c74cec3e9d79edacf8ec5fe320
+    name: deploymentlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/deploymentlib-0.6.1/deploymentlib-0.6.1.tgz
+    version: 0.6.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-16T13:05:49.123501017Z"
     dependencies:
     - name: podlib
@@ -486,6 +500,20 @@ entries:
   joblib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-17T13:20:14.125196931Z"
+    dependencies:
+    - name: podlib
+      repository: file://../../charts/podlib
+      version: '*'
+    description: A Helm chart library for Kubernetes jobs
+    digest: dffd5babfcd9df2450a0aee18a1f2ceacffaf0ac03a73540c2c945d8bc4fffd0
+    name: joblib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/joblib-0.2.1/joblib-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-16T13:05:49.869573042Z"
     dependencies:
     - name: podlib
@@ -675,4 +703,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-16T13:05:50.794264415Z"
+generated: "2021-09-17T13:20:14.125507234Z"
