@@ -41,6 +41,7 @@ spec:
   selector:
     matchLabels:
       app: {{ $jobData.name }}
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:
@@ -49,7 +50,6 @@ spec:
         repo: {{ $.Values.labels.repo }}
         version: {{ $.Chart.Version }}
     spec:
-      revisionHistoryLimit: 3
       {{- if $.Values.serviceAccount }}
       serviceAccountName: {{ $.Values.serviceAccount.name }}
       {{- end }}

@@ -2,6 +2,18 @@
 help:
 	@just list
 
+output:
+  just template-deployment "> charts/deploymentexample/output.yaml"
+  just template-deployment-staging "> charts/deploymentexample/output.staging.yaml"
+  just template-ingress "> charts/ingressexample/output.yaml"
+  just template-ingress-staging "> charts/ingressexample/output.staging.yaml"
+  just template-job "> charts/jobexample/output.yaml"
+  just template-job-staging "> charts/jobexample/output.staging.yaml"
+  just template-service "> charts/serviceexample/output.yaml"
+  just template-service-staging "> charts/serviceexample/output.staging.yaml"
+  just template-serviceaccount "> charts/serviceaccountexample/output.yaml"
+  just template-serviceaccount-staging "> charts/serviceaccountexample/output.staging.yaml"
+
 template-deployment +ARGS='':
   helm dependency update charts/deploymentlib
   helm dependency update charts/deploymentexample
