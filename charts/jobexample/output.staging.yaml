@@ -14,6 +14,7 @@ spec:
   selector:
     matchLabels:
       app: pi-with-timeout
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:
@@ -22,7 +23,6 @@ spec:
         repo: chart-library
         version: 0.1.11
     spec:
-      revisionHistoryLimit: 3
       containers:
       - name: pi-with-timeout
         image: perl
