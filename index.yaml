@@ -553,6 +553,16 @@ entries:
   podlib:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-21T05:47:41.552051916Z"
+    description: A Helm chart library for Kubernetes pods
+    digest: 98e3654aefccbe5511746ca262eb7b1ae39973d79e2678fb0649584560cbed88
+    name: podlib
+    type: library
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/podlib-0.2.1/podlib-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-16T13:05:50.065314751Z"
     description: A Helm chart library for Kubernetes pods
     digest: eacd23acdf8ddd52010b1f8e7b6c7cd29b08311eea56d80afee4173706c87923
@@ -703,4 +713,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-17T13:20:14.125507234Z"
+generated: "2021-09-21T05:47:41.552364526Z"
