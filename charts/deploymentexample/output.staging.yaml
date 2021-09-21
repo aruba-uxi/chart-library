@@ -126,7 +126,6 @@ apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: sealed-image-pull-secret
-  namesapce: default
   labels:
     name: sealed-image-pull-secret
     app: deploymentexample
@@ -139,7 +138,6 @@ spec:
     data: null
     metadata:
       name: sealed-image-pull-secret
-      namesapce: default
       labels:
         name: sealed-image-pull-secret
         app: deploymentexample
