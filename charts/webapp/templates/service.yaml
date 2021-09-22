@@ -1,0 +1,19 @@
+{{- range $appData := .Values.applications }}
+---
+{{- $service := $appData.service | default dict }} # service is optional in the values file
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $appData.name }}
+  labels:
+    {{- include "webapp.labels" (dict "context" $ "name" $appData.name) | nindent 4 }}
+spec:
+  type: {{ $service.type | default "ClusterIP" }}
+  ports:
+    - name: http
+      port: {{ $service.port | default 80 }}
+      protocol: TCP
+      targetPort: http
+  selector:
+    app: {{ $appData.name }}
+{{- end }}

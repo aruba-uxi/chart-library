@@ -1,0 +1,162 @@
+# TODO: could add additional label in each webapp
+global:
+  labels:
+    repo: chart-library
+
+  image:
+    repository: webapp-example
+    tag: "1.2.3"
+    imagePullPolicy: IfNotPresent
+
+  sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+
+cronjobs:
+- name: cronjob-1
+- name: cronjob-2
+
+workers:
+- name: worker-1
+- name: worker-2
+
+webapp:
+  applications:
+  - name: webapp-example-1
+    # sets the replica count
+    replicaCount: 1
+    # Overrides the global.image settings
+    image: {}
+      # repository: nginx
+      # pullPolicy: IfNotPresent
+      # tag: ""
+    # adds a service account to the application, defaults to default
+    serviceAccount:
+      create: true
+      # name: webapp-example
+      # annotations: {}
+    # overrides the command from the dockerfile
+    command: ["printenv"]
+    # the container port to expose
+    port: 8000
+    # customize the service created
+    # TODO: add external IP service account
+    # TODO: add external name service account
+    service: {}
+      # type: ClusterIP
+      # port: 80
+    # the path to the liveness probe
+    livenessProbe:
+      path: /livez
+    # the path to the readiness probe
+    readinessProbe:
+      path: /readyz
+    # sets the resources of the app
+    resources: {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 256Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+    # sets the node selectors
+    nodeSelector: {}
+    # sets the tolerations
+    tolerations: []
+    # sets the affinity for the app
+    affinity: {}
+    # adds a config map to the application
+    configMap:
+      annotations: {}
+      # readOnly: false
+      path: /app/config
+      data:
+        config.json: |
+          {
+            foo: bar
+            bing: bang
+            server: {
+              host: hostname
+            }
+          }
+
+    env:
+      AWS_DEFAULT_REGION: us-west-1
+
+    envFields:
+      HOST_IP: status.hostIP
+
+    envSealedSecrets:
+      database-url:
+        DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
+      aws-access:
+        AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
+        AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
+  - name: webapp-example-2
+    # sets the replica count
+    replicaCount: 1
+    # Overrides the global.image settings
+    image: {}
+      # repository: nginx
+      # pullPolicy: IfNotPresent
+      # tag: ""
+    # adds a service account to the application, defaults to default
+    serviceAccount:
+      create: true
+      # name: webapp-example
+      # annotations: {}
+    # overrides the command from the dockerfile
+    command: ["printenv"]
+    # the container port to expose
+    port: 8000
+    # customize the service created
+    # TODO: add external IP service account
+    # TODO: add external name service account
+    service: {}
+      # type: ClusterIP
+      # port: 80
+    # the path to the liveness probe
+    livenessProbe:
+      path: /livez
+    # the path to the readiness probe
+    readinessProbe:
+      path: /readyz
+    # sets the resources of the app
+    resources: {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 256Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+    # sets the node selectors
+    nodeSelector: {}
+    # sets the tolerations
+    tolerations: []
+    # sets the affinity for the app
+    affinity: {}
+    # adds a config map to the application
+    configMap:
+      annotations: {}
+      # readOnly: false
+      path: /app/config
+      data:
+        config.json: |
+          {
+            foo: bar
+            bing: bang
+            server: {
+              host: hostname
+            }
+          }
+    # TODO: stopped here
+    env:
+      AWS_DEFAULT_REGION: us-west-1
+
+    envFields:
+      HOST_IP: status.hostIP
+
+    envSealedSecrets:
+      database-url:
+        DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
+      aws-access:
+        AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
+        AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...

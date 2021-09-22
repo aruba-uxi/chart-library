@@ -1,0 +1,9 @@
+apiVersion: v2
+name: webapp-example
+description: A Helm chart for webapp-example
+type: application
+version: 1.0.0
+dependencies:
+- name: webapp
+  version: "*"
+  repository: file://../../charts/webapp

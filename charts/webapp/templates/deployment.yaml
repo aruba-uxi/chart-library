@@ -1,71 +1,47 @@
 {{- range $appData := .Values.applications }}
+---
+{{- $applicationImage := $appData.image | default dict }} # image mapping is optional in app values
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $appData.name }}
   labels:
-    name: {{ $appData.name }}
-    app: {{ $appData.name }}
-    repo: {{ $appData.labels.repo }}
-    version: {{ $.Chart.Version }}
+    {{- include "webapp.labels" (dict "context" $ "name" $appData.name) | nindent 4 }}
 spec:
-  replicas: {{ $appData.replicaCount }}
+  replicas: {{ $appData.replicaCount | default 1 }}
   selector:
     matchLabels:
-      app: {{ $appData.name }}
+      {{- include "webapp.selectorLabels" (dict "context" $ "name" $appData.name) | nindent 6 }}
   template:
     metadata:
       labels:
-        name: {{ $appData.name }}
-        app: {{ $appData.name }}
-        repo: {{ $appData.labels.repo }}
-        version: {{ $.Chart.Version }}
+        {{- include "webapp.labels" (dict "context" $ "name" $appData.name) | nindent 8 }}
     spec:
-      {{- if $appData.sealedImagePullSecret }}
+      {{- if $.Values.global.sealedImagePullSecret }}
       imagePullSecrets:
       - name: sealed-image-pull-secret
       {{- end }}
       {{- if $appData.serviceAccount }}
-      serviceAccountName: {{ $appData.serviceAccount.name }}
+      serviceAccountName: {{ template "webapp.serviceAccountName" (dict "context" $ "appData" $appData) }}
       {{- end }}
       containers:
         - name: {{ $appData.name }}
-          image: "{{ $appData.image.repository }}:{{ $appData.image.tag | default $.Chart.AppVersion }}"
-          imagePullPolicy: {{ $appData.image.pullPolicy | default "IfNotPresent" }}
+          image: "{{ default $.Values.global.image.repository $applicationImage.repository }}:{{ default $.Values.global.image.tag $applicationImage.tag }}"
+          imagePullPolicy: {{ default $.Values.global.image.pullPolicy $applicationImage.pullPolicy }}
           {{- if $appData.command }}
           command: {{ toRawJson $appData.command }}
           {{- end }}
-          {{- if $appData.env }}
+          {{- if or $appData.env $appData.envFields $appData.envSealedSecrets }}
           env:
-          {{- range $key, $val := $appData.env }}
-          - name: {{ $key }}
-            value: {{ $val | quote }}
+          {{- include "webapp.env-variables" (dict "appData" $appData) | indent 12 }}
+          {{- include "webapp.env-sealed-secrets" (dict "appData" $appData) | indent 12 }}
+          {{- include "webapp.env-fields" (dict "appData" $appData) | indent 12 }}
           {{- end }}
-          {{- end }}
-          {{- if $appData.envFields -}}
-          {{- range $key, $val := $appData.envFields }}
-          - name: {{ $key }}
-            valueFrom:
-            fieldRef:
-              fieldPath: {{ $val }}
-          {{- end -}}
-          {{- end -}}
-          {{- if $appData.envSealedSecrets -}}
-          {{- range $secretName, $secretData := $appData.envSealedSecrets }}
-          {{- range $envName, $secretValue := $secretData }}
-          - name: {{ $envName }}
-            valueFrom:
-            secretKeyRef:
-              name: {{ $secretName }}
-              key: {{ $envName }}
-          {{- end -}}
-          {{- end -}}
-          {{- end -}}
           {{- if $appData.port }}
           ports:
-          - name: {{ $appData.port.name }}
-            containerPort: {{ $appData.port.containerPort }}
-            protocol: {{ $appData.port.protocol | default "TCP" }}
+          - name: http
+            containerPort: {{ $appData.port }}
+            protocol: TCP
           {{- end }}
           {{- if $appData.readinessProbe }}
           readinessProbe:
@@ -77,8 +53,11 @@ spec:
                 value: application/json
               path: {{ $appData.readinessProbe.path }}
               port: {{ $appData.port }}
-            initialDelaySeconds: {{ $appData.readinessProbe.initialDelaySeconds | default "5" }}
-            periodSeconds: {{ $appData.readinessProbe.periodSeconds | default "3" }}
+            initialDelaySeconds: {{ $appData.readinessProbe.initialDelaySeconds | default "10" }}
+            periodSeconds: {{ $appData.readinessProbe.periodSeconds | default "10" }}
+            timeoutSeconds: {{ $appData.readinessProbe.timeoutSeconds | default "1" }}
+            successThreshold: {{ $appData.readinessProbe.successThreshold | default "1" }}
+            failureThreshold: {{ $appData.readinessProbe.failureThreshold | default "3" }}
           {{- end }}
           {{- if $appData.livenessProbe }}
           livenessProbe:
@@ -90,18 +69,24 @@ spec:
                 value: application/json
               path: {{ $appData.livenessProbe.path }}
               port: {{ $appData.port }}
-            initialDelaySeconds: {{ $appData.livenessProbe.initialDelaySeconds | default "5" }}
-            periodSeconds: {{ $appData.livenessProbe.periodSeconds | default "3" }}
+            initialDelaySeconds: {{ $appData.livenessProbe.initialDelaySeconds | default "10" }}
+            periodSeconds: {{ $appData.livenessProbe.periodSeconds | default "10" }}
+            timeoutSeconds: {{ $appData.livenessProbe.timeoutSeconds | default "1" }}
+            successThreshold: {{ $appData.livenessProbe.successThreshold | default "1" }}
+            failureThreshold: {{ $appData.livenessProbe.failureThreshold | default "3" }}
           {{- end }}
+          {{- with $appData.resources }}
           resources:
-            {{- toYaml $appData.resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if $appData.parallel }}
           parallelism: {{ $appData.parallel }}
           {{- end }}
-          {{- if $appData.configmap }}
+          {{- if $appData.configMap }}
           volumeMounts:
           - name: config
-            mountPath: {{ $appData.configmap.path }}
+            mountPath: {{ $appData.configMap.path }}
+            readOnly: {{ default true $appData.configMap.readOnly }}
           {{- end }}
       {{- with $appData.nodeSelector }}
       nodeSelector:
@@ -115,10 +100,10 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if $appData.configmap }}
+      {{- if $appData.configMap }}
       volumes:
       - name: config
         configMap:
-          name: {{ $appData.configmap.name }}
+          name: {{ $appData.name }}
       {{- end }}
 {{- end }}
