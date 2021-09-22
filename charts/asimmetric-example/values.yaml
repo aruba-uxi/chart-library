@@ -1,10 +1,10 @@
-# TODO: could add additional label in each webapp
+# TODO: could add additional label in each asimmetric
 global:
   labels:
     repo: chart-library
 
   image:
-    repository: webapp-example
+    repository: asimmetric-example
     tag: "1.2.3"
     imagePullPolicy: IfNotPresent
 
@@ -18,10 +18,10 @@ workers:
 - name: worker-1
 - name: worker-2
 
-webapp:
+asimmetric:
   enabled: true
   applications:
-  - name: webapp-example-1
+  - name: asimmetric-example-1
     # sets the replica count
     replicaCount: 1
     # Overrides the global.image settings
@@ -32,7 +32,7 @@ webapp:
     # adds a service account to the application, defaults to default
     serviceAccount:
       create: true
-      # name: webapp-example
+      # name: asimmetric-example
       # annotations: {}
     # overrides the command from the dockerfile
     command: ["printenv"]
@@ -91,7 +91,7 @@ webapp:
       aws-access:
         AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
         AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
-  - name: webapp-example-2
+  - name: asimmetric-example-2
     # sets the replica count
     replicaCount: 1
     # Overrides the global.image settings
@@ -102,7 +102,7 @@ webapp:
     # adds a service account to the application, defaults to default
     serviceAccount:
       create: true
-      # name: webapp-example
+      # name: asimmetric-example
       # annotations: {}
     # overrides the command from the dockerfile
     command: ["printenv"]

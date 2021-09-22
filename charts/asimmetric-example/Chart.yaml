@@ -1,10 +1,9 @@
 apiVersion: v2
-name: webapp-example
+name: asimmetric-example
 description: A Helm chart for Asimmetric
 type: application
 version: 1.0.0
 dependencies:
-- name: webapp
+- name: asimmetric
   version: "*"
-  repository: file://../../charts/webapp
-  condition: webapp.enabled
+  repository: file://../../charts/asimmetric
