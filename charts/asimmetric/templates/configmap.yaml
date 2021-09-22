@@ -4,9 +4,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ $appData.name }}
+  name: {{ include "application.name" (dict "context" $ "appData" $appData) }}
   labels:
-    {{- include "webapp.labels" (dict "context" $ "name" $appData.name) | nindent 4 }}
+    {{- include "application.labels" (dict "context" $ "appData" $appData) | nindent 4 }}
   {{- with $appData.configMap.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

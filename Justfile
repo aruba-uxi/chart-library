@@ -52,6 +52,6 @@ template-serviceaccount-staging +ARGS='':
   @just template-serviceaccount  -f charts/serviceaccountexample/values.yaml -f charts/serviceaccountexample/values-staging.yaml "{{ARGS}}"
 
 
-template-webapp +ARGS='':
-  helm dependency update charts/webapp-example
-  helm template webapp-example charts/webapp-example {{ARGS}}
+template-asimmetric +ARGS='':
+  helm dependency update charts/asimmetric-example
+  helm template asimmetric-example charts/asimmetric-example {{ARGS}}

@@ -1,4 +1,4 @@
-{{- define "servicelib.webapp" -}}
+{{- define "servicelib.application" -}}
 apiVersion: v1
 kind: Service
 metadata:

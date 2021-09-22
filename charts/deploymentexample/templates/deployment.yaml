@@ -1,1 +1,1 @@
-{{- include "deploymentlib.webapp" . }}
+{{- include "deploymentlib.application" . }}

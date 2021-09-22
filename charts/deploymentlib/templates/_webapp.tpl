@@ -1,4 +1,4 @@
-{{- define "deploymentlib.webapp" -}}
+{{- define "deploymentlib.application" -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

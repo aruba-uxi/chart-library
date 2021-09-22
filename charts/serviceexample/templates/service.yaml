@@ -1,1 +1,1 @@
-{{- include "servicelib.webapp" . }}
+{{- include "servicelib.application" . }}

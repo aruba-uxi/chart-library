@@ -4,28 +4,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $appData.name }}
+  name: {{ include "application.name" (dict "context" $ "appData" $appData) }}
   labels:
-    {{- include "webapp.labels" (dict "context" $ "name" $appData.name) | nindent 4 }}
+    {{- include "application.labels" (dict "context" $ "appData" $appData) | nindent 4 }}
 spec:
   replicas: {{ $appData.replicaCount | default 1 }}
   selector:
     matchLabels:
-      {{- include "webapp.selectorLabels" (dict "context" $ "name" $appData.name) | nindent 6 }}
+      {{- include "application.selectorLabels" (dict "context" $ "appData" $appData) | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "webapp.labels" (dict "context" $ "name" $appData.name) | nindent 8 }}
+        {{- include "application.labels" (dict "context" $ "appData" $appData) | nindent 8 }}
     spec:
       {{- if $.Values.global.sealedImagePullSecret }}
       imagePullSecrets:
       - name: sealed-image-pull-secret
       {{- end }}
       {{- if $appData.serviceAccount }}
-      serviceAccountName: {{ template "webapp.serviceAccountName" (dict "context" $ "appData" $appData) }}
+      serviceAccountName: {{ template "application.serviceAccountName" (dict "context" $ "appData" $appData) }}
       {{- end }}
       containers:
-        - name: {{ $appData.name }}
+        - name: {{ $appData.role }}
           image: "{{ default $.Values.global.image.repository $applicationImage.repository }}:{{ default $.Values.global.image.tag $applicationImage.tag }}"
           imagePullPolicy: {{ default $.Values.global.image.pullPolicy $applicationImage.pullPolicy }}
           {{- if $appData.command }}
@@ -33,9 +33,9 @@ spec:
           {{- end }}
           {{- if or $appData.env $appData.envFields $appData.envSealedSecrets }}
           env:
-          {{- include "webapp.env-variables" (dict "appData" $appData) | indent 12 }}
-          {{- include "webapp.env-sealed-secrets" (dict "appData" $appData) | indent 12 }}
-          {{- include "webapp.env-fields" (dict "appData" $appData) | indent 12 }}
+          {{- include "application.env-variables" (dict "appData" $appData) | indent 12 }}
+          {{- include "application.env-sealed-secrets" (dict "appData" $appData) | indent 12 }}
+          {{- include "application.env-fields" (dict "appData" $appData) | indent 12 }}
           {{- end }}
           {{- if $appData.port }}
           ports:
@@ -104,6 +104,6 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: {{ $appData.name }}
+          name: {{ include "application.name" (dict "context" $ "appData" $appData) }}
       {{- end }}
 {{- end }}

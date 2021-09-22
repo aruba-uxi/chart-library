@@ -1,38 +1,49 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "webapp.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
-{{- end }}
+{{- define "application.name" -}}
+{{- $validRoles := list "service" "worker" -}}
+{{- $name := .context.Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- if .appData.role -}}
+  {{- if has .appData.role $validRoles -}}
+    {{- printf "%s-%s" $name .appData.role -}}
+  {{- else -}}
+    {{- required "role is invalid" .appData.role -}}
+  {{- end -}}
+{{- else -}}
+  {{- printf "%s" $name -}}
+{{- end -}}
+{{- end -}}
 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "webapp.chart" -}}
+{{- define "application.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
-{{- end }}
+{{- end -}}
 
 {{/*
 Common labels
 */}}
-{{- define "webapp.labels" -}}
-helm.sh/chart: {{ include "webapp.chart" .context }}
-{{ include "webapp.selectorLabels" (dict "context" .context "name" .name) }}
+{{- define "application.labels" -}}
+helm.sh/chart: {{ include "application.chart" .context }}
+{{ include "application.selectorLabels" (dict "context" .context "appData" .appData) }}
 {{- if .context.Chart.AppVersion }}
 app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
-app: {{ .name }}
+app: {{ (include "application.name" (dict "context" .context "appData" .appData)) }}
+{{- if .appData.role }}
+role: {{ .appData.role }}
+{{- end }}
 repository: {{ .context.Values.global.labels.repo }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
-{{- define "webapp.selectorLabels" -}}
-{{- if .name -}}
-app.kubernetes.io/name: {{ .name }}
-{{ end -}}
+{{- define "application.selectorLabels" -}}
+app.kubernetes.io/name: {{ (include "application.name" (dict "context" .context "appData" .appData))}}
 app.kubernetes.io/instance: {{ .context.Release.Name }}
 {{- end }}
 
@@ -40,7 +51,7 @@ app.kubernetes.io/instance: {{ .context.Release.Name }}
 {{/*
 Inject extra environment variables
 */}}
-{{- define "webapp.env-variables" -}}
+{{- define "application.env-variables" -}}
 {{- range $key, $val := .appData.env }}
 - name: {{ $key }}
   value: {{ $val | quote }}
@@ -51,7 +62,7 @@ Inject extra environment variables
 {{/*
 Inject extra environment variables from secrets
 */}}
-{{- define "webapp.env-sealed-secrets" -}}
+{{- define "application.env-sealed-secrets" -}}
 {{- range $secretName, $secretData := .appData.envSealedSecrets }}
 {{- range $envName, $secretValue := $secretData }}
 - name: {{ $envName }}
@@ -67,7 +78,7 @@ Inject extra environment variables from secrets
 {{/*
 Inject extra environment variables from fields
 */}}
-{{- define "webapp.env-fields" -}}
+{{- define "application.env-fields" -}}
 {{- range $key, $val := .appData.envFields }}
 - name: {{ $key }}
   valueFrom:
@@ -79,9 +90,9 @@ Inject extra environment variables from fields
 {{/*
 Create a service account name
 */}}
-{{- define "webapp.serviceAccountName" -}}
+{{- define "application.serviceAccountName" -}}
 {{- if .appData.serviceAccount.create -}}
-    {{ default .appData.name .appData.serviceAccount.name }}
+    {{ default (include "application.name" (dict "context" .context "appData" .appData)) .appData.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .appData.serviceAccount.name }}
 {{- end -}}

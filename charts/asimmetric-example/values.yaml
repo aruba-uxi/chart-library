@@ -12,7 +12,7 @@ asimmetric:
     sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
 
   applications:
-  - name: asimmetric-example-1
+  - role: service
     # sets the replica count
     replicaCount: 1
     # Overrides the global.image settings
@@ -26,7 +26,7 @@ asimmetric:
       # name: asimmetric-example
       # annotations: {}
     # overrides the command from the dockerfile
-    command: ["printenv"]
+    command: ["printenv"] # TODO: check this command gets built correctly with - - - -
     # the container port to expose
     port: 8000
     # customize the service created
@@ -69,7 +69,7 @@ asimmetric:
               host: hostname
             }
           }
-
+    # TODO: stopped here
     env:
       AWS_DEFAULT_REGION: us-west-1
 
@@ -82,7 +82,7 @@ asimmetric:
       aws-access:
         AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
         AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
-  - name: asimmetric-example-2
+  - role: worker
     # sets the replica count
     replicaCount: 1
     # Overrides the global.image settings
