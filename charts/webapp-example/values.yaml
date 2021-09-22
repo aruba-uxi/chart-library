@@ -19,6 +19,7 @@ workers:
 - name: worker-2
 
 webapp:
+  enabled: true
   applications:
   - name: webapp-example-1
     # sets the replica count
