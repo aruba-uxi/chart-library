@@ -1,6 +1,6 @@
 {{- range $appData := .Values.applications }}
 ---
-{{- $applicationImage := $appData.image | default dict }} # image mapping is optional in app values
+{{- $applicationImage := $appData.image | default dict -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,20 +22,20 @@ spec:
       - name: sealed-image-pull-secret
       {{- end }}
       {{- if $appData.serviceAccount }}
-      serviceAccountName: {{ template "application.serviceAccountName" (dict "context" $ "appData" $appData) }}
+      serviceAccountName: {{ template "serviceAccount.name" (dict "context" $ "appData" $appData) }}
       {{- end }}
       containers:
         - name: {{ $appData.role }}
           image: "{{ default $.Values.global.image.repository $applicationImage.repository }}:{{ default $.Values.global.image.tag $applicationImage.tag }}"
           imagePullPolicy: {{ default $.Values.global.image.pullPolicy $applicationImage.pullPolicy }}
-          {{- if $appData.command }}
-          command: {{ toRawJson $appData.command }}
+          {{- with $appData.command }}
+          command: {{- toYaml . | nindent 12 }}
           {{- end }}
           {{- if or $appData.env $appData.envFields $appData.envSealedSecrets }}
           env:
-          {{- include "application.env-variables" (dict "appData" $appData) | indent 12 }}
-          {{- include "application.env-sealed-secrets" (dict "appData" $appData) | indent 12 }}
-          {{- include "application.env-fields" (dict "appData" $appData) | indent 12 }}
+          {{- include "application.env-variables" (dict "context" $ "appData" $appData) | indent 12 }}
+          {{- include "application.env-sealed-secrets" (dict "context" $ "appData" $appData) | indent 12 }}
+          {{- include "application.env-fields" (dict "context" $ "appData" $appData) | indent 12 }}
           {{- end }}
           {{- if $appData.port }}
           ports:

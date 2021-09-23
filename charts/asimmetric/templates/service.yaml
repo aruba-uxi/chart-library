@@ -1,6 +1,7 @@
 {{- range $appData := .Values.applications }}
+{{- if ne $appData.role "worker" -}}
 ---
-{{- $service := $appData.service | default dict }} # service is optional in the values file
+{{- $service := $appData.service | default dict }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -16,4 +17,5 @@ spec:
       targetPort: http
   selector:
     app: {{ include "application.name" (dict "context" $ "appData" $appData) }}
+{{- end -}}
 {{- end }}

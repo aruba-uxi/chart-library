@@ -1,47 +1,106 @@
 # TODO: could add additional label in each asimmetric
 asimmetric:
+  ## Global values used by all manifests
+  ##
   global:
+    ## Configures the labels for all manifests
     labels:
-      repo: chart-library
-
+      repo: asimmetric-example
+    ## Configures the image repository and pull policy for all pods
+    ##
     image:
       repository: asimmetric-example
       tag: "1.2.3"
       imagePullPolicy: IfNotPresent
-
+    ## Creates a sealed image pull secret
+    ##
     sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
-
+    ## Basic environment variables (Optional)
+    ## If overridden, in application or cronjobs, precedence is given to the overridden values
+    ## Default: None
+    ##
+    env:
+      ENVIRONMENT: environment # DEV|STAGING|PRODUCTION
+      OVERRIDDEN_VALUE: original
+    ## Environment variables set from the deployment fields (Optional)
+    ## If overridden, in application or cronjobs, precedence is given to the overridden values
+    ## Default: None
+    ##
+    envFields:
+      HOST_IP: status.hostIP
+      OVERRIDDEN_FIELD_VALUE: status.originalField
+    ## Environment variables set from sealed secrets (Optional)
+    ## If overridden, in application or cronjobs, precedence is given to the overridden values
+    ## A sealed secret is created for each envSealedSecrets.<value>
+    ## NB! These can be overridden at the secret name level and no lower. 
+    ## E.g aws-access can be overridden but you can not define aws-access.AWS_REGION here 
+    ## and aws-access.AWS_ACCESS_ID in the pod
+    ## You must override the whole sealed secret
+    ## Default: None
+    ##
+    envSealedSecrets:
+      overridden-secret:
+        OVERRIDDEN_VALUE: original-value
+      aws-access:
+        AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
+        AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
+  ## Creates one or more applications unique by role.
+  ## Roles are one of service|worker
   applications:
+    ## Asimmetric application role: service|worker
+    ## The difference between a service and worker is the worker does not have ports exposed. 
+    ## I.e a worker does not get a Service manifest defined
+    ##
   - role: service
-    # sets the replica count
+    ## Sets the replica count (Optional)
+    ## Default: 1
+    ##
     replicaCount: 1
-    # Overrides the global.image settings
+    ## Configures the image and image pull policy (Optional)
+    ## Default: uses .global.image
+    ##
     image: {}
       # repository: nginx
       # pullPolicy: IfNotPresent
       # tag: ""
-    # adds a service account to the application, defaults to default
+    ## Attaches a service account it to the application (Optional)
+    ## Default: uses the default service account in the namespace
+    ##
     serviceAccount:
-      create: true
-      # name: asimmetric-example
-      # annotations: {}
-    # overrides the command from the dockerfile
-    command: ["printenv"] # TODO: check this command gets built correctly with - - - -
-    # the container port to expose
+      create: true # If true, a service account chart will be created
+      # name: service-account-name # can use an existing service account, defaults to default
+      # annotations: {} 
+    ## Overrides the command from the dockerfile (Optional)
+    ## Default: the Dockerfile command is used
+    ##
+    command: []
+      # - "echo"
+      # - "'foobarbiz'"
+    ## Which port on the pod is exposed.
+    ## NB! for 'role: worker' do not set this
+    ##
     port: 8000
-    # customize the service created
+    ## Configures the service created (Optional)
+    ## Default: ClusterIP on port 80
+    ##
     # TODO: add external IP service account
     # TODO: add external name service account
     service: {}
       # type: ClusterIP
       # port: 80
-    # the path to the liveness probe
+    ## Enables the liveness probe on the specified path
+    ## NB! for 'role:worker' this should be excluded
+    ##
     livenessProbe:
       path: /livez
-    # the path to the readiness probe
+    ## Enables the readiness probe on the specified path
+    ## NB! for 'role:worker' this should be excluded
+    ##
     readinessProbe:
       path: /readyz
-    # sets the resources of the app
+    ## Configure the pod resources (Optional)
+    ## Default: lets kubernetes set the resources
+    ##
     resources: {}
       # limits:
       #   cpu: 100m
@@ -49,13 +108,21 @@ asimmetric:
       # requests:
       #   cpu: 100m
       #   memory: 128Mi
-    # sets the node selectors
+    ## Configures the node selectors for the pods (Optional)
+    ## Default: None
+    ##
     nodeSelector: {}
-    # sets the tolerations
+    ## Configures the tolerations for the pods (Optional)
+    ## Default: None
+    ##
     tolerations: []
-    # sets the affinity for the app
+    ## Configures the pod affinity for the pods (Optional)
+    ## Default: None
+    ##
     affinity: {}
-    # adds a config map to the application
+    ## Adds a config map to the application (Optional)
+    ## Default: None
+    ###
     configMap:
       annotations: {}
       # readOnly: false
@@ -72,86 +139,24 @@ asimmetric:
     # TODO: stopped here
     env:
       AWS_DEFAULT_REGION: us-west-1
-
+      OVERRIDDEN_VALUE: new-value
+    ## Environment variables set from the deployment fields (Optional)
+    ## If overridden, in application or cronjobs, precedence is given to the overridden values
+    ## Default: None
+    ##
     envFields:
       HOST_IP: status.hostIP
-
+      OVERRIDDEN_FIELD_VALUE: status.newField
+    ## Environment variables set from sealed secrets (Optional)
+    ## If overridden, in application or cronjobs, precedence is given to the overridden values
+    ## A sealed secret is created for each envSealedSecrets.<value>
+    ## Default: None
+    ##
     envSealedSecrets:
+      overridden-secret:
+        OVERRIDDEN_VALUE: overridden-value
       database-url:
         DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
-      aws-access:
-        AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
-        AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
-  - role: worker
-    # sets the replica count
-    replicaCount: 1
-    # Overrides the global.image settings
-    image: {}
-      # repository: nginx
-      # pullPolicy: IfNotPresent
-      # tag: ""
-    # adds a service account to the application, defaults to default
-    serviceAccount:
-      create: true
-      # name: asimmetric-example
-      # annotations: {}
-    # overrides the command from the dockerfile
-    command: ["printenv"]
-    # the container port to expose
-    port: 8000
-    # customize the service created
-    # TODO: add external IP service account
-    # TODO: add external name service account
-    service: {}
-      # type: ClusterIP
-      # port: 80
-    # the path to the liveness probe
-    livenessProbe:
-      path: /livez
-    # the path to the readiness probe
-    readinessProbe:
-      path: /readyz
-    # sets the resources of the app
-    resources: {}
-      # limits:
-      #   cpu: 100m
-      #   memory: 256Mi
-      # requests:
-      #   cpu: 100m
-      #   memory: 128Mi
-    # sets the node selectors
-    nodeSelector: {}
-    # sets the tolerations
-    tolerations: []
-    # sets the affinity for the app
-    affinity: {}
-    # adds a config map to the application
-    configMap:
-      annotations: {}
-      # readOnly: false
-      path: /app/config
-      data:
-        config.json: |
-          {
-            foo: bar
-            bing: bang
-            server: {
-              host: hostname
-            }
-          }
-    # TODO: stopped here
-    env:
-      AWS_DEFAULT_REGION: us-west-1
-
-    envFields:
-      HOST_IP: status.hostIP
-
-    envSealedSecrets:
-      database-url:
-        DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
-      aws-access:
-        AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
-        AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
   cronjobs:
   - name: cronjob-1
   - name: cronjob-2
