@@ -137,7 +137,6 @@ asimmetric:
                 host: hostname
               }
             }
-      # TODO: stopped here
       env:
         AWS_DEFAULT_REGION: us-west-1
         OVERRIDDEN_VALUE: new-value
@@ -158,10 +157,23 @@ asimmetric:
           OVERRIDDEN_VALUE: overridden-value
         database-url:
           DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
+    example-worker:
+      # role: worker
+      command:
+        - echo
+        - "foo bar biz"
+      # TODO: should not be present in deployment
+      port: 8000
+      # TODO: should not be present in deployment
+      service: {}
+      serviceAccount:
+        create: true
+      configMap:
+        annotations: {}
+        path: /app/config
+        data:
+          config.json: |
+            "hello config map"
   cronjobs:
   - name: cronjob-1
   - name: cronjob-2
-
-  workers:
-  - name: worker-1
-  - name: worker-2

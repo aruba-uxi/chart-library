@@ -1,6 +1,5 @@
-{{- range $appName, $appData := .Values.applications }}
-{{- if $appData.configMap -}}
----
+{{ range $appName, $appData := .Values.applications }}
+{{ if $appData.configMap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -12,5 +11,6 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 data: {{- toYaml $appData.configMap.data | nindent 4 }}
-{{- end -}}
-{{- end }}
+---
+{{ end }}
+{{ end }}

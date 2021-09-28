@@ -1,7 +1,6 @@
-{{- range $appName, $appData := .Values.applications }}
-{{- if ne $appData.role "worker" -}}
----
-{{- $service := $appData.service | default dict }}
+{{ range $appName, $appData := .Values.applications }}
+{{ if ne $appData.role "worker" }}
+{{- $service := $appData.service | default dict -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -17,5 +16,6 @@ spec:
       targetPort: http
   selector:
     app: {{ $appName }}
-{{- end -}}
-{{- end }}
+---
+{{ end }}
+{{ end }}

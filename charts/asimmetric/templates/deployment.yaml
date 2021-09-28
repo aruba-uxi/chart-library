@@ -1,5 +1,4 @@
-{{- range $appName, $appData := .Values.applications }}
----
+{{ range $appName, $appData := .Values.applications }}
 {{- $applicationImage := $appData.image | default dict -}}
 apiVersion: apps/v1
 kind: Deployment
@@ -37,7 +36,7 @@ spec:
             {{- include "application.env-fields" (dict "context" $ "appData" $appData) | indent 10 }}
             {{- include "application.env-sealed-secrets" (dict "context" $ "appName" $appName "appData" $appData) | indent 10 }}
           {{- end }}
-          {{- if $appData.port }}
+          {{- if and $appData.port (ne $appData.role "worker")}}
           ports:
           - name: http
             containerPort: {{ $appData.port }}
@@ -106,4 +105,5 @@ spec:
         configMap:
           name: {{ $appName }}
       {{- end }}
-{{- end }}
+---
+{{ end }}
