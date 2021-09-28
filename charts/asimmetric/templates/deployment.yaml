@@ -1,21 +1,21 @@
-{{- range $appData := .Values.applications }}
+{{- range $appName, $appData := .Values.applications }}
 ---
 {{- $applicationImage := $appData.image | default dict -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "application.name" (dict "context" $ "appData" $appData) }}
+  name: {{ $appName }}
   labels:
-    {{- include "application.labels" (dict "context" $ "appData" $appData) | nindent 4 }}
+    {{- include "application.labels" (dict "context" $ "name" $appName) | nindent 4 }}
 spec:
   replicas: {{ $appData.replicaCount | default 1 }}
   selector:
     matchLabels:
-      {{- include "application.selectorLabels" (dict "context" $ "appData" $appData) | nindent 6 }}
+      {{- include "application.selectorLabels" (dict "context" $ "name" $appName) | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "application.labels" (dict "context" $ "appData" $appData) | nindent 8 }}
+        {{- include "application.labels" (dict "context" $ "name" $appName) | nindent 8 }}
     spec:
       {{- if $.Values.global.sealedImagePullSecret }}
       imagePullSecrets:
@@ -29,13 +29,13 @@ spec:
           image: "{{ default $.Values.global.image.repository $applicationImage.repository }}:{{ default $.Values.global.image.tag $applicationImage.tag }}"
           imagePullPolicy: {{ default $.Values.global.image.pullPolicy $applicationImage.pullPolicy }}
           {{- with $appData.command }}
-          command: {{- toYaml . | nindent 12 }}
+          command: {{- toYaml . | nindent 10 }}
           {{- end }}
           {{- if or $appData.env $appData.envFields $appData.envSealedSecrets }}
           env:
-          {{- include "application.env-variables" (dict "context" $ "appData" $appData) | indent 12 }}
-          {{- include "application.env-sealed-secrets" (dict "context" $ "appData" $appData) | indent 12 }}
-          {{- include "application.env-fields" (dict "context" $ "appData" $appData) | indent 12 }}
+            {{- include "application.env-variables" (dict "context" $ "appData" $appData) | indent 10 }}
+            {{- include "application.env-fields" (dict "context" $ "appData" $appData) | indent 10 }}
+            {{- include "application.env-sealed-secrets" (dict "context" $ "appName" $appName "appData" $appData) | indent 10 }}
           {{- end }}
           {{- if $appData.port }}
           ports:
@@ -104,6 +104,6 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: {{ include "application.name" (dict "context" $ "appData" $appData) }}
+          name: {{ $appName }}
       {{- end }}
 {{- end }}

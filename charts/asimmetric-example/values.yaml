@@ -47,116 +47,117 @@ asimmetric:
   ## Creates one or more applications unique by role.
   ## Roles are one of service|worker
   applications:
-    ## Asimmetric application role: service|worker
-    ## The difference between a service and worker is the worker does not have ports exposed. 
-    ## I.e a worker does not get a Service manifest defined
-    ##
-  - role: service
-    ## Sets the replica count (Optional)
-    ## Default: 1
-    ##
-    replicaCount: 1
-    ## Configures the image and image pull policy (Optional)
-    ## Default: uses .global.image
-    ##
-    image: {}
-      # repository: nginx
-      # pullPolicy: IfNotPresent
-      # tag: ""
-    ## Attaches a service account it to the application (Optional)
-    ## Default: uses the default service account in the namespace
-    ##
-    serviceAccount:
-      create: true # If true, a service account chart will be created
-      # name: service-account-name # can use an existing service account, defaults to default
-      # annotations: {} 
-    ## Overrides the command from the dockerfile (Optional)
-    ## Default: the Dockerfile command is used
-    ##
-    command: []
-      # - "echo"
-      # - "'foobarbiz'"
-    ## Which port on the pod is exposed.
-    ## NB! for 'role: worker' do not set this
-    ##
-    port: 8000
-    ## Configures the service created (Optional)
-    ## Default: ClusterIP on port 80
-    ##
-    # TODO: add external IP service account
-    # TODO: add external name service account
-    service: {}
-      # type: ClusterIP
-      # port: 80
-    ## Enables the liveness probe on the specified path
-    ## NB! for 'role:worker' this should be excluded
-    ##
-    livenessProbe:
-      path: /livez
-    ## Enables the readiness probe on the specified path
-    ## NB! for 'role:worker' this should be excluded
-    ##
-    readinessProbe:
-      path: /readyz
-    ## Configure the pod resources (Optional)
-    ## Default: lets kubernetes set the resources
-    ##
-    resources: {}
-      # limits:
-      #   cpu: 100m
-      #   memory: 256Mi
-      # requests:
-      #   cpu: 100m
-      #   memory: 128Mi
-    ## Configures the node selectors for the pods (Optional)
-    ## Default: None
-    ##
-    nodeSelector: {}
-    ## Configures the tolerations for the pods (Optional)
-    ## Default: None
-    ##
-    tolerations: []
-    ## Configures the pod affinity for the pods (Optional)
-    ## Default: None
-    ##
-    affinity: {}
-    ## Adds a config map to the application (Optional)
-    ## Default: None
-    ###
-    configMap:
-      annotations: {}
-      # readOnly: false
-      path: /app/config
-      data:
-        config.json: |
-          {
-            foo: bar
-            bing: bang
-            server: {
-              host: hostname
+    example-service:
+      ## Asimmetric application role: service|worker
+      ## The difference between a service and worker is the worker does not have ports exposed. 
+      ## I.e a worker does not get a Service manifest defined
+      ##
+      role: service
+      ## Sets the replica count (Optional)
+      ## Default: 1
+      ##
+      replicaCount: 1
+      ## Configures the image and image pull policy (Optional)
+      ## Default: uses .global.image
+      ##
+      image: {}
+        # repository: nginx
+        # pullPolicy: IfNotPresent
+        # tag: ""
+      ## Attaches a service account it to the application (Optional)
+      ## Default: uses the default service account in the namespace
+      ##
+      serviceAccount:
+        create: true # If true, a service account chart will be created
+        # name: service-account-name # can use an existing service account, defaults to default
+        # annotations: {} 
+      ## Overrides the command from the dockerfile (Optional)
+      ## Default: the Dockerfile command is used
+      ##
+      command: []
+        # - "echo"
+        # - "'foobarbiz'"
+      ## Which port on the pod is exposed.
+      ## NB! for 'role: worker' do not set this
+      ##
+      port: 8000
+      ## Configures the service created (Optional)
+      ## Default: ClusterIP on port 80
+      ##
+      # TODO: add external IP service account
+      # TODO: add external name service account
+      service: {}
+        # type: ClusterIP
+        # port: 80
+      ## Enables the liveness probe on the specified path
+      ## NB! for 'role:worker' this should be excluded
+      ##
+      livenessProbe:
+        path: /livez
+      ## Enables the readiness probe on the specified path
+      ## NB! for 'role:worker' this should be excluded
+      ##
+      readinessProbe:
+        path: /readyz
+      ## Configure the pod resources (Optional)
+      ## Default: lets kubernetes set the resources
+      ##
+      resources: {}
+        # limits:
+        #   cpu: 100m
+        #   memory: 256Mi
+        # requests:
+        #   cpu: 100m
+        #   memory: 128Mi
+      ## Configures the node selectors for the pods (Optional)
+      ## Default: None
+      ##
+      nodeSelector: {}
+      ## Configures the tolerations for the pods (Optional)
+      ## Default: None
+      ##
+      tolerations: []
+      ## Configures the pod affinity for the pods (Optional)
+      ## Default: None
+      ##
+      affinity: {}
+      ## Adds a config map to the application (Optional)
+      ## Default: None
+      ###
+      configMap:
+        annotations: {}
+        # readOnly: false
+        path: /app/config
+        data:
+          config.json: |
+            {
+              foo: bar
+              bing: bang
+              server: {
+                host: hostname
+              }
             }
-          }
-    # TODO: stopped here
-    env:
-      AWS_DEFAULT_REGION: us-west-1
-      OVERRIDDEN_VALUE: new-value
-    ## Environment variables set from the deployment fields (Optional)
-    ## If overridden, in application or cronjobs, precedence is given to the overridden values
-    ## Default: None
-    ##
-    envFields:
-      HOST_IP: status.hostIP
-      OVERRIDDEN_FIELD_VALUE: status.newField
-    ## Environment variables set from sealed secrets (Optional)
-    ## If overridden, in application or cronjobs, precedence is given to the overridden values
-    ## A sealed secret is created for each envSealedSecrets.<value>
-    ## Default: None
-    ##
-    envSealedSecrets:
-      overridden-secret:
-        OVERRIDDEN_VALUE: overridden-value
-      database-url:
-        DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
+      # TODO: stopped here
+      env:
+        AWS_DEFAULT_REGION: us-west-1
+        OVERRIDDEN_VALUE: new-value
+      ## Environment variables set from the deployment fields (Optional)
+      ## If overridden, in application or cronjobs, precedence is given to the overridden values
+      ## Default: None
+      ##
+      envFields:
+        HOST_IP: status.hostIP
+        OVERRIDDEN_FIELD_VALUE: status.newField
+      ## Environment variables set from sealed secrets (Optional)
+      ## If overridden, in application or cronjobs, precedence is given to the overridden values
+      ## A sealed secret is created for each envSealedSecrets.<value>
+      ## Default: None
+      ##
+      envSealedSecrets:
+        overridden-secret:
+          OVERRIDDEN_VALUE: overridden-value
+        database-url:
+          DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
   cronjobs:
   - name: cronjob-1
   - name: cronjob-2
