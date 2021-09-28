@@ -36,7 +36,7 @@ spec:
             {{- include "application.env-fields" (dict "context" $ "appData" $appData) | indent 10 }}
             {{- include "application.env-sealed-secrets" (dict "context" $ "appName" $appName "appData" $appData) | indent 10 }}
           {{- end }}
-          {{- if and $appData.port (ne $appData.role "worker")}}
+          {{- if and $appData.port }}
           ports:
           - name: http
             containerPort: {{ $appData.port }}

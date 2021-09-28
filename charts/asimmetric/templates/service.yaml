@@ -1,5 +1,5 @@
 {{ range $appName, $appData := .Values.applications }}
-{{ if ne $appData.role "worker" }}
+{{ if mustHas $appData.role (list "service") }}
 {{- $service := $appData.service | default dict -}}
 apiVersion: v1
 kind: Service

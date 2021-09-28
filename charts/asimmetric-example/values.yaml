@@ -158,14 +158,10 @@ asimmetric:
         database-url:
           DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
     example-worker:
-      # role: worker
+      role: worker
       command:
         - echo
         - "foo bar biz"
-      # TODO: should not be present in deployment
-      port: 8000
-      # TODO: should not be present in deployment
-      service: {}
       serviceAccount:
         create: true
       configMap:
