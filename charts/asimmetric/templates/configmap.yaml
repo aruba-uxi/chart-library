@@ -1,16 +1,16 @@
-{{ range $appName, $appData := .Values.applications }}
-{{ if $appData.configMap }}
+{{ range $name, $data := .Values.applications }}
+{{ if $data.configMap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ $appName }}
+  name: {{ $name }}
   labels:
-    {{- include "application.labels" (dict "context" $ "name" $appName) | nindent 4 }}
-  {{- with $appData.configMap.annotations }}
+    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
+  {{- with $data.configMap.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-data: {{- toYaml $appData.configMap.data | nindent 4 }}
+data: {{- toYaml $data.configMap.data | nindent 4 }}
 ---
 {{ end }}
 {{ end }}

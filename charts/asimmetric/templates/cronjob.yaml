@@ -1,0 +1,40 @@
+{{ range $name, $data := .Values.cronjobs }}
+{{- $overrideImage := $data.image | default dict -}}
+{{- $envBasic := mustMergeOverwrite $.Values.global.env (default dict $data.env) -}}
+{{- $envFields := mustMergeOverwrite $.Values.global.envFields (default dict $data.envFields) -}}
+{{- $envSealedSecrets := mustMergeOverwrite $.Values.global.envSealedSecrets (default dict $data.envSealedSecrets) -}}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
+spec:
+  schedule: {{ $data.schedule | quote}}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          {{- if $.Values.global.sealedImagePullSecret }}
+          imagePullSecrets:
+          - name: {{ include "sealedImagePullSecret.name" "" }}
+          {{- end }}
+          {{- if $data.serviceAccount }}
+          serviceAccountName: {{ template "serviceAccount.name" (dict "context" $ "data" $data) }}
+          {{- end }}
+          containers:
+          - name: {{ $name }}
+            image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
+            imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
+            {{- if or $envBasic $envFields $envSealedSecrets }}
+            env:
+              {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 10 }}
+              {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 10 }}
+              {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 10 }}
+            {{- end }}
+            {{- with $data.command }}
+            command: {{- toYaml . | nindent 10 }}
+            {{- end }}
+          restartPolicy: {{ $data.restartPolicy | default "OnFailure"}}
+---
+{{ end }}

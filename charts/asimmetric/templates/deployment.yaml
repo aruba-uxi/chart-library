@@ -1,48 +1,51 @@
-{{ range $appName, $appData := .Values.applications }}
-{{- $applicationImage := $appData.image | default dict -}}
+{{ range $name, $data := .Values.applications }}
+{{- $overrideImage := $data.image | default dict -}}
+{{- $envBasic := mustMergeOverwrite $.Values.global.env (default dict $data.env) -}}
+{{- $envFields := mustMergeOverwrite $.Values.global.envFields (default dict $data.envFields) -}}
+{{- $envSealedSecrets := mustMergeOverwrite $.Values.global.envSealedSecrets (default dict $data.envSealedSecrets) -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $appName }}
+  name: {{ $name }}
   labels:
-    {{- include "application.labels" (dict "context" $ "name" $appName) | nindent 4 }}
+    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
 spec:
-  replicas: {{ $appData.replicaCount | default 1 }}
+  replicas: {{ $data.replicaCount | default 1 }}
   selector:
     matchLabels:
-      {{- include "application.selectorLabels" (dict "context" $ "name" $appName) | nindent 6 }}
+      {{- include "application.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "application.labels" (dict "context" $ "name" $appName) | nindent 8 }}
+        {{- include "application.labels" (dict "context" $ "name" $name) | nindent 8 }}
     spec:
       {{- if $.Values.global.sealedImagePullSecret }}
       imagePullSecrets:
-      - name: sealed-image-pull-secret
+      - name: {{ include "sealedImagePullSecret.name" "" }}
       {{- end }}
-      {{- if $appData.serviceAccount }}
-      serviceAccountName: {{ template "serviceAccount.name" (dict "context" $ "appData" $appData) }}
+      {{- if $data.serviceAccount }}
+      serviceAccountName: {{ template "serviceAccount.name" (dict "context" $ "data" $data) }}
       {{- end }}
       containers:
-        - name: {{ $appData.role }}
-          image: "{{ default $.Values.global.image.repository $applicationImage.repository }}:{{ default $.Values.global.image.tag $applicationImage.tag }}"
-          imagePullPolicy: {{ default $.Values.global.image.pullPolicy $applicationImage.pullPolicy }}
-          {{- with $appData.command }}
+        - name: {{ $data.role }}
+          image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
+          imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
+          {{- with $data.command }}
           command: {{- toYaml . | nindent 10 }}
           {{- end }}
-          {{- if or $appData.env $appData.envFields $appData.envSealedSecrets }}
+          {{- if or $envBasic $envFields $envSealedSecrets }}
           env:
-            {{- include "application.env-variables" (dict "context" $ "appData" $appData) | indent 10 }}
-            {{- include "application.env-fields" (dict "context" $ "appData" $appData) | indent 10 }}
-            {{- include "application.env-sealed-secrets" (dict "context" $ "appName" $appName "appData" $appData) | indent 10 }}
+            {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 10 }}
+            {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 10 }}
+            {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 10 }}
           {{- end }}
-          {{- if and $appData.port }}
+          {{- if and $data.port }}
           ports:
           - name: http
-            containerPort: {{ $appData.port }}
+            containerPort: {{ $data.port }}
             protocol: TCP
           {{- end }}
-          {{- if $appData.readinessProbe }}
+          {{- if $data.readinessProbe }}
           readinessProbe:
             httpGet:
               httpHeaders:
@@ -50,15 +53,15 @@ spec:
                 value: readinessProbe
               - name: Content-Type
                 value: application/json
-              path: {{ $appData.readinessProbe.path }}
-              port: {{ $appData.port }}
-            initialDelaySeconds: {{ $appData.readinessProbe.initialDelaySeconds | default "10" }}
-            periodSeconds: {{ $appData.readinessProbe.periodSeconds | default "10" }}
-            timeoutSeconds: {{ $appData.readinessProbe.timeoutSeconds | default "1" }}
-            successThreshold: {{ $appData.readinessProbe.successThreshold | default "1" }}
-            failureThreshold: {{ $appData.readinessProbe.failureThreshold | default "3" }}
+              path: {{ $data.readinessProbe.path }}
+              port: {{ $data.port }}
+            initialDelaySeconds: {{ $data.readinessProbe.initialDelaySeconds | default "10" }}
+            periodSeconds: {{ $data.readinessProbe.periodSeconds | default "10" }}
+            timeoutSeconds: {{ $data.readinessProbe.timeoutSeconds | default "1" }}
+            successThreshold: {{ $data.readinessProbe.successThreshold | default "1" }}
+            failureThreshold: {{ $data.readinessProbe.failureThreshold | default "3" }}
           {{- end }}
-          {{- if $appData.livenessProbe }}
+          {{- if $data.livenessProbe }}
           livenessProbe:
             httpGet:
               httpHeaders:
@@ -66,44 +69,44 @@ spec:
                 value: livenessProbe
               - name: Content-Type
                 value: application/json
-              path: {{ $appData.livenessProbe.path }}
-              port: {{ $appData.port }}
-            initialDelaySeconds: {{ $appData.livenessProbe.initialDelaySeconds | default "10" }}
-            periodSeconds: {{ $appData.livenessProbe.periodSeconds | default "10" }}
-            timeoutSeconds: {{ $appData.livenessProbe.timeoutSeconds | default "1" }}
-            successThreshold: {{ $appData.livenessProbe.successThreshold | default "1" }}
-            failureThreshold: {{ $appData.livenessProbe.failureThreshold | default "3" }}
+              path: {{ $data.livenessProbe.path }}
+              port: {{ $data.port }}
+            initialDelaySeconds: {{ $data.livenessProbe.initialDelaySeconds | default "10" }}
+            periodSeconds: {{ $data.livenessProbe.periodSeconds | default "10" }}
+            timeoutSeconds: {{ $data.livenessProbe.timeoutSeconds | default "1" }}
+            successThreshold: {{ $data.livenessProbe.successThreshold | default "1" }}
+            failureThreshold: {{ $data.livenessProbe.failureThreshold | default "3" }}
           {{- end }}
-          {{- with $appData.resources }}
+          {{- with $data.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if $appData.parallel }}
-          parallelism: {{ $appData.parallel }}
+          {{- if $data.parallel }}
+          parallelism: {{ $data.parallel }}
           {{- end }}
-          {{- if $appData.configMap }}
+          {{- if $data.configMap }}
           volumeMounts:
           - name: config
-            mountPath: {{ $appData.configMap.path }}
-            readOnly: {{ default true $appData.configMap.readOnly }}
+            mountPath: {{ $data.configMap.path }}
+            readOnly: {{ default true $data.configMap.readOnly }}
           {{- end }}
-      {{- with $appData.nodeSelector }}
+      {{- with $data.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with $appData.affinity }}
+      {{- with $data.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with $appData.tolerations }}
+      {{- with $data.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if $appData.configMap }}
+      {{- if $data.configMap }}
       volumes:
       - name: config
         configMap:
-          name: {{ $appName }}
+          name: {{ $name }}
       {{- end }}
 ---
 {{ end }}

@@ -21,7 +21,7 @@ app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 {{- end }}
 
 {{- define "sealedSecret.name" -}}
-{{- printf "%s-%s" .appName .secretName -}}
+{{- printf "%s-%s" .name .secretName -}}
 {{- end -}}
 
 {{- define "sealedImagePullSecret.name" -}}
@@ -39,8 +39,7 @@ Inject extra environment variables
 https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmergeoverwrite
 */}}
 {{- define "application.env-variables" -}}
-{{- $data := mustMergeOverwrite .context.Values.global.env .appData.env -}}
-{{- range $key, $val := $data }}
+{{- range $key, $val := .data }}
 - name: {{ $key }}
   value: {{ $val | quote }}
 {{- end }}
@@ -51,8 +50,7 @@ Inject extra environment variables from fields
 https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmergeoverwrite
 */}}
 {{- define "application.env-fields" -}}
-{{- $data := mustMergeOverwrite .context.Values.global.envFields .appData.envFields -}}
-{{- range $key, $val := $data }}
+{{- range $key, $val := .data }}
 - name: {{ $key }}
   valueFrom:
    fieldRef:
@@ -65,22 +63,21 @@ Inject extra environment variables from secrets
 https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmergeoverwrite
 */}}
 {{- define "application.env-sealed-secrets" -}}
-{{- $data := mustMergeOverwrite .context.Values.global.envSealedSecrets .appData.envSealedSecrets -}}
-{{- range $secretName, $secretData := $data }}
+{{- range $secretName, $secretData := .data }}
 {{- range $envName, $secretValue := $secretData }}
 - name: {{ $envName }}
   valueFrom:
    secretKeyRef:
-     name: {{ include "sealedSecret.name" (dict "context" $.context "appName" $.appName "secretName" $secretName)}}
+     name: {{ include "sealedSecret.name" (dict "context" $.context "name" $.name "secretName" $secretName)}}
      key: {{ $envName }}
 {{- end }}
 {{- end }}
 {{- end }}
 
 {{- define "serviceAccount.name" -}}
-{{- if .appData.serviceAccount.create -}}
-    {{ default .appName .appData.serviceAccount.name }}
+{{- if .data.serviceAccount.create -}}
+    {{ default .name .data.serviceAccount.name }}
 {{- else -}}
-    {{ default "default" .appData.serviceAccount.name }}
+    {{ default "default" .data.serviceAccount.name }}
 {{- end -}}
 {{- end -}}

@@ -1,4 +1,7 @@
 # TODO: could add additional label in each asimmetric
+# TODO: fix the commands not being built correctly
+# TODO: add external IP service type
+# TODO: add external name service type
 asimmetric:
   ## Global values used by all manifests
   ##
@@ -84,8 +87,6 @@ asimmetric:
       ## Configures the service created (Optional)
       ## Default: ClusterIP on port 80
       ##
-      # TODO: add external IP service account
-      # TODO: add external name service account
       service: {}
         # type: ClusterIP
         # port: 80
@@ -171,5 +172,9 @@ asimmetric:
           config.json: |
             "hello config map"
   cronjobs:
-  - name: cronjob-1
-  - name: cronjob-2
+    cronjob-1:
+      schedule: "*/5 * * * *"
+      command:
+        - "echo"
+        - "'foo bar biz'"
+      restartPolicy: Never

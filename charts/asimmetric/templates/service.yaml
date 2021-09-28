@@ -1,12 +1,12 @@
-{{ range $appName, $appData := .Values.applications }}
-{{ if mustHas $appData.role (list "service") }}
-{{- $service := $appData.service | default dict -}}
+{{ range $name, $data := .Values.applications }}
+{{ if mustHas $data.role (list "service") }}
+{{- $service := $data.service | default dict -}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $appName }}
+  name: {{ $name }}
   labels:
-    {{- include "application.labels" (dict "context" $ "name" $appName) | nindent 4 }}
+    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
 spec:
   type: {{ $service.type | default "ClusterIP" }}
   ports:
@@ -15,7 +15,7 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    app: {{ $appName }}
+    app: {{ $name }}
 ---
 {{ end }}
 {{ end }}
