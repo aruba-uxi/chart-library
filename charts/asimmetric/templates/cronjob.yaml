@@ -1,8 +1,8 @@
 {{ range $name, $data := .Values.cronjobs }}
 {{- $overrideImage := $data.image | default dict -}}
-{{- $envBasic := mustMergeOverwrite $.Values.global.env (default dict $data.env) -}}
-{{- $envFields := mustMergeOverwrite $.Values.global.envFields (default dict $data.envFields) -}}
-{{- $envSealedSecrets := mustMergeOverwrite $.Values.global.envSealedSecrets (default dict $data.envSealedSecrets) -}}
+{{- $envBasic := deepCopy $.Values.global.env | mustMerge (default dict $data.env) -}}
+{{- $envFields := deepCopy $.Values.global.envFields | mustMerge (default dict $data.envFields) -}}
+{{- $envSealedSecrets := deepCopy $.Values.global.envSealedSecrets | mustMerge (default dict $data.envSealedSecrets) -}}
 apiVersion: batch/v1
 kind: CronJob
 metadata:

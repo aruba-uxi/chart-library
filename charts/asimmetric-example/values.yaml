@@ -23,15 +23,15 @@ asimmetric:
     ## Default: None
     ##
     env:
-      ENVIRONMENT: environment # DEV|STAGING|PRODUCTION
-      OVERRIDDEN_VALUE: original
+      ENVIRONMENT: global-value # DEV|STAGING|PRODUCTION
+      OVERRIDDEN_VALUE: global-value
     ## Environment variables set from the deployment fields (Optional)
     ## If overridden, in application or cronjobs, precedence is given to the overridden values
     ## Default: None
     ##
     envFields:
-      HOST_IP: status.hostIP
-      OVERRIDDEN_FIELD_VALUE: status.originalField
+      HOST_IP: global-value
+      OVERRIDDEN_FIELD_VALUE: global-value
     ## Environment variables set from sealed secrets (Optional)
     ## If overridden, in application or cronjobs, precedence is given to the overridden values
     ## A sealed secret is created for each envSealedSecrets.<value>
@@ -43,10 +43,10 @@ asimmetric:
     ##
     envSealedSecrets:
       overridden-secret:
-        OVERRIDDEN_VALUE: original-value
+        OVERRIDDEN_VALUE: global-value
       aws-access:
-        AWS_REGION: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXhaMyq4bTQzOQK...
-        AWS_ACCESS_ID: AgCIdNV/y8BhcHBt2DJ4qcjB6lmhXha...
+        AWS_REGION: global-value
+        AWS_ACCESS_ID: global-value
   ## Creates one or more applications unique by role.
   ## Roles are one of service|worker
   applications:
@@ -139,15 +139,15 @@ asimmetric:
               }
             }
       env:
-        AWS_DEFAULT_REGION: us-west-1
-        OVERRIDDEN_VALUE: new-value
+        AWS_DEFAULT_REGION: example-service
+        OVERRIDDEN_VALUE: example-service
       ## Environment variables set from the deployment fields (Optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       envFields:
-        HOST_IP: status.hostIP
-        OVERRIDDEN_FIELD_VALUE: status.newField
+        HOST_IP: example-service
+        OVERRIDDEN_FIELD_VALUE: example-service
       ## Environment variables set from sealed secrets (Optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## A sealed secret is created for each envSealedSecrets.<value>
@@ -155,11 +155,14 @@ asimmetric:
       ##
       envSealedSecrets:
         overridden-secret:
-          OVERRIDDEN_VALUE: overridden-value
+          OVERRIDDEN_VALUE: example-service
         database-url:
-          DATABASE_URL: AgCIdNV/y8BhcHBt2DJ4qcj...
+          DATABASE_URL: example-service
     example-worker:
       role: worker
+      env:
+        AWS_DEFAULT_REGION: example-worker
+        OVERRIDDEN_VALUE: example-worker
       command:
         - echo
         - "foo bar biz"
@@ -172,9 +175,30 @@ asimmetric:
           config.json: |
             "hello config map"
   cronjobs:
-    cronjob-1:
+    example-cronjob-echo:
       schedule: "*/5 * * * *"
       command:
         - "echo"
         - "'foo bar biz'"
       restartPolicy: Never
+      env:
+        AWS_DEFAULT_REGION: example-cronjob-echo
+        OVERRIDDEN_VALUE: example-cronjob-echo
+      envSealedSecrets:
+        overridden-secret:
+          OVERRIDDEN_VALUE: example-cronjob-echo
+        database-url:
+          DATABASE_URL: example-cronjob-echo
+    example-cronjob-kinesis-consumer:
+      schedule: "*/5 * * * *"
+      command:
+        - "run-kinesis"
+      restartPolicy: Never
+      env:
+        AWS_DEFAULT_REGION: example-cronjob-kinesis-consumer
+        OVERRIDDEN_VALUE: example-cronjob-kinesis-consumer
+      envSealedSecrets:
+        overridden-secret:
+          OVERRIDDEN_VALUE: example-cronjob-kinesis-consumer
+        database-url:
+          DATABASE_URL: example-cronjob-kinesis-consumer
