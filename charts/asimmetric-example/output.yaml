@@ -1,3 +1,10 @@
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "asimmetric" chart repository
+...Successfully got an update from the "b2a25b8bdfccac032fc53da376f27cbd" chart repository
+...Successfully got an update from the "00872203fcd333046e6b21231e9fb9a3" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 1 charts
+Deleting outdated charts
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/serviceaccount.yaml
 apiVersion: v1
@@ -23,7 +30,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/configmap.yaml
+# Source: asimmetric-example/charts/asimmetric/templates/applications-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -44,7 +51,7 @@ data:
         }
       }
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/configmap.yaml
+# Source: asimmetric-example/charts/asimmetric/templates/applications-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:

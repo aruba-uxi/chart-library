@@ -1,8 +1,9 @@
-{{ range $name, $data := .Values.applications }}
-{{- $overrideImage := $data.image | default dict -}}
-{{- $envBasic := deepCopy $.Values.global.env | mustMerge (default dict $data.env) -}}
-{{- $envFields := deepCopy $.Values.global.envFields | mustMerge (default dict $data.envFields) -}}
-{{- $envSealedSecrets := deepCopy $.Values.global.envSealedSecrets | mustMerge (default dict $data.envSealedSecrets) -}}
+{{- range $name, $data := .Values.applications }}
+{{- $overrideImage := $data.image | default dict }}
+{{- $envBasic := deepCopy $.Values.global.env | mustMerge (default dict $data.env) }}
+{{- $envFields := deepCopy $.Values.global.envFields | mustMerge (default dict $data.envFields) }}
+{{- $envSealedSecrets := deepCopy $.Values.global.envSealedSecrets | mustMerge (default dict $data.envSealedSecrets) }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -108,5 +109,4 @@ spec:
         configMap:
           name: {{ $name }}
       {{- end }}
----
-{{ end }}
+{{- end }}
