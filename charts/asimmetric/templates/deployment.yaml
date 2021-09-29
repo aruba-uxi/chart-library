@@ -31,7 +31,7 @@ spec:
           image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
           imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
           {{- with $data.command }}
-          command: {{- toYaml . | nindent 10 }}
+          command: {{ toRawJson . }}
           {{- end }}
           {{- if or $envBasic $envFields $envSealedSecrets }}
           env:

@@ -33,7 +33,7 @@ spec:
               {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 10 }}
             {{- end }}
             {{- with $data.command }}
-            command: {{- toYaml . | nindent 10 }}
+            command: {{ toRawJson . }}
             {{- end }}
           restartPolicy: {{ $data.restartPolicy | default "OnFailure"}}
 ---
