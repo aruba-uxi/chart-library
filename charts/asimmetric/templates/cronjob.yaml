@@ -27,14 +27,16 @@ spec:
           - name: {{ $name }}
             image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
             imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
-            {{- if or $envBasic $envFields $envSealedSecrets }}
             env:
-              {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 10 }}
-              {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 10 }}
-              {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 10 }}
+            - name: ENVIRONMENT
+              value: {{ lower $.Values.global.environment | quote }}
+            {{- if or $envBasic $envFields $envSealedSecrets }}
+            {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 12 }}
+            {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 12 }}
+            {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 12 }}
             {{- end }}
             {{- with $data.command }}
             command: {{ toRawJson . }}
             {{- end }}
-          restartPolicy: {{ $data.restartPolicy | default "OnFailure"}}
+          restartPolicy: {{ default "OnFailure" $data.restartPolicy }}
 {{- end }}

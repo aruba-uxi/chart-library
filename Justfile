@@ -53,5 +53,5 @@ template-serviceaccount-staging +ARGS='':
 
 
 template-asimmetric +ARGS='':
-  helm dependency update charts/asimmetric-example
-  helm template asimmetric-example charts/asimmetric-example {{ARGS}}
+  helm dependency update examples/asimmetric-example
+  helm template asimmetric-example examples/asimmetric-example {{ARGS}}

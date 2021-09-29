@@ -14,7 +14,7 @@ app.kubernetes.io/instance: {{ .context.Release.Name }}
 {{ include "application.selectorLabels" (dict "context" .context "name" .name) }}
 helm.sh/chart: {{ include "application.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
-repository: {{ .context.Values.global.labels.repo }}
+repository: {{ .context.Values.global.repository }}
 {{- if .context.Chart.AppVersion }}
 app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 {{- end }}

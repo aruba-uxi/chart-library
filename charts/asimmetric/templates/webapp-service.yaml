@@ -1,6 +1,6 @@
 {{- range $name, $data := .Values.applications }}
-{{- if mustHas $data.role (list "service") }}
-{{- $service := $data.service | default dict }}
+{{- if mustHas $data.role (list "webapp") }}
+{{- $service := default dict $data.service }}
 ---
 apiVersion: v1
 kind: Service
@@ -9,10 +9,10 @@ metadata:
   labels:
     {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
 spec:
-  type: {{ $service.type | default "ClusterIP" }}
+  type: {{ default "ClusterIP" $service.type }}
   ports:
     - name: http
-      port: {{ $service.port | default 80 }}
+      port: {{ default 80 $service.port }}
       protocol: TCP
       targetPort: http
   selector:

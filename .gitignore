@@ -1,2 +1,5 @@
 charts/**/*.tgz
 charts/**/*Chart.lock
+
+examples/**/*.tgz
+examples/**/*Chart.lock

@@ -34,13 +34,15 @@ spec:
           {{- with $data.command }}
           command: {{ toRawJson . }}
           {{- end }}
-          {{- if or $envBasic $envFields $envSealedSecrets }}
           env:
-            {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 10 }}
-            {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 10 }}
-            {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 10 }}
+          - name: ENVIRONMENT
+            value: {{ lower $.Values.global.environment | quote }}
+          {{- if or $envBasic $envFields $envSealedSecrets }}
+          {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 10 }}
+          {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 10 }}
+          {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 10 }}
           {{- end }}
-          {{- if and $data.port }}
+          {{- if $data.port }}
           ports:
           - name: http
             containerPort: {{ $data.port }}
@@ -56,11 +58,11 @@ spec:
                 value: application/json
               path: {{ $data.readinessProbe.path }}
               port: {{ $data.port }}
-            initialDelaySeconds: {{ $data.readinessProbe.initialDelaySeconds | default "10" }}
-            periodSeconds: {{ $data.readinessProbe.periodSeconds | default "10" }}
-            timeoutSeconds: {{ $data.readinessProbe.timeoutSeconds | default "1" }}
-            successThreshold: {{ $data.readinessProbe.successThreshold | default "1" }}
-            failureThreshold: {{ $data.readinessProbe.failureThreshold | default "3" }}
+            initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ default "1" $data.readinessProbe.successThreshold }}
+            failureThreshold: {{ default "3" $data.readinessProbe.failureThreshold }}
           {{- end }}
           {{- if $data.livenessProbe }}
           livenessProbe:
@@ -72,11 +74,11 @@ spec:
                 value: application/json
               path: {{ $data.livenessProbe.path }}
               port: {{ $data.port }}
-            initialDelaySeconds: {{ $data.livenessProbe.initialDelaySeconds | default "10" }}
-            periodSeconds: {{ $data.livenessProbe.periodSeconds | default "10" }}
-            timeoutSeconds: {{ $data.livenessProbe.timeoutSeconds | default "1" }}
-            successThreshold: {{ $data.livenessProbe.successThreshold | default "1" }}
-            failureThreshold: {{ $data.livenessProbe.failureThreshold | default "3" }}
+            initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ default "1" $data.livenessProbe.successThreshold }}
+            failureThreshold: {{ default "3" $data.livenessProbe.failureThreshold }}
           {{- end }}
           {{- with $data.resources }}
           resources:

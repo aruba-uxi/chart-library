@@ -4,22 +4,22 @@ This is a public repository holding the helm libraries
 
 It has Github pages hosted on the branch `gh-pages`
 
+For further information see the [wiki](https://github.com/Asimmetric/onboarding/wiki/Chart-Library).
+
 ## Usage
 
 To use a chart defined in this library it must be added as a dependency in the service `Chart.yaml`.
 
 ```yaml
 dependencies:
-  - name: deploymentlib
+  - name: asimmetric
     version: "x.x.x"
     repository: https://asimmetric.github.io/chart-library
 ```
 
 Examples on how to use these charts in your own repo can be seen in:
 
-- [deploymentexample](charts/deploymentexample)
-- [ingressexample](charts/ingressexample)
-- [serviceexample](charts/serviceexample)
+- [asimmetric-example](examples/asimmetric-example)
 
 ## Templating Examples (Manual)
 
@@ -27,30 +27,30 @@ To run an example:
 
 1. `cd` into the example directory:
 
-   `cd charts/deploymentexample`
+   `cd charts/asimmetric-example`
 
 2. Update the dependencies:
 
-   `helm dependency update deploymentexample`
+   `helm dependency update asimmetric-example`
 
 3. Build the template:
 
-   `helm template --debug deploymentexample`
+   `helm template --debug asimmetric-example`
 
 ## Templating Examples (Justfile)
 
 The Justfile defines commands to template the various examples.
 
-To template the `deploymentexample` without any arguments:
+To template the `asimmetric-example` without any arguments:
 
 ```bash
-just template-ingress
+just template-asimmetric
 ```
 
 To template for a specific environment (e.g. local):
 
 ```bash
-just template-ingress -f charts/ingressexample/values-production.yaml
+just template-asimmetric -f charts/asimmetric-example/values-staging.yaml
 ```
 
 The Justfile commands accept helm flags after the command:
@@ -58,7 +58,7 @@ The Justfile commands accept helm flags after the command:
 > \*\***NOTE:** run `helm template --help` for possible arguments
 
 ```bash
-just template-ingress [flags]
+just template-asimmetric [flags]
 ```
 
 ## Vault Sealed Secrets
@@ -105,5 +105,6 @@ envSealedSecrets:
 2. Copy the sealed secret from `sealedsecret.yaml` into the `values.yaml` as seen below:
 
    ```yaml
-   sealedImagePullSecret: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
+   global:
+    sealedImagePullSecret: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
    ```
