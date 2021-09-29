@@ -1,0 +1,576 @@
+---
+# Source: asimmetric-example/charts/asimmetric/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: example-service
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+---
+# Source: asimmetric-example/charts/asimmetric/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: example-worker
+  labels:
+    app.kubernetes.io/name: example-worker
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+---
+# Source: asimmetric-example/charts/asimmetric/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-service
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+data:
+    config.json: |
+      {
+        foo: bar
+        bing: bang
+        server: {
+          host: hostname
+        }
+      }
+---
+# Source: asimmetric-example/charts/asimmetric/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-worker
+  labels:
+    app.kubernetes.io/name: example-worker
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+data:
+    config.json: |
+      "hello config map"
+---
+# Source: asimmetric-example/charts/asimmetric/templates/webapp-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+  selector:
+    app: example-service
+---
+# Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-service
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: example-service
+      app.kubernetes.io/instance: asimmetric-example
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: example-service
+        app.kubernetes.io/instance: asimmetric-example
+        helm.sh/chart: asimmetric-1.0.0
+        app.kubernetes.io/managed-by: Helm
+        repository: asimmetric-example
+    spec:
+      imagePullSecrets:
+      - name: sealed-image-pull-secret
+      serviceAccountName: 
+      containers:
+        - name: service
+          image: "asimmetric-example:1.2.3"
+          imagePullPolicy: 
+          env:          
+          - name: AWS_DEFAULT_REGION
+            value: "example-service"
+          - name: ENVIRONMENT
+            value: "global-value"
+          - name: OVERRIDDEN_VALUE
+            value: "example-service"          
+          - name: HOST_IP
+            valueFrom:
+             fieldRef:
+               fieldPath: example-service
+          - name: OVERRIDDEN_FIELD_VALUE
+            valueFrom:
+             fieldRef:
+               fieldPath: example-service          
+          - name: AWS_ACCESS_ID
+            valueFrom:
+             secretKeyRef:
+               name: example-service-aws-access
+               key: AWS_ACCESS_ID
+          - name: AWS_REGION
+            valueFrom:
+             secretKeyRef:
+               name: example-service-aws-access
+               key: AWS_REGION
+          - name: DATABASE_URL
+            valueFrom:
+             secretKeyRef:
+               name: example-service-database-url
+               key: DATABASE_URL
+          - name: OVERRIDDEN_VALUE
+            valueFrom:
+             secretKeyRef:
+               name: example-service-overridden-secret
+               key: OVERRIDDEN_VALUE
+          ports:
+          - name: http
+            containerPort: 8000
+            protocol: TCP
+          readinessProbe:
+            httpGet:
+              httpHeaders:
+              - name: Host
+                value: readinessProbe
+              - name: Content-Type
+                value: application/json
+              path: /readyz
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              httpHeaders:
+              - name: Host
+                value: livenessProbe
+              - name: Content-Type
+                value: application/json
+              path: /livez
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          volumeMounts:
+          - name: config
+            mountPath: /app/config
+            readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: example-service
+---
+# Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-worker
+  labels:
+    app.kubernetes.io/name: example-worker
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: example-worker
+      app.kubernetes.io/instance: asimmetric-example
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: example-worker
+        app.kubernetes.io/instance: asimmetric-example
+        helm.sh/chart: asimmetric-1.0.0
+        app.kubernetes.io/managed-by: Helm
+        repository: asimmetric-example
+    spec:
+      imagePullSecrets:
+      - name: sealed-image-pull-secret
+      serviceAccountName: 
+      containers:
+        - name: worker
+          image: "asimmetric-example:1.2.3"
+          imagePullPolicy: 
+          command: ["echo","foo bar biz"]
+          env:          
+          - name: AWS_DEFAULT_REGION
+            value: "example-worker"
+          - name: ENVIRONMENT
+            value: "global-value"
+          - name: OVERRIDDEN_VALUE
+            value: "example-worker"          
+          - name: HOST_IP
+            valueFrom:
+             fieldRef:
+               fieldPath: global-value
+          - name: OVERRIDDEN_FIELD_VALUE
+            valueFrom:
+             fieldRef:
+               fieldPath: global-value          
+          - name: AWS_ACCESS_ID
+            valueFrom:
+             secretKeyRef:
+               name: example-worker-aws-access
+               key: AWS_ACCESS_ID
+          - name: AWS_REGION
+            valueFrom:
+             secretKeyRef:
+               name: example-worker-aws-access
+               key: AWS_REGION
+          - name: OVERRIDDEN_VALUE
+            valueFrom:
+             secretKeyRef:
+               name: example-worker-overridden-secret
+               key: OVERRIDDEN_VALUE
+          volumeMounts:
+          - name: config
+            mountPath: /app/config
+            readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: example-worker
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: example-cronjob-echo
+  labels:
+    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+          - name: sealed-image-pull-secret
+          containers:
+          - name: example-cronjob-echo
+            image: "asimmetric-example:1.2.3"
+            imagePullPolicy: 
+            env:          
+          - name: AWS_DEFAULT_REGION
+            value: "example-cronjob-echo"
+          - name: ENVIRONMENT
+            value: "global-value"
+          - name: OVERRIDDEN_VALUE
+            value: "example-cronjob-echo"          
+          - name: HOST_IP
+            valueFrom:
+             fieldRef:
+               fieldPath: global-value
+          - name: OVERRIDDEN_FIELD_VALUE
+            valueFrom:
+             fieldRef:
+               fieldPath: global-value          
+          - name: AWS_ACCESS_ID
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-echo-aws-access
+               key: AWS_ACCESS_ID
+          - name: AWS_REGION
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-echo-aws-access
+               key: AWS_REGION
+          - name: DATABASE_URL
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-echo-database-url
+               key: DATABASE_URL
+          - name: OVERRIDDEN_VALUE
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-echo-overridden-secret
+               key: OVERRIDDEN_VALUE
+            command: ["echo","foo bar biz"]
+          restartPolicy: Never
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjob.yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: example-cronjob-kinesis-consumer
+  labels:
+    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+          - name: sealed-image-pull-secret
+          containers:
+          - name: example-cronjob-kinesis-consumer
+            image: "asimmetric-example:1.2.3"
+            imagePullPolicy: 
+            env:          
+          - name: AWS_DEFAULT_REGION
+            value: "example-cronjob-kinesis-consumer"
+          - name: ENVIRONMENT
+            value: "global-value"
+          - name: OVERRIDDEN_VALUE
+            value: "example-cronjob-kinesis-consumer"          
+          - name: HOST_IP
+            valueFrom:
+             fieldRef:
+               fieldPath: global-value
+          - name: OVERRIDDEN_FIELD_VALUE
+            valueFrom:
+             fieldRef:
+               fieldPath: global-value          
+          - name: AWS_ACCESS_ID
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-kinesis-consumer-aws-access
+               key: AWS_ACCESS_ID
+          - name: AWS_REGION
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-kinesis-consumer-aws-access
+               key: AWS_REGION
+          - name: DATABASE_URL
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-kinesis-consumer-database-url
+               key: DATABASE_URL
+          - name: OVERRIDDEN_VALUE
+            valueFrom:
+             secretKeyRef:
+               name: example-cronjob-kinesis-consumer-overridden-secret
+               key: OVERRIDDEN_VALUE
+            command: ["run-kinesis"]
+          restartPolicy: Never
+---
+# Source: asimmetric-example/charts/asimmetric/templates/applications-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-service-aws-access
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    AWS_ACCESS_ID: global-value
+    AWS_REGION: global-value
+---
+# Source: asimmetric-example/charts/asimmetric/templates/applications-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-service-database-url
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    DATABASE_URL: example-service
+---
+# Source: asimmetric-example/charts/asimmetric/templates/applications-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-service-overridden-secret
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    OVERRIDDEN_VALUE: example-service
+---
+# Source: asimmetric-example/charts/asimmetric/templates/applications-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-worker-aws-access
+  labels:
+    app.kubernetes.io/name: example-worker
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    AWS_ACCESS_ID: global-value
+    AWS_REGION: global-value
+---
+# Source: asimmetric-example/charts/asimmetric/templates/applications-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-worker-overridden-secret
+  labels:
+    app.kubernetes.io/name: example-worker
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    OVERRIDDEN_VALUE: global-value
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-echo-aws-access
+  labels:
+    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    AWS_ACCESS_ID: global-value
+    AWS_REGION: global-value
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-echo-database-url
+  labels:
+    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    DATABASE_URL: example-cronjob-echo
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-echo-overridden-secret
+  labels:
+    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    OVERRIDDEN_VALUE: example-cronjob-echo
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-kinesis-consumer-aws-access
+  labels:
+    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    AWS_ACCESS_ID: global-value
+    AWS_REGION: global-value
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-kinesis-consumer-database-url
+  labels:
+    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    DATABASE_URL: example-cronjob-kinesis-consumer
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-kinesis-consumer-overridden-secret
+  labels:
+    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+spec:
+  encryptedData:
+    OVERRIDDEN_VALUE: example-cronjob-kinesis-consumer
+---
+# Source: asimmetric-example/charts/asimmetric/templates/imagepullsecret.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: sealed-image-pull-secret
+  labels:
+    app.kubernetes.io/name: sealed-image-pull-secret
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+spec:
+  encryptedData:
+    .dockerconfigjson: sealed_version_of_the_base64_encoded_dockerconfigjson
+  template:
+    data: null
+    metadata:
+      name: sealed-image-pull-secret
+      labels:
+      app.kubernetes.io/name: sealed-image-pull-secret
+      helm.sh/chart: asimmetric-1.0.0
+      app.kubernetes.io/managed-by: Helm
+    type: kubernetes.io/dockerconfigjson
