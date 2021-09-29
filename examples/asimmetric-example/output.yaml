@@ -1,10 +1,3 @@
-Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "asimmetric" chart repository
-...Successfully got an update from the "b2a25b8bdfccac032fc53da376f27cbd" chart repository
-...Successfully got an update from the "00872203fcd333046e6b21231e9fb9a3" chart repository
-Update Complete. ⎈Happy Helming!⎈
-Saving 1 charts
-Deleting outdated charts
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/serviceaccount.yaml
 apiVersion: v1
@@ -13,18 +6,6 @@ metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
-    app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
----
-# Source: asimmetric-example/charts/asimmetric/templates/serviceaccount.yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: example-worker
-  labels:
-    app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
@@ -64,7 +45,7 @@ metadata:
     repository: asimmetric-example
 data:
     config.json: |
-      "hello config map"
+      "hello worker"
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/webapp-service.yaml
 apiVersion: v1
@@ -117,14 +98,14 @@ spec:
       - name: sealed-image-pull-secret
       serviceAccountName: 
       containers:
-        - name: service
+        - name: webapp
           image: "asimmetric-example:1.2.3"
           imagePullPolicy: 
-          env:          
+          env:
+          - name: ENVIRONMENT
+            value: "dev"          
           - name: AWS_DEFAULT_REGION
             value: "example-service"
-          - name: ENVIRONMENT
-            value: "global-value"
           - name: OVERRIDDEN_VALUE
             value: "example-service"          
           - name: HOST_IP
@@ -224,19 +205,19 @@ spec:
     spec:
       imagePullSecrets:
       - name: sealed-image-pull-secret
-      serviceAccountName: 
+      serviceAccountName: example-worker-external-service-account
       containers:
         - name: worker
           image: "asimmetric-example:1.2.3"
           imagePullPolicy: 
           command: ["echo","foo bar biz"]
-          env:          
-          - name: AWS_DEFAULT_REGION
-            value: "example-worker"
+          env:
           - name: ENVIRONMENT
-            value: "global-value"
+            value: "dev"          
+          - name: AWS_DEFAULT_REGION
+            value: "example-service"
           - name: OVERRIDDEN_VALUE
-            value: "example-worker"          
+            value: "example-service"          
           - name: HOST_IP
             valueFrom:
              fieldRef:
@@ -273,9 +254,9 @@ spec:
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: example-cronjob-echo
+  name: example-cronjob-consumer
   labels:
-    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
@@ -289,107 +270,108 @@ spec:
           imagePullSecrets:
           - name: sealed-image-pull-secret
           containers:
-          - name: example-cronjob-echo
+          - name: example-cronjob-consumer
             image: "asimmetric-example:1.2.3"
             imagePullPolicy: 
-            env:          
-          - name: AWS_DEFAULT_REGION
-            value: "example-cronjob-echo"
-          - name: ENVIRONMENT
-            value: "global-value"
-          - name: OVERRIDDEN_VALUE
-            value: "example-cronjob-echo"          
-          - name: HOST_IP
-            valueFrom:
-             fieldRef:
-               fieldPath: global-value
-          - name: OVERRIDDEN_FIELD_VALUE
-            valueFrom:
-             fieldRef:
-               fieldPath: global-value          
-          - name: AWS_ACCESS_ID
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-echo-aws-access
-               key: AWS_ACCESS_ID
-          - name: AWS_REGION
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-echo-aws-access
-               key: AWS_REGION
-          - name: DATABASE_URL
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-echo-database-url
-               key: DATABASE_URL
-          - name: OVERRIDDEN_VALUE
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-echo-overridden-secret
-               key: OVERRIDDEN_VALUE
-            command: ["echo","foo bar biz"]
+            env:
+            - name: ENVIRONMENT
+              value: "dev"            
+            - name: AWS_DEFAULT_REGION
+              value: "example-cronjob-consumer"
+            - name: OVERRIDDEN_VALUE
+              value: "example-cronjob-consumer"            
+            - name: HOST_IP
+              valueFrom:
+               fieldRef:
+                 fieldPath: global-value
+            - name: OVERRIDDEN_FIELD_VALUE
+              valueFrom:
+               fieldRef:
+                 fieldPath: global-value            
+            - name: AWS_ACCESS_ID
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-consumer-aws-access
+                 key: AWS_ACCESS_ID
+            - name: AWS_REGION
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-consumer-aws-access
+                 key: AWS_REGION
+            - name: DATABASE_URL
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-consumer-database-url
+                 key: DATABASE_URL
+            - name: OVERRIDDEN_VALUE
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-consumer-overridden-secret
+                 key: OVERRIDDEN_VALUE
+            command: ["run-kinesis","consumer"]
           restartPolicy: Never
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob.yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: example-cronjob-kinesis-consumer
+  name: example-cronjob-producer
   labels:
-    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "*/10 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           imagePullSecrets:
           - name: sealed-image-pull-secret
+          serviceAccountName: 
           containers:
-          - name: example-cronjob-kinesis-consumer
+          - name: example-cronjob-producer
             image: "asimmetric-example:1.2.3"
             imagePullPolicy: 
-            env:          
-          - name: AWS_DEFAULT_REGION
-            value: "example-cronjob-kinesis-consumer"
-          - name: ENVIRONMENT
-            value: "global-value"
-          - name: OVERRIDDEN_VALUE
-            value: "example-cronjob-kinesis-consumer"          
-          - name: HOST_IP
-            valueFrom:
-             fieldRef:
-               fieldPath: global-value
-          - name: OVERRIDDEN_FIELD_VALUE
-            valueFrom:
-             fieldRef:
-               fieldPath: global-value          
-          - name: AWS_ACCESS_ID
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-kinesis-consumer-aws-access
-               key: AWS_ACCESS_ID
-          - name: AWS_REGION
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-kinesis-consumer-aws-access
-               key: AWS_REGION
-          - name: DATABASE_URL
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-kinesis-consumer-database-url
-               key: DATABASE_URL
-          - name: OVERRIDDEN_VALUE
-            valueFrom:
-             secretKeyRef:
-               name: example-cronjob-kinesis-consumer-overridden-secret
-               key: OVERRIDDEN_VALUE
-            command: ["run-kinesis"]
-          restartPolicy: Never
+            env:
+            - name: ENVIRONMENT
+              value: "dev"            
+            - name: AWS_DEFAULT_REGION
+              value: "example-cronjob-producer"
+            - name: OVERRIDDEN_VALUE
+              value: "example-cronjob-producer"            
+            - name: HOST_IP
+              valueFrom:
+               fieldRef:
+                 fieldPath: example-cronjob-producer
+            - name: OVERRIDDEN_FIELD_VALUE
+              valueFrom:
+               fieldRef:
+                 fieldPath: example-cronjob-producer            
+            - name: AWS_ACCESS_ID
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-producer-aws-access
+                 key: AWS_ACCESS_ID
+            - name: AWS_REGION
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-producer-aws-access
+                 key: AWS_REGION
+            - name: DATABASE_URL
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-producer-database-url
+                 key: DATABASE_URL
+            - name: OVERRIDDEN_VALUE
+              valueFrom:
+               secretKeyRef:
+                 name: example-cronjob-producer-overridden-secret
+                 key: OVERRIDDEN_VALUE
+            command: ["run-kinesis","producer"]
+          restartPolicy: OnFailure
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/applications-sealedsecrets.yaml
 apiVersion: bitnami.com/v1alpha1
@@ -472,9 +454,9 @@ spec:
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-echo-aws-access
+  name: example-cronjob-consumer-aws-access
   labels:
-    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
@@ -488,39 +470,39 @@ spec:
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-echo-database-url
+  name: example-cronjob-consumer-database-url
   labels:
-    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
   encryptedData:
-    DATABASE_URL: example-cronjob-echo
+    DATABASE_URL: example-cronjob-consumer
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-echo-overridden-secret
+  name: example-cronjob-consumer-overridden-secret
   labels:
-    app.kubernetes.io/name: example-cronjob-echo
+    app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
   encryptedData:
-    OVERRIDDEN_VALUE: example-cronjob-echo
+    OVERRIDDEN_VALUE: example-cronjob-consumer
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-kinesis-consumer-aws-access
+  name: example-cronjob-producer-aws-access
   labels:
-    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
@@ -534,31 +516,31 @@ spec:
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-kinesis-consumer-database-url
+  name: example-cronjob-producer-database-url
   labels:
-    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
   encryptedData:
-    DATABASE_URL: example-cronjob-kinesis-consumer
+    DATABASE_URL: example-cronjob-producer
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjobs-sealedsecrets.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-kinesis-consumer-overridden-secret
+  name: example-cronjob-producer-overridden-secret
   labels:
-    app.kubernetes.io/name: example-cronjob-kinesis-consumer
+    app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
   encryptedData:
-    OVERRIDDEN_VALUE: example-cronjob-kinesis-consumer
+    OVERRIDDEN_VALUE: example-cronjob-producer
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
