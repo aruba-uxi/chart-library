@@ -49,6 +49,9 @@ asimmetric:
   ## Creates one or more applications unique by role.
   ## Roles are one of service|worker
   applications:
+    ## Applications are defined as keys in the map
+    ## The key is used as the name of the application and subsequent objects created
+    ##
     example-service:
       ## Asimmetric application role: service|worker
       ## The difference between a service and worker is the worker does not have ports exposed. 
@@ -70,15 +73,13 @@ asimmetric:
       ## Default: uses the default service account in the namespace
       ##
       serviceAccount:
-        create: true # If true, a service account chart will be created
-        # name: service-account-name # can use an existing service account, defaults to default
+        create: true
+        # name: service-account-name
         # annotations: {} 
       ## Overrides the command from the dockerfile (Optional)
       ## Default: the Dockerfile command is used
       ##
       command: []
-        # - "echo"
-        # - "'foobarbiz'"
       ## Which port on the pod is exposed.
       ## NB! for 'role: worker' do not set this
       ##
@@ -89,12 +90,12 @@ asimmetric:
       service: {}
         # type: ClusterIP
         # port: 80
-      ## Enables the liveness probe on the specified path
+      ## Enables the liveness probe on the specified path (Optional)
       ## NB! for 'role:worker' this should be excluded
       ##
       livenessProbe:
         path: /livez
-      ## Enables the readiness probe on the specified path
+      ## Enables the readiness probe on the specified path (Optional)
       ## NB! for 'role:worker' this should be excluded
       ##
       readinessProbe:
@@ -126,7 +127,7 @@ asimmetric:
       ###
       configMap:
         annotations: {}
-        # readOnly: false
+        readOnly: false
         path: /app/config
         data:
           config.json: |
@@ -137,6 +138,10 @@ asimmetric:
                 host: hostname
               }
             }
+      ## Environment variables set from provided key:value pair (Optional)
+      ## If overridden, in application or cronjobs, precedence is given to the overridden values
+      ## Default: None
+      ##
       env:
         AWS_DEFAULT_REGION: example-service
         OVERRIDDEN_VALUE: example-service
@@ -162,9 +167,7 @@ asimmetric:
       env:
         AWS_DEFAULT_REGION: example-worker
         OVERRIDDEN_VALUE: example-worker
-      command:
-        - echo
-        - "foo bar biz"
+      command: ["echo", "foo bar biz"]
       serviceAccount:
         create: true
       configMap:
@@ -176,9 +179,7 @@ asimmetric:
   cronjobs:
     example-cronjob-echo:
       schedule: "*/5 * * * *"
-      command:
-        - "echo"
-        - "'foo bar biz'"
+      command: ["echo", "foo bar biz"]
       restartPolicy: Never
       env:
         AWS_DEFAULT_REGION: example-cronjob-echo
@@ -190,8 +191,7 @@ asimmetric:
           DATABASE_URL: example-cronjob-echo
     example-cronjob-kinesis-consumer:
       schedule: "*/5 * * * *"
-      command:
-        - "run-kinesis"
+      command: ["run-kinesis"]
       restartPolicy: Never
       env:
         AWS_DEFAULT_REGION: example-cronjob-kinesis-consumer
