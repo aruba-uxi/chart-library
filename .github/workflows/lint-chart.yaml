@@ -21,13 +21,4 @@ jobs:
       - name: Template Check
         run: |
           just output
-          git diff --exit-code -- charts/deploymentexample/output.yaml
-          git diff --exit-code -- charts/deploymentexample/output.staging.yaml
-          git diff --exit-code -- charts/ingressexample/output.yaml
-          git diff --exit-code -- charts/ingressexample/output.staging.yaml
-          git diff --exit-code -- charts/jobexample/output.yaml
-          git diff --exit-code -- charts/jobexample/output.staging.yaml
-          git diff --exit-code -- charts/serviceexample/output.yaml
-          git diff --exit-code -- charts/serviceexample/output.staging.yaml
-          git diff --exit-code -- charts/serviceaccountexample/output.yaml
-          git diff --exit-code -- charts/serviceaccountexample/output.staging.yaml
+          git diff --exit-code -- examples/asimmetric-example/output.yaml
