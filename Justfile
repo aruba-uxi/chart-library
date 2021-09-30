@@ -3,13 +3,13 @@ help:
 	@just list
 
 output:
-  just template-asimmetric "> examples/asimmetric-example/output.yaml"
+	just template-asimmetric-local "> examples/asimmetric-example/output-local.yaml"
+	just template-asimmetric-staging "> examples/asimmetric-example/output-staging.yaml"
 
-template-deployment +ARGS='':
-  helm dependency update charts/deploymentlib
-  helm dependency update charts/deploymentexample
-  helm template charts/deploymentexample {{ARGS}}
+template-asimmetric-local +ARGS='':
+	helm dependency update examples/asimmetric-example
+	helm template asimmetric-example examples/asimmetric-example -f examples/asimmetric-example/values-local.yaml {{ARGS}}
 
-template-asimmetric +ARGS='':
-  helm dependency update examples/asimmetric-example
-  helm template asimmetric-example examples/asimmetric-example {{ARGS}}
+template-asimmetric-staging +ARGS='':
+	helm dependency update examples/asimmetric-example
+	helm template asimmetric-example examples/asimmetric-example -f examples/asimmetric-example/values-staging.yaml {{ARGS}}

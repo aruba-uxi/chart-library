@@ -1,0 +1,26 @@
+asimmetric:
+  global:
+    repository: asimmetric-example
+    environment: dev
+    image:
+      repository: asimmetric-example
+      tag: "latest"
+      pullPolicy: Never
+    env:
+      DEBUG: true
+      DD_ENABLED: false
+      DD_ENV: dev
+      DD_SERVICE: customer-integrations-service
+    envFields:
+      DD_ENTITY_ID: metadata.uid
+      DD_AGENT_HOST: status.hostIP
+  applications:
+    example-service:
+      role: webapp
+      port: 8000
+      livenessProbe:
+        path: /livez
+      readinessProbe:
+        path: /readyz
+      env:
+        DATABASE_URL: postgresql://username:password@db:5432/asimmetric-example
