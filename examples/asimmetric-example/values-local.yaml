@@ -6,10 +6,6 @@ asimmetric:
       repository: asimmetric-example
       tag: "latest"
       pullPolicy: Never
-    env:
-      DEBUG: true
-    envFields:
-      HOST_IP: status.hostIP
   applications:
     example-service:
       role: webapp
