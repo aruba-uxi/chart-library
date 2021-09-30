@@ -21,4 +21,5 @@ jobs:
       - name: Template Check
         run: |
           just output
-          git diff --exit-code -- examples/asimmetric-example/output.yaml
+          git diff --exit-code -- examples/asimmetric-example/output-local.yaml
+          git diff --exit-code -- examples/asimmetric-example/output-staging.yaml
