@@ -27,7 +27,7 @@ To run an example:
 
 1. `cd` into the example directory:
 
-   `cd charts/asimmetric-example`
+   `cd examples/asimmetric-example`
 
 2. Update the dependencies:
 
@@ -50,7 +50,7 @@ just template-asimmetric
 To template for a specific environment (e.g. local):
 
 ```bash
-just template-asimmetric -f charts/asimmetric-example/values-staging.yaml
+just template-asimmetric -f examples/asimmetric-example/values-staging.yaml
 ```
 
 The Justfile commands accept helm flags after the command:
