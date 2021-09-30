@@ -14,8 +14,8 @@ spec:
     - name: http
       port: {{ default 80 $service.port }}
       protocol: TCP
-      targetPort: http
+      targetPort: {{ $data.port }}
   selector:
-    app: {{ $name }}
+    {{- include "application.selectorLabels" (dict "context" $ "name" $name) | nindent 4 }}
 {{- end }}
 {{- end }}
