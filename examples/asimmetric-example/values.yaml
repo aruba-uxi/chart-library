@@ -1,8 +1,1 @@
-## This file defines the bare minimum values
-## Typically this file will define values that do not change across environments
-## It is also possible to define global values in this file and override them for each environment
-## Environment variables are a bit tricky. Its hard to determine where they are defined
-## I.E its hard to determine if the environment variable is define in .env or .envSealedSecrets
-## Its best not to define environment variables in this file if they will move to another type in
-## production or staging
-##
+

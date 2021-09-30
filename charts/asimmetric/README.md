@@ -2,6 +2,16 @@
 
 A helm chart for Asimmetric kubernetes resources
 
+## Value Files
+
+Typically the `values.yaml` file defines the base values used by helm, and then additional values files are created based on the environment specific configs.
+
+When using this chart library its best to leave the `values.yaml` files empty and define separate values for each environment.
+
+> **__NOTE__** Yes this does go against helm convention but its the best way we can do that does not cause duplicate data. Environment variables proved to be a bit tricky because in the local environment DATABASE_URL for example, could be defined in `.env` then in the staging environment it moves to `.envSealedSecrets`. It proved too hard to remove the duplicate values, so its best not to define any environment variables in the `values.yaml`.
+
+It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
+
 ## Global Values
 
 ```yaml
