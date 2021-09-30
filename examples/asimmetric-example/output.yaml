@@ -1,11 +1,23 @@
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/serviceaccount.yaml
+# Source: asimmetric-example/charts/asimmetric/templates/applications-serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.0
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+---
+# Source: asimmetric-example/charts/asimmetric/templates/cronjobs-serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: example-cronjob-producer-service-account
+  labels:
+    app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.0
     app.kubernetes.io/managed-by: Helm
@@ -47,7 +59,7 @@ data:
     config.json: |
       "hello worker"
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/webapp-service.yaml
+# Source: asimmetric-example/charts/asimmetric/templates/applications-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -96,11 +108,11 @@ spec:
     spec:
       imagePullSecrets:
       - name: sealed-image-pull-secret
-      serviceAccountName: 
+      serviceAccountName: example-service
       containers:
         - name: webapp
           image: "asimmetric-example:1.2.3"
-          imagePullPolicy: 
+          imagePullPolicy: IfNotPresent
           env:
           - name: ENVIRONMENT
             value: "dev"          
@@ -209,7 +221,7 @@ spec:
       containers:
         - name: worker
           image: "asimmetric-example:1.2.3"
-          imagePullPolicy: 
+          imagePullPolicy: IfNotPresent
           command: ["echo","foo bar biz"]
           env:
           - name: ENVIRONMENT
@@ -272,7 +284,7 @@ spec:
           containers:
           - name: example-cronjob-consumer
             image: "asimmetric-example:1.2.3"
-            imagePullPolicy: 
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
               value: "dev"            
@@ -330,11 +342,11 @@ spec:
         spec:
           imagePullSecrets:
           - name: sealed-image-pull-secret
-          serviceAccountName: 
+          serviceAccountName: example-cronjob-producer-service-account
           containers:
           - name: example-cronjob-producer
             image: "asimmetric-example:1.2.3"
-            imagePullPolicy: 
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
               value: "dev"            

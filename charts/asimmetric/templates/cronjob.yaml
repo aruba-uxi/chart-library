@@ -1,5 +1,5 @@
 {{- range $name, $data := .Values.cronjobs }}
-{{- $overrideImage := $data.image | default dict }}
+{{- $overrideImage := default dict $data.image }}
 {{- $envBasic := deepCopy $.Values.global.env | mustMerge (default dict $data.env) }}
 {{- $envFields := deepCopy $.Values.global.envFields | mustMerge (default dict $data.envFields) }}
 {{- $envSealedSecrets := deepCopy $.Values.global.envSealedSecrets | mustMerge (default dict $data.envSealedSecrets) }}
@@ -21,7 +21,7 @@ spec:
           - name: {{ include "sealedImagePullSecret.name" "" }}
           {{- end }}
           {{- if $data.serviceAccount }}
-          serviceAccountName: {{ template "serviceAccount.name" (dict "context" $ "data" $data) }}
+          serviceAccountName: {{ template "serviceAccount.name" (dict "context" $ "name" $name "data" $data) }}
           {{- end }}
           containers:
           - name: {{ $name }}

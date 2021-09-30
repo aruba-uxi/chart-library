@@ -17,7 +17,7 @@ asimmetric:
     image:
       repository: asimmetric-example
       tag: "1.2.3"
-      imagePullPolicy: IfNotPresent
+      pullPolicy: IfNotPresent
     ## Creates a sealed image pull secret
     ##
     sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
@@ -224,7 +224,7 @@ asimmetric:
       ##
       serviceAccount:
         create: true
-        # name: service-account-name
+        name: example-cronjob-producer-service-account
         # annotations: {} 
       ## Whether the cronjob should restart if a job fails
       ##
