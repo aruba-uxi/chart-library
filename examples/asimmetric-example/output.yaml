@@ -76,9 +76,10 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: http
+      targetPort: 8000
   selector:
-    app: example-service
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
 apiVersion: apps/v1
