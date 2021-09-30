@@ -57,6 +57,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.nodeSelector | Node selector specifications to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) for more details on the structure | `{}` | Yes |
 | application.tolerations | Tolerations to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the structure | `{}` | Yes |
 | application.affinity | Affinity to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) for more details on the structure | `{}` | Yes |
+| application.securityContext | Sets the security contextfor the pods. See [link](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for more details on the structure | `{}` | Yes |
 | application.configMap | A config map to create and apply to the application | | Yes |
 | application.configMap.annotations | Annotations to add to the config map | `{}` | Yes |
 | application.configMap.readOnly | Whether the configmap is mapped as readonly or not | `true` | Yes |

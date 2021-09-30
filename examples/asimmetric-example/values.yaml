@@ -126,6 +126,13 @@ asimmetric:
       ## Default: None
       ##
       affinity: {}
+      ## Configures the security context for the pods (Optional)
+      ## Default: None
+      ##
+      securityContext: {}
+        # runAsUser: 1000
+        # runAsGroup: 3000
+        # fsGroup: 2000
       ## Adds a config map to the application (Optional)
       ## Default: None
       ###

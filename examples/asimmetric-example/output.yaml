@@ -188,6 +188,10 @@ spec:
       - name: config
         configMap:
           name: example-service
+      securityContext:
+        fsGroup: 2000
+        runAsGroup: 3000
+        runAsUser: 1000
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
 apiVersion: apps/v1
