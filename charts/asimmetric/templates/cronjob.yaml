@@ -1,5 +1,6 @@
 {{- range $name, $data := .Values.cronjobs }}
 {{- $overrideImage := default dict $data.image }}
+{{- $datadog := default dict $data.datadog }}
 {{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
 {{- $envFields := deepCopy (default dict $.Values.global.envFields) | mustMerge (default dict $data.envFields) }}
 {{- $envSealedSecrets := deepCopy (default dict $.Values.global.envSealedSecrets) | mustMerge (default dict $data.envSealedSecrets) }}
@@ -29,7 +30,23 @@ spec:
             imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
             env:
             - name: ENVIRONMENT
-              value: {{ lower $.Values.global.environment | quote }}
+              value: {{ include "global.environment" (dict "environment" $.Values.global.environment) }}
+            - name: DD_ENABLED
+              value: {{ default false $datadog.enabled }}
+            {{- if $datadog.enabled }}
+            - name: DD_ENV
+              value: {{ include "global.environment" (dict "environment" $.Values.global.environment) }}
+            - name: DD_SERVICE
+              value: {{ $name }}
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENTITY_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+            {{- end }}
             {{- if or $envBasic $envFields $envSealedSecrets }}
             {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 12 }}
             {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 12 }}

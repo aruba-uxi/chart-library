@@ -1,19 +1,15 @@
 asimmetric:
   global:
     repository: asimmetric-example
-    environment: dev
+    environment: DEV
     image:
       repository: asimmetric-example
       tag: "latest"
       pullPolicy: Never
     env:
       DEBUG: true
-      DD_ENABLED: false
-      DD_ENV: dev
-      DD_SERVICE: customer-integrations-service
     envFields:
-      DD_ENTITY_ID: metadata.uid
-      DD_AGENT_HOST: status.hostIP
+      HOST_IP: status.hostIP
   applications:
     example-service:
       role: webapp

@@ -9,7 +9,8 @@ asimmetric:
     ##
     repository: asimmetric-example
     ## The environment that the service is deployed in
-    ## DEV|STAGING|PRODUCTION
+    ## Valid values are: DEV|STAGING|PRODUCTION (case insensitive)
+    ## The values are converted to lowercase when used in the charts
     ##
     environment: DEV
     ## Configures the image repository and pull policy for all pods
@@ -37,8 +38,8 @@ asimmetric:
     ## Environment variables set from sealed secrets (Optional)
     ## If overridden, in application or cronjobs, precedence is given to the overridden values
     ## A sealed secret is created for each envSealedSecrets.<value>
-    ## NB! These can be overridden at the secret name level and no lower. 
-    ## E.g aws-access can be overridden but you can not define aws-access.AWS_REGION here 
+    ## NB! These can be overridden at the secret name level and no lower.
+    ## E.g aws-access can be overridden but you can not define aws-access.AWS_REGION here
     ## and aws-access.AWS_ACCESS_ID in the pod
     ## You must override the whole sealed secret
     ## Default: None
@@ -57,7 +58,7 @@ asimmetric:
 
     example-service:
       ## The application role
-      ## The difference between a webapp and worker is the worker does not have ports exposed. 
+      ## The difference between a webapp and worker is the worker does not have ports exposed.
       ## I.e a worker does not get a Service manifest defined
       ## Valid roles: webapp | worker
       ##
@@ -79,7 +80,7 @@ asimmetric:
       serviceAccount:
         create: true
         # name: service-account-name
-        # annotations: {} 
+        # annotations: {}
       ## Overrides the command from the dockerfile (Optional)
       ## Default: the Dockerfile command is used
       ##
@@ -173,10 +174,23 @@ asimmetric:
           OVERRIDDEN_VALUE: example-service
         database-url:
           DATABASE_URL: example-service
+      ## Enables datadog metrics (Optional)
+      ## DD_ENABLED environment variable is always set.
+      ## The value is taken from ".datadog.enabled" (default: false)
+      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
+      ## - DD_ENV: value from ".global.environment"
+      ## - DD_SERVICE: the name of the application or cronjob
+      ## - DD_AGENT_HOST: value from ".datadog.agentHost" (default: status.hostIP)
+      ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
+      ##
+      datadog:
+        enabled: true
+        agentHost: status.hostIP
+        entityId: metadata.uid
 
     example-worker:
       ## Asimmetric application role: webapp|worker
-      ## The difference between a webapp and worker is the worker does not have ports exposed. 
+      ## The difference between a webapp and worker is the worker does not have ports exposed.
       ## I.e a worker does not get a Service manifest defined
       ##
       role: worker
@@ -185,7 +199,7 @@ asimmetric:
       ##
       serviceAccount:
         name: example-worker-external-service-account
-        # annotations: {} 
+        # annotations: {}
       ## Overrides the command from the dockerfile (Optional)
       ## Default: the Dockerfile command is used
       ##
@@ -232,7 +246,7 @@ asimmetric:
       serviceAccount:
         create: true
         name: example-cronjob-producer-service-account
-        # annotations: {} 
+        # annotations: {}
       ## Whether the cronjob should restart if a job fails
       ##
       restartPolicy: OnFailure
@@ -260,6 +274,17 @@ asimmetric:
           OVERRIDDEN_VALUE: example-cronjob-producer
         database-url:
           DATABASE_URL: example-cronjob-producer
+      ## Enables datadog metrics (Optional)
+      ## DD_ENABLED environment variable is always set to true or false.
+      ## The value is taken from ".datadog.enabled" (default: false)
+      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
+      ## - DD_ENV: value from ".global.environment"
+      ## - DD_SERVICE: the name of the application or cronjob
+      ## - DD_AGENT_HOST: status.hostIP
+      ## - DD_ENTITY_ID: metadata.uid
+      ##
+      datadog:
+        enabled: true
 
     example-cronjob-consumer:
       ## The schedule for the cronjob

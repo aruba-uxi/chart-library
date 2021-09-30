@@ -8,10 +8,9 @@ asimmetric:
       pullPolicy: Always
     sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
     env:
-      AWS_DEFAULT_REGION: us-west-1
+      DEBUG: false
     envFields:
-      DD_ENTITY_ID: metadata.uid
-      DD_AGENT_HOST: status.hostIP
+      HOST_IP: status.hostIP
     envSealedSecrets:
       aws-access:
         AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
@@ -45,10 +44,12 @@ asimmetric:
               }
             }
       env:
-        DD_ENV: STAGING
+        AWS_DEFAULT_REGION: us-west-1
       envSealedSecrets:
         database-url:
           DATABASE_URL: example-service
+      datadog:
+        enabled: true
     example-worker:
       role: worker
       command: ["echo", "foo bar biz"]
@@ -60,6 +61,8 @@ asimmetric:
       serviceAccount:
         create: true
       restartPolicy: OnFailure
+      datadog:
+        enabled: true
     example-cronjob-consumer:
       schedule: "*/5 * * * *"
       command: ["run-kinesis", "consumer"]

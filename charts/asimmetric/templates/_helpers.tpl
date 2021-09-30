@@ -1,4 +1,17 @@
 {{/*
+validates the environment
+*/}}
+{{- define "global.environment" -}}
+{{- $environment := lower .environment -}}
+{{- $validEnvironments := list "dev" "staging" "production" -}}
+{{- if mustHas $environment $validEnvironments -}}
+    {{- printf "%s" $environment | quote }}
+{{- else -}}
+{{- fail (printf "environment (%s) from .Values.global.environment is invalid" $environment) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "application.chart" -}}

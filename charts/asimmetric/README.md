@@ -15,7 +15,7 @@ Global values used by all kubernetes objects. Some can be overridden.
 | Parameter | Description | Default | Can Override |
 |-----|------|---------|--------|
 | global.repository | The repository that this chart is kept in | | No |
-| global.environment | The environment that the service is being deployed to. | `DEV` | No |
+| global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid values are (DEV, STAGING, PRODUCTION) | | No |
 | global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes |
 | global.image.repository | The image repository to use for images. | | Yes |
 | global.image.tag | The image tag to use. | `"2.0.5"` | Yes |
@@ -66,6 +66,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
+| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
 
 ## Cronjob Values
 
@@ -91,5 +92,6 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.serviceAccount.name | The name of the service account to attach to this application| | Yes |
 | cronjob.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
 | cronjob.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
-| cronjob.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
-| cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
+| cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
+| cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
+| cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
