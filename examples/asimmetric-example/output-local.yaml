@@ -55,7 +55,7 @@ spec:
           - name: ENVIRONMENT
             value: "dev"
           - name: DD_ENABLED
-            value: false          
+            value: false}}          
           - name: DATABASE_URL
             value: "postgresql://username:password@db:5432/asimmetric-example"
           - name: DEBUG

@@ -103,9 +103,7 @@ spec:
           - name: ENVIRONMENT
             value: "staging"
           - name: DD_ENABLED
-            value: true
-          - name: DD_ENABLED
-            value: true
+            value: true}}
           - name: DD_ENV
             value: "staging"
           - name: DD_SERVICE
@@ -223,7 +221,7 @@ spec:
           - name: ENVIRONMENT
             value: "staging"
           - name: DD_ENABLED
-            value: false          
+            value: false}}          
           - name: DEBUG
             value: "false"          
           - name: HOST_IP
@@ -379,7 +377,7 @@ metadata:
     repository: asimmetric-example
 spec:
   encryptedData:
-    DATABASE_URL: example-service
+    DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/applications-sealedsecrets.yaml
 apiVersion: bitnami.com/v1alpha1
