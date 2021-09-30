@@ -10,6 +10,15 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/asimmetric-1.0.0/asimmetric-1.0.0.tgz
     version: 1.0.0
+  - apiVersion: v2
+    created: "2021-09-30T17:55:06.732068119Z"
+    description: A Helm chart for Asimmetric kubernetes resources
+    digest: e62dc44cb13db8b0d963be700d02a05fba19def4454641cefef4a23ea5c600e8
+    name: asimmetric
+    type: application
+    urls:
+    - https://github.com/Asimmetric/chart-library/releases/download/asimmetric-1.0.0-dev01/asimmetric-1.0.0-dev01.tgz
+    version: 1.0.0-dev01
   deploymentexample:
   - apiVersion: v2
     appVersion: latest
@@ -723,4 +732,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-30T11:57:25.829959485Z"
+generated: "2021-09-30T17:55:06.732361715Z"
