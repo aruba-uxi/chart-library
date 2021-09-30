@@ -21,7 +21,7 @@ asimmetric:
       pullPolicy: IfNotPresent
     ## Creates a sealed image pull secret
     ##
-    sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    sealedImagePullSecret: global-value
     ## Basic environment variables (Optional)
     ## If overridden, in application or cronjobs, precedence is given to the overridden values
     ## Default: None
@@ -55,7 +55,6 @@ asimmetric:
   ## The key is used as the name of the application and subsequent objects created
   ##
   applications:
-
     example-service:
       ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.
@@ -185,26 +184,85 @@ asimmetric:
       ##
       datadog:
         enabled: true
-        agentHost: status.hostIP
-        entityId: metadata.uid
-
     example-worker:
-      ## Asimmetric application role: webapp|worker
+      ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.
       ## I.e a worker does not get a Service manifest defined
+      ## Valid roles: webapp | worker
       ##
       role: worker
+      ## Sets the replica count (Optional)
+      ## Default: 1
+      ##
+      replicaCount: 1
+      ## Configures the image and image pull policy (Optional)
+      ## Default: uses .global.image
+      ##
+      image: {}
+        # repository: nginx
+        # pullPolicy: IfNotPresent
+        # tag: ""
       ## Attaches a service account it to the application (Optional)
       ## Default: uses the default service account in the namespace
       ##
       serviceAccount:
+        # create: false
         name: example-worker-external-service-account
         # annotations: {}
       ## Overrides the command from the dockerfile (Optional)
       ## Default: the Dockerfile command is used
       ##
       command: ["echo", "foo bar biz"]
-      ## Adds a config map to the application (Optional)
+      ## Which port on the pod is exposed.
+      ## NB! for 'role: worker' do not set this
+      ##
+      port: 8000
+      ## Configures the service created (Optional)
+      ## Default: ClusterIP on port 80
+      ##
+      service: {}
+        # type: ClusterIP
+        # port: 80
+      ## Enables the liveness probe on the specified path (Optional)
+      ## NB! for 'role:worker' this should be excluded
+      ##
+      livenessProbe:
+        path: /livez
+      ## Enables the readiness probe on the specified path (Optional)
+      ## NB! for 'role:worker' this should be excluded
+      ##
+      readinessProbe:
+        path: /readyz
+      ## Configure the pod resources (Optional)
+      ## Default: lets kubernetes set the resources
+      ##
+      resources: {}
+        # limits:
+        #   cpu: 100m
+        #   memory: 256Mi
+        # requests:
+        #   cpu: 100m
+        #   memory: 128Mi
+      ## Configures the node selectors for the pods (Optional)
+      ## Default: None
+      ##
+      nodeSelector: {}
+      ## Configures the tolerations for the pods (Optional)
+      ## Default: None
+      ##
+      tolerations: []
+      ## Configures the pod affinity for the pods (Optional)
+      ## Default: None
+      ##
+      affinity: {}
+      ## Configures the security context for the pods (Optional)
+      ## Default: None
+      ##
+      securityContext: {}
+        # runAsUser: 1000
+        # runAsGroup: 3000
+        # fsGroup: 2000
+       ## Adds a config map to the application (Optional)
       ## Default: None
       ###
       configMap:
@@ -219,15 +277,41 @@ asimmetric:
       ## Default: None
       ##
       env:
-        AWS_DEFAULT_REGION: example-service
-        OVERRIDDEN_VALUE: example-service
-
+        AWS_DEFAULT_REGION: example-worker
+        OVERRIDDEN_VALUE: example-worker
+      ## Environment variables set from the deployment fields (Optional)
+      ## If overridden, in application or cronjobs, precedence is given to the overridden values
+      ## Default: None
+      ##
+      envFields:
+        HOST_IP: example-worker
+        OVERRIDDEN_FIELD_VALUE: example-worker
+      ## Environment variables set from sealed secrets (Optional)
+      ## If overridden, in application or cronjobs, precedence is given to the overridden values
+      ## A sealed secret is created for each envSealedSecrets.<value>
+      ## Default: None
+      ##
+      envSealedSecrets:
+        overridden-secret:
+          OVERRIDDEN_VALUE: example-worker
+        database-url:
+          DATABASE_URL: example-worker
+      ## Enables datadog metrics (Optional)
+      ## DD_ENABLED environment variable is always set.
+      ## The value is taken from ".datadog.enabled" (default: false)
+      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
+      ## - DD_ENV: value from ".global.environment"
+      ## - DD_SERVICE: the name of the application or cronjob
+      ## - DD_AGENT_HOST: value from ".datadog.agentHost" (default: status.hostIP)
+      ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
+      ##
+      datadog:
+        enabled: true
   ## Creates one or more cronjobs.
   ## Cronjobs are defined as keys in the applications map
   ## The key is used as the name of the cronjob and subsequent objects created
   ##
   cronjobs:
-
     example-cronjob-producer:
       ## The schedule for the cronjob
       ##
@@ -285,7 +369,6 @@ asimmetric:
       ##
       datadog:
         enabled: true
-
     example-cronjob-consumer:
       ## The schedule for the cronjob
       ##
@@ -297,6 +380,12 @@ asimmetric:
       ## Attaches a service account it to the application (Optional)
       ## Default: uses the default service account in the namespace
       ##
+      serviceAccount:
+        create: false
+        name: example-cronjob-consumer-service-account
+      ## Attaches a service account it to the application (Optional)
+      ## Default: uses the default service account in the namespace
+      ##
       restartPolicy: Never
       ## Environment variables set from provided key:value pair (Optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
@@ -305,6 +394,13 @@ asimmetric:
       env:
         AWS_DEFAULT_REGION: example-cronjob-consumer
         OVERRIDDEN_VALUE: example-cronjob-consumer
+      ## Environment variables set from the deployment fields (Optional)
+      ## If overridden, in application or cronjobs, precedence is given to the overridden values
+      ## Default: None
+      ##
+      envFields:
+        HOST_IP: example-cronjob-consumer
+        OVERRIDDEN_FIELD_VALUE: example-cronjob-consumer
       ## Environment variables set from sealed secrets (Optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## A sealed secret is created for each envSealedSecrets.<value>
@@ -315,3 +411,14 @@ asimmetric:
           OVERRIDDEN_VALUE: example-cronjob-consumer
         database-url:
           DATABASE_URL: example-cronjob-consumer
+      ## Enables datadog metrics (Optional)
+      ## DD_ENABLED environment variable is always set to true or false.
+      ## The value is taken from ".datadog.enabled" (default: false)
+      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
+      ## - DD_ENV: value from ".global.environment"
+      ## - DD_SERVICE: the name of the application or cronjob
+      ## - DD_AGENT_HOST: status.hostIP
+      ## - DD_ENTITY_ID: metadata.uid
+      ##
+      datadog:
+        enabled: true

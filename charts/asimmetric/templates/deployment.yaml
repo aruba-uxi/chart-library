@@ -26,7 +26,7 @@ spec:
       - name: {{ include "sealedImagePullSecret.name" "" }}
       {{- end }}
       {{- if $data.serviceAccount }}
-      serviceAccountName: {{ template "serviceAccount.name" (dict "context" $ "name" $name "data" $data) }}
+      serviceAccountName: {{ template "serviceAccount.name" (dict "name" $name "data" $data) }}
       {{- end }}
       containers:
         - name: {{ $data.role }}
@@ -39,10 +39,8 @@ spec:
           - name: ENVIRONMENT
             value: {{ include "global.environment" (dict "environment" $.Values.global.environment) }}
           - name: DD_ENABLED
-            value: {{ default false $datadog.enabled }}
+            value: {{ default false $datadog.enabled }}}}
           {{- if $datadog.enabled }}
-          - name: DD_ENABLED
-            value: true
           - name: DD_ENV
             value: {{ include "global.environment" (dict "environment" $.Values.global.environment) }}
           - name: DD_SERVICE
@@ -57,9 +55,9 @@ spec:
                 fieldPath: metadata.uid
           {{- end }}
           {{- if or $envBasic $envFields $envSealedSecrets }}
-          {{- include "application.env-variables" (dict "context" $ "data" $envBasic) | indent 10 }}
-          {{- include "application.env-fields" (dict "context" $ "data" $envFields) | indent 10 }}
-          {{- include "application.env-sealed-secrets" (dict "context" $ "name" $name "data" $envSealedSecrets) | indent 10 }}
+          {{- include "application.env-variables" (dict "data" $envBasic) | indent 10 }}
+          {{- include "application.env-fields" (dict "data" $envFields) | indent 10 }}
+          {{- include "application.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 10 }}
           {{- end }}
           {{- if $data.port }}
           ports:

@@ -47,7 +47,7 @@ asimmetric:
         AWS_DEFAULT_REGION: us-west-1
       envSealedSecrets:
         database-url:
-          DATABASE_URL: example-service
+          DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
       datadog:
         enabled: true
     example-worker:

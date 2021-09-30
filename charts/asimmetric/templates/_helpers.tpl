@@ -81,7 +81,7 @@ https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmerg
 - name: {{ $envName }}
   valueFrom:
    secretKeyRef:
-     name: {{ include "sealedSecret.name" (dict "context" $.context "name" $.name "secretName" $secretName)}}
+     name: {{ include "sealedSecret.name" (dict "name" $.name "secretName" $secretName)}}
      key: {{ $envName }}
 {{- end }}
 {{- end }}
