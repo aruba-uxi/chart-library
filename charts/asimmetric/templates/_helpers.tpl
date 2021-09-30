@@ -5,7 +5,7 @@ validates the environment
 {{- $environment := lower .environment -}}
 {{- $validEnvironments := list "dev" "staging" "production" -}}
 {{- if mustHas $environment $validEnvironments -}}
-    {{- printf "%s" $environment | quote }}
+    {{- printf "%s" $environment }}
 {{- else -}}
 {{- fail (printf "environment (%s) from .Values.global.environment is invalid" $environment) -}}
 {{- end -}}
@@ -66,7 +66,7 @@ https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmerg
 {{- range $key, $val := .data }}
 - name: {{ $key }}
   valueFrom:
-   fieldRef:
+    fieldRef:
      fieldPath: {{ $val }}
 {{- end }}
 {{- end }}
@@ -80,9 +80,9 @@ https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmerg
 {{- range $envName, $secretValue := $secretData }}
 - name: {{ $envName }}
   valueFrom:
-   secretKeyRef:
-     name: {{ include "sealedSecret.name" (dict "name" $.name "secretName" $secretName)}}
-     key: {{ $envName }}
+    secretKeyRef:
+      name: {{ include "sealedSecret.name" (dict "name" $.name "secretName" $secretName)}}
+      key: {{ $envName }}
 {{- end }}
 {{- end }}
 {{- end }}

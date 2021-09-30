@@ -12,7 +12,7 @@ metadata:
   labels:
     {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
 spec:
-  replicas: {{ $data.replicaCount | default 1 }}
+  replicas: {{ default 1 $data.replicaCount }}
   selector:
     matchLabels:
       {{- include "application.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
@@ -26,90 +26,90 @@ spec:
       - name: {{ include "sealedImagePullSecret.name" "" }}
       {{- end }}
       {{- if $data.serviceAccount }}
-      serviceAccountName: {{ template "serviceAccount.name" (dict "name" $name "data" $data) }}
+      serviceAccountName: {{ include "serviceAccount.name" (dict "name" $name "data" $data) }}
       {{- end }}
       containers:
-        - name: {{ $data.role }}
-          image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
-          imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
-          {{- with $data.command }}
-          command: {{ toRawJson . }}
-          {{- end }}
-          env:
-          - name: ENVIRONMENT
-            value: {{ include "global.environment" (dict "environment" $.Values.global.environment) }}
-          - name: DD_ENABLED
-            value: {{ default false $datadog.enabled }}}}
-          {{- if $datadog.enabled }}
-          - name: DD_ENV
-            value: {{ include "global.environment" (dict "environment" $.Values.global.environment) }}
-          - name: DD_SERVICE
-            value: {{ $name }}
-          - name: DD_AGENT_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-          - name: DD_ENTITY_ID
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.uid
-          {{- end }}
-          {{- if or $envBasic $envFields $envSealedSecrets }}
-          {{- include "application.env-variables" (dict "data" $envBasic) | indent 10 }}
-          {{- include "application.env-fields" (dict "data" $envFields) | indent 10 }}
-          {{- include "application.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 10 }}
-          {{- end }}
-          {{- if $data.port }}
-          ports:
-          - name: http
-            containerPort: {{ $data.port }}
-            protocol: TCP
-          {{- end }}
-          {{- if $data.readinessProbe }}
-          readinessProbe:
-            httpGet:
-              httpHeaders:
-              - name: Host
-                value: readinessProbe
-              - name: Content-Type
-                value: application/json
-              path: {{ $data.readinessProbe.path }}
-              port: {{ $data.port }}
-            initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
-            timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
-            successThreshold: {{ default "1" $data.readinessProbe.successThreshold }}
-            failureThreshold: {{ default "3" $data.readinessProbe.failureThreshold }}
-          {{- end }}
-          {{- if $data.livenessProbe }}
-          livenessProbe:
-            httpGet:
-              httpHeaders:
-              - name: Host
-                value: livenessProbe
-              - name: Content-Type
-                value: application/json
-              path: {{ $data.livenessProbe.path }}
-              port: {{ $data.port }}
-            initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
-            timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
-            successThreshold: {{ default "1" $data.livenessProbe.successThreshold }}
-            failureThreshold: {{ default "3" $data.livenessProbe.failureThreshold }}
-          {{- end }}
-          {{- with $data.resources }}
-          resources:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- if $data.parallel }}
-          parallelism: {{ $data.parallel }}
-          {{- end }}
-          {{- if $data.configMap }}
-          volumeMounts:
-          - name: config
-            mountPath: {{ $data.configMap.path }}
-            readOnly: {{ default true $data.configMap.readOnly }}
-          {{- end }}
+      - name: {{ $data.role }}
+        image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
+        imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
+        {{- with $data.command }}
+        command: {{ toRawJson . }}
+        {{- end }}
+        env:
+        - name: ENVIRONMENT
+          value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
+        - name: DD_ENABLED
+          value: {{ default "false" $datadog.enabled | quote }}
+        {{- if $datadog.enabled }}
+        - name: DD_ENV
+          value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
+        - name: DD_SERVICE
+          value: {{ $name | quote }}
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_ENTITY_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        {{- end }}
+        {{- if or $envBasic $envFields $envSealedSecrets }}
+        {{- include "application.env-variables" (dict "data" $envBasic) | indent 8 }}
+        {{- include "application.env-fields" (dict "data" $envFields) | indent 8 }}
+        {{- include "application.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 8 }}
+        {{- end }}
+        {{- if $data.port }}
+        ports:
+        - name: http
+          containerPort: {{ $data.port }}
+          protocol: TCP
+        {{- end }}
+        {{- if $data.readinessProbe }}
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: readinessProbe
+            - name: Content-Type
+              value: application/json
+            path: {{ $data.readinessProbe.path }}
+            port: {{ $data.port }}
+          initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $data.readinessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $data.readinessProbe.failureThreshold }}
+        {{- end }}
+        {{- if $data.livenessProbe }}
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: livenessProbe
+            - name: Content-Type
+              value: application/json
+            path: {{ $data.livenessProbe.path }}
+            port: {{ $data.port }}
+          initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $data.livenessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $data.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- with $data.resources }}
+        resources:
+          {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- if $data.parallel }}
+        parallelism: {{ $data.parallel }}
+        {{- end }}
+        {{- if $data.configMap }}
+        volumeMounts:
+        - name: config
+          mountPath: {{ $data.configMap.path }}
+          readOnly: {{ default true $data.configMap.readOnly }}
+        {{- end }}
       {{- with $data.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

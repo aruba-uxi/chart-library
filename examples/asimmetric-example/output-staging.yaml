@@ -96,89 +96,89 @@ spec:
       - name: sealed-image-pull-secret
       serviceAccountName: example-service
       containers:
-        - name: webapp
-          image: "quay.io/uxi/asimmetric-example:latest"
-          imagePullPolicy: Always
-          env:
-          - name: ENVIRONMENT
-            value: "staging"
-          - name: DD_ENABLED
-            value: true}}
-          - name: DD_ENV
-            value: "staging"
-          - name: DD_SERVICE
-            value: example-service
-          - name: DD_AGENT_HOST
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-          - name: DD_ENTITY_ID
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.uid          
-          - name: AWS_DEFAULT_REGION
-            value: "us-west-1"
-          - name: DEBUG
-            value: "false"          
-          - name: HOST_IP
-            valueFrom:
-             fieldRef:
-               fieldPath: status.hostIP          
-          - name: AWS_ACCESS_ID
-            valueFrom:
-             secretKeyRef:
-               name: example-service-aws-access
-               key: AWS_ACCESS_ID
-          - name: AWS_REGION
-            valueFrom:
-             secretKeyRef:
-               name: example-service-aws-access
-               key: AWS_REGION
-          - name: DATABASE_URL
-            valueFrom:
-             secretKeyRef:
-               name: example-service-database-url
-               key: DATABASE_URL
-          ports:
-          - name: http
-            containerPort: 8000
-            protocol: TCP
-          readinessProbe:
-            httpGet:
-              httpHeaders:
-              - name: Host
-                value: readinessProbe
-              - name: Content-Type
-                value: application/json
-              path: /readyz
-              port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 3
-          livenessProbe:
-            httpGet:
-              httpHeaders:
-              - name: Host
-                value: livenessProbe
-              - name: Content-Type
-                value: application/json
-              path: /livez
-              port: 8000
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 3
-          resources:
+      - name: webapp
+        image: "quay.io/uxi/asimmetric-example:latest"
+        imagePullPolicy: Always
+        env:
+        - name: ENVIRONMENT
+          value: "staging"
+        - name: DD_ENABLED
+          value: "true"
+        - name: DD_ENV
+          value: "staging"
+        - name: DD_SERVICE
+          value: "example-service"
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_ENTITY_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid        
+        - name: AWS_DEFAULT_REGION
+          value: "us-west-1"
+        - name: DEBUG
+          value: "false"        
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+             fieldPath: status.hostIP        
+        - name: AWS_ACCESS_ID
+          valueFrom:
+            secretKeyRef:
+              name: example-service-aws-access
+              key: AWS_ACCESS_ID
+        - name: AWS_REGION
+          valueFrom:
+            secretKeyRef:
+              name: example-service-aws-access
+              key: AWS_REGION
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: example-service-database-url
+              key: DATABASE_URL
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: readinessProbe
+            - name: Content-Type
+              value: application/json
+            path: /readyz
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: livenessProbe
+            - name: Content-Type
+              value: application/json
+            path: /livez
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        resources:
             limits:
               cpu: 100m
               memory: 256Mi
-          volumeMounts:
-          - name: config
-            mountPath: /app/config
-            readOnly: true
+        volumeMounts:
+        - name: config
+          mountPath: /app/config
+          readOnly: true
       volumes:
       - name: config
         configMap:
@@ -213,31 +213,31 @@ spec:
       imagePullSecrets:
       - name: sealed-image-pull-secret
       containers:
-        - name: worker
-          image: "quay.io/uxi/asimmetric-example:latest"
-          imagePullPolicy: Always
-          command: ["echo","foo bar biz"]
-          env:
-          - name: ENVIRONMENT
-            value: "staging"
-          - name: DD_ENABLED
-            value: false}}          
-          - name: DEBUG
-            value: "false"          
-          - name: HOST_IP
-            valueFrom:
-             fieldRef:
-               fieldPath: status.hostIP          
-          - name: AWS_ACCESS_ID
-            valueFrom:
-             secretKeyRef:
-               name: example-worker-aws-access
-               key: AWS_ACCESS_ID
-          - name: AWS_REGION
-            valueFrom:
-             secretKeyRef:
-               name: example-worker-aws-access
-               key: AWS_REGION
+      - name: worker
+        image: "quay.io/uxi/asimmetric-example:latest"
+        imagePullPolicy: Always
+        command: ["echo","foo bar biz"]
+        env:
+        - name: ENVIRONMENT
+          value: "staging"
+        - name: DD_ENABLED
+          value: "false"        
+        - name: DEBUG
+          value: "false"        
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+             fieldPath: status.hostIP        
+        - name: AWS_ACCESS_ID
+          valueFrom:
+            secretKeyRef:
+              name: example-worker-aws-access
+              key: AWS_ACCESS_ID
+        - name: AWS_REGION
+          valueFrom:
+            secretKeyRef:
+              name: example-worker-aws-access
+              key: AWS_REGION
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob.yaml
 apiVersion: batch/v1
@@ -266,25 +266,25 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: false            
+              value: "false"            
             - name: AWS_ACCESS_ID
               value: "uid-12345"
             - name: DEBUG
               value: "false"            
             - name: HOST_IP
               valueFrom:
-               fieldRef:
+                fieldRef:
                  fieldPath: status.hostIP            
             - name: AWS_ACCESS_ID
               valueFrom:
-               secretKeyRef:
-                 name: example-cronjob-consumer-aws-access
-                 key: AWS_ACCESS_ID
+                secretKeyRef:
+                  name: example-cronjob-consumer-aws-access
+                  key: AWS_ACCESS_ID
             - name: AWS_REGION
               valueFrom:
-               secretKeyRef:
-                 name: example-cronjob-consumer-aws-access
-                 key: AWS_REGION
+                secretKeyRef:
+                  name: example-cronjob-consumer-aws-access
+                  key: AWS_REGION
             command: ["run-kinesis","consumer"]
           restartPolicy: Never
 ---
@@ -316,11 +316,11 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: true
+              value: "true"
             - name: DD_ENV
               value: "staging"
             - name: DD_SERVICE
-              value: example-cronjob-producer
+              value: "example-cronjob-producer"
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:
@@ -333,18 +333,18 @@ spec:
               value: "false"            
             - name: HOST_IP
               valueFrom:
-               fieldRef:
+                fieldRef:
                  fieldPath: status.hostIP            
             - name: AWS_ACCESS_ID
               valueFrom:
-               secretKeyRef:
-                 name: example-cronjob-producer-aws-access
-                 key: AWS_ACCESS_ID
+                secretKeyRef:
+                  name: example-cronjob-producer-aws-access
+                  key: AWS_ACCESS_ID
             - name: AWS_REGION
               valueFrom:
-               secretKeyRef:
-                 name: example-cronjob-producer-aws-access
-                 key: AWS_REGION
+                secretKeyRef:
+                  name: example-cronjob-producer-aws-access
+                  key: AWS_REGION
             command: ["run-kinesis","producer"]
           restartPolicy: OnFailure
 ---
