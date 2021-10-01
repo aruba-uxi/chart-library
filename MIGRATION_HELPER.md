@@ -13,6 +13,7 @@ See [PR-140](https://github.com/Asimmetric/customer-integrations-service/pull/14
 - applications (webapp or worker) require the `role` to be set to state whether they are a webapp or a worker.
 - webapps and workers are all defined under `.Values.asimemtric.applications`
 - cronjobs are defined under `.Values.asimemtric.cronjobs`
+- Datadog is enabled by setting the `datadog.enabled` value to `true`. When set to `true` all the required environment variables will be added for you. You should not need to add `DD_ENV`, `DD_SERVICE`, `DD_TRACE_ENABLED`, `DD_ENTITY_ID`, `DD_AGENT_HOST`. (See the [README](https://github.com/Asimmetric/chart-library/blob/main/charts/asimmetric/README.md#application-values) for information on what can be configure for datadog)
 
 ## Chart.yaml Dependencies
 

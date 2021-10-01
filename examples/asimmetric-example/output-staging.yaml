@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 ---
@@ -19,7 +19,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 ---
@@ -31,7 +31,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 data:
@@ -52,7 +52,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -74,7 +74,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -88,7 +88,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-0.0.4
+        helm.sh/chart: asimmetric-0.0.5
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
     spec:
@@ -108,6 +108,8 @@ spec:
           value: "staging"
         - name: DD_SERVICE
           value: "example-service"
+        - name: DD_TRACE_ENABLED
+          value: "true" # TODO: make this configurable https://uxi.atlassian.net/browse/UXI-753
         - name: DD_AGENT_HOST
           valueFrom:
             fieldRef:
@@ -192,7 +194,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -206,7 +208,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-0.0.4
+        helm.sh/chart: asimmetric-0.0.5
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
     spec:
@@ -247,7 +249,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -296,7 +298,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -321,6 +323,8 @@ spec:
               value: "staging"
             - name: DD_SERVICE
               value: "example-cronjob-producer"
+            - name: DD_TRACE_ENABLED
+              value: "true" # TODO: make this configurable https://uxi.atlassian.net/browse/UXI-753
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:
@@ -356,7 +360,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -372,7 +376,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -387,7 +391,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -403,7 +407,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -419,7 +423,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -434,7 +438,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-0.0.4
+    helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
 spec:
   encryptedData:
@@ -445,6 +449,6 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-0.0.4
+      helm.sh/chart: asimmetric-0.0.5
       app.kubernetes.io/managed-by: Helm
     type: kubernetes.io/dockerconfigjson

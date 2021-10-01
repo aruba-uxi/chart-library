@@ -1,6 +1,4 @@
-# TODO: could add additional label in each asimmetric
-# TODO: add external IP service type
-# TODO: add external name service type
+# TODO: could add additional label in each asimmetric https://uxi.atlassian.net/browse/UXI-752
 asimmetric:
   ## Global values used by all manifests
   ##
