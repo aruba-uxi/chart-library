@@ -115,9 +115,8 @@ Create the image using respository and tag
 */}}
 {{- define "asimmetric.image" -}}
 {{- $repository := default .context.Values.global.image.repository .data.repository -}}
-{{- $globalTag := default  .context.Chart.Version .context.Values.global.image.tag -}}
-{{- $tag := default $globalTag .data.tag -}}
-{{ printf "%s:%s" $repository $tag}}
+{{- $tag := default .context.Values.global.image.tag .data.tag -}}
+{{ printf "%s:%s" $repository $tag }}
 {{- end -}}
 
 {{/*

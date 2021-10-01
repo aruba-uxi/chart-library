@@ -6,11 +6,20 @@ Moving from the old library to the new one is fairly straight forward. However, 
 
 See [PR-140](https://github.com/Asimmetric/customer-integrations-service/pull/140) for the customer-integrations-service repo to see how it is done
 
+## Noteable Changes
+
+- `labels.repo` has moved to `global.repository`
+- `.Chart.appVersion` is no longer used and should be removed from the `Chart.yaml` file
+- applications (webapp or worker) require the `role` to be set to state whether they are a webapp or a worker.
+- webapps and workers are all defined under `.Values.asimemtric.applications`
+- cronjobs are defined under `.Values.asimemtric.cronjobs`
+
 ## Chart.yaml Dependencies
 
 The helm charts have been moved into a single template called `asimmetric`. This means that in your `Chart.yaml` file you only need to define a single dependency
 
 ```yaml
+# Chart.yaml
 dependencies:
 - name: asimmetric
   version: "1.0.0"
@@ -40,12 +49,11 @@ To set values that the asimmetric library uses, you need to add a map to the val
 
 ``` yaml
 # values-staging.yaml
-
 asimmetric:
  ...
 ```
 
-Within the `asimmetric` map will be the values as discussed in [values.example.yaml](https://github.com/Asimmetric/chart-library/blob/main/examples/asimmetric-example/values.example.yaml)
+Within `.Values.asimmetric` will be the values as discussed in [values.example.yaml](https://github.com/Asimmetric/chart-library/blob/main/examples/asimmetric-example/values.example.yaml)
 
 ## Notes / ToDo
 

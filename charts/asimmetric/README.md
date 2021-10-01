@@ -2,7 +2,14 @@
 
 A helm chart for Asimmetric kubernetes resources
 
-## Value Files
+1. [Helm](#helm)
+2. [Developing Notes](#developing-notes)
+
+## Helm
+
+Helm is used to build this library. These charts will be used the build the helm charts for a specific service.
+
+### Value Files
 
 Typically the `values.yaml` file defines the base values used by helm, and then additional values files are created based on the environment specific configs.
 
@@ -12,7 +19,7 @@ When using this chart library its best to leave the `values.yaml` files empty an
 
 It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
 
-## Global Values
+### Global Values
 
 ```yaml
 asimmetric:
@@ -33,7 +40,7 @@ Global values used by all kubernetes objects. Some can be overridden.
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes |
 
-## Application Values
+### Application Values
 
 ```yaml
 asimmetric:
@@ -78,7 +85,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
 | application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
 
-## Cronjob Values
+### Cronjob Values
 
 ```yaml
 asimmetric:
@@ -105,3 +112,25 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
 | cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+
+## Developing Notes
+
+When contributing to this library certain approaches or concepts can be considered to make you life easier.
+
+### _helpers.tpl
+
+The `_helpers.tpl` file is used to assist in creating values used in the chart files.
+
+### Include Function
+
+Using `{{ include ... }}` refers to a template defined in the `_helpers.tpl` file.
+
+### Range function
+
+A template may refer to `.Values` and `.Chart` etc. When calling the template you will normally do it like `{{ include template.name . }}`. However, inside the `range` function `.` refers to the object within the range and not the root object. You will needs to call it with a `$` instead of `.`. For example, `{{ include template.name $ }}`.
+
+### Passing Data to Include Function
+
+We can pass our own object through to templates with the following pattern `{{ include template.name (dict "key1" value1 "key2" value2)}}` to include more than the `.` object.
+
+This lets us provide more that one object (`.` and the data from within the `range` function) by calling the template like this `{{ include template.name (dict "context" $ "data" $data)}}`. Where `context` refers to the root object and `data` refers to the object within the range. This allows us to refer to multiple objects within the template. For example, `.context.Chart.Name` gives us access to the `name` value from `Chart.yaml` and `.data.name` gives us access to the `name` of the object in the range iteration.
