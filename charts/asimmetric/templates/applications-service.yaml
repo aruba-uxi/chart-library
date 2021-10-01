@@ -1,5 +1,6 @@
 {{- range $name, $data := .Values.applications }}
-{{- if mustHas $data.role (list "webapp") }}
+{{- $applicationRole := include "application.role" (dict "role" $data.role) }}
+{{- if mustHas $applicationRole (list "webapp") }}
 {{- $service := default dict $data.service }}
 ---
 apiVersion: v1

@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 ---
@@ -19,7 +19,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 ---
@@ -31,7 +31,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 data:
@@ -52,7 +52,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -74,7 +74,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -88,7 +88,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-0.0.3
+        helm.sh/chart: asimmetric-0.0.4
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
     spec:
@@ -192,7 +192,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -206,7 +206,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-0.0.3
+        helm.sh/chart: asimmetric-0.0.4
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
     spec:
@@ -247,7 +247,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -296,7 +296,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -356,7 +356,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -372,7 +372,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -387,7 +387,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -403,7 +403,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -419,7 +419,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -434,7 +434,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-0.0.3
+    helm.sh/chart: asimmetric-0.0.4
     app.kubernetes.io/managed-by: Helm
 spec:
   encryptedData:
@@ -445,6 +445,6 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-0.0.3
+      helm.sh/chart: asimmetric-0.0.4
       app.kubernetes.io/managed-by: Helm
     type: kubernetes.io/dockerconfigjson

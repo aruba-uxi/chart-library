@@ -7,7 +7,20 @@ Validates the environment
 {{- if mustHas $environment $validEnvironments -}}
     {{- printf "%s" $environment -}}
 {{- else -}}
-{{- fail (printf "environment (%s) from .Values.global.environment is invalid" $environment) -}}
+{{- fail (printf "Environment (%s) from .Values.global.environment is invalid. Valid environments are %s" $environment $validEnvironments) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Validates the role
+*/}}
+{{- define "application.role" -}}
+{{- $role := lower .role -}}
+{{- $validRoles := list "webapp" "worker" -}}
+{{- if mustHas $role $validRoles -}}
+    {{- printf "%s" $role -}}
+{{- else -}}
+{{- fail (printf "Role (%s) from .application.role is invalid. Valid roles are %s" $role $validRoles) -}}
 {{- end -}}
 {{- end -}}
 
@@ -115,7 +128,8 @@ Create the image using respository and tag
 */}}
 {{- define "asimmetric.image" -}}
 {{- $repository := default .context.Values.global.image.repository .data.repository -}}
-{{- $tag := default .context.Values.global.image.tag .data.tag -}}
+{{- $globalTag := default "latest" .context.Values.global.image.tag -}}
+{{- $tag := default $globalTag .data.tag -}}
 {{ printf "%s:%s" $repository $tag }}
 {{- end -}}
 

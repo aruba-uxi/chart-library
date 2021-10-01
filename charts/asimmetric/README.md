@@ -27,18 +27,18 @@ asimmetric:
     ...
 ```
 
-Global values used by all kubernetes objects. Some can be overridden.
+Global values used by all kubernetes objects. The `Can Override` column in the table identifies which values can be overridden by the applications or cronjobs.
 
-| Parameter | Description | Default | Can Override |
-|-----|------|---------|--------|
-| global.repository | The repository that this chart is kept in | | No |
-| global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid values are (DEV, STAGING, PRODUCTION) | | No |
-| global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes |
-| global.image.repository | The image repository to use for images. | | Yes |
-| global.image.tag | The image tag to use. | `.Chart.version` | Yes |
-| global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes |
-| global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |
-| global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes |
+| Parameter | Description | Default | Optional | Can Override |
+|-----|------|---------|---|---|
+| global.repository | The repository that this chart is kept in | | No | No |
+| global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid environments are (`DEV`, `STAGING`, `PRODUCTION`) | | No | No |
+| global.image.repository | The image repository to use for images. | | No | Yes |
+| global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
+| global.image.tag | The image tag to use. | `latest` | Yes | Yes |
+| global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
+| global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
+| global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
 
 ### Application Values
 
@@ -55,7 +55,7 @@ In this table `application` refers to each application defined under `applicatio
 
 | Parameter | Description | Default | Optional |
 |-----|------|---------|--------|
-| application.role | The role that this application will serve (webapp / worker) | | No |
+| application.role | The role that this application will serve. Validation is done to make sure the correct role is provided. Valid roles are (`webapp`, `worker`) | | No |
 | application.replicaCount | The number of pod replicas to create | `1` | Yes |
 | application.image.repository | A specific image that the application should use | `globals.image.repository` | Yes |
 | application.image.tag | The image to use for this specific application | `globals.image.tag` | Yes |
@@ -64,7 +64,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.serviceAccount.name | The name of the service account to attach to this application| | Yes |
 | application.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
 | application.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
-| application.port | The port that must be exposed on the pod. Also used when adding a service to the webapp | | No |
+| application.port | The port that must be exposed on the pod. Also used when adding a service to the webapp. Can be excluded when defining a worker | | No* |
 | application.service | Configures the service created for webapps | `ClusterIP` | Yes |
 | application.service.type | Configures the service type that is created for webapps | `ClusterIP` | Yes |
 | application.service.port | Configures the service port to expose | `80` | Yes |
