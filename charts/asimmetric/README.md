@@ -51,6 +51,8 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.image.repository | The image repository to use for images. | | No | Yes |
 | global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
 | global.image.tag | The image tag to use. | `latest` | Yes | Yes |
+| global.sealedImagePullSecret | Creates a sealed secret with for the image pull secret from the provided sealed version of the base64 encoded dockerconfigjson | | Yes | No |
+| global.sealedSentryDsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded dockerconfigjson | | Yes | No |
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
@@ -99,6 +101,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
 | application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| application.sentry.enabled | Enables sentry on the service. Setting to true will create the necessary environment variables. You need to add the `.globals.sealedSentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 
 ### Cronjob Values
 

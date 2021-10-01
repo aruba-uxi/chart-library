@@ -7,7 +7,11 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
+<<<<<<< HEAD
     helm.sh/chart: asimmetric-1.1.0
+=======
+    helm.sh/chart: asimmetric-1.0.2
+>>>>>>> 1e7f296 (add ability to toggle sentry on and off in values)
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -30,7 +34,11 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
+<<<<<<< HEAD
     helm.sh/chart: asimmetric-1.1.0
+=======
+    helm.sh/chart: asimmetric-1.0.2
+>>>>>>> 1e7f296 (add ability to toggle sentry on and off in values)
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -45,7 +53,11 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
+<<<<<<< HEAD
         helm.sh/chart: asimmetric-1.1.0
+=======
+        helm.sh/chart: asimmetric-1.0.2
+>>>>>>> 1e7f296 (add ability to toggle sentry on and off in values)
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
@@ -58,6 +70,8 @@ spec:
         - name: ENVIRONMENT
           value: "dev"
         - name: DD_ENABLED
+          value: "false"
+        - name: SENTRY_ENABLED
           value: "false"        
         - name: DATABASE_URL
           value: "postgresql://username:password@db:5432/asimmetric-example"

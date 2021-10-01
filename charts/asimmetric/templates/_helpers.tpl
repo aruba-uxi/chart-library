@@ -142,3 +142,17 @@ Create the image pull policy to use
 {{- $globalImagePullPolicy := default "IfNotPresent" .context.Values.global.image.pullPolicy -}}
 {{ printf "%s" (default $globalImagePullPolicy .data.pullPolicy) }}
 {{- end -}}
+
+{{/*
+Creates the Sentry DSN sealed secret name
+*/}}
+{{- define "sealedSentryDsn.name" -}}
+{{- print "sentry-dsn" -}}
+{{- end -}}
+
+{{- define "sealedSentryDsn.labels" -}}
+app.kubernetes.io/name: {{ include "sealedSentryDsn.name" "" }}
+helm.sh/chart: {{ include "asimmetric.chart" .context }}
+app.kubernetes.io/managed-by: {{ .context.Release.Service }}
+namespace: {{ .context.Release.Namespace }}
+{{- end }}

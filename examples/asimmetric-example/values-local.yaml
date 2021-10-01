@@ -20,5 +20,3 @@ asimmetric:
         path: /readyz
       env:
         DATABASE_URL: postgresql://username:password@db:5432/asimmetric-example
-      datadog:
-        enabled: false
