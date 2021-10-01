@@ -10,6 +10,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjobs-serviceaccount.yaml
 apiVersion: v1
@@ -22,6 +23,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/applications-configmap.yaml
 apiVersion: v1
@@ -34,6 +36,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 data:
     config.json: |
       {
@@ -55,6 +58,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   type: ClusterIP
   ports:
@@ -77,6 +81,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   replicas: 2
   selector:
@@ -91,6 +96,7 @@ spec:
         helm.sh/chart: asimmetric-0.0.5
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
+        namespace: default
     spec:
       imagePullSecrets:
       - name: sealed-image-pull-secret
@@ -197,6 +203,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   replicas: 1
   selector:
@@ -211,6 +218,7 @@ spec:
         helm.sh/chart: asimmetric-0.0.5
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
+        namespace: default
     spec:
       imagePullSecrets:
       - name: sealed-image-pull-secret
@@ -252,6 +260,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:
@@ -301,6 +310,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   schedule: "*/10 * * * *"
   jobTemplate:
@@ -363,6 +373,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   encryptedData:
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
@@ -379,6 +390,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   encryptedData:
     DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
@@ -394,6 +406,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   encryptedData:
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
@@ -410,6 +423,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   encryptedData:
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
@@ -426,6 +440,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   encryptedData:
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
@@ -440,6 +455,7 @@ metadata:
     app.kubernetes.io/name: sealed-image-pull-secret
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
+    namespace: default
 spec:
   encryptedData:
     .dockerconfigjson: sealed_version_of_the_base64_encoded_dockerconfigjson
@@ -451,4 +467,5 @@ spec:
       app.kubernetes.io/name: sealed-image-pull-secret
       helm.sh/chart: asimmetric-0.0.5
       app.kubernetes.io/managed-by: Helm
+      namespace: default
     type: kubernetes.io/dockerconfigjson

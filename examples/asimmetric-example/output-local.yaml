@@ -10,6 +10,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   type: ClusterIP
   ports:
@@ -32,6 +33,7 @@ metadata:
     helm.sh/chart: asimmetric-0.0.5
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
+    namespace: default
 spec:
   replicas: 1
   selector:
@@ -46,6 +48,7 @@ spec:
         helm.sh/chart: asimmetric-0.0.5
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
+        namespace: default
     spec:
       containers:
       - name: webapp

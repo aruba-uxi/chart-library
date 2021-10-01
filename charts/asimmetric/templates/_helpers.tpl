@@ -47,6 +47,7 @@ Create labels used by most objects
 helm.sh/chart: {{ include "asimmetric.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
 repository: {{ .context.Values.global.repository }}
+namespace: {{ .context.Release.Namespace }}
 {{- if .context.Chart.AppVersion -}}
 app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 {{- end -}}
@@ -73,6 +74,7 @@ Create labels specific fro sealed image pull secret object
 app.kubernetes.io/name: {{ include "sealedImagePullSecret.name" "" }}
 helm.sh/chart: {{ include "asimmetric.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
+namespace: {{ .context.Release.Namespace }}
 {{- end -}}
 
 {{/*
