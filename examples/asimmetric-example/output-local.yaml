@@ -49,24 +49,21 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: asimmetric-example:%!s(<nil>)
+        image: asimmetric-example:0.0.1
         imagePullPolicy: Never
         env:
         - name: ENVIRONMENT
           value: "dev"
         - name: DD_ENABLED
-          value: "false"
-        
+          value: "false"        
         - name: DATABASE_URL
           value: "postgresql://username:password@db:5432/asimmetric-example"
         - name: DEBUG
-          value: "true"
-        
+          value: "true"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP
-        
+              fieldPath: status.hostIP        
         ports:
         - name: http
           containerPort: 8000

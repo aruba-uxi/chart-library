@@ -115,18 +115,15 @@ spec:
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
-              fieldPath: metadata.uid
-        
+              fieldPath: metadata.uid        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"
-        
+          value: "false"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP
-        
+              fieldPath: status.hostIP        
         - name: AWS_ACCESS_ID
           valueFrom:
             secretKeyRef:
@@ -224,16 +221,13 @@ spec:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
-          value: "false"
-        
+          value: "false"        
         - name: DEBUG
-          value: "false"
-        
+          value: "false"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP
-        
+              fieldPath: status.hostIP        
         - name: AWS_ACCESS_ID
           valueFrom:
             secretKeyRef:
@@ -272,18 +266,15 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "false"
-            
+              value: "false"            
             - name: AWS_ACCESS_ID
               value: "uid-12345"
             - name: DEBUG
-              value: "false"
-            
+              value: "false"            
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP
-            
+                  fieldPath: status.hostIP            
             - name: AWS_ACCESS_ID
               valueFrom:
                 secretKeyRef:
@@ -337,16 +328,13 @@ spec:
             - name: DD_ENTITY_ID
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.uid
-            
+                  fieldPath: metadata.uid            
             - name: DEBUG
-              value: "false"
-            
+              value: "false"            
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP
-            
+                  fieldPath: status.hostIP            
             - name: AWS_ACCESS_ID
               valueFrom:
                 secretKeyRef:
