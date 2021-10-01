@@ -17,9 +17,7 @@ dependencies:
     repository: https://asimmetric.github.io/chart-library
 ```
 
-Examples on how to use these charts in your own repo can be seen in:
-
-- [asimmetric-example](examples/asimmetric-example)
+The [examples](examples) folder contains examples of how to use the charts
 
 ## Templating Examples (Manual)
 
