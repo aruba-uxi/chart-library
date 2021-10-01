@@ -1,5 +1,4 @@
 # TODO: could add additional label in each asimmetric https://uxi.atlassian.net/browse/UXI-752
-# TODO: add sentry https://uxi.atlassian.net/browse/UXI-754
 asimmetric:
   ## Sealed secret data used to create the sealed secrets used by applications and cronjobs
   ##
