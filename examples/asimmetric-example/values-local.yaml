@@ -1,0 +1,24 @@
+asimmetric:
+  global:
+    repository: asimmetric-example
+    environment: DEV
+    image:
+      repository: asimmetric-example
+      tag: global-local-tag
+      pullPolicy: Never
+    env:
+      DEBUG: true
+    envFields:
+      HOST_IP: status.hostIP
+  applications:
+    example-service:
+      role: webapp
+      port: 8000
+      livenessProbe:
+        path: /livez
+      readinessProbe:
+        path: /readyz
+      env:
+        DATABASE_URL: postgresql://username:password@db:5432/asimmetric-example
+      datadog:
+        enabled: false

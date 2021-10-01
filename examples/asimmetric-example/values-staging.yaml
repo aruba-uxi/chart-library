@@ -1,0 +1,72 @@
+asimmetric:
+  global:
+    repository: asimmetric-example
+    environment: STAGING
+    image:
+      repository: quay.io/uxi/asimmetric-example
+      tag: global-staging-tag
+      pullPolicy: Always
+    sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    env:
+      DEBUG: false
+    envFields:
+      HOST_IP: status.hostIP
+    envSealedSecrets:
+      aws-access:
+        AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
+        AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
+  applications:
+    example-service:
+      role: webapp
+      replicaCount: 2
+      image:
+        tag: example-service-tag
+      serviceAccount:
+        create: true
+      port: 8000
+      livenessProbe:
+        path: /livez
+      readinessProbe:
+        path: /readyz
+      resources:
+        limits:
+          cpu: 100m
+          memory: 256Mi
+      configMap:
+        annotations: {}
+        readOnly: false
+        path: /app/config
+        data:
+          config.json: |
+            {
+              foo: bar
+              bing: bang
+              server: {
+                host: hostname
+              }
+            }
+      env:
+        AWS_DEFAULT_REGION: us-west-1
+      envSealedSecrets:
+        database-url:
+          DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+      datadog:
+        enabled: true
+    example-worker:
+      role: worker
+      command: ["echo", "foo bar biz"]
+  cronjobs:
+    example-cronjob-producer:
+      schedule: "*/10 * * * *"
+      command: ["run-kinesis", "producer"]
+      serviceAccount:
+        create: true
+      restartPolicy: OnFailure
+      datadog:
+        enabled: true
+    example-cronjob-consumer:
+      schedule: "*/5 * * * *"
+      command: ["run-kinesis", "consumer"]
+      restartPolicy: Never
+      env:
+        AWS_ACCESS_ID: uid-12345

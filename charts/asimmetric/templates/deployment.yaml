@@ -1,0 +1,137 @@
+{{- range $name, $data := .Values.applications }}
+{{- $overrideImage := default dict $data.image }}
+{{- $datadog := default dict $data.datadog }}
+{{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
+{{- $envFields := deepCopy (default dict $.Values.global.envFields) | mustMerge (default dict $data.envFields) }}
+{{- $envSealedSecrets := deepCopy (default dict $.Values.global.envSealedSecrets) | mustMerge (default dict $data.envSealedSecrets) }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
+spec:
+  replicas: {{ default 1 $data.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "asimmetric.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 8 }}
+    spec:
+      {{- if $.Values.global.sealedImagePullSecret }}
+      imagePullSecrets:
+      - name: {{ include "sealedImagePullSecret.name" (dict) }}
+      {{- end }}
+      {{- if $data.serviceAccount }}
+      serviceAccountName: {{ include "serviceAccount.name" (dict "name" $name "data" $data) }}
+      {{- end }}
+      containers:
+      - name: {{ include "application.role" (dict "role" $data.role) }}
+        image: {{ include "asimmetric.image" (dict "context" $ "data" $overrideImage) }}
+        imagePullPolicy: {{ include "asimmetric.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
+        {{- with $data.command }}
+        command: {{ toRawJson . }}
+        {{- end }}
+        env:
+        - name: ENVIRONMENT
+          value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
+        - name: DD_ENABLED
+          value: {{ default "false" $datadog.enabled | quote }}
+        {{- if $datadog.enabled }}
+        - name: DD_ENV
+          value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
+        - name: DD_SERVICE
+          value: {{ $name | quote }}
+        - name: DD_TRACE_ENABLED
+          value: "true" # TODO: make this configurable https://uxi.atlassian.net/browse/UXI-753
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_ENTITY_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        {{- end }}
+        {{- if or $envBasic $envFields $envSealedSecrets }}
+        {{- include "asimmetric.env-variables" (dict "data" $envBasic) | indent 8 }}
+        {{- include "asimmetric.env-fields" (dict "data" $envFields) | indent 8 }}
+        {{- include "asimmetric.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 8 }}
+        {{- end }}
+        {{- if $data.port }}
+        ports:
+        - name: http
+          containerPort: {{ $data.port }}
+          protocol: TCP
+        {{- end }}
+        {{- if $data.readinessProbe }}
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: readinessProbe
+            - name: Content-Type
+              value: application/json
+            path: {{ $data.readinessProbe.path }}
+            port: {{ $data.port }}
+          initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $data.readinessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $data.readinessProbe.failureThreshold }}
+        {{- end }}
+        {{- if $data.livenessProbe }}
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: livenessProbe
+            - name: Content-Type
+              value: application/json
+            path: {{ $data.livenessProbe.path }}
+            port: {{ $data.port }}
+          initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $data.livenessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $data.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- with $data.resources }}
+        resources:
+          {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- if $data.parallel }}
+        parallelism: {{ $data.parallel }}
+        {{- end }}
+        {{- if $data.configMap }}
+        volumeMounts:
+        - name: config
+          mountPath: {{ $data.configMap.path }}
+          readOnly: {{ default true $data.configMap.readOnly }}
+        {{- end }}
+      {{- with $data.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $data.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $data.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if $data.configMap }}
+      volumes:
+      - name: config
+        configMap:
+          name: {{ $name }}
+      {{- end }}
+      {{- with $data.securityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

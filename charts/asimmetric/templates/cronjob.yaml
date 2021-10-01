@@ -1,0 +1,61 @@
+{{- range $name, $data := .Values.cronjobs }}
+{{- $overrideImage := default dict $data.image }}
+{{- $datadog := default dict $data.datadog }}
+{{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
+{{- $envFields := deepCopy (default dict $.Values.global.envFields) | mustMerge (default dict $data.envFields) }}
+{{- $envSealedSecrets := deepCopy (default dict $.Values.global.envSealedSecrets) | mustMerge (default dict $data.envSealedSecrets) }}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
+spec:
+  schedule: {{ $data.schedule | quote}}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          {{- if $.Values.global.sealedImagePullSecret }}
+          imagePullSecrets:
+          - name: {{ include "sealedImagePullSecret.name" (dict) }}
+          {{- end }}
+          {{- if $data.serviceAccount }}
+          serviceAccountName: {{ include "serviceAccount.name" (dict "name" $name "data" $data) }}
+          {{- end }}
+          containers:
+          - name: {{ $name }}
+            image: {{ include "asimmetric.image" (dict "context" $ "data" $overrideImage) }}
+            imagePullPolicy: {{ include "asimmetric.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
+            env:
+            - name: ENVIRONMENT
+              value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
+            - name: DD_ENABLED
+              value: {{ default "false" $datadog.enabled | quote }}
+            {{- if $datadog.enabled }}
+            - name: DD_ENV
+              value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote  }}
+            - name: DD_SERVICE
+              value: {{ $name | quote }}
+            - name: DD_TRACE_ENABLED
+              value: "true" # TODO: make this configurable https://uxi.atlassian.net/browse/UXI-753
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENTITY_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+            {{- end }}
+            {{- if or $envBasic $envFields $envSealedSecrets }}
+            {{- include "asimmetric.env-variables" (dict "data" $envBasic) | indent 12 }}
+            {{- include "asimmetric.env-fields" (dict "data" $envFields) | indent 12 }}
+            {{- include "asimmetric.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 12 }}
+            {{- end }}
+            {{- with $data.command }}
+            command: {{ toRawJson . }}
+            {{- end }}
+          restartPolicy: {{ default "OnFailure" $data.restartPolicy }}
+{{- end }}

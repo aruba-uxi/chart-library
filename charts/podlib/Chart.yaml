@@ -1,6 +1,0 @@
-apiVersion: v2
-name: podlib
-description: A Helm chart library for Kubernetes pods
-type: library
-version: 0.2.1
-appVersion: "1.16.0"

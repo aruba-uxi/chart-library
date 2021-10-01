@@ -1,0 +1,22 @@
+{{- range $name, $data := .Values.applications }}
+{{- $applicationRole := include "application.role" (dict "role" $data.role) }}
+{{- if mustHas $applicationRole (list "webapp") }}
+{{- $service := default dict $data.service }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
+spec:
+  type: {{ default "ClusterIP" $service.type }}
+  ports:
+    - name: http
+      port: {{ default 80 $service.port }}
+      protocol: TCP
+      targetPort: {{ $data.port }}
+  selector:
+    {{- include "asimmetric.selectorLabels" (dict "context" $ "name" $name) | nindent 4 }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,101 @@
+---
+# Source: asimmetric-example/charts/asimmetric/templates/applications-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.1
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+    namespace: default
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+---
+# Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-service
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.1
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+    namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: example-service
+      app.kubernetes.io/instance: asimmetric-example
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: example-service
+        app.kubernetes.io/instance: asimmetric-example
+        helm.sh/chart: asimmetric-1.0.1
+        app.kubernetes.io/managed-by: Helm
+        repository: asimmetric-example
+        namespace: default
+    spec:
+      containers:
+      - name: webapp
+        image: asimmetric-example:global-local-tag
+        imagePullPolicy: Never
+        env:
+        - name: ENVIRONMENT
+          value: "dev"
+        - name: DD_ENABLED
+          value: "false"        
+        - name: DATABASE_URL
+          value: "postgresql://username:password@db:5432/asimmetric-example"
+        - name: DEBUG
+          value: "true"        
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP        
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: readinessProbe
+            - name: Content-Type
+              value: application/json
+            path: /readyz
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: livenessProbe
+            - name: Content-Type
+              value: application/json
+            path: /livez
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
