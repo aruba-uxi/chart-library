@@ -10,7 +10,7 @@ kind: CronJob
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
 spec:
   schedule: {{ $data.schedule | quote}}
   jobTemplate:
@@ -19,15 +19,15 @@ spec:
         spec:
           {{- if $.Values.global.sealedImagePullSecret }}
           imagePullSecrets:
-          - name: {{ include "sealedImagePullSecret.name" "" }}
+          - name: {{ include "sealedImagePullSecret.name" (dict) }}
           {{- end }}
           {{- if $data.serviceAccount }}
           serviceAccountName: {{ include "serviceAccount.name" (dict "name" $name "data" $data) }}
           {{- end }}
           containers:
           - name: {{ $name }}
-            image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
-            imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
+            image: {{ include "asimmetric.image" (dict "context" $ "data" $overrideImage) }}
+            imagePullPolicy: {{ include "asimmetric.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
             env:
             - name: ENVIRONMENT
               value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
@@ -48,9 +48,9 @@ spec:
                   fieldPath: metadata.uid
             {{- end }}
             {{- if or $envBasic $envFields $envSealedSecrets }}
-            {{- include "application.env-variables" (dict "data" $envBasic) | indent 12 }}
-            {{- include "application.env-fields" (dict "data" $envFields) | indent 12 }}
-            {{- include "application.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 12 }}
+            {{- include "asimmetric.env-variables" (dict "data" $envBasic) | indent 12 }}
+            {{- include "asimmetric.env-fields" (dict "data" $envFields) | indent 12 }}
+            {{- include "asimmetric.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 12 }}
             {{- end }}
             {{- with $data.command }}
             command: {{ toRawJson . }}

@@ -1,11 +1,11 @@
 {{/*
-validates the environment
+Validates the environment
 */}}
 {{- define "global.environment" -}}
 {{- $environment := lower .environment -}}
 {{- $validEnvironments := list "dev" "staging" "production" -}}
 {{- if mustHas $environment $validEnvironments -}}
-    {{- printf "%s" $environment }}
+    {{- printf "%s" $environment -}}
 {{- else -}}
 {{- fail (printf "environment (%s) from .Values.global.environment is invalid" $environment) -}}
 {{- end -}}
@@ -14,83 +14,116 @@ validates the environment
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "application.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+{{- define "asimmetric.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "application.selectorLabels" -}}
+{{/*
+Create selector labels used by deployments and service.
+*/}}
+{{- define "asimmetric.selectorLabels" -}}
 app.kubernetes.io/name: {{ .name }}
 app.kubernetes.io/instance: {{ .context.Release.Name }}
-{{- end }}
+{{- end -}}
 
-{{- define "application.labels" -}}
-{{ include "application.selectorLabels" (dict "context" .context "name" .name) }}
-helm.sh/chart: {{ include "application.chart" .context }}
+{{/*
+Create labels used by most objects
+*/}}
+{{- define "asimmetric.labels" -}}
+{{ include "asimmetric.selectorLabels" (dict "context" .context "name" .name) }}
+helm.sh/chart: {{ include "asimmetric.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
 repository: {{ .context.Values.global.repository }}
-{{- if .context.Chart.AppVersion }}
+{{- if .context.Chart.AppVersion -}}
 app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
-{{- end }}
-{{- end }}
+{{- end -}}
+{{- end -}}
 
+{{/*
+Create the name for sealed secrets
+*/}}
 {{- define "sealedSecret.name" -}}
 {{- printf "%s-%s" .name .secretName -}}
 {{- end -}}
 
+{{/*
+Create the name for sealed image pull secret
+*/}}
 {{- define "sealedImagePullSecret.name" -}}
 {{- print "sealed-image-pull-secret" -}}
 {{- end -}}
 
+{{/*
+Create labels specific fro sealed image pull secret object
+*/}}
 {{- define "sealedImagePullSecret.labels" -}}
 app.kubernetes.io/name: {{ include "sealedImagePullSecret.name" "" }}
-helm.sh/chart: {{ include "application.chart" .context }}
+helm.sh/chart: {{ include "asimmetric.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
-{{- end }}
+{{- end -}}
 
 {{/*
 Inject extra environment variables
-https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmergeoverwrite
 */}}
-{{- define "application.env-variables" -}}
+{{- define "asimmetric.env-variables" -}}
 {{- range $key, $val := .data }}
 - name: {{ $key }}
   value: {{ $val | quote }}
 {{- end }}
-{{- end }}
+{{- end -}}
 
 {{/*
 Inject extra environment variables from fields
-https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmergeoverwrite
 */}}
-{{- define "application.env-fields" -}}
+{{- define "asimmetric.env-fields" -}}
 {{- range $key, $val := .data }}
 - name: {{ $key }}
   valueFrom:
     fieldRef:
-     fieldPath: {{ $val }}
+      fieldPath: {{ $val }}
 {{- end }}
-{{- end }}
+{{- end -}}
 
 {{/*
 Inject extra environment variables from secrets
-https://helm.sh/docs/chart_template_guide/function_list/#mergeoverwrite-mustmergeoverwrite
 */}}
-{{- define "application.env-sealed-secrets" -}}
-{{- range $secretName, $secretData := .data }}
+{{- define "asimmetric.env-sealed-secrets" -}}
+{{- range $secretName, $secretData := .data -}}
 {{- range $envName, $secretValue := $secretData }}
 - name: {{ $envName }}
   valueFrom:
     secretKeyRef:
-      name: {{ include "sealedSecret.name" (dict "name" $.name "secretName" $secretName)}}
+      name: {{ include "sealedSecret.name" (dict "name" $.name "secretName" $secretName) }}
       key: {{ $envName }}
 {{- end }}
-{{- end }}
-{{- end }}
+{{- end -}}
+{{- end -}}
 
+{{/*
+Create the service account name
+*/}}
 {{- define "serviceAccount.name" -}}
 {{- if .data.serviceAccount.create -}}
     {{ default .name .data.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .data.serviceAccount.name }}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Create the image using respository and tag
+*/}}
+{{- define "asimmetric.image" -}}
+{{- $repository := default .context.Values.global.image.repository .data.repository -}}
+{{- $globalTag := default  .context.Chart.Version .context.Values.global.image.tag -}}
+{{- $tag := default $globalTag .data.tag -}}
+{{ printf "%s:%s" $repository $tag}}
+{{- end -}}
+
+{{/*
+Create the image pull policy to use
+*/}}
+{{- define "asimmetric.imagePullPolicy" -}}
+{{- $globalImagePullPolicy := default "IfNotPresent" .context.Values.global.image.pullPolicy -}}
+{{ printf "%s" (default $globalImagePullPolicy .data.pullPolicy) }}
 {{- end -}}

@@ -28,7 +28,7 @@ Global values used by all kubernetes objects. Some can be overridden.
 | global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid values are (DEV, STAGING, PRODUCTION) | | No |
 | global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes |
 | global.image.repository | The image repository to use for images. | | Yes |
-| global.image.tag | The image tag to use. | `"2.0.5"` | Yes |
+| global.image.tag | The image tag to use. | `.Chart.version` | Yes |
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes |

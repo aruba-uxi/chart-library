@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 ---
@@ -19,7 +19,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 ---
@@ -31,7 +31,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 data:
@@ -52,7 +52,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -74,7 +74,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -88,7 +88,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.0.0
+        helm.sh/chart: asimmetric-0.0.1
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
     spec:
@@ -97,8 +97,8 @@ spec:
       serviceAccountName: example-service
       containers:
       - name: webapp
-        image: "quay.io/uxi/asimmetric-example:latest"
-        imagePullPolicy: Always
+        image: quay.io/uxi/asimmetric-example:1.0.0
+        imagePullPolicy: IfNotPresent
         env:
         - name: ENVIRONMENT
           value: "staging"
@@ -115,15 +115,18 @@ spec:
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
-              fieldPath: metadata.uid        
+              fieldPath: metadata.uid
+        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"        
+          value: "false"
+        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-             fieldPath: status.hostIP        
+              fieldPath: status.hostIP
+        
         - name: AWS_ACCESS_ID
           valueFrom:
             secretKeyRef:
@@ -192,7 +195,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -206,7 +209,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.0.0
+        helm.sh/chart: asimmetric-0.0.1
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
     spec:
@@ -214,20 +217,23 @@ spec:
       - name: sealed-image-pull-secret
       containers:
       - name: worker
-        image: "quay.io/uxi/asimmetric-example:latest"
-        imagePullPolicy: Always
+        image: quay.io/uxi/asimmetric-example:latest
+        imagePullPolicy: IfNotPresent
         command: ["echo","foo bar biz"]
         env:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
-          value: "false"        
+          value: "false"
+        
         - name: DEBUG
-          value: "false"        
+          value: "false"
+        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-             fieldPath: status.hostIP        
+              fieldPath: status.hostIP
+        
         - name: AWS_ACCESS_ID
           valueFrom:
             secretKeyRef:
@@ -247,7 +253,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -260,21 +266,24 @@ spec:
           - name: sealed-image-pull-secret
           containers:
           - name: example-cronjob-consumer
-            image: "quay.io/uxi/asimmetric-example:latest"
-            imagePullPolicy: Always
+            image: quay.io/uxi/asimmetric-example:latest
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "false"            
+              value: "false"
+            
             - name: AWS_ACCESS_ID
               value: "uid-12345"
             - name: DEBUG
-              value: "false"            
+              value: "false"
+            
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                 fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
+            
             - name: AWS_ACCESS_ID
               valueFrom:
                 secretKeyRef:
@@ -296,7 +305,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -310,8 +319,8 @@ spec:
           serviceAccountName: example-cronjob-producer
           containers:
           - name: example-cronjob-producer
-            image: "quay.io/uxi/asimmetric-example:latest"
-            imagePullPolicy: Always
+            image: quay.io/uxi/asimmetric-example:latest
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
               value: "staging"
@@ -328,13 +337,16 @@ spec:
             - name: DD_ENTITY_ID
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.uid            
+                  fieldPath: metadata.uid
+            
             - name: DEBUG
-              value: "false"            
+              value: "false"
+            
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                 fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
+            
             - name: AWS_ACCESS_ID
               valueFrom:
                 secretKeyRef:
@@ -356,7 +368,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -372,7 +384,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -387,7 +399,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -403,7 +415,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -419,7 +431,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
 spec:
@@ -434,7 +446,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-1.0.0
+    helm.sh/chart: asimmetric-0.0.1
     app.kubernetes.io/managed-by: Helm
 spec:
   encryptedData:
@@ -445,6 +457,6 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-1.0.0
+      helm.sh/chart: asimmetric-0.0.1
       app.kubernetes.io/managed-by: Helm
     type: kubernetes.io/dockerconfigjson

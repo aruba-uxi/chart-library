@@ -6,7 +6,7 @@ kind: ConfigMap
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
   {{- with $data.configMap.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

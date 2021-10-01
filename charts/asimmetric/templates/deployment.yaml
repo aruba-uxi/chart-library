@@ -10,28 +10,28 @@ kind: Deployment
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
 spec:
   replicas: {{ default 1 $data.replicaCount }}
   selector:
     matchLabels:
-      {{- include "application.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
+      {{- include "asimmetric.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "application.labels" (dict "context" $ "name" $name) | nindent 8 }}
+        {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 8 }}
     spec:
       {{- if $.Values.global.sealedImagePullSecret }}
       imagePullSecrets:
-      - name: {{ include "sealedImagePullSecret.name" "" }}
+      - name: {{ include "sealedImagePullSecret.name" (dict) }}
       {{- end }}
       {{- if $data.serviceAccount }}
       serviceAccountName: {{ include "serviceAccount.name" (dict "name" $name "data" $data) }}
       {{- end }}
       containers:
       - name: {{ $data.role }}
-        image: "{{ default $.Values.global.image.repository $overrideImage.repository }}:{{ default $.Values.global.image.tag $overrideImage.tag }}"
-        imagePullPolicy: {{ default $.Values.global.image.pullPolicy $overrideImage.pullPolicy }}
+        image: {{ include "asimmetric.image" (dict "context" $ "data" $overrideImage) }}
+        imagePullPolicy: {{ include "asimmetric.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
         {{- with $data.command }}
         command: {{ toRawJson . }}
         {{- end }}
@@ -55,9 +55,9 @@ spec:
               fieldPath: metadata.uid
         {{- end }}
         {{- if or $envBasic $envFields $envSealedSecrets }}
-        {{- include "application.env-variables" (dict "data" $envBasic) | indent 8 }}
-        {{- include "application.env-fields" (dict "data" $envFields) | indent 8 }}
-        {{- include "application.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 8 }}
+        {{- include "asimmetric.env-variables" (dict "data" $envBasic) | indent 8 }}
+        {{- include "asimmetric.env-fields" (dict "data" $envFields) | indent 8 }}
+        {{- include "asimmetric.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 8 }}
         {{- end }}
         {{- if $data.port }}
         ports:

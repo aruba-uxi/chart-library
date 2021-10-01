@@ -7,7 +7,7 @@ kind: Service
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "application.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
 spec:
   type: {{ default "ClusterIP" $service.type }}
   ports:
@@ -16,6 +16,6 @@ spec:
       protocol: TCP
       targetPort: {{ $data.port }}
   selector:
-    {{- include "application.selectorLabels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.selectorLabels" (dict "context" $ "name" $name) | nindent 4 }}
 {{- end }}
 {{- end }}

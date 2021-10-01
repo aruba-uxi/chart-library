@@ -5,7 +5,7 @@ asimmetric:
     image:
       repository: quay.io/uxi/asimmetric-example
       tag: "latest"
-      pullPolicy: Always
+      # pullPolicy: Always
     sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
     env:
       DEBUG: false
@@ -19,6 +19,8 @@ asimmetric:
     example-service:
       role: webapp
       replicaCount: 2
+      image:
+        tag: "1.0.0"
       serviceAccount:
         create: true
       port: 8000
@@ -53,10 +55,11 @@ asimmetric:
     example-worker:
       role: worker
       command: ["echo", "foo bar biz"]
+      # datadog:
+      #   enabled: false
   cronjobs:
     example-cronjob-producer:
       schedule: "*/10 * * * *"
-      image: {}
       command: ["run-kinesis", "producer"]
       serviceAccount:
         create: true
