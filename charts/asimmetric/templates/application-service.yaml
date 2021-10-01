@@ -2,13 +2,14 @@
 {{- $applicationRole := include "application.role" (dict "role" $data.role) }}
 {{- if mustHas $applicationRole (list "webapp") }}
 {{- $service := default dict $data.service }}
+{{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   type: {{ default "ClusterIP" $service.type }}
   ports:

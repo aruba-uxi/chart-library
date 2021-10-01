@@ -6,13 +6,14 @@
 {{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
 {{- $envFields := deepCopy (default dict $.Values.global.envFields) | mustMerge (default dict $data.envFields) }}
 {{- $envSealedSecrets := $data.envSealedSecrets }}
+{{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 ---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   schedule: {{ $data.schedule | quote}}
   jobTemplate:

@@ -19,6 +19,8 @@ asimmetric:
       DEBUG: false
     envFields:
       HOST_IP: status.hostIP
+    labels:
+      global-label: global-label
   applications:
     example-service:
       role: webapp
@@ -61,6 +63,8 @@ asimmetric:
         enabled: true
       sentry:
         enabled: true
+      labels:
+        example-service-staging: example-service-staging
     example-worker:
       role: worker
       command: ["echo", "foo bar biz"]
@@ -84,3 +88,5 @@ asimmetric:
       envSealedSecrets:
         aws-access:
           - AWS_REGION
+      labels:
+        example-cronjob-consumer-staging: example-cronjob-consumer-staging

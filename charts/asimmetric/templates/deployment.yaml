@@ -6,13 +6,14 @@
 {{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
 {{- $envFields := deepCopy (default dict $.Values.global.envFields) | mustMerge (default dict $data.envFields) }}
 {{- $envSealedSecrets := $data.envSealedSecrets }}
+{{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   replicas: {{ default 1 $data.replicaCount }}
   selector:
@@ -21,7 +22,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "asimmetric.labels" (dict "context" $ "name" $name) | nindent 8 }}
+        {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 8 }}
     spec:
       {{- if $sealedSecrets.imagePullSecret }}
       imagePullSecrets:

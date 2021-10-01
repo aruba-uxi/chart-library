@@ -18,6 +18,37 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [1.1.2] - 2021-10-04
+
+### Added
+
+Ability to define global labels that are added to the existing labels (see `asimmetric.labels` template)
+
+```yaml
+asimmetric:
+    global:
+        labels:
+            global-label: value
+```
+
+Added ability to define labels for each application or cronjob. Merged with the `.globals.labels`
+
+```yaml
+asimmetric:
+    application:
+        labels:
+            extra-label: value
+```
+
+or
+
+```yaml
+asimmetric:
+    cronjobs:
+        labels:
+            extra-label: value
+```
+
 ## [1.1.1] - 2021-10-04
 
 ### Added

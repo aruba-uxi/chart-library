@@ -51,6 +51,9 @@ namespace: {{ .context.Release.Namespace }}
 {{- if .context.Chart.AppVersion -}}
 app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 {{- end -}}
+{{- with .additionalLabels }}
+{{ toYaml . }}
+{{- end }}
 {{- end -}}
 
 {{/*
