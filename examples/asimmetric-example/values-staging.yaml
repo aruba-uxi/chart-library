@@ -4,7 +4,7 @@ asimmetric:
     environment: STAGING
     image:
       repository: quay.io/uxi/asimmetric-example
-      tag: "global-staging-tag"
+      tag: global-staging-tag
       pullPolicy: Always
     sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
     env:
@@ -20,7 +20,7 @@ asimmetric:
       role: webapp
       replicaCount: 2
       image:
-        tag: "example-service-tag"
+        tag: example-service-tag
       serviceAccount:
         create: true
       port: 8000

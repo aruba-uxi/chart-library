@@ -17,7 +17,7 @@ asimmetric:
     ##
     image:
       repository: asimmetric-example
-      tag: "1.2.3"
+      tag: 1.2.3
       pullPolicy: IfNotPresent
     ## Creates a sealed image pull secret
     ##
