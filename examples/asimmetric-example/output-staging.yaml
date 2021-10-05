@@ -143,15 +143,15 @@ spec:
           valueFrom:
           secretKeyRef:
             name: sentry-dsn
-            key: SENTRY_DSN
+            key: SENTRY_DSN        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"
+          value: "false"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP
+              fieldPath: status.hostIP        
         - name: AWS_REGION
           valueFrom:
             secretKeyRef:
@@ -255,9 +255,9 @@ spec:
         - name: DD_ENABLED
           value: "false"
         - name: SENTRY_ENABLED
-          value: "false"
+          value: "false"        
         - name: DEBUG
-          value: "false"
+          value: "false"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -295,15 +295,15 @@ spec:
             - name: DD_ENABLED
               value: "false"
             - name: SENTRY_ENABLED
-              value: "false"
+              value: "false"            
             - name: AWS_ACCESS_ID
               value: "uid-12345"
             - name: DEBUG
-              value: "false"
+              value: "false"            
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP
+                  fieldPath: status.hostIP            
             - name: AWS_REGION
               valueFrom:
                 secretKeyRef:
@@ -365,13 +365,13 @@ spec:
               valueFrom:
               secretKeyRef:
                 name: sentry-dsn
-                key: SENTRY_DSN
+                key: SENTRY_DSN            
             - name: DEBUG
-              value: "false"
+              value: "false"            
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP
+                  fieldPath: status.hostIP            
             command: ["run-kinesis","producer"]
           restartPolicy: OnFailure
 ---
@@ -385,7 +385,6 @@ metadata:
     helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     namespace: default
-    global-label: global-label
 spec:
   encryptedData:
     .dockerconfigjson: sealed_version_of_the_base64_encoded_dockerconfigjson
@@ -412,8 +411,6 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
-    example-cronjob-consumer-staging: example-cronjob-consumer-staging
-    global-label: global-label
 spec:
   encryptedData:
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
@@ -431,7 +428,6 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
-    global-label: global-label
 spec:
   encryptedData:
     DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
