@@ -7,10 +7,12 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    example-service-staging: example-service-staging
+    global-label: global-label
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob-serviceaccount.yaml
 apiVersion: v1
@@ -20,10 +22,11 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    global-label: global-label
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/application-configmap.yaml
 apiVersion: v1
@@ -33,10 +36,12 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    example-service-staging: example-service-staging
+    global-label: global-label
 data:
     config.json: |
       {
@@ -55,10 +60,12 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    example-service-staging: example-service-staging
+    global-label: global-label
 spec:
   type: ClusterIP
   ports:
@@ -78,10 +85,12 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    example-service-staging: example-service-staging
+    global-label: global-label
 spec:
   replicas: 2
   selector:
@@ -93,10 +102,12 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.1
+        helm.sh/chart: asimmetric-1.1.2
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
+        example-service-staging: example-service-staging
+        global-label: global-label
     spec:
       imagePullSecrets:
       - name: sealed-image-pull-secret
@@ -209,10 +220,11 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    global-label: global-label
 spec:
   replicas: 1
   selector:
@@ -224,10 +236,11 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.1
+        helm.sh/chart: asimmetric-1.1.2
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
+        global-label: global-label
     spec:
       imagePullSecrets:
       - name: sealed-image-pull-secret
@@ -258,10 +271,12 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    example-cronjob-consumer-staging: example-cronjob-consumer-staging
+    global-label: global-label
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:
@@ -305,10 +320,11 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
+    global-label: global-label
 spec:
   schedule: "*/10 * * * *"
   jobTemplate:
@@ -366,7 +382,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -378,7 +394,7 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-1.1.1
+      helm.sh/chart: asimmetric-1.1.2
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -391,7 +407,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -408,7 +424,7 @@ metadata:
   labels:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -423,7 +439,7 @@ metadata:
   name: sentry-dsn
   labels:
     app.kubernetes.io/name: sentry-dsn
-    helm.sh/chart: asimmetric-1.1.1
+    helm.sh/chart: asimmetric-1.1.2
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
