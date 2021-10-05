@@ -18,6 +18,48 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [1.1.0] - 2021-10-04
+
+### Changed - Sealed Secrets
+
+Sealed secrets were defined globally with the option of overriding them on a per application or cronjob basis. Each global sealed secret was added to all applications and cronjobs. This proved abit complicated because sealed secrets are dependent on the name and namespace. Previously the name was automatically generated based on where its being used.
+
+To simplify the sealed secret process this change includes:
+
+- Sealed secrets have been moved out of `.global` into their own object `.sealedSecrets`
+- Sealed secrets used as environment variables must be defined within `.sealedSecrets.env`
+- It is only possible to define the sealed secret data in this `.sealedSecrets.env` object. Applications and cronjobs can only set what ENV variables they want to use from the sealed secrets defined in `.sealedSecrets`
+
+#### Example Usage
+
+```yaml
+# values-staging.yaml
+asimmetric:
+    sealedSecrets:
+        env:
+            database-url:
+                DATABASE_URL: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
+...
+    applications:
+        example-service:
+            envSealedSecrets:
+                database-url:
+                    - DATABASE_URL
+```
+
+### Changed - Image Pull Sealed Secrets
+
+In addition to the above change, `sealedImagePullSecret` has been moved out of `.global` into `.sealedSecrets`
+
+#### Example Usage
+
+```yaml
+# values-staging.yaml
+asimmetric:
+    sealedSecrets:
+        imagePullSecret: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
+```
+
 ## [1.0.2] - 2021-10-05
 
 ### Changed

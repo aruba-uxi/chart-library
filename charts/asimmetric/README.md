@@ -19,6 +19,21 @@ When using this chart library its best to leave the `values.yaml` files empty an
 
 It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
 
+### Sealed Secrets
+
+```yaml
+asimmetric:
+  sealedSecrets:
+    ...
+```
+
+Sealed secrets are defined with the `.sealedSecrets` object. A `SealedSecret` kubernetes object is created using the data defined in this map.
+
+| Parameter | Description | Default | Optional |
+|-----|------|---------|---|
+| sealedSecrets.imagePullSecret | The sealed version of the base64 encoded `dockerconfigjson` file used to provide access to our image repository | "" | Yes |
+| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Asimmetric/chart-library/blob/main/examples/asimmetric-example/values.example.yaml) for usage| {} | Yes |
+
 ### Global Values
 
 ```yaml
