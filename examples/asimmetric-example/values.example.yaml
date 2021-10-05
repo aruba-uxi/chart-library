@@ -192,7 +192,7 @@ asimmetric:
       ## The value is taken from ".sentry.enabled" (default: false)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value take from sealed secret. You need to add the`.global.sealedSentryDSN` value
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
       ##
       sentry:
         enabled: false
@@ -324,7 +324,7 @@ asimmetric:
       ## The value is taken from ".sentry.enabled" (default: false)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## The Sentry DSN still needs to be add to `.global.sealedSentryDSN`
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
       ##
       sentry:
         enabled: false
@@ -395,7 +395,7 @@ asimmetric:
       ## The value is taken from ".sentry.enabled" (default: false)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## The Sentry DSN still needs to be add to `.global.sealedSentryDSN`
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
       ##
       sentry:
         enabled: false
@@ -457,7 +457,7 @@ asimmetric:
       ## The value is taken from ".sentry.enabled" (default: false)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## The Sentry DSN still needs to be add to `.global.sealedSentryDSN`
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
       ##
       sentry:
         enabled: false
