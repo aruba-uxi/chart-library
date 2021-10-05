@@ -1,0 +1,5 @@
+# Define binary file attributes.
+
+# generated files, do not automatically show diff
+*output-local.yaml linguist-generated
+*output-staging.yaml linguist-generated
