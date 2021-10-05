@@ -1,4 +1,5 @@
 {{- range $name, $data := .Values.cronjobs }}
+{{- $sealedSecrets := default dict $.Values.sealedSecrets }}
 {{- $overrideImage := default dict $data.image }}
 {{- $datadog := default dict $data.datadog }}
 {{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
@@ -17,7 +18,7 @@ spec:
     spec:
       template:
         spec:
-          {{- if $.Values.global.sealedImagePullSecret }}
+          {{- if $sealedSecrets.imagePullSecret }}
           imagePullSecrets:
           - name: {{ include "sealedImagePullSecret.name" (dict) }}
           {{- end }}
