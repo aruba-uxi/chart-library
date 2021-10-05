@@ -352,3 +352,36 @@ spec:
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
+---
+# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: aws-access
+  labels:
+    app.kubernetes.io/name: aws-access
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.1
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+    namespace: default
+spec:
+  encryptedData:
+    AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
+    AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
+---
+# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: database-url
+  labels:
+    app.kubernetes.io/name: database-url
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.0.1
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+    namespace: default
+spec:
+  encryptedData:
+    DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
