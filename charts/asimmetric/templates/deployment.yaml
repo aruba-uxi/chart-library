@@ -2,6 +2,7 @@
 {{- $sealedSecrets := default dict $.Values.sealedSecrets }}
 {{- $overrideImage := default dict $data.image }}
 {{- $datadog := default dict $data.datadog }}
+{{- $sentry := default dict $data.sentry }}
 {{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
 {{- $envFields := deepCopy (default dict $.Values.global.envFields) | mustMerge (default dict $data.envFields) }}
 {{- $envSealedSecrets := $data.envSealedSecrets }}
@@ -56,6 +57,17 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.uid
+        {{- end }}
+        - name: SENTRY_ENABLED
+          value: {{ default "false" $sentry.enabled | quote }}
+        {{- if $sentry.enabled }}
+        - name: SENTRY_ENVIRONMENT
+          value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
+        - name: SENTRY_DSN
+          valueFrom:
+          secretKeyRef:
+            name: {{ template "sealedSentryDsn.name" dict}}
+            key: SENTRY_DSN
         {{- end }}
         {{- if or $envBasic $envFields $envSealedSecrets }}
         {{- include "asimmetric.env-variables" (dict "data" $envBasic) | indent 8 }}

@@ -32,6 +32,7 @@ Sealed secrets are defined with the `.sealedSecrets` object. A `SealedSecret` ku
 | Parameter | Description | Default | Optional |
 |-----|------|---------|---|
 | sealedSecrets.imagePullSecret | The sealed version of the base64 encoded `dockerconfigjson` file used to provide access to our image repository | "" | Yes |
+| sealedSecrets.sentryDsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value | | Yes |
 | sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Asimmetric/chart-library/blob/main/examples/asimmetric-example/values.example.yaml) for usage| {} | Yes |
 
 ### Global Values
@@ -99,6 +100,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
 | application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 
 ### Cronjob Values
 
@@ -127,6 +129,7 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
 | cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 
 ## Developing Notes
 

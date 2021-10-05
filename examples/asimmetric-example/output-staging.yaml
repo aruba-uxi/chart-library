@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -20,7 +20,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -33,7 +33,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -55,7 +55,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -78,7 +78,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -93,7 +93,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.0
+        helm.sh/chart: asimmetric-1.1.1
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
@@ -123,7 +123,16 @@ spec:
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
-              fieldPath: metadata.uid        
+              fieldPath: metadata.uid
+        - name: SENTRY_ENABLED
+          value: "true"
+        - name: SENTRY_ENVIRONMENT
+          value: "staging"
+        - name: SENTRY_DSN
+          valueFrom:
+          secretKeyRef:
+            name: sentry-dsn
+            key: SENTRY_DSN        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
@@ -200,7 +209,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -215,7 +224,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.0
+        helm.sh/chart: asimmetric-1.1.1
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
@@ -231,6 +240,8 @@ spec:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
+          value: "false"
+        - name: SENTRY_ENABLED
           value: "false"        
         - name: DEBUG
           value: "false"        
@@ -247,7 +258,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -267,6 +278,8 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
+              value: "false"
+            - name: SENTRY_ENABLED
               value: "false"            
             - name: AWS_ACCESS_ID
               value: "uid-12345"
@@ -292,7 +305,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -327,7 +340,16 @@ spec:
             - name: DD_ENTITY_ID
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.uid            
+                  fieldPath: metadata.uid
+            - name: SENTRY_ENABLED
+              value: "true"
+            - name: SENTRY_ENVIRONMENT
+              value: "staging"
+            - name: SENTRY_DSN
+              valueFrom:
+              secretKeyRef:
+                name: sentry-dsn
+                key: SENTRY_DSN            
             - name: DEBUG
               value: "false"            
             - name: HOST_IP
@@ -344,7 +366,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -356,7 +378,7 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-1.1.0
+      helm.sh/chart: asimmetric-1.1.1
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -369,7 +391,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -386,10 +408,24 @@ metadata:
   labels:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.0
+    helm.sh/chart: asimmetric-1.1.1
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
 spec:
   encryptedData:
     DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+---
+# Source: asimmetric-example/charts/asimmetric/templates/sentry-dsn.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: sentry-dsn
+  labels:
+    app.kubernetes.io/name: sentry-dsn
+    helm.sh/chart: asimmetric-1.1.1
+    app.kubernetes.io/managed-by: Helm
+    namespace: default
+spec:
+  encryptedData:
+    SENTRY_DSN: sealed_version_of_the_base64_encoded_sentry_dsn

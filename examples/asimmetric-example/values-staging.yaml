@@ -1,6 +1,7 @@
 asimmetric:
   sealedSecrets:
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    sentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
     env:
       aws-access:
         AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
@@ -58,6 +59,8 @@ asimmetric:
           - AWS_ACCESS_ID
       datadog:
         enabled: true
+      sentry:
+        enabled: true
     example-worker:
       role: worker
       command: ["echo", "foo bar biz"]
@@ -69,6 +72,8 @@ asimmetric:
         create: true
       restartPolicy: OnFailure
       datadog:
+        enabled: true
+      sentry:
         enabled: true
     example-cronjob-consumer:
       schedule: "*/5 * * * *"

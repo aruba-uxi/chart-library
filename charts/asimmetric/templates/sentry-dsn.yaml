@@ -1,0 +1,12 @@
+{{- $sealedSecrets := default dict .Values.sealedSecrets }}
+{{- if $sealedSecrets.sentryDsn }}
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: {{ include "sealedSentryDsn.name" (dict) }}
+  labels:
+    {{- include "sealedSentryDsn.labels" (dict "context" .) | nindent 4 }}
+spec:
+  encryptedData:
+    SENTRY_DSN: {{ $sealedSecrets.sentryDsn }}
+{{- end }}

@@ -1,5 +1,4 @@
 # TODO: could add additional label in each asimmetric https://uxi.atlassian.net/browse/UXI-752
-# TODO: add sentry https://uxi.atlassian.net/browse/UXI-754
 asimmetric:
   ## Sealed secret data used to create the sealed secrets used by applications and cronjobs
   ##
@@ -9,6 +8,11 @@ asimmetric:
     ## Default: None
     ##
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    ## Creates a sealed secret for the sentry DSN (Optional).
+    ## Used when sentry is enabled
+    ## Default: None
+    ##
+    sentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
     ## Creates sealed secrets used to populate environment variables (Optional)
     ## A sealed secret is created for each env.<value>
     ## Default: None
@@ -182,7 +186,16 @@ asimmetric:
       ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
       ##
       datadog:
-        enabled: true
+        enabled: false
+      ## Enables sentry (Optional)
+      ## SENTRY_ENABLED environment variable is always set.
+      ## The value is taken from ".sentry.enabled" (default: false)
+      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
+      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ##
+      sentry:
+        enabled: false
     example-worker:
       ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.
@@ -305,7 +318,16 @@ asimmetric:
       ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
       ##
       datadog:
-        enabled: true
+        enabled: false
+      ## Enables sentry (Optional)
+      ## SENTRY_ENABLED environment variable is always set.
+      ## The value is taken from ".sentry.enabled" (default: false)
+      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
+      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ##
+      sentry:
+        enabled: false
   ## Creates one or more cronjobs.
   ## Cronjobs are defined as keys in the applications map
   ## The key is used as the name of the cronjob and subsequent objects created
@@ -367,7 +389,16 @@ asimmetric:
       ## - DD_ENTITY_ID: metadata.uid
       ##
       datadog:
-        enabled: true
+        enabled: false
+      ## Enables sentry (Optional)
+      ## SENTRY_ENABLED environment variable is always set.
+      ## The value is taken from ".sentry.enabled" (default: false)
+      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
+      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ##
+      sentry:
+        enabled: false
     example-cronjob-consumer:
       ## The schedule for the cronjob
       ##
@@ -420,4 +451,13 @@ asimmetric:
       ## - DD_ENTITY_ID: metadata.uid
       ##
       datadog:
-        enabled: true
+        enabled: false
+      ## Enables sentry (Optional)
+      ## SENTRY_ENABLED environment variable is always set.
+      ## The value is taken from ".sentry.enabled" (default: false)
+      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
+      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ##
+      sentry:
+        enabled: false

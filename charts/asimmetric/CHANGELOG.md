@@ -18,6 +18,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [1.1.1] - 2021-10-04
+
+### Added
+
+Ability to control sentry for each application or cronjob with `sentry.enabled: true | false`. Enabling sentry will create the necessary environment variables.
+
+```yaml
+- name: SENTRY_ENABLED
+    value: "true"
+- name: SENTRY_ENVIRONMENT
+    value: "staging"
+- name: SENTRY_DSN
+    valueFrom:
+    secretKeyRef:
+    name: sentry-dsn
+    key: SENTRY_DSN
+```
+
+Added the `.sealedSecrets.sentryDsn` value which (if present) will create a `sentry-dsn` sealed secret. This value will be used to populate the `SENTRY_DSN` environment variable.
+
+> **__NOTE__** There is no logic to catch if you enabled sentry and forgot to provide the `.sealedSecrets.sentryDsn` value.
+
 ## [1.1.0] - 2021-10-04
 
 ### Changed - Sealed Secrets
@@ -74,7 +96,3 @@ asimmetric:
 - The Asimmetric chart library provides a template for deploying, webapps, workers and cronjobs
 - See [README.md](https://github.com/Asimmetric/chart-library/blob/main/charts/asimmetric/README.md) and [MIGRATION_NOTES.md](https://github.com/Asimmetric/chart-library/blob/main/MIGRATION_NOTES.md) for information
 - See [WiKi](https://github.com/Asimmetric/onboarding/wiki/Chart-Library) for a history of the change
-
-### Changed
-
-### Fixed
