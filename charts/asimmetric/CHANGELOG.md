@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
-## [1.1.2] - 2021-10-04
+## [1.1.2] - 2021-10-05
 
 ### Added
 
@@ -49,7 +49,7 @@ asimmetric:
             extra-label: value
 ```
 
-## [1.1.1] - 2021-10-04
+## [1.1.1] - 2021-10-05
 
 ### Added
 
@@ -71,7 +71,7 @@ Added the `.sealedSecrets.sentryDsn` value which (if present) will create a `sen
 
 > **__NOTE__** There is no logic to catch if you enabled sentry and forgot to provide the `.sealedSecrets.sentryDsn` value.
 
-## [1.1.0] - 2021-10-04
+## [1.1.0] - 2021-10-05
 
 ### Changed - Sealed Secrets
 
