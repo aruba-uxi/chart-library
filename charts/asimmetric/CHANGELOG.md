@@ -26,27 +26,27 @@ Ability to define global labels that are added to the existing labels (see `asim
 
 ```yaml
 asimmetric:
-    global:
-        labels:
-            global-label: value
+  global:
+    labels:
+      global-label: value
 ```
 
 Added ability to define labels for each application or cronjob. Merged with the `.globals.labels`
 
 ```yaml
 asimmetric:
-    application:
-        labels:
-            extra-label: value
+  application:
+    labels:
+      extra-label: value
 ```
 
 or
 
 ```yaml
 asimmetric:
-    cronjobs:
-        labels:
-            extra-label: value
+  cronjobs:
+    labels:
+      extra-label: value
 ```
 
 ## [1.1.1] - 2021-10-05
@@ -57,14 +57,14 @@ Ability to control sentry for each application or cronjob with `sentry.enabled: 
 
 ```yaml
 - name: SENTRY_ENABLED
-    value: "true"
+  value: "true"
 - name: SENTRY_ENVIRONMENT
-    value: "staging"
+  value: "staging"
 - name: SENTRY_DSN
-    valueFrom:
+  valueFrom:
     secretKeyRef:
-    name: sentry-dsn
-    key: SENTRY_DSN
+      name: sentry-dsn
+      key: SENTRY_DSN
 ```
 
 Added the `.sealedSecrets.sentryDsn` value which (if present) will create a `sentry-dsn` sealed secret. This value will be used to populate the `SENTRY_DSN` environment variable.
@@ -88,16 +88,16 @@ To simplify the sealed secret process this change includes:
 ```yaml
 # values-staging.yaml
 asimmetric:
-    sealedSecrets:
-        env:
-            database-url:
-                DATABASE_URL: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
+  sealedSecrets:
+    env:
+      database-url:
+        DATABASE_URL: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
 ...
-    applications:
-        example-service:
-            envSealedSecrets:
-                database-url:
-                    - DATABASE_URL
+applications:
+  example-service:
+    envSealedSecrets:
+      database-url:
+      - DATABASE_URL
 ```
 
 ### Changed - Image Pull Sealed Secrets
@@ -109,8 +109,8 @@ In addition to the above change, `sealedImagePullSecret` has been moved out of `
 ```yaml
 # values-staging.yaml
 asimmetric:
-    sealedSecrets:
-        imagePullSecret: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
+  sealedSecrets:
+    imagePullSecret: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
 ```
 
 ## [1.0.2] - 2021-10-05
