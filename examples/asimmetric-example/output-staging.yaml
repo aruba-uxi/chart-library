@@ -98,8 +98,6 @@ spec:
         repository: asimmetric-example
         namespace: default
     spec:
-      imagePullSecrets:
-      - name: sealed-image-pull-secret
       serviceAccountName: example-service
       containers:
       - name: webapp
@@ -220,8 +218,6 @@ spec:
         repository: asimmetric-example
         namespace: default
     spec:
-      imagePullSecrets:
-      - name: sealed-image-pull-secret
       containers:
       - name: worker
         image: quay.io/uxi/asimmetric-example:global-staging-tag
@@ -257,8 +253,6 @@ spec:
     spec:
       template:
         spec:
-          imagePullSecrets:
-          - name: sealed-image-pull-secret
           containers:
           - name: example-cronjob-consumer
             image: quay.io/uxi/asimmetric-example:global-staging-tag
@@ -275,7 +269,16 @@ spec:
             - name: HOST_IP
               valueFrom:
                 fieldRef:
+<<<<<<< HEAD
                   fieldPath: status.hostIP
+=======
+                  fieldPath: status.hostIP            
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: example-cronjob-consumer-aws-access
+                  key: AWS_REGION
+>>>>>>> 291f0a5 (changes)
             command: ["run-kinesis","consumer"]
           restartPolicy: Never
 ---
@@ -297,8 +300,6 @@ spec:
     spec:
       template:
         spec:
-          imagePullSecrets:
-          - name: sealed-image-pull-secret
           serviceAccountName: example-cronjob-producer
           containers:
           - name: example-cronjob-producer
@@ -392,6 +393,7 @@ metadata:
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
+<<<<<<< HEAD
 ---
 <<<<<<< HEAD
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob-sealedsecrets.yaml
@@ -462,3 +464,5 @@ spec:
 =======
     DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
 >>>>>>> e08471a (define sealed secrets in their own object)
+=======
+>>>>>>> 291f0a5 (changes)

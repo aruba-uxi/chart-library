@@ -1,10 +1,12 @@
 asimmetric:
   sealedSecrets:
-    aws-access:
-      AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
-      AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
-    database-url:
-      DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+    imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    env:
+      aws-access:
+        AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
+        AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
+      database-url:
+        DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
   global:
     repository: asimmetric-example
     environment: STAGING
@@ -12,7 +14,6 @@ asimmetric:
       repository: quay.io/uxi/asimmetric-example
       tag: global-staging-tag
       pullPolicy: Always
-    sealedImagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
     env:
       DEBUG: false
     envFields:
@@ -75,3 +76,6 @@ asimmetric:
       restartPolicy: Never
       env:
         AWS_ACCESS_ID: uid-12345
+      envSealedSecrets:
+        aws-access:
+          - AWS_REGION
