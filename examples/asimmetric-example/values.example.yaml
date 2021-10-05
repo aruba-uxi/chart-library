@@ -1,6 +1,24 @@
 # TODO: could add additional label in each asimmetric https://uxi.atlassian.net/browse/UXI-752
 # TODO: add sentry https://uxi.atlassian.net/browse/UXI-754
 asimmetric:
+  ## Sealed secret data used to create the sealed secrets used by applications and cronjobs
+  ##
+  sealedSecrets:
+    ## Creates a sealed image pull secret using the data provided (Optional)
+    ## Used by deployments to pull images from our image repository
+    ## Default: None
+    ##
+    imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    ## Creates sealed secrets used to populate environment variables (Optional)
+    ## A sealed secret is created for each env.<value>
+    ## Default: None
+    ##
+    env:
+      secret-name-a:
+        FOO: sealed_version_of_the_base64_encoded_environment_variable_value
+        BAR: sealed_version_of_the_base64_encoded_environment_variable_value
+      secret-name-b:
+        BIZ: sealed_version_of_the_base64_encoded_environment_variable_value
   ## Global values used by all manifests
   ##
   global:
@@ -18,9 +36,6 @@ asimmetric:
       repository: asimmetric-example
       tag: 1.2.3
       pullPolicy: IfNotPresent
-    ## Creates a sealed image pull secret
-    ##
-    sealedImagePullSecret: global-value
     ## Basic environment variables (Optional)
     ## If overridden, in application or cronjobs, precedence is given to the overridden values
     ## Default: None
@@ -34,21 +49,6 @@ asimmetric:
     envFields:
       HOST_IP: global-value
       OVERRIDDEN_FIELD_VALUE: global-value
-    ## Environment variables set from sealed secrets (Optional)
-    ## If overridden, in application or cronjobs, precedence is given to the overridden values
-    ## A sealed secret is created for each envSealedSecrets.<value>
-    ## NB! These can be overridden at the secret name level and no lower.
-    ## E.g aws-access can be overridden but you can not define aws-access.AWS_REGION here
-    ## and aws-access.AWS_ACCESS_ID in the pod
-    ## You must override the whole sealed secret
-    ## Default: None
-    ##
-    envSealedSecrets:
-      overridden-secret:
-        OVERRIDDEN_VALUE: global-value
-      aws-access:
-        AWS_REGION: global-value
-        AWS_ACCESS_ID: global-value
   ## Creates one or more applications unique by role.
   ## Applications are defined as keys in the applications map
   ## The key is used as the name of the application and subsequent objects created
@@ -163,15 +163,15 @@ asimmetric:
         HOST_IP: example-service
         OVERRIDDEN_FIELD_VALUE: example-service
       ## Environment variables set from sealed secrets (Optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## A sealed secret is created for each envSealedSecrets.<value>
+      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
       envSealedSecrets:
-        overridden-secret:
-          OVERRIDDEN_VALUE: example-service
-        database-url:
-          DATABASE_URL: example-service
+        secret-name-a:
+          - FOO
+          - BAR
+        secret-name-b:
+          - BIZ
       ## Enables datadog metrics (Optional)
       ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
@@ -286,15 +286,15 @@ asimmetric:
         HOST_IP: example-worker
         OVERRIDDEN_FIELD_VALUE: example-worker
       ## Environment variables set from sealed secrets (Optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## A sealed secret is created for each envSealedSecrets.<value>
+      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
       envSealedSecrets:
-        overridden-secret:
-          OVERRIDDEN_VALUE: example-worker
-        database-url:
-          DATABASE_URL: example-worker
+        secret-name-a:
+          - FOO
+          - BAR
+        secret-name-b:
+          - BIZ
       ## Enables datadog metrics (Optional)
       ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
@@ -348,15 +348,15 @@ asimmetric:
         HOST_IP: example-cronjob-producer
         OVERRIDDEN_FIELD_VALUE: example-cronjob-producer
       ## Environment variables set from sealed secrets (Optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## A sealed secret is created for each envSealedSecrets.<value>
+      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
       envSealedSecrets:
-        overridden-secret:
-          OVERRIDDEN_VALUE: example-cronjob-producer
-        database-url:
-          DATABASE_URL: example-cronjob-producer
+        secret-name-a:
+          - FOO
+          - BAR
+        secret-name-b:
+          - BIZ
       ## Enables datadog metrics (Optional)
       ## DD_ENABLED environment variable is always set to true or false.
       ## The value is taken from ".datadog.enabled" (default: false)
@@ -401,15 +401,15 @@ asimmetric:
         HOST_IP: example-cronjob-consumer
         OVERRIDDEN_FIELD_VALUE: example-cronjob-consumer
       ## Environment variables set from sealed secrets (Optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## A sealed secret is created for each envSealedSecrets.<value>
+      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
       envSealedSecrets:
-        overridden-secret:
-          OVERRIDDEN_VALUE: example-cronjob-consumer
-        database-url:
-          DATABASE_URL: example-cronjob-consumer
+        secret-name-a:
+          - FOO
+          - BAR
+        secret-name-b:
+          - BIZ
       ## Enables datadog metrics (Optional)
       ## DD_ENABLED environment variable is always set to true or false.
       ## The value is taken from ".datadog.enabled" (default: false)
