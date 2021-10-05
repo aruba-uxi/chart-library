@@ -60,15 +60,15 @@ spec:
         - name: DD_ENABLED
           value: "false"
         - name: SENTRY_ENABLED
-          value: "false"
+          value: "false"        
         - name: DATABASE_URL
           value: "postgresql://username:password@db:5432/asimmetric-example"
         - name: DEBUG
-          value: "true"
+          value: "true"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP
+              fieldPath: status.hostIP        
         ports:
         - name: http
           containerPort: 8000
