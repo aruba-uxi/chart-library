@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-Ability to enable sentry for each application or cronjob with `sentry.enabled: true | false`. Enabling sentry will create the necessary environment variables.
+Ability to control sentry for each application or cronjob with `sentry.enabled: true | false`. Enabling sentry will create the necessary environment variables.
 
 ```yaml
 - name: SENTRY_ENABLED
@@ -36,18 +36,9 @@ Ability to enable sentry for each application or cronjob with `sentry.enabled: t
     key: SENTRY_DSN
 ```
 
-Added the `.globals.sealedSentryDsn` value to add to the `SENTRY_DSN` environment variable. Setting `sentry.enabled: true` will try and fetch the `SENTRY_DSN` from the `sentry-dsn` secret.
+Added the `.sealedSecrets.sentryDsn` value which (if present) will create a `sentry-dsn` sealed secret. This value will be used to populate the `SENTRY_DSN` environment variable.
 
-```yaml
-- name: SENTRY_DSN
-    valueFrom:
-    secretKeyRef:
-    name: sentry-dsn
-    key: SENTRY_DSN
-```
-
-If this value is set, a SealedSecret name `sentry-dsn` will be created. If it is not set and `sentry.enabled` is set to `true` the environment variable will not get set.
-> **__NOTE__** There is no logic to catch if you enabled sentry and forgot to provide the `.globals.sealedSentryDsn` value.
+> **__NOTE__** There is no logic to catch if you enabled sentry and forgot to provide the `.sealedSecrets.sentryDsn` value.
 
 ## [1.1.0] - 2021-10-04
 

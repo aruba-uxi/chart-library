@@ -12,7 +12,7 @@ asimmetric:
     ## Used when sentry is enabled
     ## Default: None
     ##
-    sealedSentryDsn: global-value
+    sentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
     ## Creates sealed secrets used to populate environment variables (Optional)
     ## A sealed secret is created for each env.<value>
     ## Default: None

@@ -1,4 +1,5 @@
-{{- if .Values.global.sealedSentryDsn }}
+{{- $sealedSecrets := default dict .Values.sealedSecrets }}
+{{- if $sealedSecrets.sentryDsn }}
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
@@ -7,5 +8,5 @@ metadata:
     {{- include "sealedSentryDsn.labels" (dict "context" .) | nindent 4 }}
 spec:
   encryptedData:
-    SENTRY_DSN: {{ .Values.global.sealedSentryDsn }}
+    SENTRY_DSN: {{ $sealedSecrets.sentryDsn }}
 {{- end }}

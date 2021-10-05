@@ -1,7 +1,7 @@
 asimmetric:
   sealedSecrets:
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
-    sealedSentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
+    sentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
     env:
       aws-access:
         AWS_REGION: sealed_version_of_the_base64_encoded_aws_region

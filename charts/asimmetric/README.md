@@ -32,6 +32,7 @@ Sealed secrets are defined with the `.sealedSecrets` object. A `SealedSecret` ku
 | Parameter | Description | Default | Optional |
 |-----|------|---------|---|
 | sealedSecrets.imagePullSecret | The sealed version of the base64 encoded `dockerconfigjson` file used to provide access to our image repository | "" | Yes |
+| sealedSecrets.sentryDsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value | | Yes |
 | sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Asimmetric/chart-library/blob/main/examples/asimmetric-example/values.example.yaml) for usage| {} | Yes |
 
 ### Global Values
@@ -51,8 +52,6 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.image.repository | The image repository to use for images. | | No | Yes |
 | global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
 | global.image.tag | The image tag to use. | `latest` | Yes | Yes |
-| global.sealedImagePullSecret | Creates a sealed secret with for the image pull secret from the provided sealed version of the base64 encoded dockerconfigjson | | Yes | No |
-| global.sealedSentryDsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded dockerconfigjson | | Yes | No |
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
