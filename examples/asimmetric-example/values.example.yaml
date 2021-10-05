@@ -199,7 +199,8 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template
+      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Default: None
       ##
       labels: {}
     example-worker:
@@ -334,7 +335,8 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template
+      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Default: None
       ##
       labels: {}
   ## Creates one or more cronjobs.
@@ -408,7 +410,8 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template
+      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Default: None
       ##
       labels: {}
     example-cronjob-consumer:
@@ -473,6 +476,7 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template
+      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Default: None
       ##
       labels: {}
