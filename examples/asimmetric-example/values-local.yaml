@@ -22,3 +22,5 @@ asimmetric:
         DATABASE_URL: postgresql://username:password@db:5432/asimmetric-example
       datadog:
         enabled: false
+      sentry:
+        enabled: false
