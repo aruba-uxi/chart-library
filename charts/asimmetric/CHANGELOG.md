@@ -49,7 +49,7 @@ asimmetric:
 
 ### Changed - Image Pull Sealed Secrets
 
-In addition to the above change, `sealedImagePullSecret` has been moved out of `.global` into `.sealedSecrets`
+In addition to the above change, `sealedImagePullSecret` has been moved out of `.global` into `.sealedSecrets`.
 
 #### Example Usage
 
