@@ -104,7 +104,7 @@ Inject extra environment variables from secrets
 */}}
 {{- define "asimmetric.env-sealed-secrets" -}}
 {{- range $secretName, $secretData := .data -}}
-{{- range $envName, $secretValue := $secretData }}
+{{- range $envName := $secretData }}
 - name: {{ $envName }}
   valueFrom:
     secretKeyRef:

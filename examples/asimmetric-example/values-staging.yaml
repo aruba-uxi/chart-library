@@ -1,4 +1,10 @@
 asimmetric:
+  sealedSecrets:
+    aws-access:
+      AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
+      AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
+    database-url:
+      DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
   global:
     repository: asimmetric-example
     environment: STAGING
@@ -11,10 +17,6 @@ asimmetric:
       DEBUG: false
     envFields:
       HOST_IP: status.hostIP
-    envSealedSecrets:
-      aws-access:
-        AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
-        AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
   applications:
     example-service:
       role: webapp
@@ -49,7 +51,10 @@ asimmetric:
         AWS_DEFAULT_REGION: us-west-1
       envSealedSecrets:
         database-url:
-          DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+          - DATABASE_URL
+        aws-access:
+          - AWS_REGION
+          - AWS_ACCESS_ID
       datadog:
         enabled: true
     example-worker:
