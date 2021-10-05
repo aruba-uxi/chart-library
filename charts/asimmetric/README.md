@@ -100,7 +100,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
 | application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
-| application.sentry.enabled | Enables sentry on the service. Setting to true will create the necessary environment variables. You need to add the `.globals.sealedSentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
+| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 
 ### Cronjob Values
 
@@ -129,6 +129,7 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
 | cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 
 ## Developing Notes
 
