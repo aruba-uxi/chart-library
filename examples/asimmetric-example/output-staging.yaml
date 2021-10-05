@@ -253,7 +253,21 @@ spec:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
+          value: "true"
+        - name: DD_ENV
+          value: "staging"
+        - name: DD_SERVICE
+          value: "example-worker"
+        - name: DD_TRACE_ENABLED
           value: "false"
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_ENTITY_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
         - name: SENTRY_ENABLED
           value: "false"        
         - name: DEBUG
@@ -348,7 +362,7 @@ spec:
             - name: DD_SERVICE
               value: "example-cronjob-producer"
             - name: DD_TRACE_ENABLED
-              value: "true"
+              value: "false"
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:

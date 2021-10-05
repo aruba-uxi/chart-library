@@ -69,6 +69,8 @@ asimmetric:
     example-worker:
       role: worker
       command: ["echo", "foo bar biz"]
+      datadog:
+        enabled: true
   cronjobs:
     example-cronjob-producer:
       schedule: "*/10 * * * *"
@@ -78,7 +80,6 @@ asimmetric:
       restartPolicy: OnFailure
       datadog:
         enabled: true
-        traceEnabled: true
       sentry:
         enabled: true
     example-cronjob-consumer:
