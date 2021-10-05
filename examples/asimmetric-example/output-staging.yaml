@@ -123,25 +123,25 @@ spec:
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
-              fieldPath: metadata.uid        
+              fieldPath: metadata.uid
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP        
-        - name: AWS_ACCESS_ID
-          valueFrom:
-            secretKeyRef:
-              name: example-service-aws-access
-              key: AWS_ACCESS_ID
+              fieldPath: status.hostIP
         - name: AWS_REGION
           valueFrom:
             secretKeyRef:
               name: example-service-aws-access
               key: AWS_REGION
+        - name: AWS_ACCESS_ID
+          valueFrom:
+            secretKeyRef:
+              name: example-service-aws-access
+              key: AWS_ACCESS_ID
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
@@ -231,23 +231,13 @@ spec:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
-          value: "false"        
+          value: "false"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP        
-        - name: AWS_ACCESS_ID
-          valueFrom:
-            secretKeyRef:
-              name: example-worker-aws-access
-              key: AWS_ACCESS_ID
-        - name: AWS_REGION
-          valueFrom:
-            secretKeyRef:
-              name: example-worker-aws-access
-              key: AWS_REGION
+              fieldPath: status.hostIP
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob.yaml
 apiVersion: batch/v1
@@ -277,25 +267,15 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "false"            
+              value: "false"
             - name: AWS_ACCESS_ID
               value: "uid-12345"
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
-            - name: AWS_ACCESS_ID
-              valueFrom:
-                secretKeyRef:
-                  name: example-cronjob-consumer-aws-access
-                  key: AWS_ACCESS_ID
-            - name: AWS_REGION
-              valueFrom:
-                secretKeyRef:
-                  name: example-cronjob-consumer-aws-access
-                  key: AWS_REGION
+                  fieldPath: status.hostIP
             command: ["run-kinesis","consumer"]
           restartPolicy: Never
 ---
@@ -342,23 +322,13 @@ spec:
             - name: DD_ENTITY_ID
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.uid            
+                  fieldPath: metadata.uid
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
-            - name: AWS_ACCESS_ID
-              valueFrom:
-                secretKeyRef:
-                  name: example-cronjob-producer-aws-access
-                  key: AWS_ACCESS_ID
-            - name: AWS_REGION
-              valueFrom:
-                secretKeyRef:
-                  name: example-cronjob-producer-aws-access
-                  key: AWS_REGION
+                  fieldPath: status.hostIP
             command: ["run-kinesis","producer"]
           restartPolicy: OnFailure
 ---
@@ -396,29 +366,44 @@ spec:
     DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/application-sealedsecrets.yaml
+# Source: asimmetric-example/charts/asimmetric/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-worker-aws-access
+  name: sealed-image-pull-secret
   labels:
+<<<<<<< HEAD
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+=======
+    app.kubernetes.io/name: sealed-image-pull-secret
+    helm.sh/chart: asimmetric-1.0.1
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
     namespace: default
-spec:
   encryptedData:
-    AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
-    AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
+    .dockerconfigjson: sealed_version_of_the_base64_encoded_dockerconfigjson
+  template:
+    data: null
+    metadata:
+      name: sealed-image-pull-secret
+      labels:
+      app.kubernetes.io/name: sealed-image-pull-secret
+      helm.sh/chart: asimmetric-1.0.1
+      app.kubernetes.io/managed-by: Helm
+      namespace: default
+    type: kubernetes.io/dockerconfigjson
 ---
+<<<<<<< HEAD
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob-sealedsecrets.yaml
+=======
+# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+>>>>>>> e08471a (define sealed secrets in their own object)
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-consumer-aws-access
+  name: aws-access
   labels:
-    app.kubernetes.io/name: example-cronjob-consumer
+    app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.2
     app.kubernetes.io/managed-by: Helm
@@ -429,13 +414,17 @@ spec:
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
     AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
 ---
+<<<<<<< HEAD
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob-sealedsecrets.yaml
+=======
+# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+>>>>>>> e08471a (define sealed secrets in their own object)
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: example-cronjob-producer-aws-access
+  name: database-url
   labels:
-    app.kubernetes.io/name: example-cronjob-producer
+    app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: asimmetric-example
     helm.sh/chart: asimmetric-1.0.2
     app.kubernetes.io/managed-by: Helm
@@ -443,6 +432,7 @@ metadata:
     namespace: default
 spec:
   encryptedData:
+<<<<<<< HEAD
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
     AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
 ---
@@ -469,3 +459,6 @@ spec:
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
+=======
+    DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+>>>>>>> e08471a (define sealed secrets in their own object)
