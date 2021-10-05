@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -20,7 +20,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -33,7 +33,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -55,7 +55,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -78,7 +78,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -93,11 +93,13 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.0.2
+        helm.sh/chart: asimmetric-1.1.0
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
     spec:
+      imagePullSecrets:
+      - name: sealed-image-pull-secret
       serviceAccountName: example-service
       containers:
       - name: webapp
@@ -198,7 +200,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -213,11 +215,13 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.0.2
+        helm.sh/chart: asimmetric-1.1.0
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
     spec:
+      imagePullSecrets:
+      - name: sealed-image-pull-secret
       containers:
       - name: worker
         image: quay.io/uxi/asimmetric-example:global-staging-tag
@@ -243,7 +247,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -253,6 +257,8 @@ spec:
     spec:
       template:
         spec:
+          imagePullSecrets:
+          - name: sealed-image-pull-secret
           containers:
           - name: example-cronjob-consumer
             image: quay.io/uxi/asimmetric-example:global-staging-tag
@@ -286,7 +292,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -296,6 +302,8 @@ spec:
     spec:
       template:
         spec:
+          imagePullSecrets:
+          - name: sealed-image-pull-secret
           serviceAccountName: example-cronjob-producer
           containers:
           - name: example-cronjob-producer
@@ -336,7 +344,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -348,7 +356,7 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-1.0.2
+      helm.sh/chart: asimmetric-1.1.0
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -361,7 +369,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -378,7 +386,7 @@ metadata:
   labels:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.0.2
+    helm.sh/chart: asimmetric-1.1.0
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
