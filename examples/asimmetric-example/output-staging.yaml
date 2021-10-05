@@ -394,12 +394,17 @@ metadata:
       namespace: default
     type: kubernetes.io/dockerconfigjson
 <<<<<<< HEAD
+<<<<<<< HEAD
 ---
 <<<<<<< HEAD
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob-sealedsecrets.yaml
 =======
 # Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
 >>>>>>> e08471a (define sealed secrets in their own object)
+=======
+---
+# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+>>>>>>> cb4de39 (output)
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
@@ -407,7 +412,11 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: asimmetric-example
+<<<<<<< HEAD
     helm.sh/chart: asimmetric-1.0.2
+=======
+    helm.sh/chart: asimmetric-1.0.1
+>>>>>>> cb4de39 (output)
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -417,10 +426,14 @@ spec:
     AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
 ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Source: asimmetric-example/charts/asimmetric/templates/cronjob-sealedsecrets.yaml
 =======
 # Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
 >>>>>>> e08471a (define sealed secrets in their own object)
+=======
+# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+>>>>>>> cb4de39 (output)
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
@@ -428,12 +441,17 @@ metadata:
   labels:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: asimmetric-example
+<<<<<<< HEAD
     helm.sh/chart: asimmetric-1.0.2
+=======
+    helm.sh/chart: asimmetric-1.0.1
+>>>>>>> cb4de39 (output)
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
 spec:
   encryptedData:
+<<<<<<< HEAD
 <<<<<<< HEAD
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
     AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
@@ -466,3 +484,6 @@ spec:
 >>>>>>> e08471a (define sealed secrets in their own object)
 =======
 >>>>>>> 291f0a5 (changes)
+=======
+    DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+>>>>>>> cb4de39 (output)
