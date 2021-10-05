@@ -126,7 +126,7 @@ spec:
         - name: DD_SERVICE
           value: "example-service"
         - name: DD_TRACE_ENABLED
-          value: "true" # TODO: make this configurable https://uxi.atlassian.net/browse/UXI-753
+          value: "true"
         - name: DD_AGENT_HOST
           valueFrom:
             fieldRef:
@@ -348,7 +348,7 @@ spec:
             - name: DD_SERVICE
               value: "example-cronjob-producer"
             - name: DD_TRACE_ENABLED
-              value: "true" # TODO: make this configurable https://uxi.atlassian.net/browse/UXI-753
+              value: "true"
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:

@@ -187,9 +187,11 @@ asimmetric:
       ## - DD_SERVICE: the name of the application or cronjob
       ## - DD_AGENT_HOST: value from ".datadog.agentHost" (default: status.hostIP)
       ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
+      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
       ##
       datadog:
         enabled: false
+        traceEnabled: false
       ## Enables sentry (Optional)
       ## SENTRY_ENABLED environment variable is always set.
       ## The value is taken from ".sentry.enabled" (default: false)
@@ -323,9 +325,11 @@ asimmetric:
       ## - DD_SERVICE: the name of the application or cronjob
       ## - DD_AGENT_HOST: value from ".datadog.agentHost" (default: status.hostIP)
       ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
+      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
       ##
       datadog:
         enabled: false
+        traceEnabled: false
       ## Enables sentry (Optional)
       ## SENTRY_ENABLED environment variable is always set.
       ## The value is taken from ".sentry.enabled" (default: false)
@@ -391,16 +395,18 @@ asimmetric:
         secret-name-b:
           - BIZ
       ## Enables datadog metrics (Optional)
-      ## DD_ENABLED environment variable is always set to true or false.
+      ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
       ## - DD_ENV: value from ".global.environment"
       ## - DD_SERVICE: the name of the application or cronjob
-      ## - DD_AGENT_HOST: status.hostIP
-      ## - DD_ENTITY_ID: metadata.uid
+      ## - DD_AGENT_HOST: value from ".datadog.agentHost" (default: status.hostIP)
+      ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
+      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
       ##
       datadog:
         enabled: false
+        traceEnabled: false
       ## Enables sentry (Optional)
       ## SENTRY_ENABLED environment variable is always set.
       ## The value is taken from ".sentry.enabled" (default: false)
@@ -457,16 +463,18 @@ asimmetric:
         secret-name-b:
           - BIZ
       ## Enables datadog metrics (Optional)
-      ## DD_ENABLED environment variable is always set to true or false.
+      ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
       ## - DD_ENV: value from ".global.environment"
       ## - DD_SERVICE: the name of the application or cronjob
-      ## - DD_AGENT_HOST: status.hostIP
-      ## - DD_ENTITY_ID: metadata.uid
+      ## - DD_AGENT_HOST: value from ".datadog.agentHost" (default: status.hostIP)
+      ## - DD_ENTITY_ID: value from ".datadog.entityId" (default: metadata.uid )
+      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
       ##
       datadog:
         enabled: false
+        traceEnabled: false
       ## Enables sentry (Optional)
       ## SENTRY_ENABLED environment variable is always set.
       ## The value is taken from ".sentry.enabled" (default: false)

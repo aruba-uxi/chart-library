@@ -49,7 +49,7 @@ spec:
         - name: DD_SERVICE
           value: {{ $name | quote }}
         - name: DD_TRACE_ENABLED
-          value: "true" # TODO: make this configurable https://uxi.atlassian.net/browse/UXI-753
+          value: {{ default "false" $datadog.traceEnabled | quote }}
         - name: DD_AGENT_HOST
           valueFrom:
             fieldRef:

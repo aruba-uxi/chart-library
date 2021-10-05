@@ -61,6 +61,7 @@ asimmetric:
           - AWS_ACCESS_ID
       datadog:
         enabled: true
+        traceEnabled: true
       sentry:
         enabled: true
       labels:
@@ -77,6 +78,7 @@ asimmetric:
       restartPolicy: OnFailure
       datadog:
         enabled: true
+        traceEnabled: true
       sentry:
         enabled: true
     example-cronjob-consumer:
