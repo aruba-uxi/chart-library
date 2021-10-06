@@ -2,7 +2,7 @@ apiVersion: v2
 name: asimmetric-example
 description: A Helm chart for Asimmetric
 type: application
-version: 1.2.3
+version: 1.2.4
 dependencies:
 - name: asimmetric
   version: "*"

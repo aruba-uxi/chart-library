@@ -24,6 +24,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 Sealed secrets were using the wrong name. Deployments and Cronjobs were still searching for sealed secrets using the pre v 1.1.x name.
 
+### Added
+In Deployment, `spec.revisionHistoryLimit` to define number of old ReplicaSets to be retained. Rest are garbage collected in the background.
+
+Example Usage
+```yaml
+# values-staging.yaml
+example-service:
+  role: webapp
+  revisionHistoryLimit: 4
+```
+
 ## [1.1.2] - 2021-10-05
 
 ### Added
