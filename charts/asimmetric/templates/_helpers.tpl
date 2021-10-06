@@ -57,13 +57,6 @@ app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 {{- end -}}
 
 {{/*
-Create the name for sealed secrets
-*/}}
-{{- define "sealedSecret.name" -}}
-{{- printf "%s-%s" .name .secretName -}}
-{{- end -}}
-
-{{/*
 Create the name for sealed image pull secret
 */}}
 {{- define "sealedImagePullSecret.name" -}}
@@ -111,7 +104,7 @@ Inject extra environment variables from secrets
 - name: {{ $envName }}
   valueFrom:
     secretKeyRef:
-      name: {{ include "sealedSecret.name" (dict "name" $.name "secretName" $secretName) }}
+      name: {{ $secretName }}
       key: {{ $envName }}
 {{- end }}
 {{- end -}}
