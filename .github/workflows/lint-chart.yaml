@@ -1,9 +1,11 @@
-name: Lint and Test Charts
+# yaml options: https://github.com/helm/chart-testing/blob/main/doc/ct_lint.md
+name: Lint & Test Charts
 
 on: [push]
 
 jobs:
   lint-test:
+    name: Lint & Test Charts
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -11,12 +13,38 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: extractions/setup-just@v1
-
       - name: Set up Helm
         uses: azure/setup-helm@v1
         with:
           version: v3.4.0
+
+      - name: Set up Just
+        uses: extractions/setup-just@v1
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.1.0
+
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          changed=$(ct list-changed)
+          if [[ -n "$changed" ]]; then
+            echo "::set-output name=changed::true"
+          fi
+        env:
+          CT_CHART_DIRS: charts
+          CT_TARGET_BRANCH: main
+
+      - name: Run chart-testing (lint)
+        run: ct lint
+        env:
+          CT_CHART_DIRS: charts
+          CT_TARGET_BRANCH: main
 
       - name: Template Check
         run: |

@@ -101,6 +101,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
 | application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| application.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
 | application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 
@@ -120,17 +121,18 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | Parameter | Description | Default | Optional |
 |-----|------|---------|--------|
 | cronjob.schedule | The schedule to set for the cronjob to run on | | No |
-| cronjob.image.repository | A specific image that the application should use | `globals.image.repository` | Yes |
-| cronjob.image.tag | The image to use for this specific application | `globals.image.tag` | Yes |
-| cronjob.image.pullPolicy | The image pull policy to use for this application | `globals.image.pullPOlicy` | Yes |
+| cronjob.image.repository | A specific image that the cronjob should use | `globals.image.repository` | Yes |
+| cronjob.image.tag | The image to use for this specific cronjob | `globals.image.tag` | Yes |
+| cronjob.image.pullPolicy | The image pull policy to use for this cronjob | `globals.image.pullPOlicy` | Yes |
 | cronjob.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
-| cronjob.serviceAccount.create | Creates a service account and adds it to the application. If no name is provided the application name will be used | `false` | Yes |
-| cronjob.serviceAccount.name | The name of the service account to attach to this application| | Yes |
+| cronjob.serviceAccount.create | Creates a service account and adds it to the cronjob. If no name is provided the application name will be used | `false` | Yes |
+| cronjob.serviceAccount.name | The name of the service account to attach to this cronjob| | Yes |
 | cronjob.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
-| cronjob.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
+| cronjob.env | Basic environment variables specific for this cronjob. Can override the global.env values | `{}` | Yes |
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
 | cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| cronjob.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
 | cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 | cronjob.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 

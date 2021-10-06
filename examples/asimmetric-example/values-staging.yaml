@@ -61,6 +61,7 @@ asimmetric:
           - AWS_ACCESS_ID
       datadog:
         enabled: true
+        traceEnabled: true
       sentry:
         enabled: true
       labels:
@@ -68,6 +69,8 @@ asimmetric:
     example-worker:
       role: worker
       command: ["echo", "foo bar biz"]
+      datadog:
+        enabled: true
   cronjobs:
     example-cronjob-producer:
       schedule: "*/10 * * * *"
