@@ -71,6 +71,10 @@ asimmetric:
       ## Sets the replica count (Optional)
       ## Default: 1
       ##
+      revisionHistoryLimit: 3
+      ## Sets number of old ReplicaSets for this deployment to be retained
+      ## Default: 3
+      ##
       replicaCount: 1
       ## Configures the image and image pull policy (Optional)
       ## Default: uses .global.image
@@ -214,6 +218,10 @@ asimmetric:
       role: worker
       ## Sets the replica count (Optional)
       ## Default: 1
+      ##
+      revisionHistoryLimit: 3
+      ## Sets number of old ReplicaSets for this deployment to be retained
+      ## Default: 3
       ##
       replicaCount: 1
       ## Configures the image and image pull policy (Optional)

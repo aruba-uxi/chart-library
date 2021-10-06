@@ -40,6 +40,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: example-service
       app.kubernetes.io/instance: asimmetric-example
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:

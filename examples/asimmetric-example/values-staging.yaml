@@ -24,6 +24,7 @@ asimmetric:
   applications:
     example-service:
       role: webapp
+      revisionHistoryLimit: 4
       replicaCount: 2
       image:
         tag: example-service-tag
