@@ -38,14 +38,12 @@ jobs:
           fi
         env:
           CT_CHART_DIRS: charts
-          CT_VALIDATE_MAINTAINERS: false
           CT_TARGET_BRANCH: main
 
       - name: Run chart-testing (lint)
         run: ct lint
         env:
           CT_CHART_DIRS: charts
-          CT_VALIDATE_MAINTAINERS: false
           CT_TARGET_BRANCH: main
 
       - name: Template Check

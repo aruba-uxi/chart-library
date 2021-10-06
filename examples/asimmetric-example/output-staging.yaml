@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -22,7 +22,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -36,7 +36,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -60,7 +60,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -85,7 +85,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -102,7 +102,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.3
+        helm.sh/chart: asimmetric-1.1.4
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
@@ -220,7 +220,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -236,7 +236,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.3
+        helm.sh/chart: asimmetric-1.1.4
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
@@ -285,7 +285,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -334,7 +334,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -396,7 +396,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -408,7 +408,7 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-1.1.3
+      helm.sh/chart: asimmetric-1.1.4
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -421,7 +421,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -438,7 +438,7 @@ metadata:
   labels:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -453,7 +453,7 @@ metadata:
   name: sentry-dsn
   labels:
     app.kubernetes.io/name: sentry-dsn
-    helm.sh/chart: asimmetric-1.1.3
+    helm.sh/chart: asimmetric-1.1.4
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
