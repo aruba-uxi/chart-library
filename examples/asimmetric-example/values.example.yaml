@@ -72,7 +72,7 @@ asimmetric:
       ## Default: 1
       ##
       revisionHistoryLimit: 3
-      ## Sets number of old ReplicaSets for this deployment to be retained
+      ## Sets number of old ReplicaSets for this deployment to be retained (Optional)
       ## Default: 3
       ##
       replicaCount: 1
@@ -220,7 +220,7 @@ asimmetric:
       ## Default: 1
       ##
       revisionHistoryLimit: 3
-      ## Sets number of old ReplicaSets for this deployment to be retained
+      ## Sets number of old ReplicaSets for this deployment to be retained (Optional)
       ## Default: 3
       ##
       replicaCount: 1

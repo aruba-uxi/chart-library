@@ -18,11 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
-## [1.1.3] - 2021-10-06
-
-### Fixed
-
-Sealed secrets were using the wrong name. Deployments and Cronjobs were still searching for sealed secrets using the pre v 1.1.x name.
+## [1.1.5] - 2021-10-06
 
 ### Added
 In Deployment, `spec.revisionHistoryLimit` to define number of old ReplicaSets to be retained. Rest are garbage collected in the background.
@@ -34,6 +30,25 @@ example-service:
   role: webapp
   revisionHistoryLimit: 4
 ```
+
+## [1.1.4] - 2021-10-06
+
+### Added
+
+Added the ability to set whether datadog tracing is enabled.
+
+```yaml
+example-service:
+  datadog:
+    enabled: true
+    traceEnabled: true
+```
+
+## [1.1.3] - 2021-10-06
+
+### Fixed
+
+Sealed secrets were using the wrong name. Deployments and Cronjobs were still searching for sealed secrets using the pre v 1.1.x name.
 
 ## [1.1.2] - 2021-10-05
 
