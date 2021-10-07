@@ -115,7 +115,7 @@ spec:
       serviceAccountName: example-service
       containers:
       - name: webapp
-        image: quay.io/uxi/asimmetric-example:example-service-tag
+        image: quay.io/uxi/asimmetric-example:1.0.1-dev
         imagePullPolicy: Always
         env:
         - name: ENVIRONMENT
@@ -248,7 +248,7 @@ spec:
       - name: sealed-image-pull-secret
       containers:
       - name: worker
-        image: quay.io/uxi/asimmetric-example:1.2.3
+        image: quay.io/uxi/asimmetric-example:1.0.0
         imagePullPolicy: Always
         command: ["echo","foo bar biz"]
         env:
@@ -303,7 +303,7 @@ spec:
           - name: sealed-image-pull-secret
           containers:
           - name: example-cronjob-consumer
-            image: quay.io/uxi/asimmetric-example:1.2.3
+            image: quay.io/uxi/asimmetric-example:1.0.0
             imagePullPolicy: Always
             env:
             - name: ENVIRONMENT
@@ -352,7 +352,7 @@ spec:
           serviceAccountName: example-cronjob-producer
           containers:
           - name: example-cronjob-producer
-            image: quay.io/uxi/asimmetric-example:1.2.3
+            image: quay.io/uxi/asimmetric-example:1.0.0
             imagePullPolicy: Always
             env:
             - name: ENVIRONMENT

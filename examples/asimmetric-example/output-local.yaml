@@ -53,7 +53,7 @@ spec:
     spec:
       containers:
       - name: webapp
-        image: asimmetric-example:1.2.3
+        image: asimmetric-example:latest
         imagePullPolicy: Never
         env:
         - name: ENVIRONMENT
