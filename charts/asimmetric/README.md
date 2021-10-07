@@ -50,8 +50,8 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.repository | The repository that this chart is kept in | | No | No |
 | global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid environments are (`DEV`, `STAGING`, `PRODUCTION`) | | No | No |
 | global.image.repository | The image repository to use for images. | | No | Yes |
-| global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
 | global.image.tag | The image tag to use. | | No | Yes |
+| global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
