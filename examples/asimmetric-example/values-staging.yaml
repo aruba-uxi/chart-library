@@ -13,7 +13,6 @@ asimmetric:
     environment: STAGING
     image:
       repository: quay.io/uxi/asimmetric-example
-      tag: global-staging-tag
       pullPolicy: Always
     env:
       DEBUG: false
@@ -27,7 +26,7 @@ asimmetric:
       revisionHistoryLimit: 4
       replicaCount: 2
       image:
-        tag: example-service-tag
+        tag: 1.0.1-dev
       serviceAccount:
         create: true
       port: 8000
