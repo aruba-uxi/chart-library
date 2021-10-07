@@ -18,6 +18,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [1.1.5] - 2021-10-06
+
+### Added
+In Deployment, `spec.revisionHistoryLimit` to define number of old ReplicaSets to be retained. Rest are garbage collected in the background.
+
+Example Usage
+```yaml
+# values-staging.yaml
+example-service:
+  role: webapp
+  revisionHistoryLimit: 4
+```
+
+## [1.1.4] - 2021-10-06
+
+### Added
+
+Added the ability to set whether datadog tracing is enabled.
+
+```yaml
+example-service:
+  datadog:
+    enabled: true
+    traceEnabled: true
+```
+
 ## [1.1.3] - 2021-10-06
 
 ### Fixed

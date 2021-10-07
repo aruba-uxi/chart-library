@@ -73,6 +73,7 @@ In this table `application` refers to each application defined under `applicatio
 | Parameter | Description | Default | Optional |
 |-----|------|---------|--------|
 | application.role | The role that this application will serve. Validation is done to make sure the correct role is provided. Valid roles are (`webapp`, `worker`) | | No |
+| application.revisionHistoryLimit | The number of old ReplicaSets to be retained | `3` | Yes |
 | application.replicaCount | The number of pod replicas to create | `1` | Yes |
 | application.image.repository | A specific image that the application should use | `globals.image.repository` | Yes |
 | application.image.tag | The image to use for this specific application | `globals.image.tag` | Yes |

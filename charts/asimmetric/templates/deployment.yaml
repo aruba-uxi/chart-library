@@ -19,6 +19,7 @@ spec:
   selector:
     matchLabels:
       {{- include "asimmetric.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
+  revisionHistoryLimit: {{ default 3 $data.revisionHistoryLimit }}
   template:
     metadata:
       labels:
