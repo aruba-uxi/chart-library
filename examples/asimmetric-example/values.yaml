@@ -5,5 +5,3 @@ asimmetric:
     image:
       repository: asimmetric-example
       tag: 1.0.0
-
-
