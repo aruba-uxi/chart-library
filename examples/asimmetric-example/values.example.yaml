@@ -26,6 +26,7 @@ asimmetric:
   ##
   global:
     ## The repository that this chart is kept in
+    ## This can be define in the base values.yaml file and forgotten about
     ##
     repository: asimmetric-example
     ## The environment that the service is deployed in
@@ -34,6 +35,7 @@ asimmetric:
     ##
     environment: DEV
     ## Configures the image repository and pull policy for all pods
+    ## The "image.tag" and "image.repository" needs to be define in the values.yaml file too
     ##
     image:
       repository: asimmetric-example

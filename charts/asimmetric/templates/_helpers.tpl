@@ -125,8 +125,9 @@ Create the service account name
 Create the image using respository and tag
 */}}
 {{- define "asimmetric.image" -}}
-{{- $repository := default .context.Values.global.image.repository .data.repository -}}
-{{- $globalTag := default "latest" .context.Values.global.image.tag -}}
+{{- $globalTag := required "An image tag is required. Ensure it is defined in the values.yaml file at least" .context.Values.global.image.tag -}}
+{{- $globalRepository := required "An image repository is required." .context.Values.global.image.repository -}}
+{{- $repository := default $globalRepository .data.repository -}}
 {{- $tag := default $globalTag .data.tag -}}
 {{ printf "%s:%s" $repository $tag }}
 {{- end -}}

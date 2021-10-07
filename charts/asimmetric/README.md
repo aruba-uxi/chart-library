@@ -15,7 +15,7 @@ Typically the `values.yaml` file defines the base values used by helm, and then 
 
 When using this chart library its best to leave the `values.yaml` files empty and define separate values for each environment.
 
-> **__NOTE__** Yes this does go against helm convention but its the best way we can do that does not cause duplicate data. Environment variables proved to be a bit tricky because in the local environment DATABASE_URL for example, could be defined in `.env` then in the staging environment it moves to `.envSealedSecrets`. It proved too hard to remove the duplicate values, so its best not to define any environment variables in the `values.yaml`.
+> **__NOTE:__** Yes this does go against helm convention but its the best way we can do that does not cause duplicate data. Environment variables proved to be a bit tricky because in the local environment DATABASE_URL for example, could be defined in `.env` then in the staging environment it moves to `.envSealedSecrets`. It proved too hard to remove the duplicate values, so its best not to define any environment variables in the `values.yaml`.
 
 It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
 
@@ -50,12 +50,14 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.repository | The repository that this chart is kept in | | No | No |
 | global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid environments are (`DEV`, `STAGING`, `PRODUCTION`) | | No | No |
 | global.image.repository | The image repository to use for images. | | No | Yes |
+| global.image.tag | The image tag to use. | | No | Yes |
 | global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
-| global.image.tag | The image tag to use. | `latest` | Yes | Yes |
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
 | global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret` and `sealedSecrets.sentryDsn`). | `{}` | Yes | Yes |
+
+> **__NOTE:__** The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
 
 ### Application Values
 
@@ -82,7 +84,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.serviceAccount.name | The name of the service account to attach to this application| | Yes |
 | application.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
 | application.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
-| application.port | The port that must be exposed on the pod. Also used when adding a service to the webapp. Can be excluded when defining a worker | | No* |
+| application.port | The port that must be exposed on the pod. Also used when adding a service to the webapp. Can be excluded when defining a worker | | No |
 | application.service | Configures the service created for webapps | `ClusterIP` | Yes |
 | application.service.type | Configures the service type that is created for webapps | `ClusterIP` | Yes |
 | application.service.port | Configures the service port to expose | `80` | Yes |
@@ -140,6 +142,54 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 ## Developing Notes
 
 When contributing to this library certain approaches or concepts can be considered to make you life easier.
+
+### Value Files
+
+Helm works by using a default `values.yaml` file and overlaying additional values files provided with the `-f` tag to the helm command.
+
+When using this library the values file is left largely empty except for the following values:
+
+- `asimmetric.global.image.repository`
+- `asimmetric.global.image.tag`
+- `asimmetric.global.repository`
+
+The `asimmetric.global.image.repository` and `asimmetric.global.image.tag` values are used as the default image. These can be overridden in other value files but it has to be present in the base `values.yaml` file.
+
+The `asimmetric.global.repository` is only needed once and should not be overridden. It makes sense to add it here.
+
+For example, the `values.yaml` file defines the default tag:
+
+```yaml
+# values.yaml
+asimmetric:
+  global:
+    repoistory: example-service
+    image:
+      repository: example-service
+      tag: 1.0.0
+```
+
+The staging environment overrides the tag to a development tag
+
+```yaml
+# values-staging.yaml
+asimmetric:
+  global:
+    image:
+      repository: quay.io/uxi/example-service
+      tag: 1.0.0-dev
+```
+
+The production environment uses the default latest tag
+
+```yaml
+# values-production.yaml
+asimmetric:
+  global:
+    image:
+      repository: quay.io/uxi/example-service
+      tag: 1.0.0
+```
 
 ### _helpers.tpl
 

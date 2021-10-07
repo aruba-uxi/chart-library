@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.5
+    helm.sh/chart: asimmetric-1.1.6
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -30,7 +30,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.5
+    helm.sh/chart: asimmetric-1.1.6
     app.kubernetes.io/managed-by: Helm
     repository: asimmetric-example
     namespace: default
@@ -46,14 +46,14 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.5
+        helm.sh/chart: asimmetric-1.1.6
         app.kubernetes.io/managed-by: Helm
         repository: asimmetric-example
         namespace: default
     spec:
       containers:
       - name: webapp
-        image: asimmetric-example:global-local-tag
+        image: asimmetric-example:latest
         imagePullPolicy: Never
         env:
         - name: ENVIRONMENT

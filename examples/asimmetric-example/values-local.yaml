@@ -1,10 +1,7 @@
 asimmetric:
   global:
-    repository: asimmetric-example
-    environment: DEV
     image:
-      repository: asimmetric-example
-      tag: global-local-tag
+      tag: latest
       pullPolicy: Never
     env:
       DEBUG: true

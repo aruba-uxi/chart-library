@@ -18,12 +18,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [1.1.6] - 2021-10-07
+
+### Changed
+
+The following values are required in the `values.yaml` file:
+
+- `asimmetric.global.image.repository`
+- `asimmetric.global.image.tag`
+- `asimmetric.global.repository`
+
+The `image.repository` and `image.tag` can be overridden in the overlay value files but it has to be set in the base values. Helm will fail with an error if it can not find an image tag
+
 ## [1.1.5] - 2021-10-06
 
 ### Added
+
 In Deployment, `spec.revisionHistoryLimit` to define number of old ReplicaSets to be retained. Rest are garbage collected in the background.
 
 Example Usage
+
 ```yaml
 # values-staging.yaml
 example-service:
