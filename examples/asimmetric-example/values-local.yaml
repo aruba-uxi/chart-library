@@ -1,9 +1,6 @@
 asimmetric:
   global:
-    repository: asimmetric-example
-    environment: DEV
     image:
-      repository: asimmetric-example
       tag: latest
       pullPolicy: Never
     env:

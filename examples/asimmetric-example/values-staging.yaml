@@ -9,7 +9,6 @@ asimmetric:
       database-url:
         DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
   global:
-    repository: asimmetric-example
     environment: STAGING
     image:
       repository: quay.io/uxi/asimmetric-example
