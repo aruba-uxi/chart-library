@@ -21,9 +21,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [1.1.5] - 2021-10-06
 
 ### Added
+
 In Deployment, `spec.revisionHistoryLimit` to define number of old ReplicaSets to be retained. Rest are garbage collected in the background.
 
 Example Usage
+
 ```yaml
 # values-staging.yaml
 example-service:

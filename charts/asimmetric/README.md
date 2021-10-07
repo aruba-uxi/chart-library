@@ -51,11 +51,13 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid environments are (`DEV`, `STAGING`, `PRODUCTION`) | | No | No |
 | global.image.repository | The image repository to use for images. | | No | Yes |
 | global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
-| global.image.tag | The image tag to use. | `latest` | Yes | Yes |
+| global.image.tag | The image tag to use. | `""` | No* | Yes |
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
 | global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret` and `sealedSecrets.sentryDsn`). | `{}` | Yes | Yes |
+
+* The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
 
 ### Application Values
 
@@ -140,6 +142,42 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 ## Developing Notes
 
 When contributing to this library certain approaches or concepts can be considered to make you life easier.
+
+### Value Files
+
+Helm works by using a default `values.yaml` file and overlaying additional values files provided with the `-f` tag to the helm command.
+
+When using this library the values file is left largely empty except for the `asimmetric.global.image.tag`. The `asimmetric.global.image.tag` is used as the default image tag. This tag can be overridden in other value files but it has to be present in the base `values.yaml` file.
+
+For example, the `values.yaml` file defines the default tag:
+
+```yaml
+# values.yaml
+asimmetric:
+  global:
+    image:
+      tag: 1.0.0
+```
+
+The staging environment overrides the tag to a development tag
+
+```yaml
+# values-staging.yaml
+asimmetric:
+  global:
+    image:
+      tag: 1.0.0-dev
+```
+
+The production environment uses the default latest tag
+
+```yaml
+# values-production.yaml
+asimmetric:
+  global:
+    image:
+      tag: 1.0.0
+```
 
 ### _helpers.tpl
 
