@@ -7,7 +7,7 @@ jobs:
     name: Change Log Check
     runs-on: ubuntu-latest
     steps:
-    - name: Ceckout Code
+    - name: Checkout Code
       uses: actions/checkout@v2
 
     - name: Git Fetch
