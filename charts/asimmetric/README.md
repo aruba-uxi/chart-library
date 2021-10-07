@@ -147,7 +147,15 @@ When contributing to this library certain approaches or concepts can be consider
 
 Helm works by using a default `values.yaml` file and overlaying additional values files provided with the `-f` tag to the helm command.
 
-When using this library the values file is left largely empty except for the `asimmetric.global.image.tag`. The `asimmetric.global.image.tag` is used as the default image tag. This tag can be overridden in other value files but it has to be present in the base `values.yaml` file.
+When using this library the values file is left largely empty except for the following values:
+
+- `asimmetric.global.image.repository`
+- `asimmetric.global.image.tag`
+- `asimmetric.global.repository`
+
+The `asimmetric.global.image.repository` and `asimmetric.global.image.tag` values are used as the default image. These can be overridden in other value files but it has to be present in the base `values.yaml` file.
+
+The `asimmetric.global.repository` is only needed once and should not be overridden. It makes sense to add it here.
 
 For example, the `values.yaml` file defines the default tag:
 
@@ -155,7 +163,9 @@ For example, the `values.yaml` file defines the default tag:
 # values.yaml
 asimmetric:
   global:
+    repoistory: example-service
     image:
+      repository: example-service
       tag: 1.0.0
 ```
 
@@ -166,6 +176,7 @@ The staging environment overrides the tag to a development tag
 asimmetric:
   global:
     image:
+      repository: quay.io/uxi/example-service
       tag: 1.0.0-dev
 ```
 
@@ -176,6 +187,7 @@ The production environment uses the default latest tag
 asimmetric:
   global:
     image:
+      repository: quay.io/uxi/example-service
       tag: 1.0.0
 ```
 
