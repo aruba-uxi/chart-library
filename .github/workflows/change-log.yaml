@@ -1,0 +1,34 @@
+name: Change Log Check
+
+on: [push]
+
+jobs:
+  version-bump:
+    name: Change Log Check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Ceckout Code
+      uses: actions/checkout@v2
+
+    - name: Git Fetch
+      run: |
+        git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
+
+    - name: Main Version Number
+      run: echo "::set-output name=result::$(git show origin/main:charts/asimmetric/Chart.yaml | yq e .version -)"
+      id: main_version_number
+
+    - name: Branch Version Number
+      run: echo "::set-output name=result::$(yq e .version charts/asimmetric/Chart.yaml)"
+      id: branch_version_number
+
+    - name: Git Diff CHANGELOG.md
+      run: |
+        echo "::set-output name=result::$(git diff --name-only --exit-code origin/main..HEAD -- charts/asimmetric/CHANGELOG.md)"
+      id: has_changelog_changes
+
+    - name: Verify Values Tag == Chart Version
+      if: ${{ steps.main_version_number.outputs.result != steps.branch_version_number.outputs.result && !has_changelog_changes}}
+      run: |
+        echo "Chart changes were detected but no charts/asimmetric/CHANGELOG.md were found. Please document the change"
+        exit 1
