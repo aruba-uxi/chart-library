@@ -28,7 +28,7 @@ jobs:
       id: has_changelog_changes
 
     - name: Verify Values Tag == Chart Version
-      if: ${{ steps.main_version_number.outputs.result != steps.branch_version_number.outputs.result && has_changelog_changes }}
+      if: ${{ steps.main_version_number.outputs.result != steps.branch_version_number.outputs.result && !steps.has_changelog_changes.outputs.result }}
       run: |
         echo "Chart changes were detected but no charts/asimmetric/CHANGELOG.md were found. Please document the change"
         exit 1
