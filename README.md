@@ -2,7 +2,7 @@
 
 This is a public repository holding the helm libraries
 
-It has Github pages hosted on the branch `gh-pages`
+It has Github pages hosted on the branch `gh-pages`. The helm charts available on <https://asimmetric.github.io/chart-library> (see [Usage](#usage) for more info)
 
 For further information see the [wiki](https://github.com/Asimmetric/onboarding/wiki/Chart-Library).
 
