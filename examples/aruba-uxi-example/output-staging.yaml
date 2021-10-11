@@ -504,13 +504,13 @@ metadata:
     kubernetes.io/ingress.class: legacy-ingress
 spec:
   rules:
-    - host: "example-service.local"
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: example-service
-              servicePort: 8000
+  - host: "example-service.local"
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: example-service
+          servicePort: 8000
 ---
 # Source: asimmetric-example/charts/asimmetric/templates/imagepullsecret.yaml
 >>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
