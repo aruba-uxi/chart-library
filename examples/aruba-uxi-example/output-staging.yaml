@@ -6,8 +6,17 @@ metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -21,8 +30,17 @@ metadata:
   name: example-cronjob-producer
   labels:
     app.kubernetes.io/name: example-cronjob-producer
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -35,8 +53,17 @@ metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -59,8 +86,17 @@ metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -84,8 +120,17 @@ metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -102,8 +147,17 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: example-service
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
         app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.0.1
+=======
+        helm.sh/chart: aruba-uxi-2.0.0
+=======
+        app.kubernetes.io/instance: asimmetric-example
+        helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -220,8 +274,17 @@ metadata:
   name: example-worker
   labels:
     app.kubernetes.io/name: example-worker
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -237,8 +300,17 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: example-worker
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
         app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.0.1
+=======
+        helm.sh/chart: aruba-uxi-2.0.0
+=======
+        app.kubernetes.io/instance: asimmetric-example
+        helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -286,8 +358,17 @@ metadata:
   name: example-cronjob-consumer
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -336,8 +417,17 @@ metadata:
   name: example-cronjob-producer
   labels:
     app.kubernetes.io/name: example-cronjob-producer
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -393,14 +483,52 @@ spec:
             command: ["run-kinesis","producer"]
           restartPolicy: OnFailure
 ---
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/imagepullsecret.yaml
+=======
+# Source: asimmetric-example/charts/asimmetric/templates/application-ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: example-service
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+    app.kubernetes.io/managed-by: Helm
+    repository: asimmetric-example
+    namespace: default
+    example-service-staging: example-service-staging
+    global-label: global-label
+  annotations:
+    kubernetes.io/ingress.class: legacy-ingress
+spec:
+  rules:
+    - host: "example-service.local"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: example-service
+              servicePort: 8000
+---
+# Source: asimmetric-example/charts/asimmetric/templates/imagepullsecret.yaml
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -412,7 +540,15 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
+<<<<<<< HEAD
       helm.sh/chart: aruba-uxi-2.0.1
+=======
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
+      helm.sh/chart: aruba-uxi-2.0.0
+=======
+      helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -424,8 +560,17 @@ metadata:
   name: aws-access
   labels:
     app.kubernetes.io/name: aws-access
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -441,8 +586,17 @@ metadata:
   name: database-url
   labels:
     app.kubernetes.io/name: database-url
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
     app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    app.kubernetes.io/instance: asimmetric-example
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -457,7 +611,15 @@ metadata:
   name: sentry-dsn
   labels:
     app.kubernetes.io/name: sentry-dsn
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
+=======
+<<<<<<< HEAD:examples/aruba-uxi-example/output-staging.yaml
+    helm.sh/chart: aruba-uxi-2.0.0
+=======
+    helm.sh/chart: asimmetric-1.1.7
+>>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-staging.yaml
+>>>>>>> e808a23 (adding a legacy ingress option to applications)
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
