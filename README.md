@@ -4,7 +4,7 @@ This is a public repository holding the helm libraries
 
 It has Github pages hosted on the branch `gh-pages`. The helm charts available on <https://aruba-uxi.github.io/chart-library> (see [Usage](#usage) for more info)
 
-For further information see the [wiki](https://github.com/Asimmetric/onboarding/wiki/Chart-Library).
+For further information see the [wiki](https://github.com/Aruba-UXI/onboarding/wiki/Chart-Library).
 
 ## Usage
 
@@ -61,11 +61,11 @@ just template-aruba-uxi [flags]
 
 ## Vault Sealed Secrets
 
-There are two types of sealed secrets, standard secrets and image pull secrets. For more info on kubeseal and getting the cert.pem see [Kape](https://github.com/Asimmetric/kape#secrets)
+There are two types of sealed secrets, standard secrets and image pull secrets. For more info on kubeseal and getting the cert.pem see [Kape](https://github.com/Aruba-UXI/kape#secrets)
 
 ### Standard Secrets
 
-1. Generate the sealed secret name using kubeseal as described in [Kape](https://github.com/Asimmetric/kape#secrets)
+1. Generate the sealed secret name using kubeseal as described in [Kape](https://github.com/Aruba-UXI/kape#secrets)
 2. Copy the secret into `values.yaml`. NB: be sure to use the correct `namespace` and `secret name` (in this example `"database-url"` and `"redis"`)
 
 ```yaml

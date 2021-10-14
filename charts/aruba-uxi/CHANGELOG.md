@@ -1,4 +1,4 @@
-# Asimmetric Chart Library Change Log
+# Aruba UXI Chart Library Change Log
 
 All notable changes to this project will be documented in this file.
 

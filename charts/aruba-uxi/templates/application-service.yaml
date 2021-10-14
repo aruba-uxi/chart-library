@@ -9,7 +9,7 @@ kind: Service
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   type: {{ default "ClusterIP" $service.type }}
   ports:
@@ -18,6 +18,6 @@ spec:
       protocol: TCP
       targetPort: {{ $data.port }}
   selector:
-    {{- include "asimmetric.selectorLabels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "aruba-uxi.selectorLabels" (dict "context" $ "name" $name) | nindent 4 }}
 {{- end }}
 {{- end }}

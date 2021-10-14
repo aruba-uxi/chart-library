@@ -15,20 +15,20 @@ jobs:
         git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
 
     - name: Main Version Number
-      run: echo "::set-output name=result::$(git show origin/main:charts/asimmetric/Chart.yaml | yq e .version -)"
+      run: echo "::set-output name=result::$(git show origin/main:charts/aruba-uxi/Chart.yaml | yq e .version -)"
       id: main_version_number
 
     - name: Branch Version Number
-      run: echo "::set-output name=result::$(yq e .version charts/asimmetric/Chart.yaml)"
+      run: echo "::set-output name=result::$(yq e .version charts/aruba-uxi/Chart.yaml)"
       id: branch_version_number
 
     - name: Git Diff CHANGELOG.md
       run: |
-        echo "::set-output name=result::$(git diff --name-only --exit-code origin/main..HEAD -- charts/asimmetric/CHANGELOG.md)"
+        echo "::set-output name=result::$(git diff --name-only --exit-code origin/main..HEAD -- charts/aruba-uxi/CHANGELOG.md)"
       id: has_changelog_changes
 
     - name: Verify Values Tag == Chart Version
       if: ${{ steps.main_version_number.outputs.result != steps.branch_version_number.outputs.result && !steps.has_changelog_changes.outputs.result }}
       run: |
-        echo "Chart changes were detected but no charts/asimmetric/CHANGELOG.md were found. Please document the change"
+        echo "Chart changes were detected but no charts/aruba-uxi/CHANGELOG.md were found. Please document the change"
         exit 1
