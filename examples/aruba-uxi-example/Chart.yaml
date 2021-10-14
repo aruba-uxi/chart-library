@@ -1,9 +1,9 @@
 apiVersion: v2
-name: asimmetric-example
+name: aruba-uxi-example
 description: A Helm chart for Asimmetric
 type: application
 version: 1.2.5
 dependencies:
-- name: asimmetric
+- name: aruba-uxi
   version: "*"
-  repository: file://../../charts/asimmetric
+  repository: file://../../charts/aruba-uxi

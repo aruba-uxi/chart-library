@@ -3,13 +3,13 @@ help:
 	@just list
 
 output:
-	just template-asimmetric-local "> examples/asimmetric-example/output-local.yaml"
-	just template-asimmetric-staging "> examples/asimmetric-example/output-staging.yaml"
+	just template-aruba-uxi-local "> examples/aruba-uxi-example/output-local.yaml"
+	just template-aruba-uxi-staging "> examples/aruba-uxi-example/output-staging.yaml"
 
-template-asimmetric-local +ARGS='':
-	helm dependency update examples/asimmetric-example
-	helm template asimmetric-example examples/asimmetric-example -f examples/asimmetric-example/values-local.yaml {{ARGS}}
+template-aruba-uxi-local +ARGS='':
+	helm dependency update examples/aruba-uxi-example
+	helm template aruba-uxi-example examples/aruba-uxi-example -f examples/aruba-uxi-example/values-local.yaml {{ARGS}}
 
-template-asimmetric-staging +ARGS='':
-	helm dependency update examples/asimmetric-example
-	helm template asimmetric-example examples/asimmetric-example -f examples/asimmetric-example/values-staging.yaml {{ARGS}}
+template-aruba-uxi-staging +ARGS='':
+	helm dependency update examples/aruba-uxi-example
+	helm template aruba-uxi-example examples/aruba-uxi-example -f examples/aruba-uxi-example/values-staging.yaml {{ARGS}}

@@ -1,5 +1,5 @@
-# Asimmetric Examples
+# Aruba-UXI Examples
 
 | Example | Description |
 |-----|--------|
-| [asimmetric-example](asimmetric-example) | Creating standard assimetric webapps, workers, cronjobs |
+| [aruba-uxi-example](aruba-uxi-example) | Creating standard webapps, workers, cronjobs |

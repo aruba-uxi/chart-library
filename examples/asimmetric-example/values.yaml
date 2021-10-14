@@ -1,7 +1,0 @@
-asimmetric:
-  global:
-    repository: asimmetric-example
-    environment: DEV
-    image:
-      repository: asimmetric-example
-      tag: 1.0.0

@@ -18,6 +18,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.0.0] - 2021-10-15
+
+### Changed
+
+- Moved `values.example.yaml` into the `charts/aruba-uxi`
+- Renamed `asimmetric` to `aruba-uxi`. This includes the root key in the yaml file.
+
+```yaml
+aruba-uxi:
+  sealed-secrets: {}
+  global: {}
+  applications: {}
+  cronjobs: {}
+```
+
 ## [1.1.6] - 2021-10-07
 
 ### Changed

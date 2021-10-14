@@ -1,6 +1,6 @@
-# Asimmetric Chart
+# Aruba UXI Chart
 
-A helm chart for Asimmetric kubernetes resources
+A helm chart for Aruba UXI kubernetes resources
 
 1. [Helm](#helm)
 2. [Developing Notes](#developing-notes)
@@ -22,7 +22,7 @@ It is possible to define some values in the `values.yaml` file. You are welcome 
 ### Sealed Secrets
 
 ```yaml
-asimmetric:
+aruba-uxi:
   sealedSecrets:
     ...
 ```
@@ -33,12 +33,12 @@ Sealed secrets are defined with the `.sealedSecrets` object. A `SealedSecret` ku
 |-----|------|---------|---|
 | sealedSecrets.imagePullSecret | The sealed version of the base64 encoded `dockerconfigjson` file used to provide access to our image repository | "" | Yes |
 | sealedSecrets.sentryDsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value | | Yes |
-| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Asimmetric/chart-library/blob/main/examples/asimmetric-example/values.example.yaml) for usage| {} | Yes |
+| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Aruba-UXI/chart-library/blob/main/examples/aruba-uxi-example/values.example.yaml) for usage| {} | Yes |
 
 ### Global Values
 
 ```yaml
-asimmetric:
+aruba-uxi:
   global:
     ...
 ```
@@ -62,7 +62,7 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 ### Application Values
 
 ```yaml
-asimmetric:
+aruba-uxi:
   applications:
     example-webapp:
       ...
@@ -111,7 +111,7 @@ In this table `application` refers to each application defined under `applicatio
 ### Cronjob Values
 
 ```yaml
-asimmetric:
+aruba-uxi:
   cronjobs:
     example-cronjob-consumer:
       ...
@@ -149,19 +149,19 @@ Helm works by using a default `values.yaml` file and overlaying additional value
 
 When using this library the values file is left largely empty except for the following values:
 
-- `asimmetric.global.image.repository`
-- `asimmetric.global.image.tag`
-- `asimmetric.global.repository`
+- `aruba-uxi.global.image.repository`
+- `aruba-uxi.global.image.tag`
+- `aruba-uxi.global.repository`
 
-The `asimmetric.global.image.repository` and `asimmetric.global.image.tag` values are used as the default image. These can be overridden in other value files but it has to be present in the base `values.yaml` file.
+The `aruba-uxi.global.image.repository` and `aruba-uxi.global.image.tag` values are used as the default image. These can be overridden in other value files but it has to be present in the base `values.yaml` file.
 
-The `asimmetric.global.repository` is only needed once and should not be overridden. It makes sense to add it here.
+The `aruba-uxi.global.repository` is only needed once and should not be overridden. It makes sense to add it here.
 
 For example, the `values.yaml` file defines the default tag:
 
 ```yaml
 # values.yaml
-asimmetric:
+aruba-uxi:
   global:
     repoistory: example-service
     image:
@@ -173,7 +173,7 @@ The staging environment overrides the tag to a development tag
 
 ```yaml
 # values-staging.yaml
-asimmetric:
+aruba-uxi:
   global:
     image:
       repository: quay.io/uxi/example-service
@@ -184,7 +184,7 @@ The production environment uses the default latest tag
 
 ```yaml
 # values-production.yaml
-asimmetric:
+aruba-uxi:
   global:
     image:
       repository: quay.io/uxi/example-service

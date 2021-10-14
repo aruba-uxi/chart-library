@@ -1,15 +1,15 @@
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/application-service.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
 spec:
   type: ClusterIP
@@ -20,40 +20,40 @@ spec:
       targetPort: 8000
   selector:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
+    app.kubernetes.io/instance: aruba-uxi-example
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: example-service
-      app.kubernetes.io/instance: asimmetric-example
+      app.kubernetes.io/instance: aruba-uxi-example
   revisionHistoryLimit: 3
   template:
     metadata:
       labels:
         app.kubernetes.io/name: example-service
-        app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.6
+        app.kubernetes.io/instance: aruba-uxi-example
+        helm.sh/chart: aruba-uxi-2.0.0
         app.kubernetes.io/managed-by: Helm
-        repository: asimmetric-example
+        repository: aruba-uxi-example
         namespace: default
     spec:
       containers:
       - name: webapp
-        image: asimmetric-example:latest
+        image: aruba-uxi-example:latest
         imagePullPolicy: Never
         env:
         - name: ENVIRONMENT
@@ -63,7 +63,7 @@ spec:
         - name: SENTRY_ENABLED
           value: "false"        
         - name: DATABASE_URL
-          value: "postgresql://username:password@db:5432/asimmetric-example"
+          value: "postgresql://username:password@db:5432/aruba-uxi-example"
         - name: DEBUG
           value: "true"        
         - name: HOST_IP
