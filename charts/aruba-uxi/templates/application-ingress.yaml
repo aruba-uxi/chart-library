@@ -1,20 +1,20 @@
 {{- range $name, $data := .Values.applications }}
-{{- $legacyIngress := default dict $data.legacyIngress }}
+{{- $ingress := default dict $data.ingress }}
 {{- $svcPort := $data.port }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
-{{- if $legacyIngress.enabled -}}
-apiVersion: extensions/v1beta1
+{{- if $ingress.enabled -}}
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ $name }}
   labels:
     {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
   annotations:
-    kubernetes.io/ingress.class: legacy-ingress
+    kubernetes.io/ingress.class: kong
 spec:
-  {{- if $legacyIngress.tls }}
+  {{- if $ingress.tls }}
   tls:
-  {{- range $legacyIngress.tls }}
+  {{- range $ingress.tls }}
   - hosts:
       {{- range .hosts }}
       - {{ . | quote }}
@@ -23,15 +23,21 @@ spec:
   {{- end }}
   {{- end }}
   rules:
-  {{- range $legacyIngress.hosts }}
-  - host: {{ .host | quote }}
+  {{- range $ingress.hosts }}
+  - host: {{ .host }}
     http:
       paths:
       {{- range $path := .paths }}
-      - path: {{ $path }}
+      - path: {{ $path.path }}
+        pathType: {{ default "ImplementationSpecific" $path.pathTpe }}
         backend:
+          {{- if $path.backend }}
+          serviceName: {{ default $name $path.backend.serviceName }}
+          servicePort: {{ default $svcPort $path.backend.servicePort }}
+          {{- else }}
           serviceName: {{ $name }}
           servicePort: {{ $svcPort }}
+          {{- end }}
       {{- end }}
   {{- end }}
 {{- end }}

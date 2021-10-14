@@ -213,12 +213,16 @@ aruba-uxi:
       labels: {}
       ## Configures a legacy ingress on the application (Optional)
       ## Default: None
-      legacyIngress:
+      ingress:
         enabled: false
         hosts:
         - host: example-service.local
           paths:
-          - /
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              serviceName: example-service
+              servicePort: 8000
         tls: []
         # - secretName: chart-example-tls
         #   hosts:
