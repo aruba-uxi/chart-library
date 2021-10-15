@@ -2,9 +2,9 @@
 
 This is a public repository holding the helm libraries
 
-It has Github pages hosted on the branch `gh-pages`. The helm charts available on <https://asimmetric.github.io/chart-library> (see [Usage](#usage) for more info)
+It has Github pages hosted on the branch `gh-pages`. The helm charts available on <https://aruba-uxi.github.io/chart-library> (see [Usage](#usage) for more info)
 
-For further information see the [wiki](https://github.com/Asimmetric/onboarding/wiki/Chart-Library).
+For further information see the [wiki](https://github.com/Aruba-UXI/knowledge/wiki/Chart-Library).
 
 ## Usage
 
@@ -12,9 +12,9 @@ To use a chart defined in this library it must be added as a dependency in the s
 
 ```yaml
 dependencies:
-  - name: asimmetric
+  - name: aruba-uxi
     version: "x.x.x"
-    repository: https://asimmetric.github.io/chart-library
+    repository: https://aruba-uxi.github.io/chart-library
 ```
 
 The [examples](examples) folder contains examples of how to use the charts
@@ -25,30 +25,30 @@ To run an example:
 
 1. `cd` into the example directory:
 
-   `cd examples/asimmetric-example`
+   `cd examples/aruba-uxi-example`
 
 2. Update the dependencies:
 
-   `helm dependency update asimmetric-example`
+   `helm dependency update aruba-uxi-example`
 
 3. Build the template:
 
-   `helm template --debug asimmetric-example`
+   `helm template --debug aruba-uxi-example`
 
 ## Templating Examples (Justfile)
 
 The Justfile defines commands to template the various examples.
 
-To template the `asimmetric-example` without any arguments:
+To template the `aruba-uxi-example` without any arguments:
 
 ```bash
-just template-asimmetric
+just template-aruba-uxi
 ```
 
 To template for a specific environment (e.g. local):
 
 ```bash
-just template-asimmetric -f examples/asimmetric-example/values-staging.yaml
+just template-aruba-uxi -f examples/aruba-uxi-example/values-staging.yaml
 ```
 
 The Justfile commands accept helm flags after the command:
@@ -56,16 +56,16 @@ The Justfile commands accept helm flags after the command:
 > \*\***NOTE:** run `helm template --help` for possible arguments
 
 ```bash
-just template-asimmetric [flags]
+just template-aruba-uxi [flags]
 ```
 
 ## Vault Sealed Secrets
 
-There are two types of sealed secrets, standard secrets and image pull secrets. For more info on kubeseal and getting the cert.pem see [Kape](https://github.com/Asimmetric/kape#secrets)
+There are two types of sealed secrets, standard secrets and image pull secrets. For more info on kubeseal and getting the cert.pem see [Kape](https://github.com/Aruba-UXI/kape#secrets)
 
 ### Standard Secrets
 
-1. Generate the sealed secret name using kubeseal as described in [Kape](https://github.com/Asimmetric/kape#secrets)
+1. Generate the sealed secret name using kubeseal as described in [Kape](https://github.com/Aruba-UXI/kape#secrets)
 2. Copy the secret into `values.yaml`. NB: be sure to use the correct `namespace` and `secret name` (in this example `"database-url"` and `"redis"`)
 
 ```yaml

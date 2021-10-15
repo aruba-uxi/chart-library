@@ -1,4 +1,4 @@
-{{- range $name, $data := .Values.applications }}
+{{- range $name, $data := .Values.cronjobs }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 {{- if $data.configMap }}
 ---
@@ -7,7 +7,7 @@ kind: ConfigMap
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
   {{- with $data.configMap.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

@@ -1,4 +1,4 @@
-asimmetric:
+aruba-uxi:
   ## Sealed secret data used to create the sealed secrets used by applications and cronjobs
   ##
   sealedSecrets:
@@ -28,7 +28,7 @@ asimmetric:
     ## The repository that this chart is kept in
     ## This can be define in the base values.yaml file and forgotten about
     ##
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     ## The environment that the service is deployed in
     ## Valid values are: DEV|STAGING|PRODUCTION (case insensitive)
     ## The values are converted to lowercase when used in the charts
@@ -38,7 +38,7 @@ asimmetric:
     ## The "image.tag" and "image.repository" needs to be define in the values.yaml file too
     ##
     image:
-      repository: asimmetric-example
+      repository: aruba-uxi-example
       tag: 1.2.3
       pullPolicy: IfNotPresent
     ## Basic environment variables (Optional)
@@ -54,7 +54,7 @@ asimmetric:
     envFields:
       HOST_IP: global-value
       OVERRIDDEN_FIELD_VALUE: global-value
-    ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+    ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
     ## Default: Nones
     ##
     labels: {}
@@ -207,7 +207,7 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##
       labels: {}
@@ -349,7 +349,7 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##
       labels: {}
@@ -426,7 +426,7 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##
       labels: {}
@@ -494,7 +494,7 @@ asimmetric:
       ##
       sentry:
         enabled: false
-      ## Ability to add extra labels above the default ones add by the `asimmetric.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##
       labels: {}

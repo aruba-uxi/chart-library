@@ -1,4 +1,4 @@
-asimmetric:
+aruba-uxi:
   sealedSecrets:
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
     sentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
@@ -11,7 +11,7 @@ asimmetric:
   global:
     environment: STAGING
     image:
-      repository: quay.io/uxi/asimmetric-example
+      repository: quay.io/uxi/aruba-uxi-example
       pullPolicy: Always
     env:
       DEBUG: false

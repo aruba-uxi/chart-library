@@ -13,17 +13,17 @@ kind: Deployment
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   replicas: {{ default 1 $data.replicaCount }}
   selector:
     matchLabels:
-      {{- include "asimmetric.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
+      {{- include "aruba-uxi.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
   revisionHistoryLimit: {{ default 3 $data.revisionHistoryLimit }}
   template:
     metadata:
       labels:
-        {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 8 }}
+        {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 8 }}
     spec:
       {{- if $sealedSecrets.imagePullSecret }}
       imagePullSecrets:
@@ -34,8 +34,8 @@ spec:
       {{- end }}
       containers:
       - name: {{ include "application.role" (dict "role" $data.role) }}
-        image: {{ include "asimmetric.image" (dict "context" $ "data" $overrideImage) }}
-        imagePullPolicy: {{ include "asimmetric.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
+        image: {{ include "aruba-uxi.image" (dict "context" $ "data" $overrideImage) }}
+        imagePullPolicy: {{ include "aruba-uxi.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
         {{- with $data.command }}
         command: {{ toRawJson . }}
         {{- end }}
@@ -72,9 +72,9 @@ spec:
             key: SENTRY_DSN
         {{- end }}
         {{- if or $envBasic $envFields $envSealedSecrets }}
-        {{- include "asimmetric.env-variables" (dict "data" $envBasic) | indent 8 }}
-        {{- include "asimmetric.env-fields" (dict "data" $envFields) | indent 8 }}
-        {{- include "asimmetric.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 8 }}
+        {{- include "aruba-uxi.env-variables" (dict "data" $envBasic) | indent 8 }}
+        {{- include "aruba-uxi.env-fields" (dict "data" $envFields) | indent 8 }}
+        {{- include "aruba-uxi.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 8 }}
         {{- end }}
         {{- if $data.port }}
         ports:

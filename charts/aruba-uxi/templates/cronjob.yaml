@@ -13,7 +13,7 @@ kind: CronJob
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   schedule: {{ $data.schedule | quote}}
   jobTemplate:
@@ -29,8 +29,8 @@ spec:
           {{- end }}
           containers:
           - name: {{ $name }}
-            image: {{ include "asimmetric.image" (dict "context" $ "data" $overrideImage) }}
-            imagePullPolicy: {{ include "asimmetric.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
+            image: {{ include "aruba-uxi.image" (dict "context" $ "data" $overrideImage) }}
+            imagePullPolicy: {{ include "aruba-uxi.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
             env:
             - name: ENVIRONMENT
               value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
@@ -64,9 +64,9 @@ spec:
                 key: SENTRY_DSN
             {{- end }}
             {{- if or $envBasic $envFields $envSealedSecrets }}
-            {{- include "asimmetric.env-variables" (dict "data" $envBasic) | indent 12 }}
-            {{- include "asimmetric.env-fields" (dict "data" $envFields) | indent 12 }}
-            {{- include "asimmetric.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 12 }}
+            {{- include "aruba-uxi.env-variables" (dict "data" $envBasic) | indent 12 }}
+            {{- include "aruba-uxi.env-fields" (dict "data" $envFields) | indent 12 }}
+            {{- include "aruba-uxi.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 12 }}
             {{- end }}
             {{- with $data.command }}
             command: {{ toRawJson . }}

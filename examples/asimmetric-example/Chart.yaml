@@ -1,9 +1,0 @@
-apiVersion: v2
-name: asimmetric-example
-description: A Helm chart for Asimmetric
-type: application
-version: 1.2.5
-dependencies:
-- name: asimmetric
-  version: "*"
-  repository: file://../../charts/asimmetric

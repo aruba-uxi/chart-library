@@ -1,44 +1,44 @@
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/application-serviceaccount.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     example-service-staging: example-service-staging
     global-label: global-label
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/cronjob-serviceaccount.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob-serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: example-cronjob-producer
   labels:
     app.kubernetes.io/name: example-cronjob-producer
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     global-label: global-label
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/application-configmap.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     example-service-staging: example-service-staging
     global-label: global-label
@@ -52,17 +52,17 @@ data:
         }
       }
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/application-service.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     example-service-staging: example-service-staging
     global-label: global-label
@@ -75,19 +75,19 @@ spec:
       targetPort: 8000
   selector:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
+    app.kubernetes.io/instance: aruba-uxi-example
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     example-service-staging: example-service-staging
     global-label: global-label
@@ -96,16 +96,16 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: example-service
-      app.kubernetes.io/instance: asimmetric-example
+      app.kubernetes.io/instance: aruba-uxi-example
   revisionHistoryLimit: 4
   template:
     metadata:
       labels:
         app.kubernetes.io/name: example-service
-        app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.6
+        app.kubernetes.io/instance: aruba-uxi-example
+        helm.sh/chart: aruba-uxi-2.0.0
         app.kubernetes.io/managed-by: Helm
-        repository: asimmetric-example
+        repository: aruba-uxi-example
         namespace: default
         example-service-staging: example-service-staging
         global-label: global-label
@@ -115,7 +115,7 @@ spec:
       serviceAccountName: example-service
       containers:
       - name: webapp
-        image: quay.io/uxi/asimmetric-example:1.0.1-dev
+        image: quay.io/uxi/aruba-uxi-example:1.0.1-dev
         imagePullPolicy: Always
         env:
         - name: ENVIRONMENT
@@ -213,17 +213,17 @@ spec:
         configMap:
           name: example-service
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/deployment.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: example-worker
   labels:
     app.kubernetes.io/name: example-worker
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     global-label: global-label
 spec:
@@ -231,16 +231,16 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: example-worker
-      app.kubernetes.io/instance: asimmetric-example
+      app.kubernetes.io/instance: aruba-uxi-example
   revisionHistoryLimit: 3
   template:
     metadata:
       labels:
         app.kubernetes.io/name: example-worker
-        app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.6
+        app.kubernetes.io/instance: aruba-uxi-example
+        helm.sh/chart: aruba-uxi-2.0.0
         app.kubernetes.io/managed-by: Helm
-        repository: asimmetric-example
+        repository: aruba-uxi-example
         namespace: default
         global-label: global-label
     spec:
@@ -248,7 +248,7 @@ spec:
       - name: sealed-image-pull-secret
       containers:
       - name: worker
-        image: quay.io/uxi/asimmetric-example:1.0.0
+        image: quay.io/uxi/aruba-uxi-example:1.0.0
         imagePullPolicy: Always
         command: ["echo","foo bar biz"]
         env:
@@ -279,17 +279,17 @@ spec:
             fieldRef:
               fieldPath: status.hostIP
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/cronjob.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: example-cronjob-consumer
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     example-cronjob-consumer-staging: example-cronjob-consumer-staging
     global-label: global-label
@@ -303,7 +303,7 @@ spec:
           - name: sealed-image-pull-secret
           containers:
           - name: example-cronjob-consumer
-            image: quay.io/uxi/asimmetric-example:1.0.0
+            image: quay.io/uxi/aruba-uxi-example:1.0.0
             imagePullPolicy: Always
             env:
             - name: ENVIRONMENT
@@ -328,17 +328,17 @@ spec:
             command: ["run-kinesis","consumer"]
           restartPolicy: Never
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/cronjob.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
 apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: example-cronjob-producer
   labels:
     app.kubernetes.io/name: example-cronjob-producer
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
     global-label: global-label
 spec:
@@ -352,7 +352,7 @@ spec:
           serviceAccountName: example-cronjob-producer
           containers:
           - name: example-cronjob-producer
-            image: quay.io/uxi/asimmetric-example:1.0.0
+            image: quay.io/uxi/aruba-uxi-example:1.0.0
             imagePullPolicy: Always
             env:
             - name: ENVIRONMENT
@@ -391,14 +391,14 @@ spec:
             command: ["run-kinesis","producer"]
           restartPolicy: OnFailure
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/imagepullsecret.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: asimmetric-1.1.6
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -410,52 +410,52 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: asimmetric-1.1.6
+      helm.sh/chart: aruba-uxi-2.0.0
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/sealedsecret.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: aws-access
   labels:
     app.kubernetes.io/name: aws-access
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
 spec:
   encryptedData:
     AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
     AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/sealedsecret.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/sealedsecret.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: database-url
   labels:
     app.kubernetes.io/name: database-url
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.6
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
-    repository: asimmetric-example
+    repository: aruba-uxi-example
     namespace: default
 spec:
   encryptedData:
     DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
 ---
-# Source: asimmetric-example/charts/asimmetric/templates/sentry-dsn.yaml
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/sentry-dsn.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
   name: sentry-dsn
   labels:
     app.kubernetes.io/name: sentry-dsn
-    helm.sh/chart: asimmetric-1.1.6
+    helm.sh/chart: aruba-uxi-2.0.0
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:

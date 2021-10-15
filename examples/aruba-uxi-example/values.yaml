@@ -1,0 +1,7 @@
+aruba-uxi:
+  global:
+    repository: aruba-uxi-example
+    environment: DEV
+    image:
+      repository: aruba-uxi-example
+      tag: 1.0.0

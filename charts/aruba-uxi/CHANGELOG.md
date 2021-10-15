@@ -1,4 +1,4 @@
-# Asimmetric Chart Library Change Log
+# Aruba UXI Chart Library Change Log
 
 All notable changes to this project will be documented in this file.
 
@@ -17,6 +17,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Fixed
 
 - what has been fixed
+
+## [2.0.0] - 2021-10-15
+
+### Changed
+
+- Moved `values.example.yaml` into the `charts/aruba-uxi`
+- Renamed `asimmetric` to `aruba-uxi`. This includes the root key in the yaml file.
+
+```yaml
+aruba-uxi:
+  sealed-secrets: {}
+  global: {}
+  applications: {}
+  cronjobs: {}
+```
 
 ## [1.1.6] - 2021-10-07
 
@@ -171,5 +186,5 @@ asimmetric:
 
 - Higher level of abstraction of kubernetes objects
 - The Asimmetric chart library provides a template for deploying, webapps, workers and cronjobs
-- See [README.md](https://github.com/Asimmetric/chart-library/blob/main/charts/asimmetric/README.md) and [MIGRATION_NOTES.md](https://github.com/Asimmetric/chart-library/blob/main/MIGRATION_NOTES.md) for information
-- See [WiKi](https://github.com/Asimmetric/onboarding/wiki/Chart-Library) for a history of the change
+- See [README.md](https://github.com/Aruba-UXI/chart-library/blob/main/charts/aruba-uxi/README.md) and [MIGRATION_NOTES.md](https://github.com/Aruba-UXI/chart-library/blob/main/MIGRATION_NOTES.md) for information
+- See [WiKi](https://github.com/Aruba-UXI/knowledge/wiki/Chart-Library) for a history of the change

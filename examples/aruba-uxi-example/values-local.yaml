@@ -1,4 +1,4 @@
-asimmetric:
+aruba-uxi:
   global:
     image:
       tag: latest
@@ -16,7 +16,7 @@ asimmetric:
       readinessProbe:
         path: /readyz
       env:
-        DATABASE_URL: postgresql://username:password@db:5432/asimmetric-example
+        DATABASE_URL: postgresql://username:password@db:5432/aruba-uxi-example
       datadog:
         enabled: false
       sentry:
