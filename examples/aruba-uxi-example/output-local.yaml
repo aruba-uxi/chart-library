@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
 =======
     helm.sh/chart: aruba-uxi-2.0.0
@@ -19,6 +20,9 @@ metadata:
 >>>>>>> e808a23 (adding a legacy ingress option to applications)
 =======
 >>>>>>> b9224f7 (rebase fixes)
+=======
+    helm.sh/chart: aruba-uxi-2.0.1
+>>>>>>> de61d48 (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -42,6 +46,7 @@ metadata:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.0.1
 =======
     helm.sh/chart: aruba-uxi-2.0.0
@@ -53,6 +58,9 @@ metadata:
 >>>>>>> e808a23 (adding a legacy ingress option to applications)
 =======
 >>>>>>> b9224f7 (rebase fixes)
+=======
+    helm.sh/chart: aruba-uxi-2.0.1
+>>>>>>> de61d48 (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -69,6 +77,7 @@ spec:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.0.1
 =======
         helm.sh/chart: aruba-uxi-2.0.0
@@ -80,6 +89,9 @@ spec:
 >>>>>>> e808a23 (adding a legacy ingress option to applications)
 =======
 >>>>>>> b9224f7 (rebase fixes)
+=======
+        helm.sh/chart: aruba-uxi-2.0.1
+>>>>>>> de61d48 (just output)
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
