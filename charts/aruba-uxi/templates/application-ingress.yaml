@@ -8,7 +8,7 @@ kind: Ingress
 metadata:
   name: {{ $name }}
   labels:
-    {{- include "asimmetric.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
   annotations:
     kubernetes.io/ingress.class: kong
 spec:
