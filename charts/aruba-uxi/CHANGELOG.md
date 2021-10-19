@@ -18,6 +18,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.0.1] - 2021-10-19
+
+### Added
+
+Add the ability to create a cronjob in suspended mode by setting the `suspend` key. Default is `false`
+
+```yaml
+cronjobs:
+  example-cronjob:
+    ...
+    suspend: true
+    ...
+```
+
 ## [2.0.0] - 2021-10-15
 
 ### Changed

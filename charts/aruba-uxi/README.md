@@ -124,6 +124,7 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | Parameter | Description | Default | Optional |
 |-----|------|---------|--------|
 | cronjob.schedule | The schedule to set for the cronjob to run on | | No |
+| cronjob.suspend | Suspends the cronjob | `false` | Yes |
 | cronjob.image.repository | A specific image that the cronjob should use | `globals.image.repository` | Yes |
 | cronjob.image.tag | The image to use for this specific cronjob | `globals.image.tag` | Yes |
 | cronjob.image.pullPolicy | The image pull policy to use for this cronjob | `globals.image.pullPOlicy` | Yes |

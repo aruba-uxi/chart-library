@@ -295,6 +295,7 @@ metadata:
     global-label: global-label
 spec:
   schedule: "*/5 * * * *"
+  suspend: "false"
   jobTemplate:
     spec:
       template:
@@ -343,6 +344,7 @@ metadata:
     global-label: global-label
 spec:
   schedule: "*/10 * * * *"
+  suspend: "true"
   jobTemplate:
     spec:
       template:

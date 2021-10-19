@@ -73,6 +73,7 @@ aruba-uxi:
   cronjobs:
     example-cronjob-producer:
       schedule: "*/10 * * * *"
+      suspend: true
       command: ["run-kinesis", "producer"]
       serviceAccount:
         create: true

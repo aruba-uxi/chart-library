@@ -362,6 +362,10 @@ aruba-uxi:
       ## The schedule for the cronjob
       ##
       schedule: "*/10 * * * *"
+      ## Suspends the cronjob (Optional)
+      ## Default: false
+      ##
+      suspend: false
       ## Configures the image and image pull policy (Optional)
       ## Default: uses .global.image
       ##
@@ -434,6 +438,10 @@ aruba-uxi:
       ## The schedule for the cronjob
       ##
       schedule: "*/5 * * * *"
+      ## Suspends the cronjob (Optional)
+      ## Default: false
+      ##
+      suspend: false
       ## Overrides the command from the dockerfile (Optional)
       ## Default: the Dockerfile command is used
       ##
