@@ -124,6 +124,7 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | Parameter | Description | Default | Optional |
 |-----|------|---------|--------|
 | cronjob.schedule | The schedule to set for the cronjob to run on | | No |
+| cronjob.suspend | Suspends the cronjob | `false` | Yes |
 | cronjob.image.repository | A specific image that the cronjob should use | `globals.image.repository` | Yes |
 | cronjob.image.tag | The image to use for this specific cronjob | `globals.image.tag` | Yes |
 | cronjob.image.pullPolicy | The image pull policy to use for this cronjob | `globals.image.pullPOlicy` | Yes |
@@ -131,6 +132,7 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.serviceAccount.create | Creates a service account and adds it to the cronjob. If no name is provided the application name will be used | `false` | Yes |
 | cronjob.serviceAccount.name | The name of the service account to attach to this cronjob| | Yes |
 | cronjob.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
+| cronjob.restartPolicy| Whether the cronjob should restart if a job fails | `OnFailure` | Yes |
 | cronjob.env | Basic environment variables specific for this cronjob. Can override the global.env values | `{}` | Yes |
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
