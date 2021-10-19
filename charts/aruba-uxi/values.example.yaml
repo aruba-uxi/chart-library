@@ -381,7 +381,8 @@ aruba-uxi:
         create: true
         name: example-cronjob-producer-service-account
         # annotations: {}
-      ## Whether the cronjob should restart if a job fails
+      ## Whether the cronjob should restart if a job fails (Optional)
+      ## Default: OnFailure
       ##
       restartPolicy: OnFailure
       ## Environment variables set from provided key:value pair (Optional)
@@ -452,10 +453,10 @@ aruba-uxi:
       serviceAccount:
         create: false
         name: example-cronjob-consumer-service-account
-      ## Attaches a service account it to the application (Optional)
-      ## Default: uses the default service account in the namespace
+      ## Whether the cronjob should restart if a job fails (Optional)
+      ## Default: OnFailure
       ##
-      restartPolicy: Never
+      restartPolicy: OnFailure
       ## Environment variables set from provided key:value pair (Optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None

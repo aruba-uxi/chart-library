@@ -144,15 +144,15 @@ spec:
           valueFrom:
           secretKeyRef:
             name: sentry-dsn
-            key: SENTRY_DSN        
+            key: SENTRY_DSN
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP        
+              fieldPath: status.hostIP
         - name: AWS_REGION
           valueFrom:
             secretKeyRef:
@@ -271,9 +271,9 @@ spec:
             fieldRef:
               fieldPath: metadata.uid
         - name: SENTRY_ENABLED
-          value: "false"        
+          value: "false"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -312,15 +312,15 @@ spec:
             - name: DD_ENABLED
               value: "false"
             - name: SENTRY_ENABLED
-              value: "false"            
+              value: "false"
             - name: AWS_ACCESS_ID
               value: "uid-12345"
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
             - name: AWS_REGION
               valueFrom:
                 secretKeyRef:
@@ -383,13 +383,13 @@ spec:
               valueFrom:
               secretKeyRef:
                 name: sentry-dsn
-                key: SENTRY_DSN            
+                key: SENTRY_DSN
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
             command: ["run-kinesis","producer"]
           restartPolicy: OnFailure
 ---

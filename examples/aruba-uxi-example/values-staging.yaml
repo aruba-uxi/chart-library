@@ -77,7 +77,6 @@ aruba-uxi:
       command: ["run-kinesis", "producer"]
       serviceAccount:
         create: true
-      restartPolicy: OnFailure
       datadog:
         enabled: true
       sentry:
