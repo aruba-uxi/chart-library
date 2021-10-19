@@ -7,22 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-<<<<<<< HEAD
-<<<<<<< HEAD
-    helm.sh/chart: aruba-uxi-2.0.1
-=======
-    helm.sh/chart: aruba-uxi-2.0.0
-<<<<<<< HEAD
-=======
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.7
->>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-local.yaml
->>>>>>> e808a23 (adding a legacy ingress option to applications)
-=======
->>>>>>> b9224f7 (rebase fixes)
-=======
-    helm.sh/chart: aruba-uxi-2.0.1
->>>>>>> de61d48 (just output)
+    helm.sh/chart: aruba-uxi-2.1.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -45,22 +30,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-<<<<<<< HEAD
-<<<<<<< HEAD
-    helm.sh/chart: aruba-uxi-2.0.1
-=======
-    helm.sh/chart: aruba-uxi-2.0.0
-<<<<<<< HEAD
-=======
-    app.kubernetes.io/instance: asimmetric-example
-    helm.sh/chart: asimmetric-1.1.7
->>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-local.yaml
->>>>>>> e808a23 (adding a legacy ingress option to applications)
-=======
->>>>>>> b9224f7 (rebase fixes)
-=======
-    helm.sh/chart: aruba-uxi-2.0.1
->>>>>>> de61d48 (just output)
+    helm.sh/chart: aruba-uxi-2.1.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -76,22 +46,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-<<<<<<< HEAD
-<<<<<<< HEAD
-        helm.sh/chart: aruba-uxi-2.0.1
-=======
-        helm.sh/chart: aruba-uxi-2.0.0
-<<<<<<< HEAD
-=======
-        app.kubernetes.io/instance: asimmetric-example
-        helm.sh/chart: asimmetric-1.1.7
->>>>>>> 0ae6f5e (adding a legacy ingress option to applications):examples/asimmetric-example/output-local.yaml
->>>>>>> e808a23 (adding a legacy ingress option to applications)
-=======
->>>>>>> b9224f7 (rebase fixes)
-=======
-        helm.sh/chart: aruba-uxi-2.0.1
->>>>>>> de61d48 (just output)
+        helm.sh/chart: aruba-uxi-2.1.0
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
