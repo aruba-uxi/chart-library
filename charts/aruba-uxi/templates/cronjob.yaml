@@ -60,9 +60,9 @@ spec:
               value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
             - name: SENTRY_DSN
               valueFrom:
-              secretKeyRef:
-                name: {{ template "sealedSentryDsn.name" dict}}
-                key: SENTRY_DSN
+                secretKeyRef:
+                  name: {{ template "sealedSentryDsn.name" dict}}
+                  key: SENTRY_DSN
             {{- end }}
             {{- if or $envBasic $envFields $envSealedSecrets }}
             {{- include "aruba-uxi.env-variables" (dict "data" $envBasic) | indent 12 }}

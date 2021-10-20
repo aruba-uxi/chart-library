@@ -4,6 +4,7 @@ A helm chart for Aruba UXI kubernetes resources
 
 1. [Helm](#helm)
 2. [Developing Notes](#developing-notes)
+3. [Sealed Secrets](#sealed-secrets)
 
 ## Helm
 
@@ -221,3 +222,17 @@ A template may refer to `.Values` and `.Chart` etc. When calling the template yo
 We can pass our own object through to templates with the following pattern `{{ include template.name (dict "key1" value1 "key2" value2)}}` to include more than the `.` object.
 
 This lets us provide more that one object (`.` and the data from within the `range` function) by calling the template like this `{{ include template.name (dict "context" $ "data" $data)}}`. Where `context` refers to the root object and `data` refers to the object within the range. This allows us to refer to multiple objects within the template. For example, `.context.Chart.Name` gives us access to the `name` value from `Chart.yaml` and `.data.name` gives us access to the `name` of the object in the range iteration.
+
+## Sealed Secrets
+
+Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-uxi/knowledge/wiki/Sealed-Secrets) to create a `SealedSecret`.
+
+Copy the `SealedSecret` data into the correct values key. The snippet below creates a `database-url` sealed secret
+
+```yaml
+aruba-uxi:
+  sealedSecrets:
+    env:
+      database-url:
+        DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+```
