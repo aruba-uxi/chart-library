@@ -59,20 +59,6 @@ The Justfile commands accept helm flags after the command:
 just template-aruba-uxi [flags]
 ```
 
-## Sealed Secrets
-
-Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-uxi/knowledge/wiki/Sealed-Secrets) to create a `SealedSecret`.
-
-Copy the `SealedSecret` data into the correct values key. The snippet below creates a `database-url` sealed secret
-
-```yaml
-aruba-uxi:
-  sealedSecrets:
-    env:
-      database-url:
-        DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
-```
-
 ## Version Control
 
 This repo follows the [SemVer 2](https://semver.org/) version format.
