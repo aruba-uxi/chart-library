@@ -18,6 +18,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.1.3] - 2021-10-20
+
+### Fixed
+
+- Fixed indentation in sentry env keys
+- updated documentation
+
 ## [2.1.2] - 2021-10-20
 
 ### Fixed
