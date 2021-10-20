@@ -65,6 +65,12 @@ aruba-uxi:
         enabled: true
       labels:
         example-service-staging: example-service-staging
+      ingress:
+        enabled: true
+        hosts:
+        - host: example-service.local
+          paths:
+            - path: /
     example-worker:
       role: worker
       command: ["echo", "foo bar biz"]

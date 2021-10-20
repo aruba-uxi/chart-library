@@ -18,6 +18,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.1.0] - 2021-10-20
+
+### Added
+
+Added a legacy ingress to the applications. The legacy ingress can be added by setting `ingress.enabled` option to `true`
+
+```yaml
+ingress:
+enabled: true
+hosts:
+- host: example-service.local
+  paths:
+  - path: /
+    pathType: ImplementationSpecific
+    backend:
+      serviceName: example-service
+      servicePort: 8000
+tls:
+ - secretName: chart-example-tls
+   hosts:
+   - example-service.local
+```
+
 ## [2.0.1] - 2021-10-19
 
 ### Added

@@ -1,0 +1,44 @@
+{{- range $name, $data := .Values.applications }}
+{{- $ingress := default dict $data.ingress }}
+{{- $svcPort := $data.port }}
+{{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
+{{- if $ingress.enabled -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $name }}
+  labels:
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: kong
+spec:
+  {{- if $ingress.tls }}
+  tls:
+  {{- range $ingress.tls }}
+  - hosts:
+      {{- range .hosts }}
+      - {{ . | quote }}
+      {{- end }}
+    secretName: {{ .secretName }}
+  {{- end }}
+  {{- end }}
+  rules:
+  {{- range $ingress.hosts }}
+  - host: {{ .host }}
+    http:
+      paths:
+      {{- range $path := .paths }}
+      - path: {{ $path.path }}
+        pathType: {{ default "ImplementationSpecific" $path.pathTpe }}
+        backend:
+          {{- if $path.backend }}
+          serviceName: {{ default $name $path.backend.serviceName }}
+          servicePort: {{ default $svcPort $path.backend.servicePort }}
+          {{- else }}
+          serviceName: {{ $name }}
+          servicePort: {{ $svcPort }}
+          {{- end }}
+      {{- end }}
+  {{- end }}
+{{- end }}
+{{- end }}

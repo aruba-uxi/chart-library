@@ -107,6 +107,17 @@ In this table `application` refers to each application defined under `applicatio
 | application.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
 | application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
+| application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
+| application.ingress.enabled | Enables the legacy ingress on the application. Setting to true will create a new legacy ingress manifest. | `false` | Yes |
+| application.ingress.hosts | A list of hosts to add to the legacy ingress. | `[]` | Yes |
+| application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | `[]` | Yes |
+| application.ingress.hosts[].paths.path | The path | `/` | Yes |
+| application.ingress.hosts[].paths.pathType | The path type | `ImplementationSpecific` | Yes |
+| application.ingress.hosts[].paths.backend.serviceName | The service name that the path talks to. | `application.name` | Yes |
+| application.ingress.hosts[].paths.backend.servicePort | The service port that the path talks to. | `application.port` | Yes |
+| application.ingress.tls | A set of TLS configuration settings to add to the lagacy ingress. | `[]` | Yes |
+| application.ingress.tls.secretName | The secret that contains the TLS certs. | | Yes |
+| application.ingress.tls.hosts | The hosts which use the TLS certs contained in the respective secret. | | Yes |
 
 ### Cronjob Values
 

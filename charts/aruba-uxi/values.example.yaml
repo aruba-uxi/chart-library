@@ -211,6 +211,22 @@ aruba-uxi:
       ## Default: None
       ##
       labels: {}
+      ## Configures a legacy ingress on the application (Optional)
+      ## Default: None
+      ingress:
+        enabled: false
+        hosts:
+        - host: example-service.local
+          paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              serviceName: example-service
+              servicePort: 8000
+        tls: []
+        # - secretName: chart-example-tls
+        #   hosts:
+        #     - example-service.local
     example-worker:
       ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.
