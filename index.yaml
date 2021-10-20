@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   aruba-uxi:
   - apiVersion: v2
+    created: "2021-10-20T06:53:42.800310221Z"
+    description: A Helm chart for Aruba UXI kubernetes resources
+    digest: f25b21e6d1744c87554a8257f3fee0c2e0393894f054eefe8d155165ff9bb293
+    maintainers:
+    - name: Aruba-UXI
+    name: aruba-uxi
+    type: application
+    urls:
+    - https://github.com/aruba-uxi/chart-library/releases/download/aruba-uxi-2.1.0/aruba-uxi-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v2
     created: "2021-10-19T17:59:14.366716899Z"
     description: A Helm chart for Aruba UXI kubernetes resources
     digest: b52695b8c6bf1a7505af8a9e73f283009cf89b071e79cd921a9e88a4299e7331
@@ -887,4 +898,4 @@ entries:
     urls:
     - https://github.com/Asimmetric/chart-library/releases/download/servicelib-0.1.0/servicelib-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-19T17:59:14.366980399Z"
+generated: "2021-10-20T06:53:42.804150862Z"
