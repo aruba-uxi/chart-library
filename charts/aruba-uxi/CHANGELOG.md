@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.1.2] - 2021-10-20
+
+### Fixed
+
+The `suspend` value for a `CronJob` should not be quoted
+
 ## [2.1.1] - 2021-10-20
 
 ### Fixed

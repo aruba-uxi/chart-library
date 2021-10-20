@@ -16,7 +16,7 @@ metadata:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   schedule: {{ $data.schedule | quote }}
-  suspend: {{ default "false" $data.suspend | quote }}
+  suspend: {{ default false $data.suspend }}
   jobTemplate:
     spec:
       template:
