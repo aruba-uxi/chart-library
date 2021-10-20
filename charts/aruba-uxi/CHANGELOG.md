@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.1.1] - 2021-10-20
+
+### Fixed
+
+K8s 1.18 does not support cronjob `batch/v1`. I had to change it to `batch/v1beta1`
+
 ## [2.1.0] - 2021-10-20
 
 ### Added
