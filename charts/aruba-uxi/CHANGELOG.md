@@ -50,8 +50,6 @@ Setting `sentry.enabled: true` will add:
 
 ```yaml
 env:
-- name: SENTRY_ENABLED
-  value: true
 - name: SENTRY_ENVIRONMENT
   value: "lowercase value from '.global.environment'"
 - name: SENTRY_DSN
