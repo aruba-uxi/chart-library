@@ -2,6 +2,6 @@ apiVersion: v2
 name: aruba-uxi
 description: A Helm chart for Aruba UXI kubernetes resources
 type: application
-version: 2.1.5
+version: 2.2.0
 maintainers:
   - name: Aruba-UXI
