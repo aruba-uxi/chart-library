@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
 =======
@@ -29,6 +30,9 @@ metadata:
     helm.sh/chart: aruba-uxi-2.2.0
 >>>>>>> e56fcdf (just output)
 >>>>>>> a701daf (just output)
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> bc6e26e (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -53,6 +57,7 @@ metadata:
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
 =======
@@ -73,6 +78,9 @@ metadata:
     helm.sh/chart: aruba-uxi-2.2.0
 >>>>>>> e56fcdf (just output)
 >>>>>>> a701daf (just output)
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> bc6e26e (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -88,6 +96,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.1.5
@@ -110,6 +119,9 @@ spec:
         helm.sh/chart: aruba-uxi-2.2.0
 >>>>>>> e56fcdf (just output)
 >>>>>>> a701daf (just output)
+=======
+        helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> bc6e26e (just output)
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
