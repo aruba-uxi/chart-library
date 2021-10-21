@@ -115,7 +115,7 @@ spec:
       serviceAccountName: example-service
       containers:
       - name: webapp
-        image: quay.io/uxi/aruba-uxi-example:1.0.1-dev
+        image: quay.io/uxi/aruba-uxi-example:1.0.1
         imagePullPolicy: Always
         env:
         - name: ENVIRONMENT
@@ -137,7 +137,7 @@ spec:
             fieldRef:
               fieldPath: metadata.uid
         - name: SENTRY_RELEASE
-          value: 1.0.1-dev
+          value: 1.0.1
         - name: SENTRY_ENVIRONMENT
           value: "staging"
         - name: SENTRY_DSN
