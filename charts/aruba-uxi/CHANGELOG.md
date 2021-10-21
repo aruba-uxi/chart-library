@@ -20,6 +20,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [2.1.4] - 2021-10-21
 
+### Added
+
+- `SENTRY_RELEASE` environment variable set to `image.tag`
+
 ### Changed
 
 - removed `SENTRY_ENABLED` env variable that is not needed

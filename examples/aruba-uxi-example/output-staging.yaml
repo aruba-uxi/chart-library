@@ -136,6 +136,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.uid
+        - name: SENTRY_RELEASE
+          value: 1.0.1-dev
         - name: SENTRY_ENVIRONMENT
           value: "staging"
         - name: SENTRY_DSN
@@ -369,6 +371,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.uid
+            - name: SENTRY_RELEASE
+              value: 1.0.0
             - name: SENTRY_ENVIRONMENT
               value: "staging"
             - name: SENTRY_DSN
