@@ -64,8 +64,6 @@ spec:
         {{- if not $sealedSecrets.sentryDsn }}
         {{- fail "Sentry is enabled but sentryDsn in .Values.sealedSecrets.sentryDsn is undefined"}}
         {{- end}}
-        - name: SENTRY_RELEASE
-          value: {{ include "aruba-uxi.image.tag" (dict "context" $ "data" $overrideImage) }}
         - name: SENTRY_ENVIRONMENT
           value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
         - name: SENTRY_DSN
