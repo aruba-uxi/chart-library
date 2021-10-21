@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-- removed `SENTRY_ENABLED~ env variable that is not needed
+- removed `SENTRY_ENABLED` env variable that is not needed
 - documentation updates
 
 ## [2.1.3] - 2021-10-20
