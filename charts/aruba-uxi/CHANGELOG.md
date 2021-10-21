@@ -18,6 +18,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.1.5] - 2021-10-21
+
+### Changed
+
+- Service uses port 80 by default and the ingress tries to talk to Service on Pod port. This is not allowing Service and Ingress to communicate.
+- To fix the above mentioned issue, the ingress will now use port 80 by default if `.service.port` is not defined.
+
 ## [2.1.4] - 2021-10-21
 
 ### Changed
