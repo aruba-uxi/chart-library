@@ -8,8 +8,11 @@ metadata:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -19,7 +22,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -35,8 +44,11 @@ metadata:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -46,7 +58,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -61,8 +79,11 @@ metadata:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -72,7 +93,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -97,8 +124,11 @@ metadata:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -108,7 +138,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -134,8 +170,11 @@ metadata:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -145,7 +184,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -164,8 +209,11 @@ spec:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -175,7 +223,13 @@ spec:
         helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+        helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -292,8 +346,11 @@ metadata:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -303,7 +360,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -321,8 +384,11 @@ spec:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
         helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -332,7 +398,13 @@ spec:
         helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+        helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -380,8 +452,11 @@ metadata:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -391,7 +466,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -440,8 +521,11 @@ metadata:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -451,7 +535,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -514,8 +604,11 @@ metadata:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -525,7 +618,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -552,8 +651,11 @@ metadata:
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -563,7 +665,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -576,8 +684,11 @@ spec:
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
 <<<<<<< HEAD
+<<<<<<< HEAD
       helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
       helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -587,7 +698,13 @@ spec:
       helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+      helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -601,8 +718,11 @@ metadata:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -612,7 +732,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -630,8 +756,11 @@ metadata:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: aruba-uxi-example
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -641,7 +770,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -657,8 +792,11 @@ metadata:
   labels:
     app.kubernetes.io/name: sentry-dsn
 <<<<<<< HEAD
+<<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.5
 =======
+=======
+>>>>>>> a701daf (just output)
 <<<<<<< HEAD
     helm.sh/chart: aruba-uxi-2.1.4
 =======
@@ -668,7 +806,13 @@ metadata:
     helm.sh/chart: aruba-uxi-2.1.2
 >>>>>>> c5db0c6 (enforcing datadog and sentry enabled in values)
 >>>>>>> f3559a0 (enforcing datadog and sentry enabled in values)
+<<<<<<< HEAD
 >>>>>>> cbd824a (enforcing datadog and sentry enabled in values)
+=======
+=======
+    helm.sh/chart: aruba-uxi-2.2.0
+>>>>>>> e56fcdf (just output)
+>>>>>>> a701daf (just output)
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
