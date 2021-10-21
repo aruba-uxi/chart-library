@@ -1,6 +1,7 @@
 {{- range $name, $data := .Values.applications }}
 {{- $ingress := default dict $data.ingress }}
 {{- $svcPort := $data.port }}
+{{- $service := default dict $data.service }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 {{- if $ingress.enabled -}}
 apiVersion: networking.k8s.io/v1beta1
@@ -33,10 +34,10 @@ spec:
         backend:
           {{- if $path.backend }}
           serviceName: {{ default $name $path.backend.serviceName }}
-          servicePort: {{ default $svcPort $path.backend.servicePort }}
+          servicePort: {{ default 80 $path.backend.servicePort }}
           {{- else }}
           serviceName: {{ $name }}
-          servicePort: {{ $svcPort }}
+          servicePort: {{ default 80 $service.port }}
           {{- end }}
       {{- end }}
   {{- end }}
