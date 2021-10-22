@@ -18,6 +18,47 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.2.0] - 2021-10-20
+
+### Added
+
+Checks have been added to the environment variables to restrict users from controlling datadog and sentry using environment variables. Controlling datadog and sentry should be done through the values file, i.e `datadog.enabled` or `sentry.enabled`. Setting either of these values to true will add additional environment variables that are relevant. It still allows adding additional environment variables that are not automatically set.
+
+Setting `datadog.enabled: true` will add:
+
+```yaml
+env:
+- name: DD_ENABLED
+  value: true
+- name: DD_ENV
+  value: "lowercase value from ".global.environment'"
+- name: DD_SERVICE
+  value: "the name of the application or cronjob"
+- name: DD_TRACE_ENABLED
+  value: "value from '.datadog.traceEnabled' (default: false)"
+- name: DD_AGENT_HOST
+  valueFrom:
+  fieldRef:
+    fieldPath: status.hostIP
+- name: DD_ENTITY_ID
+  valueFrom:
+  fieldRef:
+    fieldPath: metadata.uid
+```
+
+Setting `sentry.enabled: true` will add:
+
+```yaml
+env:
+- name: SENTRY_ENVIRONMENT
+  value: "lowercase value from '.global.environment'"
+- name: SENTRY_DSN
+  valueFrom:
+    secretKeyRef:
+      name: sentry-dsn
+      key: SENTRY_DSN
+```
+
 ## [2.1.5] - 2021-10-21
 
 ### Changed

@@ -77,7 +77,15 @@ namespace: {{ .context.Release.Namespace }}
 Inject extra environment variables
 */}}
 {{- define "aruba-uxi.env-variables" -}}
+{{- $datadogImplementedEnvironmentVariables := list "DD_ENABLED" "DD_ENV" "DD_SERVICE" "DD_TRACE_ENABLED" -}}
+{{- $sentryImplementedEnvironmentVariables := list "SENTRY_ENVIRONMENT" -}}
 {{- range $key, $val := .data }}
+{{- if mustHas $key $datadogImplementedEnvironmentVariables -}}
+{{- fail (printf "Env variable (%s) should not be defined in the env section. See the 'datadog' section in values.example.yaml for more info" $key) -}}
+{{- end }}
+{{- if mustHas $key $sentryImplementedEnvironmentVariables -}}
+{{- fail (printf "Env variable (%s) should not be defined in the env section. See the 'sentry' section in values.example.yaml for more info" $key) -}}
+{{- end }}
 - name: {{ $key }}
   value: {{ $val | quote }}
 {{- end }}
@@ -87,7 +95,11 @@ Inject extra environment variables
 Inject extra environment variables from fields
 */}}
 {{- define "aruba-uxi.env-fields" -}}
+{{- $datadogImplementedEnvironmentVariables := list "DD_AGENT_HOST" "DD_ENTITY_ID" -}}
 {{- range $key, $val := .data }}
+{{- if mustHas $key $datadogImplementedEnvironmentVariables -}}
+{{- fail (printf "Env variable (%s) should not be defined in the envFields section. See the 'datadog' section in values.example.yaml for more info" $key) -}}
+{{- end }}
 - name: {{ $key }}
   valueFrom:
     fieldRef:
@@ -99,8 +111,12 @@ Inject extra environment variables from fields
 Inject extra environment variables from secrets
 */}}
 {{- define "aruba-uxi.env-sealed-secrets" -}}
+{{- $sentryImplementedEnvironmentVariables := list "SENTRY_DSN" -}}
 {{- range $secretName, $secretData := .data -}}
 {{- range $envName := $secretData }}
+{{- if mustHas $envName $sentryImplementedEnvironmentVariables -}}
+{{- fail (printf "Env variable (%s) should not be defined in the envSealedSecret section. See the 'sentry' section in values.example.yaml for more info" $envName) -}}
+{{- end }}
 - name: {{ $envName }}
   valueFrom:
     secretKeyRef:
