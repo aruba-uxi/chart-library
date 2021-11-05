@@ -45,6 +45,7 @@ jobs:
         env:
           CT_CHART_DIRS: charts
           CT_TARGET_BRANCH: main
+          CT_CHECK_VERSION_INCREMENT: false
 
       - name: Template Check
         run: |
