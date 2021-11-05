@@ -1,12 +1,8 @@
 # chart-library
 
 - [Development](#development)
-  - [Version Control](#version-control)
-  - [Pull Requests](#pull-requests)
 - [Usage](#usage)
 - [Templating Examples](#templating-examples)
-  - [Manual](#manual)
-  - [Justfile](#justfile)
 
 This is a public repository holding the helm libraries
 
