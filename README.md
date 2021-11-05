@@ -31,6 +31,16 @@ Given a version number `MAJOR.MINOR.PATCH`, increment the:
 
 This repo enforces the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) style through the use of [Semantic Pull Requests](https://github.com/zeke/semantic-pull-requests) github app.
 
+A commit message or PR title should take the form
+
+```text
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)
+```
+
 ## Usage
 
 To use a chart defined in this library it must be added as a dependency in the service `Chart.yaml`.

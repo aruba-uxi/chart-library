@@ -33,10 +33,7 @@ Sealed secrets are defined with the `.sealedSecrets` object. A `SealedSecret` ku
 | Parameter | Description | Default | Optional |
 |-----|------|---------|---|
 | sealedSecrets.imagePullSecret | The sealed version of the base64 encoded `dockerconfigjson` file used to provide access to our image repository | "" | Yes |
-| sealedSecrets.sentryDsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value | | Yes |
-| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/aruba-uxi/chart-library/blob/main/charts/aruba-uxi/values.example.yaml) for usage| {} | Yes |
-
-### Creating Sealed Secrets
+| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Aruba-UXI/chart-library/blob/main/examples/aruba-uxi-example/values.example.yaml) for usage| {} | Yes |
 
 Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-uxi/knowledge/wiki/Sealed-Secrets) to create a `SealedSecret`.
 
@@ -83,7 +80,7 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
-| global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret` and `sealedSecrets.sentryDsn`). | `{}` | Yes | Yes |
+| global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret`). | `{}` | Yes | Yes |
 
 > **__NOTE:__** The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
 
@@ -131,9 +128,10 @@ In this table `application` refers to each application defined under `applicatio
 | application.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
-| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
-| application.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false` | Yes |
-| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
+| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| application.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
+| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sentry.dsn` value to create the sentry DSN sealed secret | `false` | Yes |
+| application.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<application-name>-sentry-dsn` | | Yes |
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 | application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
 | application.ingress.enabled | Enables the legacy ingress on the application. Setting to true will create a new legacy ingress manifest. | `false` | Yes |
@@ -175,9 +173,10 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.env | Basic environment variables specific for this cronjob. Can override the global.env values | `{}` | Yes |
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
-| cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
-| cronjob.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false` | Yes |
-| cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
+| cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
+| cronjob.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
+| cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sentry.dsn` value to create the sentry DSN sealed secret | `false` | Yes |
+| cronjob.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<cronjob-name>-sentry-dsn` | | Yes |
 | cronjob.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 
 ## Developing Notes
