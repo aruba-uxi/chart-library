@@ -4,4 +4,4 @@ description: A Helm chart for Aruba UXI kubernetes resources
 type: application
 version: 2.2.0
 maintainers:
-  - name: Aruba-UXI
+  - name: aruba-uxi

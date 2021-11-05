@@ -4,7 +4,7 @@ This is a public repository holding the helm libraries
 
 It has Github pages hosted on the branch `gh-pages`. The helm charts available on <https://aruba-uxi.github.io/chart-library> (see [Usage](#usage) for more info)
 
-For further information see the [wiki](https://github.com/Aruba-UXI/knowledge/wiki/Chart-Library).
+For further information see the [wiki](https://github.com/aruba-uxi/knowledge/wiki/Chart-Library).
 
 ## Usage
 

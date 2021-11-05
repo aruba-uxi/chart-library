@@ -25,8 +25,8 @@ aruba-uxi:
   ## Global values used by all manifests
   ##
   global:
-    ## The repository that this chart is kept in
-    ## This can be define in the base values.yaml file and forgotten about
+    ## The github repository that these charts are kept in
+    ## This can be defined in the base values.yaml file and forgotten about
     ##
     repository: aruba-uxi-example
     ## The environment that the service is deployed in
