@@ -34,11 +34,26 @@ Sealed secrets are defined with the `.sealedSecrets` object. A `SealedSecret` ku
 |-----|------|---------|---|
 | sealedSecrets.imagePullSecret | The sealed version of the base64 encoded `dockerconfigjson` file used to provide access to our image repository | "" | Yes |
 | sealedSecrets.sentryDsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value | | Yes |
-| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Aruba-UXI/chart-library/blob/main/examples/aruba-uxi-example/values.example.yaml) for usage| {} | Yes |
+| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/aruba-uxi/chart-library/blob/main/charts/aruba-uxi/values.example.yaml) for usage| {} | Yes |
+
+### Creating Sealed Secrets
 
 Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-uxi/knowledge/wiki/Sealed-Secrets) to create a `SealedSecret`.
 
-Copy the `SealedSecret` data into the correct values key. The snippet below creates a `database-url` sealed secret
+When naming a sealed secret you need to ensure that the name you use to create the sealed secret and the name you give in the values file is the same.
+
+> **__NOTE:__** The `sealedSecrets.imagePullSecret` name should be called `uxi-sealed-image-pull-secret`
+
+Once you have created a `SealedSecret` you will need to copy the encoded value for each key defined.
+
+For example, to create a sealed secret called `database-url` with the key `DATABASE_URL`, you need to follow the instructions in the link above to create a sealed secret with the following values:
+
+- name: `database-url`
+- key `DATABASE_URL`
+- value: The value is the URL taken from wherever the database is hosted
+- namespace: The namespace should be the name of the github repo, unless there are reasons for it to
+
+The output should be a sealed secret with an encoded string for the `DATABASE_URL` value. Copy this value and paste it into the values file in the correct section.
 
 ```yaml
 aruba-uxi:
@@ -60,7 +75,7 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 
 | Parameter | Description | Default | Optional | Can Override |
 |-----|------|---------|---|---|
-| global.repository | The repository that this chart is kept in | | No | No |
+| global.repository | The github repository that these charts are kept in | | No | No |
 | global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid environments are (`DEV`, `STAGING`, `PRODUCTION`) | | No | No |
 | global.image.repository | The image repository to use for images. | | No | Yes |
 | global.image.tag | The image tag to use. | | No | Yes |
@@ -116,8 +131,8 @@ In this table `application` refers to each application defined under `applicatio
 | application.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
-| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
-| application.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
+| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
+| application.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false` | Yes |
 | application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 | application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
@@ -160,8 +175,8 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.env | Basic environment variables specific for this cronjob. Can override the global.env values | `{}` | Yes |
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
-| cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
-| cronjob.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
+| cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
+| cronjob.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false` | Yes |
 | cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 | cronjob.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 

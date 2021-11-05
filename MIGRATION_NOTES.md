@@ -4,7 +4,7 @@
 
 Moving from the old library to the new one is fairly straight forward. However, there are some notable changes.
 
-See [PR-140](https://github.com/Aruba-UXI/customer-integrations-service/pull/140) for the customer-integrations-service repo to see how it is done
+See [PR-140](https://github.com/aruba-uxi/customer-integrations-service/pull/140) for the customer-integrations-service repo to see how it is done
 
 ## Noteable Changes
 
@@ -13,7 +13,7 @@ See [PR-140](https://github.com/Aruba-UXI/customer-integrations-service/pull/140
 - applications (webapp or worker) require the `role` to be set to state whether they are a webapp or a worker.
 - webapps and workers are all defined under `.Values.asimemtric.applications`
 - cronjobs are defined under `.Values.asimemtric.cronjobs`
-- Datadog is enabled by setting the `datadog.enabled` value to `true`. When set to `true` all the required environment variables will be added for you. You should not need to add `DD_ENV`, `DD_SERVICE`, `DD_TRACE_ENABLED`, `DD_ENTITY_ID`, `DD_AGENT_HOST`. (See the [README](https://github.com/Aruba-UXI/chart-library/blob/main/charts/aruba-uxi/README.md#application-values) for information on what can be configure for datadog)
+- Datadog is enabled by setting the `datadog.enabled` value to `true`. When set to `true` all the required environment variables will be added for you. You should not need to add `DD_ENV`, `DD_SERVICE`, `DD_TRACE_ENABLED`, `DD_ENTITY_ID`, `DD_AGENT_HOST`. (See the [README](https://github.com/aruba-uxi/chart-library/blob/main/charts/aruba-uxi/README.md#application-values) for information on what can be configure for datadog)
 
 ## Chart.yaml Dependencies
 
@@ -54,7 +54,7 @@ aruba-uxi:
  ...
 ```
 
-Within `.Values.aruba-uxi` will be the values as discussed in [values.example.yaml](https://github.com/Aruba-UXI/chart-library/blob/main/examples/aruba-uxi-example/values.example.yaml)
+Within `.Values.aruba-uxi` will be the values as discussed in [values.example.yaml](https://github.com/aruba-uxi/chart-library/blob/main/examples/aruba-uxi-example/values.example.yaml)
 
 ## Notes / ToDo
 
