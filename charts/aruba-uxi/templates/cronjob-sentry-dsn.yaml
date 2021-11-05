@@ -1,5 +1,6 @@
 {{- range $name, $data := .Values.applications }}
 {{- $sentry := default dict $data.sentry }}
+{{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 {{- if $sentry.enabled }}
 {{- if not $sentry.dsn }}
 {{- fail (printf "Sentry is enabled but applications.%s.sentry.dsn is not defined" $name) }}
@@ -9,7 +10,7 @@ kind: SealedSecret
 metadata:
   name: {{ include "sealedSentryDsn.name" (dict "name" $name) }}
   labels:
-    {{- include "sealedSentryDsn.labels" (dict "context" $ "name" $name) | nindent 4 }}
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
   encryptedData:
     SENTRY_DSN: {{ $sentry.dsn }}

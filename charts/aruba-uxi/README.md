@@ -80,7 +80,7 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
 | global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
-| global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret` and `sealedSecrets.sentryDsn`). | `{}` | Yes | Yes |
+| global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret`). | `{}` | Yes | Yes |
 
 > **__NOTE:__** The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
 
