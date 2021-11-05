@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-The `application-sentry-dsn.yaml` and `cronjob-sentry-dsn.yaml` files needed to be renamed(interchanged) because the `application-sentry-dsn.yaml` has logic to add sentry-dsn for a cronjob and vice versa for `cronjob-sentry-dsn.yaml`.
+The `application-sentry-dsn.yaml` and `cronjob-sentry-dsn.yaml` files needed to be renamed(interchanged) because the `application-sentry-dsn.yaml` has logic to add sentry-dsn for a cronjob and vice versa for `cronjob-sentry-dsn.yaml`. Files have been renamed now to correctly generate sealedsecrets.
 
 ## [2.3.0] - 2021-11-05
 
