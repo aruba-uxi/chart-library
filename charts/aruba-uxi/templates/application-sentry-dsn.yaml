@@ -1,9 +1,9 @@
-{{- range $name, $data := .Values.cronjobs }}
+{{- range $name, $data := .Values.applications }}
 {{- $sentry := default dict $data.sentry }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 {{- if $sentry.enabled }}
 {{- if not $sentry.dsn }}
-{{- fail (printf "Sentry is enabled but cronjobs.%s.sentry.dsn is not defined" $name) }}
+{{- fail (printf "Sentry is enabled but applications.%s.sentry.dsn is not defined" $name) }}
 {{- end}}
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
