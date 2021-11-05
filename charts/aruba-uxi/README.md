@@ -132,17 +132,17 @@ In this table `application` refers to each application defined under `applicatio
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
 | application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
-| application.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false`| Yes |
-| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false`| Yes |
-| application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}`| Yes |
-| application.ingress | Configures the legacy ingress added to an application | `{}`| Yes |
-| application.ingress.enabled | Enables the legacy ingress on the application. Setting to true will create a new legacy ingress manifest. | `false`| Yes |
-| application.ingress.hosts | A list of hosts to add to the legacy ingress. | `[]`| Yes |
-| application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | `[]`| Yes |
-| application.ingress.hosts[].paths.path | The path | `/`| Yes |
-| application.ingress.hosts[].paths.pathType | The path type | `ImplementationSpecific`| Yes |
-| application.ingress.hosts[].paths.backend.serviceName | The service name that the path talks to. | `application.name`| Yes |
-| application.ingress.hosts[].paths.backend.servicePort | The service port that the path talks to. | `application.port`| Yes |
+| application.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false` | Yes |
+| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
+| application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
+| application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
+| application.ingress.enabled | Enables the legacy ingress on the application. Setting to true will create a new legacy ingress manifest. | `false` | Yes |
+| application.ingress.hosts | A list of hosts to add to the legacy ingress. | `[]` | Yes |
+| application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | `[]` | Yes |
+| application.ingress.hosts[].paths.path | The path | `/` | Yes |
+| application.ingress.hosts[].paths.pathType | The path type | `ImplementationSpecific` | Yes |
+| application.ingress.hosts[].paths.backend.serviceName | The service name that the path talks to. | `application.name` | Yes |
+| application.ingress.hosts[].paths.backend.servicePort | The service port that the path talks to. | `application.port` | Yes |
 | application.ingress.tls | A set of TLS configuration settings to add to the lagacy ingress. | `[]` | Yes |
 | application.ingress.tls.secretName | The secret that contains the TLS certs. | | Yes |
 | application.ingress.tls.hosts | The hosts which use the TLS certs contained in the respective secret. | | Yes |
@@ -176,7 +176,7 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
 | cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
 | cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
-| cronjob.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false`| Yes |
+| cronjob.datadog.traceEnabled | Enables datadog tracing. This sets the `DD_TRACE_ENABLED` environment variable. | `false` | Yes |
 | cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sealedSecrets.sentryDsn` value to create the sentry-dsn sealed secret | `false` | Yes |
 | cronjob.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 
