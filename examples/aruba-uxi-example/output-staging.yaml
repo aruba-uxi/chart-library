@@ -141,7 +141,7 @@ spec:
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
-              name: sentry-dsn
+              name: example-service-sentry-dsn
               key: SENTRY_DSN        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
@@ -374,7 +374,7 @@ spec:
             - name: SENTRY_DSN
               valueFrom:
                 secretKeyRef:
-                  name: sentry-dsn
+                  name: example-cronjob-producer-sentry-dsn
                   key: SENTRY_DSN            
             - name: DEBUG
               value: "false"            
@@ -411,6 +411,34 @@ spec:
         backend:
           serviceName: example-service
           servicePort: 80
+---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-producer-sentry-dsn
+  labels:
+    app.kubernetes.io/name: example-cronjob-producer-sentry-dsn
+    helm.sh/chart: aruba-uxi-2.2.0
+    app.kubernetes.io/managed-by: Helm
+    namespace: default
+spec:
+  encryptedData:
+    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
+---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob-sentry-dsn.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-service-sentry-dsn
+  labels:
+    app.kubernetes.io/name: example-service-sentry-dsn
+    helm.sh/chart: aruba-uxi-2.2.0
+    app.kubernetes.io/managed-by: Helm
+    namespace: default
+spec:
+  encryptedData:
+    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
@@ -468,6 +496,7 @@ metadata:
 spec:
   encryptedData:
     DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+<<<<<<< HEAD
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/sentry-dsn.yaml
 apiVersion: bitnami.com/v1alpha1
@@ -482,3 +511,5 @@ metadata:
 spec:
   encryptedData:
     SENTRY_DSN: sealed_version_of_the_base64_encoded_sentry_dsn
+=======
+>>>>>>> 8614cfb ([feat] move sentry DSN into the applications level)

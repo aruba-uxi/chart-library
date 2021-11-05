@@ -160,11 +160,11 @@ Create the image pull policy to use
 Creates the Sentry DSN sealed secret name
 */}}
 {{- define "sealedSentryDsn.name" -}}
-{{- print "sentry-dsn" -}}
+{{- printf "%s-sentry-dsn" .name -}}
 {{- end -}}
 
 {{- define "sealedSentryDsn.labels" -}}
-app.kubernetes.io/name: {{ include "sealedSentryDsn.name" "" }}
+app.kubernetes.io/name: {{ include "sealedSentryDsn.name" (dict "name" .name) }}
 helm.sh/chart: {{ include "aruba-uxi.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
 namespace: {{ .context.Release.Namespace }}

@@ -7,11 +7,6 @@ aruba-uxi:
     ## Default: None
     ##
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
-    ## Creates a sealed secret for the sentry DSN (Optional).
-    ## Used when sentry is enabled
-    ## Default: None
-    ##
-    sentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
     ## Creates sealed secrets used to populate environment variables (Optional)
     ## A sealed secret is created for each env.<value>
     ## Default: None
@@ -201,10 +196,11 @@ aruba-uxi:
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
       ##
       sentry:
         enabled: false
+        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##
@@ -357,10 +353,11 @@ aruba-uxi:
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
       ##
       sentry:
         enabled: false
+        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##
@@ -437,10 +434,11 @@ aruba-uxi:
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
       ##
       sentry:
         enabled: false
+        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##
@@ -507,10 +505,11 @@ aruba-uxi:
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sealedSecrets.sentryDsn value
+      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
       ##
       sentry:
         enabled: false
+        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
       ##

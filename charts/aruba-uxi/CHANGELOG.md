@@ -18,6 +18,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.3.0] - 2021-11-05
+
+### Changed
+
+Each application needs to use its own sentry DSN value. Previously the sentry DSN was shared across all applications which caused incorrect data in sentry.
+
+Now the sentry DSN has been moved into the application level under the `application[n].sentry` key.
+
+When enabling sentry, you have to also provide the encoded sentry DSN. The charts will fail if you have not provided the DSN.
+
+The `sentryDsn` has been removed from the `sealedSecrets` section
+
+```yaml
+aruba-uxi:
+  sealedSecrets:
+    sentryDsn: ...
+```
+
+and moved into the application section
+
+```yaml
+aruba-uxi:
+  applications:
+    example-service:
+      ...
+      sentry:
+        enabled: true
+        dsn: AgA/ae/EwlywYuzCRFAFDQEYJ9y2Jy4I...
+```
+
 ## [2.2.0] - 2021-10-20
 
 ### Added

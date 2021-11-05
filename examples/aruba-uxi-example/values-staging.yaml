@@ -1,7 +1,6 @@
 aruba-uxi:
   sealedSecrets:
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
-    sentryDsn: sealed_version_of_the_base64_encoded_sentry_dsn
     env:
       aws-access:
         AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
@@ -63,6 +62,7 @@ aruba-uxi:
         traceEnabled: true
       sentry:
         enabled: true
+        dsn: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
       labels:
         example-service-staging: example-service-staging
       ingress:
@@ -87,6 +87,7 @@ aruba-uxi:
         enabled: true
       sentry:
         enabled: true
+        dsn: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
     example-cronjob-consumer:
       schedule: "*/5 * * * *"
       command: ["run-kinesis", "consumer"]

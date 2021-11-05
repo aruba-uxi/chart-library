@@ -1,0 +1,17 @@
+{{- range $name, $data := .Values.cronjobs }}
+{{- $sentry := default dict $data.sentry }}
+{{- if $sentry.enabled }}
+{{- if not $sentry.dsn }}
+{{- fail (printf "Sentry is enabled but cronjobs.%s.sentry.dsn is not defined" $name) }}
+{{- end}}
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: {{ include "sealedSentryDsn.name" (dict "name" $name) }}
+  labels:
+    {{- include "sealedSentryDsn.labels" (dict "context" $ "name" $name) | nindent 4 }}
+spec:
+  encryptedData:
+    SENTRY_DSN: {{ $sentry.dsn }}
+{{- end }}
+{{- end }}

@@ -2,7 +2,7 @@ apiVersion: v2
 name: aruba-uxi-example
 description: A Helm chart for Aruba UX
 type: application
-version: 1.2.5
+version: 1.2.6
 dependencies:
 - name: aruba-uxi
   version: "*"
