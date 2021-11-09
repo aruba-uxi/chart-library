@@ -28,10 +28,10 @@ aruba-uxi:
       serviceAccount:
         create: true
       port: 8000
-      livenessProbe:
-        path: /livez
-      readinessProbe:
-        path: /readyz
+      # livenessProbe:
+      #   path: /livez
+      # readinessProbe:
+      #   path: /readyz
       resources:
         limits:
           cpu: 100m
@@ -58,10 +58,10 @@ aruba-uxi:
           - AWS_REGION
           - AWS_ACCESS_ID
       datadog:
-        enabled: true
-        traceEnabled: true
+        enabled: false
+        traceEnabled: false
       sentry:
-        enabled: true
+        enabled: false
         dsn: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
       labels:
         example-service-staging: example-service-staging
@@ -75,7 +75,7 @@ aruba-uxi:
       role: worker
       command: ["echo", "foo bar biz"]
       datadog:
-        enabled: true
+        enabled: false
   cronjobs:
     example-cronjob-producer:
       schedule: "*/10 * * * *"
@@ -84,12 +84,13 @@ aruba-uxi:
       serviceAccount:
         create: true
       datadog:
-        enabled: true
+        enabled: false
       sentry:
-        enabled: true
+        enabled: false
         dsn: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
     example-cronjob-consumer:
       schedule: "*/5 * * * *"
+      suspend: true
       command: ["run-kinesis", "consumer"]
       restartPolicy: Never
       env:
