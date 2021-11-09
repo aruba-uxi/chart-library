@@ -24,8 +24,8 @@ aruba-uxi:
       role: webapp
       revisionHistoryLimit: 4
       replicaCount: 2
-      image:
-        tag: 1.0.1
+      # image:
+      #   tag: 1.0.1
       serviceAccount:
         create: true
       port: 8000
