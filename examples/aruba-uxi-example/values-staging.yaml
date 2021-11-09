@@ -10,7 +10,8 @@ aruba-uxi:
   global:
     environment: STAGING
     image:
-      repository: quay.io/uxi/aruba-uxi-example
+      repository: nginx
+      tag: latest
       pullPolicy: Always
     env:
       DEBUG: false
