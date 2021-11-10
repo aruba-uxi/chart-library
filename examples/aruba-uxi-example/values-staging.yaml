@@ -88,7 +88,7 @@ aruba-uxi:
     example-worker:
       role: worker
       image:
-        repository: busybox
+        repository: quay.io/uxi/busybox
         tag: latest
       command: ["/bin/sh", "-c", "exec tail -f /dev/null"]
       datadog:
