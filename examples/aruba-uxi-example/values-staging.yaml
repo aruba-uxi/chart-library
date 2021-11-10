@@ -57,7 +57,7 @@ aruba-uxi:
       - name: firebase-service-account
         readOnly: true
         path: /app/resources
-        secretName: SERVICE_ACCOUNT
+        secretName: firebase-service-account
       env:
         AWS_DEFAULT_REGION: us-west-1
       envSealedSecrets:

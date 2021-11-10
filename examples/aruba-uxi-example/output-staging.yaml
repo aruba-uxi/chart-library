@@ -209,7 +209,7 @@ spec:
           name: example-service
       - name: firebase-service-account
         secret:
-          secretName: SERVICE_ACCOUNT
+          secretName: firebase-service-account
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
 apiVersion: apps/v1
