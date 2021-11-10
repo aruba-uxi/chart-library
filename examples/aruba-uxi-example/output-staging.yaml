@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -22,7 +22,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -36,7 +36,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -60,7 +60,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -85,7 +85,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -103,7 +103,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-2.3.1
+        helm.sh/chart: aruba-uxi-2.3.2
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -135,15 +135,15 @@ spec:
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
-              fieldPath: metadata.uid        
+              fieldPath: metadata.uid
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP        
+              fieldPath: status.hostIP
         - name: AWS_REGION
           valueFrom:
             secretKeyRef:
@@ -195,10 +195,22 @@ spec:
         - name: config
           mountPath: /app/config
           readOnly: true
+        - name: service-account
+          mountPath: /app/resources
+          readOnly: true
+        - name: database-url
+          mountPath: /app/something
+          readOnly: true
       volumes:
       - name: config
         configMap:
           name: example-service
+      - name: service-account
+        secret:
+          secretName: SERVICE_ACCOUNT
+      - name: database-url
+        secret:
+          secretName: DATABASE_URL
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
 apiVersion: apps/v1
@@ -208,7 +220,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -225,7 +237,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-2.3.1
+        helm.sh/chart: aruba-uxi-2.3.2
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -242,9 +254,9 @@ spec:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
-          value: "false"        
+          value: "false"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -258,7 +270,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -281,13 +293,13 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "false"            
+              value: "false"
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
             - name: AWS_REGION
               valueFrom:
                 secretKeyRef:
@@ -304,7 +316,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -327,13 +339,13 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "false"            
+              value: "false"
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
             command: ["/bin/sh","-c","echo Hello from the example-cronjob-producer"]
           restartPolicy: OnFailure
 ---
@@ -345,7 +357,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -364,6 +376,41 @@ spec:
           serviceName: example-service
           servicePort: 80
 ---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-service-sentry-dsn
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.3.2
+    app.kubernetes.io/managed-by: Helm
+    repository: aruba-uxi-example
+    namespace: default
+    example-service-staging: example-service-staging
+    global-label: global-label
+spec:
+  encryptedData:
+    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
+---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob-sentry-dsn.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-producer-sentry-dsn
+  labels:
+    app.kubernetes.io/name: example-cronjob-producer
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.3.2
+    app.kubernetes.io/managed-by: Helm
+    repository: aruba-uxi-example
+    namespace: default
+    global-label: global-label
+spec:
+  encryptedData:
+    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
+---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -371,7 +418,7 @@ metadata:
   name: sealed-image-pull-secret
   labels:
     app.kubernetes.io/name: sealed-image-pull-secret
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -383,7 +430,7 @@ spec:
       name: sealed-image-pull-secret
       labels:
       app.kubernetes.io/name: sealed-image-pull-secret
-      helm.sh/chart: aruba-uxi-2.3.1
+      helm.sh/chart: aruba-uxi-2.3.2
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -396,7 +443,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -413,7 +460,7 @@ metadata:
   labels:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
+    helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
