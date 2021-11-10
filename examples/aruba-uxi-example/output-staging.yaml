@@ -135,15 +135,15 @@ spec:
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
-              fieldPath: metadata.uid        
+              fieldPath: metadata.uid
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP        
+              fieldPath: status.hostIP
         - name: AWS_REGION
           valueFrom:
             secretKeyRef:
@@ -248,9 +248,9 @@ spec:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
-          value: "false"        
+          value: "false"
         - name: DEBUG
-          value: "false"        
+          value: "false"
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -287,13 +287,13 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "false"            
+              value: "false"
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
             - name: AWS_REGION
               valueFrom:
                 secretKeyRef:
@@ -333,13 +333,13 @@ spec:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "false"            
+              value: "false"
             - name: DEBUG
-              value: "false"            
+              value: "false"
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP            
+                  fieldPath: status.hostIP
             command: ["/bin/sh","-c","echo Hello from the example-cronjob-producer"]
           restartPolicy: OnFailure
 ---
@@ -369,6 +369,41 @@ spec:
         backend:
           serviceName: example-service
           servicePort: 80
+---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-service-sentry-dsn
+  labels:
+    app.kubernetes.io/name: example-service
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.3.2
+    app.kubernetes.io/managed-by: Helm
+    repository: aruba-uxi-example
+    namespace: default
+    example-service-staging: example-service-staging
+    global-label: global-label
+spec:
+  encryptedData:
+    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
+---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob-sentry-dsn.yaml
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: example-cronjob-producer-sentry-dsn
+  labels:
+    app.kubernetes.io/name: example-cronjob-producer
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-2.3.2
+    app.kubernetes.io/managed-by: Helm
+    repository: aruba-uxi-example
+    namespace: default
+    global-label: global-label
+spec:
+  encryptedData:
+    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
