@@ -96,7 +96,7 @@ aruba-uxi:
   cronjobs:
     example-cronjob-producer:
       image:
-        repository: busybox
+        repository: quay.io/uxi/busybox
         tag: latest
       schedule: "0 * * * *"
       command: ["/bin/sh", "-c", "echo Hello from the example-cronjob-producer"]
@@ -104,7 +104,7 @@ aruba-uxi:
         create: true
     example-cronjob-consumer:
       image:
-        repository: busybox
+        repository: quay.io/uxi/busybox
         tag: latest
       schedule: "0 * * * *"
       suspend: true
