@@ -33,10 +33,10 @@ aruba-uxi:
         repository: quay.io/uxi/nginx
         tag: latest
       revisionHistoryLimit: 1
-      replicaCount: 2
+      replicaCount: 1
       serviceAccount:
         create: true
-      port: 8000
+      port: 80
       # livenessProbe:
       #   path: /
       # readinessProbe:
