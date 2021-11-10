@@ -79,6 +79,7 @@ aruba-uxi:
             - path: /
     example-worker:
       role: worker
+      revisionHistoryLimit: 1
       image:
         repository: quay.io/uxi/busybox
         tag: latest
