@@ -15,6 +15,7 @@ aruba-uxi:
     environment: STAGING
     image:
       repository: quay.io/uxi/aruba-uxi-example
+      tag: latest
     env:
       DEBUG: false
     envFields:
@@ -26,7 +27,7 @@ aruba-uxi:
       role: webapp
       image:
         repository: quay.io/uxi/nginx
-        tag: 1.14.2
+        tag: latest
       revisionHistoryLimit: 1
       replicaCount: 2
       serviceAccount:
@@ -81,7 +82,7 @@ aruba-uxi:
       image:
         repository: busybox
         tag: latest
-      command: ["/bin/sh", "-c", "echo Hello from the example-work"]
+      command: ["/bin/sh", "-c", "exec tail -f /dev/null"]
       datadog:
         enabled: false
   cronjobs:
