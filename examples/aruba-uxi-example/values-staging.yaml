@@ -27,7 +27,7 @@ aruba-uxi:
       image:
         repository: quay.io/uxi/nginx
         tag: 1.14.2
-      revisionHistoryLimit: 4
+      revisionHistoryLimit: 1
       replicaCount: 2
       serviceAccount:
         create: true
