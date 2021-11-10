@@ -90,8 +90,8 @@ aruba-uxi:
       schedule: "0 * * * *"
       suspend: true
       command: ["/bin/sh", "-c", "echo Hello from the example-cronjob-producer"]
-      # serviceAccount:
-      #   create: true
+      serviceAccount:
+        create: true
     example-cronjob-consumer:
       image:
         repository: quay.io/uxi/busybox
