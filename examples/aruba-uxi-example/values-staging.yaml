@@ -28,6 +28,9 @@ aruba-uxi:
   applications:
     example-service:
       role: webapp
+      image:
+        repository: quay.io/uxi/nginx
+        tag: 1.14.2
       revisionHistoryLimit: 4
       replicaCount: 2
       serviceAccount:
