@@ -50,10 +50,10 @@ aruba-uxi:
               }
             }
       secretMount:
-      - name: service-account-path
+      - name: service-account
         readOnly: true
         path: /app/resources
-        secretName: SERVICE_ACCOUNT_PATH
+        secretName: SERVICE_ACCOUNT
       - name: database-url
         readOnly: true
         path: /app/something
