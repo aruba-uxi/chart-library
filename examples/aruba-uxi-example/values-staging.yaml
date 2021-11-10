@@ -1,17 +1,20 @@
 aruba-uxi:
   sealedSecrets:
-    imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    imagePullSecret:
+      AgCxyrrggdxyecv5e/SVAQ/nanjCAd5zl6DJm0N+3tbauR9JPjslLSz3RnuoFNTDGyYky0ybQNj0R+EDr5zgOzoNcxU8UcBfu9tyJTmuJCqNFdY2+cnviOlcSSOZ5M7PVhMeB3Dmu4K5CeqgUq5N9tp/SL+Md7gt0USTMlyD3VrOkwww7uYr9eIaXTyc6SedzvpI4X8KNGhG+eDg0SbySaTPzeoz/XgaUMPyIQ4aUsbItFfyE+JoQTGgLQqOKIE3r2K7uO+ZXuKTZDrr9Y+pXolWLnESjSeLIjoObHJn8LMFOmjZ6895flEgqBUjdUKLm46Xc8+D4IFBc26epT23Adf2H9BqXKVy934wGmgUK0pbxlET/l8gIdrbQRO2r8EGSe9wNs6wfveGnVmMCxxLOvysPUHG75HR8sbqOI8kHIhitFilbm6QbOWI2pjcM/xVPuyoEcOeuotiiz1TRmWG5+lxqWpdWpSohTnB6Mki/xAebV3JfdKNn5XvDB6hJBnoXqU26mdB/hZOclGLo/6i7RiBzQnhffVsJu63J2wvZIavoXLLsZEvodXl+celVJ1SrOXhFCuH6O/ss+g+F4Eyp8BLMs1Wc2b0PBgZ9NXl/zlQ9NOF/g8XuD5DGfj+txnslgZJC6C+7PddE8siaUhnr74px5hk3FZnVjmkU6U+2th61ix4IdKmSADXAzbXObCm5osMZxulrd0c+nyME2ieR4DRSag7g6r3sx7Fcq7MW2YYsodh1vZI3B+kfFKNcDqR98c8mo7TOaRaBqV+XcELdvH7ZT02SFSRhAcJ6jSoPTsv+uu45wUtBdUOM8GsM7eXNa1uaXLsWlBIs3RdiBkbsMffyL1jaCWx3UI657ss3FJbdFLUBs84P4aA+/7j713njduPqWTR0ss4al7JFD4HKHgvAt0pOmPmx5fuASLTI5Y9yxnSVvLncjrVNckKeKAEIRsMBA68
     env:
       aws-access:
-        AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
-        AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
+        AWS_REGION:
+          AgDHInk7E4j3jC8zuBrfDirC4bTlUj4nEUk7bnPX8krFC4kWGELObhvcKb2xDkE6dAw39eeAbBUuZXmXq8Jsk1+donH3SZP3BIwng+fjjdCJjKn8Cs/CjNPzH5zvAzpS/GDik5wGCLhaYn9dAe0DXXnq9pRxypjAyv3fAMs3VSMP4pOEzGvBkoqHwzEBXMy+6tGrZepn6RX7sBXutUcg2sl9NUPcfMLC1SrfvCluzqFM0vqSwnyL7QYbjUkCLFh192H4a0LFoV068w6K/rZTMVG5MLXgBziB24lAT0MtY0u1r/xIW1t8PoQuDegcUfr0Cmj5zJI3F7WFn7EoG6qy/2gemO+X5Kzmr28v02t7UiXaBqqWxXU7LsvdUjQ5SGGtOlCeVOXsnCGnBzhVSFPKxRMh3aLKeoRieflnYBQQhEyIAsRA2YY1m6V3rCLAVecnA7NwlpbVOVqCqBTdEj5wI/KsF3GcnUZQ+ceftLHxDPgawLZW5DCeQROF1mR1LxVmJuSb3Aaci8Fc9szusFSto7vz0RhKX2wCJMKf7gTKOSfdUnHc1cw7IG4FjZbA4DE5nVE7LXkPcEXe0dEJ+uUk6a+O+APi20T+dU2p5WiH6W1EjVjLQz3zcR1oKw264uI9iX6Rt/pfudWtR2pmLacUcu5HkEFRqnvpek6qnXUSF52YlEfWgWLbqME2pcoYQJ2hRt2rf/8g0cd3kJPF
+        AWS_ACCESS_ID:
+          AgCiBP+jM76iL3njeCm0Ndoj7gvVGhqAluKGevJd7WvbUh+do+SAEFUL+SRlva8rep6YXmGhXsdLG9DtfPtM8YR6L7wvQiDLfVaUi0pcdJf5c6EA5VqznAr7UrMnMratln/TKvUbsLtaPcjwg5jVG0rY4SDCzdmPnzekXChK8AcKAcggm6OA6ITvUfJF01G+kP+e3JvUzEMebT95Cm0E6mdS8GaxTSTZdzEkTOTuPnhRwIvCZZM3Ixha1Ta12U5bXKiWY7BRIXy2yzB1Ck0iEtzA57I1YsxzikY8uj4IXyt/ETJyGt5bp2ezwFzdZInw+/KeuJ8+4/PnDtINnUftQq5VRgcRL583TDnILyk5mcowLwMITYkZVgS3y9rzHcMyQT2UDeF/5g7lQDPWIAcc25DpFYqQxmI+Ud3gmlcXIuGrntb9SwiWIYzmmZD5F85UZCpEfvKcaT761upxgOpMAAt7q19M3MXGB/0a2B5nhCpLuGfa+WbXjAeGeGhSgjLGbHJzgkT7ZGEJkUHoh4mfOTw9vI93UNN2V5jCUuFelEA8+UAZQpVli8Qr4rKrEdnGttYxFzvFVfp/IfvyuXc4ArndzfLu4BZHYqDzh3Qz8pHzx0syFDUHjC7pnjByDGE1EgQyVdp8Qbule5hd1TklRAAbOZE02qrePOkTFULLNpHQ0DkkGuELSjcBJfrQtq73QGSrO8BdOuej5LI=
       database-url:
-        DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+        DATABASE_URL:
+          AgAuvJH6oRC1EklejbecyiSvse4HcCn/VqZcZectp14ZKp/fZlekWVWMQR9eBmXGr4QIfgbMeDNdMXfh+3g2GaXSA+8z2gNTQQWqweyy9WBnXyOG6uJD/yFXXz1mIACAektFMUNqAIDGTIUahcdGwCtRqUaq7ikOyx0HWo6ZtTE2DKYvRUZG8226pm6s4HQNW9aMwgpsmrZYZYQUOiO5yFeuUA/CdoxkzK6G7ArtQj2dRXKRH5p4/foBvXZpVTegWu2ATnfEJf+VVs0jNpAoDk5+shg5grH8GHTD/COmf8SCEdiKk6HZhWof8di+l+l9eTx+1rcAuMPZnNvOuW8G2b8Cb4V71vcg5O3ONJnyLcSW0mL4o66qpK+z3DBZq10r3fnMEWBUVnDdzZcUDWs6UoVjj/rBleKzLGNkbRTqvXbzqdxbjq1w1yLHQMw2WzxLfARwM08LOT91C2egL7RyjBjBSM/TjPzMzMzZkbu7U0d46GVI6/H3mPOc831o5cLncBjxph6Nx/mrS/NA6Nai56OI7wfXK5cIYJKX+Ch47Qewj80CZjHnud8n2aZqrsk4nAp+ZX6yAThQIq8ytg21oZYwOcTSbBfwlzEqjJP5jBMzIIrxauXsHiIAjcjpaQ40mkFI7mJpwGgcxPMtJglC29yDTdRctakht2EMXs7r2GO5llI//nOzlheq5PnstyaoiwPMO47ebk+MRXNtxiUxhHmXeeLXe7ZKkHegKERTrPYyZCjY
   global:
     environment: STAGING
     image:
-      repository: nginx
-      tag: latest
+      repository: quay.io/uxi/aruba-uxi-example
       pullPolicy: Always
     env:
       DEBUG: false
@@ -24,15 +27,16 @@ aruba-uxi:
       role: webapp
       revisionHistoryLimit: 4
       replicaCount: 2
-      # image:
-      #   tag: 1.0.1
+      image:
+        repository: nginx
+        tag: latest
       serviceAccount:
         create: true
       port: 8000
       # livenessProbe:
-      #   path: /livez
+      #   path: /
       # readinessProbe:
-      #   path: /readyz
+      #   path: /
       resources:
         limits:
           cpu: 100m
@@ -59,45 +63,47 @@ aruba-uxi:
           - AWS_REGION
           - AWS_ACCESS_ID
       datadog:
-        enabled: false
-        traceEnabled: false
+        enabled: true
+        traceEnabled: true
       sentry:
         enabled: false
-        dsn: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
+        dsn:
+          AgBQvwiX1Y190fkB5xxqpjUJs5ROw7GHXUTUXLe54flWMIOIvdV1fD6xwhtEUiq8fAK/bVcnxQ1inMH16Pc4XW7LyIL0VGsvK+tOwh8B8yimdKraRC7HYhK88rK9WtMll4Ql7kvs4maeNWWgfPjtxn28zyORR7wJPPdWD5BNxiXpa0OF3eRPCKbl31jEZlWa7HHLSzVM/NZ4XfuJRGtW6A9KbQSu+vcn3zsyFKPdMyh77lUXENRltQTn8oiNgZ68tlzv/jfEPZZd4g/eGgohPEn0hoShGT34UmOcw1nMHETlBhj3HZ7sE1VVNXMF8m760jjaZ+Ko0A6RUU6rrd187phJokEjU9O5V0EAqCa8MkV1G5erdpGRWPLXJ9pdRMDnfRONX3ReW/z9CInVdM3Aze/G2rOy7tS5MPutIkdBLI8JwX9D3gEb0lKmZNqzye8IUpB7sg0tdEHfQlpVZ+XPvI+EQhWtxDr0fgbRoxqzutfFsIUFsHVoRSPLz6jE13Vey8vHN8gvanKiyJ9/3caUxiOQvZBQM7n1ylucpE/iibypHTGVGYZmkhHhNc6uQEjqxLlbGlm2V/4FDkx3sG0VsPtVXP2oWKbSw+2aCdItbFh7up2fQ1jrEYNPWsQJ+dNlnCMWAKbvJ37DLaRJc+09SYhID9UDRCto6jjQU9A5B/DWT/7wj+g5eteo1o0aIGdvzHb4nKVuLoL+oLhKt/vwpn82ywhW1cEgnePQrv1XDzfX0QIj0AOp4LKifGVGJx7iDG8CNL6rEqIche5rBBwv0MVepokNv3U6dg==
       labels:
         example-service-staging: example-service-staging
       ingress:
         enabled: true
         hosts:
-        - host: example-service.local
+        - host: example-service.staging.capedev.io
           paths:
             - path: /
     example-worker:
       role: worker
-      command: ["echo", "foo bar biz"]
+      image:
+        repository: busybox
+        tag: latest
+      command: ["/bin/sh", "-c", "date; echo Hello from the example-work"]
       datadog:
         enabled: false
   cronjobs:
     example-cronjob-producer:
-      schedule: "*/10 * * * *"
-      suspend: true
-      command: ["run-kinesis", "producer"]
+      image:
+        repository: busybox
+        tag: latest
+      schedule: "0 * * * *"
+      command: ["/bin/sh", "-c", "date; echo Hello from the example-cronjob-producer"]
       serviceAccount:
         create: true
-      datadog:
-        enabled: false
-      sentry:
-        enabled: false
-        dsn: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
     example-cronjob-consumer:
-      schedule: "*/5 * * * *"
+      image:
+        repository: busybox
+        tag: latest
+      schedule: "0 * * * *"
       suspend: true
-      command: ["run-kinesis", "consumer"]
+      command: ["/bin/sh", "-c", "date; echo Hello from the example-cronjob-consumer"]
       restartPolicy: Never
-      env:
-        AWS_ACCESS_ID: uid-12345
       envSealedSecrets:
         aws-access:
-          - AWS_REGION
+        - AWS_REGION
       labels:
         example-cronjob-consumer-staging: example-cronjob-consumer-staging
