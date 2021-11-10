@@ -72,7 +72,7 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: 8000
+      targetPort: 80
   selector:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
@@ -92,12 +92,12 @@ metadata:
     example-service-staging: example-service-staging
     global-label: global-label
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: example-service
       app.kubernetes.io/instance: aruba-uxi-example
-  revisionHistoryLimit: 4
+  revisionHistoryLimit: 1
   template:
     metadata:
       labels:
@@ -115,8 +115,8 @@ spec:
       serviceAccountName: example-service
       containers:
       - name: webapp
-        image: quay.io/uxi/aruba-uxi-example:1.0.1
-        imagePullPolicy: Always
+        image: quay.io/uxi/nginx:latest
+        imagePullPolicy: IfNotPresent
         env:
         - name: ENVIRONMENT
           value: "staging"
@@ -135,14 +135,7 @@ spec:
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
-              fieldPath: metadata.uid
-        - name: SENTRY_ENVIRONMENT
-          value: "staging"
-        - name: SENTRY_DSN
-          valueFrom:
-            secretKeyRef:
-              name: example-service-sentry-dsn
-              key: SENTRY_DSN        
+              fieldPath: metadata.uid        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
@@ -168,7 +161,7 @@ spec:
               key: DATABASE_URL
         ports:
         - name: http
-          containerPort: 8000
+          containerPort: 80
           protocol: TCP
         readinessProbe:
           httpGet:
@@ -177,8 +170,8 @@ spec:
               value: readinessProbe
             - name: Content-Type
               value: application/json
-            path: /readyz
-            port: 8000
+            path: /
+            port: 80
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1
@@ -191,17 +184,13 @@ spec:
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: /livez
-            port: 8000
+            path: /
+            port: 80
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1
           successThreshold: 1
           failureThreshold: 3
-        resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
         volumeMounts:
         - name: config
           mountPath: /app/config
@@ -230,7 +219,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: example-worker
       app.kubernetes.io/instance: aruba-uxi-example
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 1
   template:
     metadata:
       labels:
@@ -246,28 +235,14 @@ spec:
       - name: sealed-image-pull-secret
       containers:
       - name: worker
-        image: quay.io/uxi/aruba-uxi-example:1.0.0
-        imagePullPolicy: Always
-        command: ["echo","foo bar biz"]
+        image: quay.io/uxi/busybox:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh","-c","exec tail -f /dev/null"]
         env:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
-          value: "true"
-        - name: DD_ENV
-          value: "staging"
-        - name: DD_SERVICE
-          value: "example-worker"
-        - name: DD_TRACE_ENABLED
-          value: "false"
-        - name: DD_AGENT_HOST
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-        - name: DD_ENTITY_ID
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.uid        
+          value: "false"        
         - name: DEBUG
           value: "false"        
         - name: HOST_IP
@@ -290,8 +265,8 @@ metadata:
     example-cronjob-consumer-staging: example-cronjob-consumer-staging
     global-label: global-label
 spec:
-  schedule: "*/5 * * * *"
-  suspend: false
+  schedule: "0 * * * *"
+  suspend: true
   jobTemplate:
     spec:
       template:
@@ -300,15 +275,13 @@ spec:
           - name: sealed-image-pull-secret
           containers:
           - name: example-cronjob-consumer
-            image: quay.io/uxi/aruba-uxi-example:1.0.0
-            imagePullPolicy: Always
+            image: quay.io/uxi/busybox:latest
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
               value: "false"            
-            - name: AWS_ACCESS_ID
-              value: "uid-12345"
             - name: DEBUG
               value: "false"            
             - name: HOST_IP
@@ -320,7 +293,7 @@ spec:
                 secretKeyRef:
                   name: aws-access
                   key: AWS_REGION
-            command: ["run-kinesis","consumer"]
+            command: ["/bin/sh","-c","date; echo Hello from the example-cronjob-consumer"]
           restartPolicy: Never
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
@@ -337,7 +310,7 @@ metadata:
     namespace: default
     global-label: global-label
 spec:
-  schedule: "*/10 * * * *"
+  schedule: "0 * * * *"
   suspend: true
   jobTemplate:
     spec:
@@ -348,41 +321,20 @@ spec:
           serviceAccountName: example-cronjob-producer
           containers:
           - name: example-cronjob-producer
-            image: quay.io/uxi/aruba-uxi-example:1.0.0
-            imagePullPolicy: Always
+            image: quay.io/uxi/busybox:latest
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
               value: "staging"
             - name: DD_ENABLED
-              value: "true"
-            - name: DD_ENV
-              value: "staging"
-            - name: DD_SERVICE
-              value: "example-cronjob-producer"
-            - name: DD_TRACE_ENABLED
-              value: "false"
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: DD_ENTITY_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.uid
-            - name: SENTRY_ENVIRONMENT
-              value: "staging"
-            - name: SENTRY_DSN
-              valueFrom:
-                secretKeyRef:
-                  name: example-cronjob-producer-sentry-dsn
-                  key: SENTRY_DSN            
+              value: "false"            
             - name: DEBUG
               value: "false"            
             - name: HOST_IP
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP            
-            command: ["run-kinesis","producer"]
+            command: ["/bin/sh","-c","echo Hello from the example-cronjob-producer"]
           restartPolicy: OnFailure
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-ingress.yaml
@@ -403,7 +355,7 @@ metadata:
     kubernetes.io/ingress.class: kong
 spec:
   rules:
-  - host: example-service.local
+  - host: example-service.staging.capedev.io
     http:
       paths:
       - path: /
@@ -411,41 +363,6 @@ spec:
         backend:
           serviceName: example-service
           servicePort: 80
----
-# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: example-service-sentry-dsn
-  labels:
-    app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
-    app.kubernetes.io/managed-by: Helm
-    repository: aruba-uxi-example
-    namespace: default
-    example-service-staging: example-service-staging
-    global-label: global-label
-spec:
-  encryptedData:
-    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
----
-# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob-sentry-dsn.yaml
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: example-cronjob-producer-sentry-dsn
-  labels:
-    app.kubernetes.io/name: example-cronjob-producer
-    app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.1
-    app.kubernetes.io/managed-by: Helm
-    repository: aruba-uxi-example
-    namespace: default
-    global-label: global-label
-spec:
-  encryptedData:
-    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
@@ -459,7 +376,7 @@ metadata:
     namespace: default
 spec:
   encryptedData:
-    .dockerconfigjson: sealed_version_of_the_base64_encoded_dockerconfigjson
+    .dockerconfigjson: AgCxyrrggdxyecv5e/SVAQ/nanjCAd5zl6DJm0N+3tbauR9JPjslLSz3RnuoFNTDGyYky0ybQNj0R+EDr5zgOzoNcxU8UcBfu9tyJTmuJCqNFdY2+cnviOlcSSOZ5M7PVhMeB3Dmu4K5CeqgUq5N9tp/SL+Md7gt0USTMlyD3VrOkwww7uYr9eIaXTyc6SedzvpI4X8KNGhG+eDg0SbySaTPzeoz/XgaUMPyIQ4aUsbItFfyE+JoQTGgLQqOKIE3r2K7uO+ZXuKTZDrr9Y+pXolWLnESjSeLIjoObHJn8LMFOmjZ6895flEgqBUjdUKLm46Xc8+D4IFBc26epT23Adf2H9BqXKVy934wGmgUK0pbxlET/l8gIdrbQRO2r8EGSe9wNs6wfveGnVmMCxxLOvysPUHG75HR8sbqOI8kHIhitFilbm6QbOWI2pjcM/xVPuyoEcOeuotiiz1TRmWG5+lxqWpdWpSohTnB6Mki/xAebV3JfdKNn5XvDB6hJBnoXqU26mdB/hZOclGLo/6i7RiBzQnhffVsJu63J2wvZIavoXLLsZEvodXl+celVJ1SrOXhFCuH6O/ss+g+F4Eyp8BLMs1Wc2b0PBgZ9NXl/zlQ9NOF/g8XuD5DGfj+txnslgZJC6C+7PddE8siaUhnr74px5hk3FZnVjmkU6U+2th61ix4IdKmSADXAzbXObCm5osMZxulrd0c+nyME2ieR4DRSag7g6r3sx7Fcq7MW2YYsodh1vZI3B+kfFKNcDqR98c8mo7TOaRaBqV+XcELdvH7ZT02SFSRhAcJ6jSoPTsv+uu45wUtBdUOM8GsM7eXNa1uaXLsWlBIs3RdiBkbsMffyL1jaCWx3UI657ss3FJbdFLUBs84P4aA+/7j713njduPqWTR0ss4al7JFD4HKHgvAt0pOmPmx5fuASLTI5Y9yxnSVvLncjrVNckKeKAEIRsMBA68
   template:
     data: null
     metadata:
@@ -485,8 +402,8 @@ metadata:
     namespace: default
 spec:
   encryptedData:
-    AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
-    AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
+    AWS_ACCESS_ID: AgCiBP+jM76iL3njeCm0Ndoj7gvVGhqAluKGevJd7WvbUh+do+SAEFUL+SRlva8rep6YXmGhXsdLG9DtfPtM8YR6L7wvQiDLfVaUi0pcdJf5c6EA5VqznAr7UrMnMratln/TKvUbsLtaPcjwg5jVG0rY4SDCzdmPnzekXChK8AcKAcggm6OA6ITvUfJF01G+kP+e3JvUzEMebT95Cm0E6mdS8GaxTSTZdzEkTOTuPnhRwIvCZZM3Ixha1Ta12U5bXKiWY7BRIXy2yzB1Ck0iEtzA57I1YsxzikY8uj4IXyt/ETJyGt5bp2ezwFzdZInw+/KeuJ8+4/PnDtINnUftQq5VRgcRL583TDnILyk5mcowLwMITYkZVgS3y9rzHcMyQT2UDeF/5g7lQDPWIAcc25DpFYqQxmI+Ud3gmlcXIuGrntb9SwiWIYzmmZD5F85UZCpEfvKcaT761upxgOpMAAt7q19M3MXGB/0a2B5nhCpLuGfa+WbXjAeGeGhSgjLGbHJzgkT7ZGEJkUHoh4mfOTw9vI93UNN2V5jCUuFelEA8+UAZQpVli8Qr4rKrEdnGttYxFzvFVfp/IfvyuXc4ArndzfLu4BZHYqDzh3Qz8pHzx0syFDUHjC7pnjByDGE1EgQyVdp8Qbule5hd1TklRAAbOZE02qrePOkTFULLNpHQ0DkkGuELSjcBJfrQtq73QGSrO8BdOuej5LI=
+    AWS_REGION: AgDHInk7E4j3jC8zuBrfDirC4bTlUj4nEUk7bnPX8krFC4kWGELObhvcKb2xDkE6dAw39eeAbBUuZXmXq8Jsk1+donH3SZP3BIwng+fjjdCJjKn8Cs/CjNPzH5zvAzpS/GDik5wGCLhaYn9dAe0DXXnq9pRxypjAyv3fAMs3VSMP4pOEzGvBkoqHwzEBXMy+6tGrZepn6RX7sBXutUcg2sl9NUPcfMLC1SrfvCluzqFM0vqSwnyL7QYbjUkCLFh192H4a0LFoV068w6K/rZTMVG5MLXgBziB24lAT0MtY0u1r/xIW1t8PoQuDegcUfr0Cmj5zJI3F7WFn7EoG6qy/2gemO+X5Kzmr28v02t7UiXaBqqWxXU7LsvdUjQ5SGGtOlCeVOXsnCGnBzhVSFPKxRMh3aLKeoRieflnYBQQhEyIAsRA2YY1m6V3rCLAVecnA7NwlpbVOVqCqBTdEj5wI/KsF3GcnUZQ+ceftLHxDPgawLZW5DCeQROF1mR1LxVmJuSb3Aaci8Fc9szusFSto7vz0RhKX2wCJMKf7gTKOSfdUnHc1cw7IG4FjZbA4DE5nVE7LXkPcEXe0dEJ+uUk6a+O+APi20T+dU2p5WiH6W1EjVjLQz3zcR1oKw264uI9iX6Rt/pfudWtR2pmLacUcu5HkEFRqnvpek6qnXUSF52YlEfWgWLbqME2pcoYQJ2hRt2rf/8g0cd3kJPF
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/sealedsecret.yaml
 apiVersion: bitnami.com/v1alpha1
@@ -502,4 +419,4 @@ metadata:
     namespace: default
 spec:
   encryptedData:
-    DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+    DATABASE_URL: AgAuvJH6oRC1EklejbecyiSvse4HcCn/VqZcZectp14ZKp/fZlekWVWMQR9eBmXGr4QIfgbMeDNdMXfh+3g2GaXSA+8z2gNTQQWqweyy9WBnXyOG6uJD/yFXXz1mIACAektFMUNqAIDGTIUahcdGwCtRqUaq7ikOyx0HWo6ZtTE2DKYvRUZG8226pm6s4HQNW9aMwgpsmrZYZYQUOiO5yFeuUA/CdoxkzK6G7ArtQj2dRXKRH5p4/foBvXZpVTegWu2ATnfEJf+VVs0jNpAoDk5+shg5grH8GHTD/COmf8SCEdiKk6HZhWof8di+l+l9eTx+1rcAuMPZnNvOuW8G2b8Cb4V71vcg5O3ONJnyLcSW0mL4o66qpK+z3DBZq10r3fnMEWBUVnDdzZcUDWs6UoVjj/rBleKzLGNkbRTqvXbzqdxbjq1w1yLHQMw2WzxLfARwM08LOT91C2egL7RyjBjBSM/TjPzMzMzZkbu7U0d46GVI6/H3mPOc831o5cLncBjxph6Nx/mrS/NA6Nai56OI7wfXK5cIYJKX+Ch47Qewj80CZjHnud8n2aZqrsk4nAp+ZX6yAThQIq8ytg21oZYwOcTSbBfwlzEqjJP5jBMzIIrxauXsHiIAjcjpaQ40mkFI7mJpwGgcxPMtJglC29yDTdRctakht2EMXs7r2GO5llI//nOzlheq5PnstyaoiwPMO47ebk+MRXNtxiUxhHmXeeLXe7ZKkHegKERTrPYyZCjY
