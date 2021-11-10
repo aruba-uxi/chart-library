@@ -78,7 +78,7 @@ aruba-uxi:
       image:
         repository: busybox
         tag: latest
-      command: ["/bin/sh", "-c", "date; echo Hello from the example-work"]
+      command: ["/bin/sh", "-c", "echo Hello from the example-work"]
       datadog:
         enabled: false
   cronjobs:
@@ -87,7 +87,7 @@ aruba-uxi:
         repository: busybox
         tag: latest
       schedule: "0 * * * *"
-      command: ["/bin/sh", "-c", "date; echo Hello from the example-cronjob-producer"]
+      command: ["/bin/sh", "-c", "echo Hello from the example-cronjob-producer"]
       serviceAccount:
         create: true
     example-cronjob-consumer:
