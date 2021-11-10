@@ -19,7 +19,6 @@ aruba-uxi:
     environment: STAGING
     image:
       repository: quay.io/uxi/aruba-uxi-example
-      pullPolicy: Always
     env:
       DEBUG: false
     envFields:
@@ -31,9 +30,6 @@ aruba-uxi:
       role: webapp
       revisionHistoryLimit: 4
       replicaCount: 2
-      image:
-        repository: nginx
-        tag: latest
       serviceAccount:
         create: true
       port: 8000
