@@ -119,11 +119,18 @@ spec:
         {{- if $data.parallel }}
         parallelism: {{ $data.parallel }}
         {{- end }}
-        {{- if $data.configMap }}
+        {{- if or $data.configMap $data.secretMount }}
         volumeMounts:
+        {{- if $data.configMap }}
         - name: config
           mountPath: {{ $data.configMap.path }}
           readOnly: {{ default true $data.configMap.readOnly }}
+        {{- end }}
+        {{- with $data.secretMount }}
+        - name: {{ toYaml $data.secretMount.name }}
+          mountPath: {{ toYaml $data.secretMount.path}}
+          readOnly: {{ default true $data.secretMount.readOnly }}
+        {{- end }}
         {{- end }}
       {{- with $data.nodeSelector }}
       nodeSelector:
@@ -137,11 +144,18 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if $data.configMap }}
+      {{- if or $data.configMap $data.secretMount }}
       volumes:
+      {{- if $data.configMap }}
       - name: config
         configMap:
           name: {{ $name }}
+      {{- end }}
+      {{- with $data.secretMount }}
+      - name: {{ toYaml $data.secretMount.name }}
+        secret:
+          secretName: {{ toYaml $data.secretMount.secretName }}
+      {{- end }}
       {{- end }}
       {{- with $data.securityContext }}
       securityContext:
