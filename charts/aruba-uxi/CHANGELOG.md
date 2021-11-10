@@ -18,6 +18,54 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.3.2] - 2021-11-10
+
+### Added
+
+Ability to mount secrets on the pod as a file in the app/other directory which then could be accessed by code to read service accounts or secret URLs. For example, FIREBASE_SERVICE_ACCOUNT is a JSON file that is accessed by code in `firebase-config-sender` and needs to be passed as secret when the service is deployed.
+
+Volumes will be mounted like this under `spec.template.spec.containers` in deployment
+```
+volumeMounts:
+- name: config
+  mountPath: /app/config
+  readOnly: true
+- name: service-account
+  mountPath: /app/resources
+  readOnly: true
+- name: database-url
+  mountPath: /app/something
+  readOnly: true
+```
+
+And the volume definition is done like this under `spec.template.spec` in deployment
+
+```
+volumes:
+- name: config
+  configMap:
+    name: example-service
+- name: service-account
+  secret:
+    secretName: SERVICE_ACCOUNT
+- name: database-url
+  secret:
+    secretName: DATABASE_URL
+```
+
+The `values-staging.yaml` to add secret mounts would look like this
+```
+secretMount:
+- name: service-account
+  readOnly: true
+  path: /app/resources
+  secretName: SERVICE_ACCOUNT
+- name: database-url
+  readOnly: true
+  path: /app/something
+  secretName: DATABASE_URL
+```
+
 ## [2.3.1] - 2021-11-05
 
 ### Changed
