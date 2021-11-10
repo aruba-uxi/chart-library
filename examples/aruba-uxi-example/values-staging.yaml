@@ -33,14 +33,10 @@ aruba-uxi:
       serviceAccount:
         create: true
       port: 80
-      # livenessProbe:
-      #   path: /
-      # readinessProbe:
-      #   path: /
-      resources:
-        limits:
-          cpu: 100m
-          memory: 256Mi
+      livenessProbe:
+        path: /
+      readinessProbe:
+        path: /
       configMap:
         annotations: {}
         readOnly: false
