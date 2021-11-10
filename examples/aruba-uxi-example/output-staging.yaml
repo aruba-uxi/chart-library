@@ -159,6 +159,11 @@ spec:
             secretKeyRef:
               name: database-url
               key: DATABASE_URL
+        - name: SERVICE_ACCOUNT
+          valueFrom:
+            secretKeyRef:
+              name: firebase-service-account
+              key: SERVICE_ACCOUNT
         ports:
         - name: http
           containerPort: 80

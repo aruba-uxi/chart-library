@@ -66,6 +66,8 @@ aruba-uxi:
         aws-access:
           - AWS_REGION
           - AWS_ACCESS_ID
+        firebase-service-account:
+          - SERVICE_ACCOUNT
       datadog:
         enabled: true
         traceEnabled: true
