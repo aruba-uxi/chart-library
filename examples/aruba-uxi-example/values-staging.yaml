@@ -55,10 +55,6 @@ aruba-uxi:
         readOnly: true
         path: /app/resources
         secretName: SERVICE_ACCOUNT
-      - name: database-url
-        readOnly: true
-        path: /app/something
-        secretName: DATABASE_URL
       env:
         AWS_DEFAULT_REGION: us-west-1
       envSealedSecrets:
