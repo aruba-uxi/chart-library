@@ -33,9 +33,6 @@ volumeMounts:
 - name: service-account
   mountPath: /app/resources
   readOnly: true
-- name: database-url
-  mountPath: /app/something
-  readOnly: true
 ```
 
 And the volume definition is done like this under `spec.template.spec` in deployment
@@ -48,9 +45,6 @@ volumes:
 - name: service-account
   secret:
     secretName: SERVICE_ACCOUNT
-- name: database-url
-  secret:
-    secretName: DATABASE_URL
 ```
 
 The `values-staging.yaml` to add secret mounts would look like this
@@ -60,10 +54,6 @@ secretMount:
   readOnly: true
   path: /app/resources
   secretName: SERVICE_ACCOUNT
-- name: database-url
-  readOnly: true
-  path: /app/something
-  secretName: DATABASE_URL
 ```
 
 ## [2.3.1] - 2021-11-05

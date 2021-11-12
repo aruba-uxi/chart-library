@@ -157,7 +157,7 @@ spec:
       {{- range $secretMountName, $secretMountData := $data.secretMount }}
       - name: {{ $secretMountData.name }}
         secret:
-          secretName: {{ toYaml $secretMountData.secretName }}
+          secretName: {{ toYaml $secretMountData.name }}
       {{- end }}
       {{- end }}
       {{- end }}
