@@ -104,6 +104,6 @@ aruba-uxi:
         AWS_ACCESS_ID: uid-12345
       envSealedSecrets:
         aws-access:
-         - AWS_REGION
+          - AWS_REGION
       labels:
         example-cronjob-consumer-staging: example-cronjob-consumer-staging
