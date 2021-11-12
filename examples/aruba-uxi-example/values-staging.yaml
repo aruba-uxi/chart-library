@@ -1,16 +1,12 @@
 aruba-uxi:
   sealedSecrets:
-    imagePullSecret:
-      AgCxyrrggdxyecv5e/SVAQ/nanjCAd5zl6DJm0N+3tbauR9JPjslLSz3RnuoFNTDGyYky0ybQNj0R+EDr5zgOzoNcxU8UcBfu9tyJTmuJCqNFdY2+cnviOlcSSOZ5M7PVhMeB3Dmu4K5CeqgUq5N9tp/SL+Md7gt0USTMlyD3VrOkwww7uYr9eIaXTyc6SedzvpI4X8KNGhG+eDg0SbySaTPzeoz/XgaUMPyIQ4aUsbItFfyE+JoQTGgLQqOKIE3r2K7uO+ZXuKTZDrr9Y+pXolWLnESjSeLIjoObHJn8LMFOmjZ6895flEgqBUjdUKLm46Xc8+D4IFBc26epT23Adf2H9BqXKVy934wGmgUK0pbxlET/l8gIdrbQRO2r8EGSe9wNs6wfveGnVmMCxxLOvysPUHG75HR8sbqOI8kHIhitFilbm6QbOWI2pjcM/xVPuyoEcOeuotiiz1TRmWG5+lxqWpdWpSohTnB6Mki/xAebV3JfdKNn5XvDB6hJBnoXqU26mdB/hZOclGLo/6i7RiBzQnhffVsJu63J2wvZIavoXLLsZEvodXl+celVJ1SrOXhFCuH6O/ss+g+F4Eyp8BLMs1Wc2b0PBgZ9NXl/zlQ9NOF/g8XuD5DGfj+txnslgZJC6C+7PddE8siaUhnr74px5hk3FZnVjmkU6U+2th61ix4IdKmSADXAzbXObCm5osMZxulrd0c+nyME2ieR4DRSag7g6r3sx7Fcq7MW2YYsodh1vZI3B+kfFKNcDqR98c8mo7TOaRaBqV+XcELdvH7ZT02SFSRhAcJ6jSoPTsv+uu45wUtBdUOM8GsM7eXNa1uaXLsWlBIs3RdiBkbsMffyL1jaCWx3UI657ss3FJbdFLUBs84P4aA+/7j713njduPqWTR0ss4al7JFD4HKHgvAt0pOmPmx5fuASLTI5Y9yxnSVvLncjrVNckKeKAEIRsMBA68
+    imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
     env:
       aws-access:
-        AWS_REGION:
-          AgDHInk7E4j3jC8zuBrfDirC4bTlUj4nEUk7bnPX8krFC4kWGELObhvcKb2xDkE6dAw39eeAbBUuZXmXq8Jsk1+donH3SZP3BIwng+fjjdCJjKn8Cs/CjNPzH5zvAzpS/GDik5wGCLhaYn9dAe0DXXnq9pRxypjAyv3fAMs3VSMP4pOEzGvBkoqHwzEBXMy+6tGrZepn6RX7sBXutUcg2sl9NUPcfMLC1SrfvCluzqFM0vqSwnyL7QYbjUkCLFh192H4a0LFoV068w6K/rZTMVG5MLXgBziB24lAT0MtY0u1r/xIW1t8PoQuDegcUfr0Cmj5zJI3F7WFn7EoG6qy/2gemO+X5Kzmr28v02t7UiXaBqqWxXU7LsvdUjQ5SGGtOlCeVOXsnCGnBzhVSFPKxRMh3aLKeoRieflnYBQQhEyIAsRA2YY1m6V3rCLAVecnA7NwlpbVOVqCqBTdEj5wI/KsF3GcnUZQ+ceftLHxDPgawLZW5DCeQROF1mR1LxVmJuSb3Aaci8Fc9szusFSto7vz0RhKX2wCJMKf7gTKOSfdUnHc1cw7IG4FjZbA4DE5nVE7LXkPcEXe0dEJ+uUk6a+O+APi20T+dU2p5WiH6W1EjVjLQz3zcR1oKw264uI9iX6Rt/pfudWtR2pmLacUcu5HkEFRqnvpek6qnXUSF52YlEfWgWLbqME2pcoYQJ2hRt2rf/8g0cd3kJPF
-        AWS_ACCESS_ID:
-          AgCiBP+jM76iL3njeCm0Ndoj7gvVGhqAluKGevJd7WvbUh+do+SAEFUL+SRlva8rep6YXmGhXsdLG9DtfPtM8YR6L7wvQiDLfVaUi0pcdJf5c6EA5VqznAr7UrMnMratln/TKvUbsLtaPcjwg5jVG0rY4SDCzdmPnzekXChK8AcKAcggm6OA6ITvUfJF01G+kP+e3JvUzEMebT95Cm0E6mdS8GaxTSTZdzEkTOTuPnhRwIvCZZM3Ixha1Ta12U5bXKiWY7BRIXy2yzB1Ck0iEtzA57I1YsxzikY8uj4IXyt/ETJyGt5bp2ezwFzdZInw+/KeuJ8+4/PnDtINnUftQq5VRgcRL583TDnILyk5mcowLwMITYkZVgS3y9rzHcMyQT2UDeF/5g7lQDPWIAcc25DpFYqQxmI+Ud3gmlcXIuGrntb9SwiWIYzmmZD5F85UZCpEfvKcaT761upxgOpMAAt7q19M3MXGB/0a2B5nhCpLuGfa+WbXjAeGeGhSgjLGbHJzgkT7ZGEJkUHoh4mfOTw9vI93UNN2V5jCUuFelEA8+UAZQpVli8Qr4rKrEdnGttYxFzvFVfp/IfvyuXc4ArndzfLu4BZHYqDzh3Qz8pHzx0syFDUHjC7pnjByDGE1EgQyVdp8Qbule5hd1TklRAAbOZE02qrePOkTFULLNpHQ0DkkGuELSjcBJfrQtq73QGSrO8BdOuej5LI=
+        AWS_REGION: sealed_version_of_the_base64_encoded_aws_region
+        AWS_ACCESS_ID: sealed_version_of_the_base64_encoded_aws_access_id
       database-url:
-        DATABASE_URL:
-          AgAuvJH6oRC1EklejbecyiSvse4HcCn/VqZcZectp14ZKp/fZlekWVWMQR9eBmXGr4QIfgbMeDNdMXfh+3g2GaXSA+8z2gNTQQWqweyy9WBnXyOG6uJD/yFXXz1mIACAektFMUNqAIDGTIUahcdGwCtRqUaq7ikOyx0HWo6ZtTE2DKYvRUZG8226pm6s4HQNW9aMwgpsmrZYZYQUOiO5yFeuUA/CdoxkzK6G7ArtQj2dRXKRH5p4/foBvXZpVTegWu2ATnfEJf+VVs0jNpAoDk5+shg5grH8GHTD/COmf8SCEdiKk6HZhWof8di+l+l9eTx+1rcAuMPZnNvOuW8G2b8Cb4V71vcg5O3ONJnyLcSW0mL4o66qpK+z3DBZq10r3fnMEWBUVnDdzZcUDWs6UoVjj/rBleKzLGNkbRTqvXbzqdxbjq1w1yLHQMw2WzxLfARwM08LOT91C2egL7RyjBjBSM/TjPzMzMzZkbu7U0d46GVI6/H3mPOc831o5cLncBjxph6Nx/mrS/NA6Nai56OI7wfXK5cIYJKX+Ch47Qewj80CZjHnud8n2aZqrsk4nAp+ZX6yAThQIq8ytg21oZYwOcTSbBfwlzEqjJP5jBMzIIrxauXsHiIAjcjpaQ40mkFI7mJpwGgcxPMtJglC29yDTdRctakht2EMXs7r2GO5llI//nOzlheq5PnstyaoiwPMO47ebk+MRXNtxiUxhHmXeeLXe7ZKkHegKERTrPYyZCjY
+        DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
       firebase-service-account:
         SERVICE_ACCOUNT:
           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
@@ -18,7 +14,7 @@ aruba-uxi:
     environment: STAGING
     image:
       repository: quay.io/uxi/aruba-uxi-example
-      tag: latest
+      pullPolicy: Always
     env:
       DEBUG: false
     envFields:
@@ -28,18 +24,21 @@ aruba-uxi:
   applications:
     example-service:
       role: webapp
+      revisionHistoryLimit: 4
+      replicaCount: 2
       image:
-        repository: quay.io/uxi/nginx
-        tag: latest
-      revisionHistoryLimit: 1
-      replicaCount: 1
+        tag: 1.0.1
       serviceAccount:
         create: true
-      port: 80
+      port: 8000
       livenessProbe:
-        path: /
+        path: /livez
       readinessProbe:
-        path: /
+        path: /readyz
+      resources:
+        limits:
+          cpu: 100m
+          memory: 256Mi
       configMap:
         annotations: {}
         readOnly: false
@@ -71,46 +70,41 @@ aruba-uxi:
         enabled: true
         traceEnabled: true
       sentry:
-        enabled: false
-        dsn:
-          AgBQvwiX1Y190fkB5xxqpjUJs5ROw7GHXUTUXLe54flWMIOIvdV1fD6xwhtEUiq8fAK/bVcnxQ1inMH16Pc4XW7LyIL0VGsvK+tOwh8B8yimdKraRC7HYhK88rK9WtMll4Ql7kvs4maeNWWgfPjtxn28zyORR7wJPPdWD5BNxiXpa0OF3eRPCKbl31jEZlWa7HHLSzVM/NZ4XfuJRGtW6A9KbQSu+vcn3zsyFKPdMyh77lUXENRltQTn8oiNgZ68tlzv/jfEPZZd4g/eGgohPEn0hoShGT34UmOcw1nMHETlBhj3HZ7sE1VVNXMF8m760jjaZ+Ko0A6RUU6rrd187phJokEjU9O5V0EAqCa8MkV1G5erdpGRWPLXJ9pdRMDnfRONX3ReW/z9CInVdM3Aze/G2rOy7tS5MPutIkdBLI8JwX9D3gEb0lKmZNqzye8IUpB7sg0tdEHfQlpVZ+XPvI+EQhWtxDr0fgbRoxqzutfFsIUFsHVoRSPLz6jE13Vey8vHN8gvanKiyJ9/3caUxiOQvZBQM7n1ylucpE/iibypHTGVGYZmkhHhNc6uQEjqxLlbGlm2V/4FDkx3sG0VsPtVXP2oWKbSw+2aCdItbFh7up2fQ1jrEYNPWsQJ+dNlnCMWAKbvJ37DLaRJc+09SYhID9UDRCto6jjQU9A5B/DWT/7wj+g5eteo1o0aIGdvzHb4nKVuLoL+oLhKt/vwpn82ywhW1cEgnePQrv1XDzfX0QIj0AOp4LKifGVGJx7iDG8CNL6rEqIche5rBBwv0MVepokNv3U6dg==
+        enabled: true
+        dsn: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
       labels:
         example-service-staging: example-service-staging
       ingress:
         enabled: true
         hosts:
-        - host: example-service.staging.capedev.io
+        - host: example-service.local
           paths:
             - path: /
     example-worker:
       role: worker
-      revisionHistoryLimit: 1
-      image:
-        repository: quay.io/uxi/busybox
-        tag: latest
-      command: ["/bin/sh", "-c", "exec tail -f /dev/null"]
+      command: ["echo", "foo bar biz"]
       datadog:
-        enabled: false
+        enabled: true
   cronjobs:
     example-cronjob-producer:
-      image:
-        repository: quay.io/uxi/busybox
-        tag: latest
-      schedule: "0 * * * *"
+      schedule: "*/10 * * * *"
       suspend: true
-      command: ["/bin/sh", "-c", "echo Hello from the example-cronjob-producer"]
+      command: ["run-kinesis", "producer"]
       serviceAccount:
         create: true
+      datadog:
+        enabled: true
+      sentry:
+        enabled: true
+        dsn: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
     example-cronjob-consumer:
-      image:
-        repository: quay.io/uxi/busybox
-        tag: latest
-      schedule: "0 * * * *"
-      suspend: true
-      command: ["/bin/sh", "-c", "date; echo Hello from the example-cronjob-consumer"]
+      schedule: "*/5 * * * *"
+      command: ["run-kinesis", "consumer"]
       restartPolicy: Never
+      env:
+        AWS_ACCESS_ID: uid-12345
       envSealedSecrets:
         aws-access:
-        - AWS_REGION
+         - AWS_REGION
       labels:
         example-cronjob-consumer-staging: example-cronjob-consumer-staging
