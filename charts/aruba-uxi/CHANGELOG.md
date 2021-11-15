@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-Ability to mount secrets on the pod as a file in the app/other directory which then could be accessed by code to read service accounts or secret URLs. For example, FIREBASE_SERVICE_ACCOUNT is a JSON file that is accessed by code in `firebase-config-sender` and needs to be passed as secret when the service is deployed.
+Ability to mount secrets on the pod as a file in the app or other directory which then could be accessed by code to read service accounts or secret URLs. For example, SERVICE_ACCOUNT is a JSON file that is accessed by code in `firebase-config-sender` and needs to be passed as secret when the service is deployed.
 
 Volumes will be mounted like this under `spec.template.spec.containers` in deployment
 ```
@@ -30,7 +30,7 @@ volumeMounts:
 - name: config
   mountPath: /app/config
   readOnly: true
-- name: service-account
+- name: firebase-service-account
   mountPath: /app/resources
   readOnly: true
 ```
@@ -42,18 +42,27 @@ volumes:
 - name: config
   configMap:
     name: example-service
-- name: service-account
+- name: firebase-service-account
   secret:
-    secretName: SERVICE_ACCOUNT
+    secretName: firebase-service-account
 ```
 
 The `values-staging.yaml` to add secret mounts would look like this
 ```
 secretMount:
-- name: service-account
+- name: firebase-service-account
   readOnly: true
   path: /app/resources
-  secretName: SERVICE_ACCOUNT
+```
+
+The secrets that are to be mounted as files should be placed under `.Values.sealedSecrets.secretMount` like this
+```
+sealedSecrets:
+    imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+    secretMount:
+      firebase-service-account:
+        SERVICE_ACCOUNT.json:
+          sealed_version_of_the_base64_encoded_service_account
 ```
 
 ## [2.3.1] - 2021-11-05
