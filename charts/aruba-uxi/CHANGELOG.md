@@ -58,11 +58,11 @@ secretMount:
 The secrets that are to be mounted as files should be placed under `.Values.sealedSecrets.secretMount` like this
 ```
 sealedSecrets:
-    imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
-    secretMount:
-      firebase-service-account:
-        SERVICE_ACCOUNT.json:
-          sealed_version_of_the_base64_encoded_service_account
+  imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
+  secretMount:
+    firebase-service-account:
+      SERVICE_ACCOUNT.json:
+        sealed_version_of_the_base64_encoded_service_account
 ```
 
 ## [2.3.1] - 2021-11-05
