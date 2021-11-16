@@ -127,7 +127,7 @@ spec:
           readOnly: {{ default true $data.configMap.readOnly }}
         {{- end }}
         {{- if $data.secretMount }}
-        {{- range $secretMountName, $secretMountData := $data.secretMount }}
+        {{- range $secretMountData := $data.secretMount }}
         - name: {{ $secretMountData.name }}
           mountPath: {{ $secretMountData.path}}
           readOnly: {{ default true $secretMountData.readOnly }}
@@ -154,7 +154,7 @@ spec:
           name: {{ $name }}
       {{- end }}
       {{- if $data.secretMount }}
-      {{- range $secretMountName, $secretMountData := $data.secretMount }}
+      {{- range $secretMountData := $data.secretMount }}
       - name: {{ $secretMountData.name }}
         secret:
           secretName: {{ toYaml $secretMountData.name }}

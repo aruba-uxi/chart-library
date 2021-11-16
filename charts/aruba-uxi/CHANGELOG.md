@@ -22,7 +22,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-Ability to mount secrets on the pod as a file in the app or other directory which then could be accessed by code to read service accounts or secret URLs. For example, SERVICE_ACCOUNT is a JSON file that is accessed by code in `firebase-config-sender` and needs to be passed as secret when the service is deployed.
+Ability to mount secrets on the pod as a file in the app or other directory which then could be accessed by code to read service accounts or secret URLs. For example, `firebase-service-account` is a JSON file that is accessed by code in `firebase-config-sender` and needs to be passed as secret when the service is deployed.
 
 Volumes will be mounted like this under `spec.template.spec.containers` in deployment
 ```
@@ -61,7 +61,7 @@ sealedSecrets:
   imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
   secretMount:
     firebase-service-account:
-      SERVICE_ACCOUNT.json:
+      firebase-service-account.json:
         sealed_version_of_the_base64_encoded_service_account
 ```
 

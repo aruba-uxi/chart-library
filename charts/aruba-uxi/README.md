@@ -128,7 +128,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.secretMount | A secret mount to add secrets as a file to the pod | | Yes |
 | application.secretMount.name | The name of the secret volume to be mounted | | Yes |
 | application.secretMount.path | The path to mount the secret on in the pod | `{}` | Yes |
-| application.secretMount.secretName | The name of the variable in secret to be mounted | | Yes |
+| application.secretMount.readOnly | Whether the secret is mounted as readonly file or not | `true` | Yes |
 | application.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |

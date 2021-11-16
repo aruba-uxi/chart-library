@@ -3,7 +3,7 @@ aruba-uxi:
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
     secretMount:
       firebase-service-account:
-        SERVICE_ACCOUNT.json:
+        firebase-service-account.json:
           sealed_version_of_the_base64_encoded_service_account_json
     env:
       aws-access:

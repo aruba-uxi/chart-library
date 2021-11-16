@@ -524,4 +524,4 @@ metadata:
     namespace: default
 spec:
   encryptedData:
-    SERVICE_ACCOUNT.json: sealed_version_of_the_base64_encoded_service_account_json
+    firebase-service-account.json: sealed_version_of_the_base64_encoded_service_account_json
