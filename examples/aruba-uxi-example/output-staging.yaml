@@ -116,7 +116,7 @@ spec:
       containers:
       - name: webapp
         image: quay.io/uxi/nginx:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         - name: ENVIRONMENT
           value: "staging"
@@ -242,7 +242,7 @@ spec:
       containers:
       - name: worker
         image: quay.io/uxi/busybox:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         command: ["/bin/sh","-c","exec tail -f /dev/null"]
         env:
         - name: ENVIRONMENT
@@ -282,7 +282,7 @@ spec:
           containers:
           - name: example-cronjob-consumer
             image: quay.io/uxi/busybox:latest
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             env:
             - name: ENVIRONMENT
               value: "staging"
@@ -328,7 +328,7 @@ spec:
           containers:
           - name: example-cronjob-producer
             image: quay.io/uxi/busybox:latest
-            imagePullPolicy: IfNotPresent
+            imagePullPolicy: Always
             env:
             - name: ENVIRONMENT
               value: "staging"

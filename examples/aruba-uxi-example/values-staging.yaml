@@ -19,6 +19,7 @@ aruba-uxi:
     environment: STAGING
     image:
       repository: quay.io/uxi/aruba-uxi-example
+      pullPolicy: Always
       tag: latest
     env:
       DEBUG: false
