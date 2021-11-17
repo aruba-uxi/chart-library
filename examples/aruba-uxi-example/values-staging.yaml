@@ -20,7 +20,6 @@ aruba-uxi:
     image:
       repository: quay.io/uxi/aruba-uxi-example
       pullPolicy: Always
-      tag: latest
     env:
       DEBUG: false
     envFields:
@@ -70,10 +69,6 @@ aruba-uxi:
       datadog:
         enabled: true
         traceEnabled: true
-      sentry:
-        enabled: false
-        dsn:
-          AgBQvwiX1Y190fkB5xxqpjUJs5ROw7GHXUTUXLe54flWMIOIvdV1fD6xwhtEUiq8fAK/bVcnxQ1inMH16Pc4XW7LyIL0VGsvK+tOwh8B8yimdKraRC7HYhK88rK9WtMll4Ql7kvs4maeNWWgfPjtxn28zyORR7wJPPdWD5BNxiXpa0OF3eRPCKbl31jEZlWa7HHLSzVM/NZ4XfuJRGtW6A9KbQSu+vcn3zsyFKPdMyh77lUXENRltQTn8oiNgZ68tlzv/jfEPZZd4g/eGgohPEn0hoShGT34UmOcw1nMHETlBhj3HZ7sE1VVNXMF8m760jjaZ+Ko0A6RUU6rrd187phJokEjU9O5V0EAqCa8MkV1G5erdpGRWPLXJ9pdRMDnfRONX3ReW/z9CInVdM3Aze/G2rOy7tS5MPutIkdBLI8JwX9D3gEb0lKmZNqzye8IUpB7sg0tdEHfQlpVZ+XPvI+EQhWtxDr0fgbRoxqzutfFsIUFsHVoRSPLz6jE13Vey8vHN8gvanKiyJ9/3caUxiOQvZBQM7n1ylucpE/iibypHTGVGYZmkhHhNc6uQEjqxLlbGlm2V/4FDkx3sG0VsPtVXP2oWKbSw+2aCdItbFh7up2fQ1jrEYNPWsQJ+dNlnCMWAKbvJ37DLaRJc+09SYhID9UDRCto6jjQU9A5B/DWT/7wj+g5eteo1o0aIGdvzHb4nKVuLoL+oLhKt/vwpn82ywhW1cEgnePQrv1XDzfX0QIj0AOp4LKifGVGJx7iDG8CNL6rEqIche5rBBwv0MVepokNv3U6dg==
       labels:
         example-service-staging: example-service-staging
       ingress:
