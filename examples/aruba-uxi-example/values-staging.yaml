@@ -55,9 +55,9 @@ aruba-uxi:
               }
             }
       secretMount:
-      - name: firebase-service-account
+      - name: example-service-account
         readOnly: true
-        path: /app/resources
+        path: /tmp
       env:
         AWS_DEFAULT_REGION: us-west-1
       envSealedSecrets:
