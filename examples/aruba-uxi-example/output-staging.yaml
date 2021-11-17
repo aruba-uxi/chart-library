@@ -195,16 +195,16 @@ spec:
         - name: config
           mountPath: /app/config
           readOnly: true
-        - name: firebase-service-account
-          mountPath: /app/resources
+        - name: example-service-account
+          mountPath: /tmp
           readOnly: true
       volumes:
       - name: config
         configMap:
           name: example-service
-      - name: firebase-service-account
+      - name: example-service-account
         secret:
-          secretName: firebase-service-account
+          secretName: example-service-account
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
 apiVersion: apps/v1
@@ -431,9 +431,9 @@ spec:
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: secretMount
+  name: example-service-account
   labels:
-    app.kubernetes.io/name: secretMount
+    app.kubernetes.io/name: example-service-account
     app.kubernetes.io/instance: aruba-uxi-example
     helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
@@ -441,5 +441,4 @@ metadata:
     namespace: default
 spec:
   encryptedData:
-    example-service-account: 
     example-service-account.json: AgCF2ON/DjK0uf8WKIxTwSuVHDdsFVfHqR9pHrj3htxPDo5ePpJYpfFGzcDBLRzcBOCMZq8I3Z9gUDPXoMPZb+aYc76NTNQxzG/NchS4aekTy3K2FiMiTKS9lzz/WI5CvNXhFoEb06uHy6DR8DbzYn+S+cGsOjlNnU6HvZdn8rqEEGC151IhT0FPVQaiPV4PJkXgHuYCKoCUhsgK80pHsWr8AaUf3r3McbcSYC1eXYVaoy6uhbFsMqZHNOenOooMUsl0xJZ1i/RueKiind9URIKTSxDLG5xEDu5isZgrP22xxzZ1HEolMc+UmtPwDHqr90+Dmnto8vOlLnVN8Mwlj78AZe2SjVp39QRtouKKjKPvNacfSoVkHroSssDLnW3gtucBAthzDe1gAitA0xWV02TYbYnpHcFmx18h1b3UBEmZyfzdtpsU/4oDqNCa1zzL/rBjK4slzTlPvajRgP6GdW+311tOE+W7V2cvwro1u/lqX56dDMp+qLm2SAYAVBGsvbUPqxrcHhD9MMm65HrSU7IBtSqk/91KGtxkrC1pTtVHsav7xlgE9Azv+6iViJ70sTsLbA+4et/jKvu7cHKoLNR7UZ5JINnY1SR0rI8cBIBgvhHq/iu0a2y7eM3LmrFhVYpsM0PAaDeDg4Y0o2XIpF1i0wXBrrZaFLInbUN4Z0uj+MD+k37jDBsSx53JqKrph5qiHvdifZYh8gZ+IfFWNjg=
