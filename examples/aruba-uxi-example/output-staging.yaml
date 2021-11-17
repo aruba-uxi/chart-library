@@ -370,44 +370,6 @@ spec:
           serviceName: example-service
           servicePort: 80
 ---
-<<<<<<< HEAD
-# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: example-service-sentry-dsn
-  labels:
-    app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.2
-    app.kubernetes.io/managed-by: Helm
-    repository: aruba-uxi-example
-    namespace: default
-    example-service-staging: example-service-staging
-    global-label: global-label
-spec:
-  encryptedData:
-    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_service_sentry_dsn
----
-# Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob-sentry-dsn.yaml
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: example-cronjob-producer-sentry-dsn
-  labels:
-    app.kubernetes.io/name: example-cronjob-producer
-    app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-2.3.2
-    app.kubernetes.io/managed-by: Helm
-    repository: aruba-uxi-example
-    namespace: default
-    global-label: global-label
-spec:
-  encryptedData:
-    SENTRY_DSN: sealed_version_of_the_base64_encoded_example_cronjob_producer_sentry_dsn
----
-=======
->>>>>>> cd0835d (just output)
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/imagepullsecret.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
@@ -463,16 +425,15 @@ metadata:
     namespace: default
 spec:
   encryptedData:
-<<<<<<< HEAD
-    DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
+    DATABASE_URL: AgAuvJH6oRC1EklejbecyiSvse4HcCn/VqZcZectp14ZKp/fZlekWVWMQR9eBmXGr4QIfgbMeDNdMXfh+3g2GaXSA+8z2gNTQQWqweyy9WBnXyOG6uJD/yFXXz1mIACAektFMUNqAIDGTIUahcdGwCtRqUaq7ikOyx0HWo6ZtTE2DKYvRUZG8226pm6s4HQNW9aMwgpsmrZYZYQUOiO5yFeuUA/CdoxkzK6G7ArtQj2dRXKRH5p4/foBvXZpVTegWu2ATnfEJf+VVs0jNpAoDk5+shg5grH8GHTD/COmf8SCEdiKk6HZhWof8di+l+l9eTx+1rcAuMPZnNvOuW8G2b8Cb4V71vcg5O3ONJnyLcSW0mL4o66qpK+z3DBZq10r3fnMEWBUVnDdzZcUDWs6UoVjj/rBleKzLGNkbRTqvXbzqdxbjq1w1yLHQMw2WzxLfARwM08LOT91C2egL7RyjBjBSM/TjPzMzMzZkbu7U0d46GVI6/H3mPOc831o5cLncBjxph6Nx/mrS/NA6Nai56OI7wfXK5cIYJKX+Ch47Qewj80CZjHnud8n2aZqrsk4nAp+ZX6yAThQIq8ytg21oZYwOcTSbBfwlzEqjJP5jBMzIIrxauXsHiIAjcjpaQ40mkFI7mJpwGgcxPMtJglC29yDTdRctakht2EMXs7r2GO5llI//nOzlheq5PnstyaoiwPMO47ebk+MRXNtxiUxhHmXeeLXe7ZKkHegKERTrPYyZCjY
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/sealedsecret.yaml
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: firebase-service-account
+  name: secretMount
   labels:
-    app.kubernetes.io/name: firebase-service-account
+    app.kubernetes.io/name: secretMount
     app.kubernetes.io/instance: aruba-uxi-example
     helm.sh/chart: aruba-uxi-2.3.2
     app.kubernetes.io/managed-by: Helm
@@ -480,7 +441,5 @@ metadata:
     namespace: default
 spec:
   encryptedData:
-    firebase-service-account.json: sealed_version_of_the_base64_encoded_service_account_json
-=======
-    DATABASE_URL: AgAuvJH6oRC1EklejbecyiSvse4HcCn/VqZcZectp14ZKp/fZlekWVWMQR9eBmXGr4QIfgbMeDNdMXfh+3g2GaXSA+8z2gNTQQWqweyy9WBnXyOG6uJD/yFXXz1mIACAektFMUNqAIDGTIUahcdGwCtRqUaq7ikOyx0HWo6ZtTE2DKYvRUZG8226pm6s4HQNW9aMwgpsmrZYZYQUOiO5yFeuUA/CdoxkzK6G7ArtQj2dRXKRH5p4/foBvXZpVTegWu2ATnfEJf+VVs0jNpAoDk5+shg5grH8GHTD/COmf8SCEdiKk6HZhWof8di+l+l9eTx+1rcAuMPZnNvOuW8G2b8Cb4V71vcg5O3ONJnyLcSW0mL4o66qpK+z3DBZq10r3fnMEWBUVnDdzZcUDWs6UoVjj/rBleKzLGNkbRTqvXbzqdxbjq1w1yLHQMw2WzxLfARwM08LOT91C2egL7RyjBjBSM/TjPzMzMzZkbu7U0d46GVI6/H3mPOc831o5cLncBjxph6Nx/mrS/NA6Nai56OI7wfXK5cIYJKX+Ch47Qewj80CZjHnud8n2aZqrsk4nAp+ZX6yAThQIq8ytg21oZYwOcTSbBfwlzEqjJP5jBMzIIrxauXsHiIAjcjpaQ40mkFI7mJpwGgcxPMtJglC29yDTdRctakht2EMXs7r2GO5llI//nOzlheq5PnstyaoiwPMO47ebk+MRXNtxiUxhHmXeeLXe7ZKkHegKERTrPYyZCjY
->>>>>>> cd0835d (just output)
+    example-service-account: 
+    example-service-account.json: AgCF2ON/DjK0uf8WKIxTwSuVHDdsFVfHqR9pHrj3htxPDo5ePpJYpfFGzcDBLRzcBOCMZq8I3Z9gUDPXoMPZb+aYc76NTNQxzG/NchS4aekTy3K2FiMiTKS9lzz/WI5CvNXhFoEb06uHy6DR8DbzYn+S+cGsOjlNnU6HvZdn8rqEEGC151IhT0FPVQaiPV4PJkXgHuYCKoCUhsgK80pHsWr8AaUf3r3McbcSYC1eXYVaoy6uhbFsMqZHNOenOooMUsl0xJZ1i/RueKiind9URIKTSxDLG5xEDu5isZgrP22xxzZ1HEolMc+UmtPwDHqr90+Dmnto8vOlLnVN8Mwlj78AZe2SjVp39QRtouKKjKPvNacfSoVkHroSssDLnW3gtucBAthzDe1gAitA0xWV02TYbYnpHcFmx18h1b3UBEmZyfzdtpsU/4oDqNCa1zzL/rBjK4slzTlPvajRgP6GdW+311tOE+W7V2cvwro1u/lqX56dDMp+qLm2SAYAVBGsvbUPqxrcHhD9MMm65HrSU7IBtSqk/91KGtxkrC1pTtVHsav7xlgE9Azv+6iViJ70sTsLbA+4et/jKvu7cHKoLNR7UZ5JINnY1SR0rI8cBIBgvhHq/iu0a2y7eM3LmrFhVYpsM0PAaDeDg4Y0o2XIpF1i0wXBrrZaFLInbUN4Z0uj+MD+k37jDBsSx53JqKrph5qiHvdifZYh8gZ+IfFWNjg=
