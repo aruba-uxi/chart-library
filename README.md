@@ -1,5 +1,7 @@
 # chart-library
 
+## Table Of Contents
+
 - [Development](#development)
 - [Usage](#usage)
 - [Templating Examples](#templating-examples)
