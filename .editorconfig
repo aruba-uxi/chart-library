@@ -13,11 +13,6 @@ end_of_line = lf
 [Justfile]
 indent_style = tab
 
-# 4 space indentation
-[*.py]
-indent_style = space
-indent_size = 4
-
 [{*.yaml,*.yml}]
 indent_style = space
 indent_size = 2
