@@ -47,7 +47,7 @@ Create labels used by most objects
 helm.sh/chart: {{ include "aruba-uxi.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
 repository: {{ .context.Values.global.repository }}
-namespace: {{ .context.Release.Namespace }}
+namespace: {{ .context.Values.global.namespace }}
 {{- if .context.Chart.AppVersion -}}
 app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 {{- end -}}

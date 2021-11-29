@@ -1,5 +1,6 @@
 {{- range $name, $data := .Values.applications }}
 {{- $applicationRole := include "application.role" (dict "role" $data.role) }}
+{{- $namespace := (default "default" $.Values.global.namespace) }}
 {{- if mustHas $applicationRole (list "webapp") }}
 {{- $service := default dict $data.service }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
@@ -8,6 +9,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ $name }}
+  namespace: {{ $namespace }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:

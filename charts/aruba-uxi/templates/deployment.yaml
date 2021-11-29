@@ -1,6 +1,7 @@
 {{- range $name, $data := .Values.applications }}
 {{- $sealedSecrets := default dict $.Values.sealedSecrets }}
 {{- $overrideImage := default dict $data.image }}
+{{- $namespace := (default "default" $.Values.global.namespace) }}
 {{- $datadog := default dict $data.datadog }}
 {{- $sentry := default dict $data.sentry }}
 {{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
@@ -12,6 +13,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ $name }}
+  namespace: {{ $namespace }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:

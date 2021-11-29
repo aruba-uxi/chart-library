@@ -1,0 +1,11 @@
+{{- range $name, $data := .Values.applications }}
+{{- $namespace := (default "default" $.Values.global.namespace) }}
+{{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $namespace }}
+  labels:
+    {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+{{- end }}
