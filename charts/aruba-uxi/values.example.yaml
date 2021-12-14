@@ -264,8 +264,6 @@ aruba-uxi:
       service: {}
         # type: ClusterIP
         # port: 80
-      ## Enables the liveness probe on the specified path (Optional)
-      ## NB! for 'role:worker' this should be excluded
       ##
       ## Enables the liveness probe to run the specified command (Optional)
       ##
