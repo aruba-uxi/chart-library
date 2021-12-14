@@ -74,7 +74,7 @@ spec:
           protocol: TCP
         readinessProbe:
           exec:
-            command: ls -a
+            command: "ls -a"
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1

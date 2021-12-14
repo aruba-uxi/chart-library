@@ -257,7 +257,7 @@ spec:
               fieldPath: status.hostIP        
         readinessProbe:
           exec:
-            command: ls
+            command: ["ls"]
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1
@@ -265,7 +265,7 @@ spec:
           failureThreshold: 3
         livenessProbe:
           exec:
-            command: ls
+            command: ["ls"]
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1
