@@ -14,7 +14,7 @@ aruba-uxi:
       livenessProbe:
         path: /livez
       readinessProbe:
-        path: /readyz
+        command: "ls -a"
       env:
         DATABASE_URL: postgresql://username:password@db:5432/aruba-uxi-example
       datadog:
