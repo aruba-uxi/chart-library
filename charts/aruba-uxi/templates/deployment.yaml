@@ -94,12 +94,12 @@ spec:
               value: application/json
             path: {{ $data.readinessProbe.path }}
             port: {{ $data.port }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
           successThreshold: {{ default "1" $data.readinessProbe.successThreshold }}
           failureThreshold: {{ default "3" $data.readinessProbe.failureThreshold }}
-          {{- end }}
         {{- end }}
         {{- if $data.livenessProbe }}
         livenessProbe:
@@ -115,12 +115,12 @@ spec:
               value: application/json
             path: {{ $data.livenessProbe.path }}
             port: {{ $data.port }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
           successThreshold: {{ default "1" $data.livenessProbe.successThreshold }}
           failureThreshold: {{ default "3" $data.livenessProbe.failureThreshold }}
-          {{- end }}
         {{- end }}
         {{- with $data.resources }}
         resources:

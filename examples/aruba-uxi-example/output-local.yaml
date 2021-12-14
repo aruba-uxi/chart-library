@@ -75,6 +75,11 @@ spec:
         readinessProbe:
           exec:
             command: ls -a
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
         livenessProbe:
           httpGet:
             httpHeaders:
