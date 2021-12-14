@@ -24,6 +24,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 Ability to use commands to do liveness and readiness checks
 
+```
+livenessProbe:
+    command: "ls -a"
+readinessProbe:
+    command: "ls -a"
+```
+
 ## [2.3.2] - 2021-11-10
 
 ### Added
