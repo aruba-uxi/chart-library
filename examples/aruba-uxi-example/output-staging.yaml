@@ -254,7 +254,23 @@ spec:
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP
+              fieldPath: status.hostIP        
+        readinessProbe:
+          exec:
+            command: ls
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        livenessProbe:
+          exec:
+            command: ls
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
 apiVersion: batch/v1beta1
