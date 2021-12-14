@@ -85,9 +85,9 @@ aruba-uxi:
         tag: latest
       command: ["/bin/sh", "-c", "exec tail -f /dev/null"]
       livenessProbe:
-        command: ls
+        command: ["ls"]
       readinessProbe:
-        command: ls
+        command: ["ls"]
   cronjobs:
     example-cronjob-producer:
       image:

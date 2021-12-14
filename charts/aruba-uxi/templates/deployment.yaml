@@ -84,7 +84,7 @@ spec:
         readinessProbe:
           {{- if $data.readinessProbe.command }}
           exec:
-            command: {{ $data.readinessProbe.command }}
+            command: {{ toRawJson $data.readinessProbe.command }}
           {{- else }}
           httpGet:
             httpHeaders:
@@ -105,7 +105,7 @@ spec:
         livenessProbe:
           {{- if $data.livenessProbe.command }}
           exec:
-            command: {{ $data.livenessProbe.command }}
+            command: {{ toRawJson $data.livenessProbe.command }}
           {{- else }}
           httpGet:
             httpHeaders:
