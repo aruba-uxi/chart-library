@@ -113,10 +113,10 @@ In this table `application` refers to each application defined under `applicatio
 | application.service | Configures the service created for webapps | `ClusterIP` | Yes |
 | application.service.type | Configures the service type that is created for webapps | `ClusterIP` | Yes |
 | application.service.port | Configures the service port to expose | `80` | Yes |
-| application.livenessProbe.command | The command to use to test liveness | | Yes |
-| application.readinessProbe.command | The command to use to test readiness | | Yes |
 | application.livenessProbe.path | The API path to query for liveness tests | `/livez` | Yes |
 | application.readinessProbe.path | The API path to query for readiness tests | `/readyz` | Yes |
+| application.livenessProbe.command | The command to use to test liveness (as opposed to livenessProbe.path) | | Yes |
+| application.readinessProbe.command | The command to use to test readiness (as opposed to readinessProbe.path)| | Yes |
 | application.resources | Resource limits and requests to set on the pod. See [link](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for more details on the structure | `{}` | Yes |
 | application.nodeSelector | Node selector specifications to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) for more details on the structure | `{}` | Yes |
 | application.tolerations | Tolerations to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the structure | `{}` | Yes |
