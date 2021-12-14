@@ -267,13 +267,14 @@ aruba-uxi:
       ## Enables the liveness probe on the specified path (Optional)
       ## NB! for 'role:worker' this should be excluded
       ##
+      ## Enables the liveness probe to run the specified command (Optional)
+      ##
       livenessProbe:
-        path: /livez
-      ## Enables the readiness probe on the specified path (Optional)
-      ## NB! for 'role:worker' this should be excluded
+        command: "ls -a"
+      ## Enables the readiness probe to run the specified command (Optional)
       ##
       readinessProbe:
-        path: /readyz
+        command: "ls -a"
       ## Configure the pod resources (Optional)
       ## Default: lets kubernetes set the resources
       ##
