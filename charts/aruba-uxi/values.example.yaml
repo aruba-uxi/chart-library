@@ -268,11 +268,11 @@ aruba-uxi:
       ## Enables the liveness probe to run the specified command (Optional)
       ##
       livenessProbe:
-        command: "ls -a"
+        command: ["ls -a"]
       ## Enables the readiness probe to run the specified command (Optional)
       ##
       readinessProbe:
-        command: "ls -a"
+        command: ["ls -a"]
       ## Configure the pod resources (Optional)
       ## Default: lets kubernetes set the resources
       ##
