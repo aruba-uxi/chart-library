@@ -84,6 +84,10 @@ aruba-uxi:
         repository: quay.io/uxi/busybox
         tag: latest
       command: ["/bin/sh", "-c", "exec tail -f /dev/null"]
+      livenessProbe:
+        command: ["ls"]
+      readinessProbe:
+        command: ["ls"]
   cronjobs:
     example-cronjob-producer:
       image:

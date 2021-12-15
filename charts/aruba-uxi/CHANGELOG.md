@@ -18,6 +18,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.4.2] - 2021-12-14
+
+### Added
+
+Ability to use commands to do liveness and readiness checks. This is especially handy for workers.
+
+```
+livenessProbe:
+    command: ["ls -a"]
+readinessProbe:
+    command: ["ls -a"]
+```
+
 ## [2.3.2] - 2021-11-10
 
 ### Added

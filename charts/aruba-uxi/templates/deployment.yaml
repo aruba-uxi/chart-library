@@ -82,6 +82,10 @@ spec:
         {{- end }}
         {{- if $data.readinessProbe }}
         readinessProbe:
+          {{- if $data.readinessProbe.command }}
+          exec:
+            command: {{ toRawJson $data.readinessProbe.command }}
+          {{- else }}
           httpGet:
             httpHeaders:
             - name: Host
@@ -90,6 +94,7 @@ spec:
               value: application/json
             path: {{ $data.readinessProbe.path }}
             port: {{ $data.port }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
@@ -98,6 +103,10 @@ spec:
         {{- end }}
         {{- if $data.livenessProbe }}
         livenessProbe:
+          {{- if $data.livenessProbe.command }}
+          exec:
+            command: {{ toRawJson $data.livenessProbe.command }}
+          {{- else }}
           httpGet:
             httpHeaders:
             - name: Host
@@ -106,6 +115,7 @@ spec:
               value: application/json
             path: {{ $data.livenessProbe.path }}
             port: {{ $data.port }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
