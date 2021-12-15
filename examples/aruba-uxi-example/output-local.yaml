@@ -73,8 +73,14 @@ spec:
           containerPort: 8000
           protocol: TCP
         readinessProbe:
-          exec:
-            command: ["ls -a"]
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: readinessProbe
+            - name: Content-Type
+              value: application/json
+            path: /readyz
+            port: 8000
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1
