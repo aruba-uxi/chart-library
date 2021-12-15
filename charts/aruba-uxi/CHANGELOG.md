@@ -18,6 +18,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.4.3] - 2021-12-15
+
+Fix local values example file.
 ## [2.4.2] - 2021-12-14
 
 ### Added
