@@ -39,6 +39,9 @@ spec:
         {{- with $data.command }}
         command: {{ toRawJson . }}
         {{- end }}
+        {{- with $data.args }}
+        args: {{ toRawJson . }}
+        {{- end }}
         env:
         - name: ENVIRONMENT
           value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}

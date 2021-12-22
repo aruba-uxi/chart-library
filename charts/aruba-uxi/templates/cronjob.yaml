@@ -70,5 +70,8 @@ spec:
             {{- with $data.command }}
             command: {{ toRawJson . }}
             {{- end }}
+            {{- with $data.args }}
+            args: {{ toRawJson . }}
+            {{- end }}
           restartPolicy: {{ default "OnFailure" $data.restartPolicy }}
 {{- end }}
