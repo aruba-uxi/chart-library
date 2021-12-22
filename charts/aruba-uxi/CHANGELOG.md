@@ -22,7 +22,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-Ability to support args for comands
+Ability to send args for container command
+```
+args: ["-d", "--doSomething"]
+```
 
 ## [2.4.2] - 2021-12-14
 
