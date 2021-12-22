@@ -244,6 +244,7 @@ spec:
         image: quay.io/uxi/busybox:latest
         imagePullPolicy: Always
         command: ["/bin/sh","-c","exec tail -f /dev/null"]
+        args: ["-d","--disable-upload"]
         env:
         - name: ENVIRONMENT
           value: "staging"
@@ -316,6 +317,7 @@ spec:
                   name: aws-access
                   key: AWS_REGION
             command: ["/bin/sh","-c","date; echo Hello from the example-cronjob-consumer"]
+            args: ["-h","-d 5"]
           restartPolicy: Never
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
