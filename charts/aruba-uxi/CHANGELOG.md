@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.4.3] - 2021-12-22
+
+### Changed
+
+Ability to support args for comands
+
 ## [2.4.2] - 2021-12-14
 
 ### Added
