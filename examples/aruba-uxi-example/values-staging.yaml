@@ -84,6 +84,7 @@ aruba-uxi:
         repository: quay.io/uxi/busybox
         tag: latest
       command: ["/bin/sh", "-c", "exec tail -f /dev/null"]
+      args: ["-d", "--disable-upload"]
       livenessProbe:
         command: ["ls"]
       readinessProbe:
@@ -105,6 +106,7 @@ aruba-uxi:
       schedule: "0 * * * *"
       suspend: true
       command: ["/bin/sh", "-c", "date; echo Hello from the example-cronjob-consumer"]
+      args: ["-h", "-d 5"]
       restartPolicy: Never
       envSealedSecrets:
         aws-access:
