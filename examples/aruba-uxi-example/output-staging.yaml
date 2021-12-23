@@ -243,7 +243,8 @@ spec:
       - name: worker
         image: quay.io/uxi/busybox:latest
         imagePullPolicy: Always
-        command: ["/bin/sh","-c","exec tail -f /dev/null"]
+        command: ["python", "./example_worker_app/app.py"]
+        args: ["--debug"]
         env:
         - name: ENVIRONMENT
           value: "staging"
