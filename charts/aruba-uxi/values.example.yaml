@@ -253,7 +253,10 @@ aruba-uxi:
       ## Overrides the command from the dockerfile (Optional)
       ## Default: the Dockerfile command is used
       ##
-      command: ["echo", "foo bar biz"]
+      command: ["python", "./example_worker_app/app.py"]
+      ## args for the container command (Optional)
+      ##
+      args: ["--debug"]
       ## Which port on the pod is exposed.
       ## NB! for 'role: worker' do not set this
       ##

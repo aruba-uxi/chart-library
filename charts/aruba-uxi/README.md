@@ -109,6 +109,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.serviceAccount.name | The name of the service account to attach to this application| | Yes |
 | application.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
 | application.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
+| application.args | The arguments that used by the override command | `""` | Yes |
 | application.port | The port that must be exposed on the pod. Also used when adding a service to the webapp. Can be excluded when defining a worker | | No |
 | application.service | Configures the service created for webapps | `ClusterIP` | Yes |
 | application.service.type | Configures the service type that is created for webapps | `ClusterIP` | Yes |
@@ -172,6 +173,7 @@ In this table `cronjob` refers to each cronjob defined under `cronjobs`
 | cronjob.image.tag | The image to use for this specific cronjob | `globals.image.tag` | Yes |
 | cronjob.image.pullPolicy | The image pull policy to use for this cronjob | `globals.image.pullPOlicy` | Yes |
 | cronjob.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
+| cronjob.args | The arguments that used by the override command | `""` | Yes |
 | cronjob.serviceAccount.create | Creates a service account and adds it to the cronjob. If no name is provided the application name will be used | `false` | Yes |
 | cronjob.serviceAccount.name | The name of the service account to attach to this cronjob| | Yes |
 | cronjob.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
