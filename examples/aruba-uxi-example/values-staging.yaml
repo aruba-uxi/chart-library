@@ -83,12 +83,7 @@ aruba-uxi:
       image:
         repository: quay.io/uxi/busybox
         tag: latest
-      command: ["printenv"]
-      args: ["HOSTNAME"]
-      # livenessProbe:
-      #   command: ["ls"]
-      # readinessProbe:
-      #   command: ["ls"]
+      command: ["/bin/sh", "-c", "echo Hello from the example-worker"]
   cronjobs:
     example-cronjob-producer:
       image:
