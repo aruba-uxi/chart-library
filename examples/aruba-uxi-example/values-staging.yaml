@@ -83,8 +83,8 @@ aruba-uxi:
       image:
         repository: quay.io/uxi/busybox
         tag: latest
-      command: ["python", "./example_worker_app/app.py"]
-      args: ["--debug"]
+      command: ["printenv"]
+      args: ["HOSTNAME", "KUBERNETES_PORT"]
       livenessProbe:
         command: ["ls"]
       readinessProbe:
