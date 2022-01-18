@@ -253,10 +253,10 @@ aruba-uxi:
       ## Overrides the command from the dockerfile (Optional)
       ## Default: the Dockerfile command is used
       ##
-      command: ["python", "./example_worker_app/app.py"]
+      command: ["printenv"]
       ## args for the container command (Optional)
       ##
-      args: ["--debug"]
+      args: ["HOSTNAME", "KUBERNETES_PORT"]
       ## Which port on the pod is exposed.
       ## NB! for 'role: worker' do not set this
       ##
