@@ -84,11 +84,11 @@ aruba-uxi:
         repository: quay.io/uxi/busybox
         tag: latest
       command: ["printenv"]
-      args: ["HOSTNAME", "KUBERNETES_PORT"]
-      livenessProbe:
-        command: ["ls"]
-      readinessProbe:
-        command: ["ls"]
+      args: ["HOSTNAME"]
+      # livenessProbe:
+      #   command: ["ls"]
+      # readinessProbe:
+      #   command: ["ls"]
   cronjobs:
     example-cronjob-producer:
       image:
