@@ -83,7 +83,7 @@ aruba-uxi:
       image:
         repository: quay.io/uxi/busybox
         tag: latest
-      command: ["/bin/sh", "-c", 'while true; do sleep 60; now=$(date +"%r"); echo "the time is now $now"; done;"]
+      command: ["/bin/sh", "-c", 'while true; do sleep 60; now=$(date +"%r"); echo "the time is now $now"; done;"']
   cronjobs:
     example-cronjob-producer:
       image:
