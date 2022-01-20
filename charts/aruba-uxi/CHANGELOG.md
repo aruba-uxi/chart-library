@@ -46,7 +46,7 @@ args: ["-d", "--doSomething"]
 
 Ability to use commands to do liveness and readiness checks. This is especially handy for workers.
 
-```yaml
+```
 livenessProbe:
   command: ["ls -a"]
 readinessProbe:
