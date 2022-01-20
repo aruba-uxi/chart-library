@@ -372,9 +372,8 @@ metadata:
     namespace: default
     example-service-staging: example-service-staging
     global-label: global-label
-  annotations:
-    kubernetes.io/ingress.class: kong
 spec:
+  ingressClassName: nginx
   rules:
   - host: example-service.staging.capedev.io
     http:
