@@ -36,7 +36,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 Ability to send args for container command
 
-```
+```yaml
 args: ["-d", "--doSomething"]
 ```
 
@@ -46,11 +46,11 @@ args: ["-d", "--doSomething"]
 
 Ability to use commands to do liveness and readiness checks. This is especially handy for workers.
 
-```
+```yaml
 livenessProbe:
-    command: ["ls -a"]
+  command: ["ls -a"]
 readinessProbe:
-    command: ["ls -a"]
+  command: ["ls -a"]
 ```
 
 ## [2.3.2] - 2021-11-10
@@ -61,7 +61,7 @@ Ability to mount secrets on the pod as a file in the app or other directory whic
 
 Volumes will be mounted like this under `spec.template.spec.containers` in deployment
 
-```
+```yaml
 volumeMounts:
 - name: config
   mountPath: /app/config
@@ -73,7 +73,7 @@ volumeMounts:
 
 And the volume definition is done like this under `spec.template.spec` in deployment
 
-```
+```yaml
 volumes:
 - name: config
   configMap:
@@ -85,7 +85,7 @@ volumes:
 
 The `values-staging.yaml` to add secret mounts would look like this
 
-```
+```yaml
 secretMount:
 - name: firebase-service-account
   readOnly: true
@@ -94,7 +94,7 @@ secretMount:
 
 The secrets that are to be mounted as files should be placed under `.Values.sealedSecrets.secretMount` like this
 
-```
+```yaml
 sealedSecrets:
   imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
   secretMount:

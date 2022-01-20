@@ -10,9 +10,8 @@ metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
-  annotations:
-    kubernetes.io/ingress.class: {{ default "nginx" $ingress.class }}
 spec:
+  ingressClassName: {{ default "nginx" $ingress.className }}
   {{- if $ingress.tls }}
   tls:
   {{- range $ingress.tls }}

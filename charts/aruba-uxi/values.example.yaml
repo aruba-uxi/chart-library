@@ -216,7 +216,7 @@ aruba-uxi:
       ## Default: None
       ingress:
         enabled: false
-        class: kong
+        className: nginx
         hosts:
         - host: example-service.local
           paths:

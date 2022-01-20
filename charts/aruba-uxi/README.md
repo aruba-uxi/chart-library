@@ -141,7 +141,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 | application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
 | application.ingress.enabled | Enables the legacy ingress on the application. Setting to true will create a new legacy ingress manifest. | `false` | Yes |
-| application.ingress.class | Defines the ingressClass. | `nginx` | Yes |
+| application.ingress.className | Defines the ingressClassName. | `nginx` | Yes |
 | application.ingress.hosts | A list of hosts to add to the legacy ingress. | `[]` | Yes |
 | application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | `[]` | Yes |
 | application.ingress.hosts[].paths.path | The path | `/` | Yes |
