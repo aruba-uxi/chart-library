@@ -83,8 +83,7 @@ aruba-uxi:
       image:
         repository: quay.io/uxi/busybox
         tag: latest
-      command: ["printenv"]
-      args: ["HOSTNAME"]
+      command: ["/bin/sh", "-c", "while true; do sleep 60; echo 'example cronjob producer'; done;"]
   cronjobs:
     example-cronjob-producer:
       image:
@@ -101,7 +100,8 @@ aruba-uxi:
         tag: latest
       schedule: "0 * * * *"
       suspend: true
-      command: ["/bin/sh", "-c", "date; echo Hello from the example-cronjob-consumer"]
+      command: ["printenv"]
+      args: ["HOSTNAME"]
       restartPolicy: Never
       envSealedSecrets:
         aws-access:
