@@ -1,34 +1,6 @@
-# # yaml options: https://github.com/helm/chart-testing/blob/main/doc/ct_lint.md
-# name: Lint & Test Markdown
-
-# on: [push]
-
-# jobs:
-#   lint-test:
-#     name: Lint & Test Markdown
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#         with:
-#           fetch-depth: 0
-
-#       - name: Set up markdownlint
-#         uses: xt0rted/markdownlint-problem-matcher@v1
-
-#       - name: Run markdownlint
-#         run: markdownlint **/*.md --ignore node_modules --disable MD013 MD024
-#################################
-#################################
-## Super Linter GitHub Actions ##
-#################################
-#################################
+# Super Linter: https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
 name: Lint Code Base
 
-#
-# Documentation:
-# https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions
-#
 on: [push]
 
 jobs:

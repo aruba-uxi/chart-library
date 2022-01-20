@@ -7,3 +7,5 @@ MD024:
   allow_different_nesting: false
   # Only check sibling headings
   siblings_only: false
+
+MD013: {}
