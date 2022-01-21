@@ -18,6 +18,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.4.6] - 2022-01-19
+
+### Added
+
+Added the ability to set the ingress class name. Defaults to `nginx`
+
+```yaml
+ingress:
+  class: nginx
+```
+
 ## [2.4.5] - yyyy-mm-dd
 
 ### Fixed
@@ -46,7 +57,7 @@ args: ["-d", "--doSomething"]
 
 Ability to use commands to do liveness and readiness checks. This is especially handy for workers.
 
-```
+```yaml
 livenessProbe:
   command: ["ls -a"]
 readinessProbe:
@@ -362,7 +373,7 @@ Ability to control sentry for each application or cronjob with `sentry.enabled: 
 
 Added the `.sealedSecrets.sentryDsn` value which (if present) will create a `sentry-dsn` sealed secret. This value will be used to populate the `SENTRY_DSN` environment variable.
 
-> **__NOTE__** There is no logic to catch if you enabled sentry and forgot to provide the `.sealedSecrets.sentryDsn` value.
+> ****NOTE**** There is no logic to catch if you enabled sentry and forgot to provide the `.sealedSecrets.sentryDsn` value.
 
 ## [1.1.0] - 2021-10-05
 
