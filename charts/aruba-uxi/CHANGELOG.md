@@ -18,11 +18,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.4.4] - 2022-01-21
+
+### Changed
+
+- updated worker commands
+
 ## [2.4.3] - 2021-12-22
 
 ### Changed
 
 Ability to send args for container command
+
 ```
 args: ["-d", "--doSomething"]
 ```
@@ -47,6 +54,7 @@ readinessProbe:
 Ability to mount secrets on the pod as a file in the app or other directory which then could be accessed by code to read service accounts or secret URLs. For example, `firebase-service-account` is a JSON file that is accessed by code in `firebase-config-sender` and needs to be passed as secret when the service is deployed.
 
 Volumes will be mounted like this under `spec.template.spec.containers` in deployment
+
 ```
 volumeMounts:
 - name: config
@@ -70,6 +78,7 @@ volumes:
 ```
 
 The `values-staging.yaml` to add secret mounts would look like this
+
 ```
 secretMount:
 - name: firebase-service-account
@@ -78,6 +87,7 @@ secretMount:
 ```
 
 The secrets that are to be mounted as files should be placed under `.Values.sealedSecrets.secretMount` like this
+
 ```
 sealedSecrets:
   imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
