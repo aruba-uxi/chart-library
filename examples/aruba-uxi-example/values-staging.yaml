@@ -88,7 +88,7 @@ aruba-uxi:
         repository: quay.io/uxi/busybox
         tag: latest
       command: ["/bin/sh", "-c", 'while true; do sleep 3600; date; done;']
-    sentry:
+      sentry:
         enabled: true
         dsn:
           AgBsCKUK1LVkqXFrIoqKHzUPCpH0cm2QomH5/d4f+ZgwaBBTKAOmOo0QBZz90BgJDAk3EwArlAw7EgACDkrbVJzHYofs/peFUvB8JO5jYZDjL5HnJ9Uyj1upE1/tBCZhzswKs/WIesRHZKseDgLSmE7//z8F9obVAKn6ECYMB4nhazfzJivDTRsbGZrgb0u0NDFdHRUhpNeBmclrheatz/ZtUL1Vbyvne1zQfRvBz7pGhzxLFFk/q5O//UmqAAWy6WRm6u0mWbvDM8CUmCzPkIBH4+pTuAT+2u/pbSrUGMKf9tEw5brqySPg7c/+jcaJUMY3cCNCIMxf9Zb83CuhqIggZpZfNBaGaYHiAU4BGELCEnk74uW/09A5/Qu1vY7wZYrfMJn3RTz8+jmXGxVyzmPzPyL7veOJwX2ajhRBbUQOtExcd2AFiMwbb3elgGY01rFuxvujq2ppqymGlkwjetWjQWUfKZ91CnBEEfnOz5PWnevoaN7acFzP2aRp7/qpZhN+mcl1jXp0ESVP3BptD8fhNdsnhpEra8dVZLJ2CXGXP+ubZUGrbV6kuccGwkg12dZjwBHYIZQ8akZNZjYRD+x6V6tah0dyVcedJgk7Zlx9mreCg9zW2ZQGL3Bhcjw9ZoxQTLkhWA6zodWxot/n73WIAsQfHYw177VJB9xWnPhZFolgS3iPkRHTalteSvBBsvRmNm8c052CzBY5uhaZp1ugjw==
