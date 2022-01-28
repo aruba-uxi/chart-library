@@ -4,7 +4,8 @@
 {{- if $sentry.enabled }}
 {{- if not $sentry.dsn }}
 {{- fail (printf "Sentry is enabled but applications.%s.sentry.dsn is not defined" $name) }}
-{{- end}}
+{{- end }}
+---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:

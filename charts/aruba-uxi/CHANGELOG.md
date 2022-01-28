@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been fixed
 
+## [2.4.5] - yyyy-mm-dd
+
+### Fixed
+
+- sentry-dsn sealed secrets were incorrectly being created
+
 ## [2.4.4] - 2022-01-21
 
 ### Changed
