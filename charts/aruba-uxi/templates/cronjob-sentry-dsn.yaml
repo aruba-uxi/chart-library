@@ -5,6 +5,7 @@
 {{- if not $sentry.dsn }}
 {{- fail (printf "Sentry is enabled but cronjobs.%s.sentry.dsn is not defined" $name) }}
 {{- end}}
+---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
