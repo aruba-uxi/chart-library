@@ -17,6 +17,13 @@ aruba-uxi:
         BAR: sealed_version_of_the_base64_encoded_environment_variable_value
       secret-name-b:
         BIZ: sealed_version_of_the_base64_encoded_environment_variable_value
+    ## Creates sealed secrets used to mount as files (Optional)
+    ## A sealed secret is created for each secretMount.<value>
+    ## Default: None
+    ##
+    secretMount:
+      secret-name:
+        filename.json: sealed_version_of_the_base64_encoded_file_contents
   ## Global values used by all manifests
   ##
   global:
@@ -209,6 +216,7 @@ aruba-uxi:
       ## Default: None
       ingress:
         enabled: false
+        className: nginx
         hosts:
         - host: example-service.local
           paths:
@@ -221,6 +229,14 @@ aruba-uxi:
         # - secretName: chart-example-tls
         #   hosts:
         #     - example-service.local
+      ## Mounts one or more sealed secrets to a location on the file system (Optional)
+      ## Each key in the sealed secret will be mounted as a file under `secretMount.[n].path`
+      ## Default: None
+      ###
+      secretMount:
+      - name: secret-name
+        readOnly: true
+        path: /path/to/mount/folder
     example-worker:
       ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.
