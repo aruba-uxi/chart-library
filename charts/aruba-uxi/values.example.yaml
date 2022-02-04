@@ -12,7 +12,7 @@ aruba-uxi:
     ## Default: None
     ##
     env:
-      secret-name-:
+      secret-name-a:
         FOO: sealed_version_of_the_base64_encoded_environment_variable_value
         BAR: sealed_version_of_the_base64_encoded_environment_variable_value
       secret-name-b:
