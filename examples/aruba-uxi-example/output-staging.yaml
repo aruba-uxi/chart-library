@@ -111,7 +111,7 @@ spec:
         global-label: global-label
     spec:
       imagePullSecrets:
-      - name: sealed-image-pull-secret
+      - name: aruba-uxi-example-image-pull-secret
       serviceAccountName: example-service
       containers:
       - name: webapp
@@ -245,7 +245,7 @@ spec:
         global-label: global-label
     spec:
       imagePullSecrets:
-      - name: sealed-image-pull-secret
+      - name: aruba-uxi-example-image-pull-secret
       containers:
       - name: worker
         image: quay.io/uxi/busybox:latest
@@ -292,7 +292,7 @@ spec:
       template:
         spec:
           imagePullSecrets:
-          - name: sealed-image-pull-secret
+          - name: aruba-uxi-example-image-pull-secret
           containers:
           - name: example-cronjob-consumer
             image: quay.io/uxi/busybox:latest
@@ -338,7 +338,7 @@ spec:
       template:
         spec:
           imagePullSecrets:
-          - name: sealed-image-pull-secret
+          - name: aruba-uxi-example-image-pull-secret
           serviceAccountName: example-cronjob-producer
           containers:
           - name: example-cronjob-producer
@@ -423,9 +423,9 @@ spec:
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  name: sealed-image-pull-secret
+  name: aruba-uxi-example-image-pull-secret
   labels:
-    app.kubernetes.io/name: sealed-image-pull-secret
+    app.kubernetes.io/name: aruba-uxi-example-image-pull-secret
     helm.sh/chart: aruba-uxi-2.4.6
     app.kubernetes.io/managed-by: Helm
     namespace: default
@@ -435,9 +435,9 @@ spec:
   template:
     data: null
     metadata:
-      name: sealed-image-pull-secret
+      name: aruba-uxi-example-image-pull-secret
       labels:
-      app.kubernetes.io/name: sealed-image-pull-secret
+      app.kubernetes.io/name: aruba-uxi-example-image-pull-secret
       helm.sh/chart: aruba-uxi-2.4.6
       app.kubernetes.io/managed-by: Helm
       namespace: default

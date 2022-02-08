@@ -23,7 +23,7 @@ spec:
         spec:
           {{- if $sealedSecrets.imagePullSecret }}
           imagePullSecrets:
-          - name: {{ include "sealedImagePullSecret.name" (dict) }}
+          - name: {{ include "sealedImagePullSecret.name" (dict "context" $) }}
           {{- end }}
           {{- if $data.serviceAccount }}
           serviceAccountName: {{ include "serviceAccount.name" (dict "name" $name "data" $data) }}
