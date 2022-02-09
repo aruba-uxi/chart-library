@@ -14,7 +14,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
-### Fixed
+## [3.0.1] - 2022-02-09
+
+### Changed
+
+- updated typo in changelog and moved changelog out of charts folder
 
 ## [3.0.0] - 2022-02-08
 
