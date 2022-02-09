@@ -23,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 The allow for multiple repos to be deployed to the same namespace, the image pull secret name needed to be changed to something unique to the repo.
 An error was occurring in ArgoCD when an application was trys to create an image pull secret but it already exists from another repo.
 
-The image pull secret name has been changed from `sealed-image-pull-secret` to `<repository-name>.image-pull-secret` where repository name is taken from `.Values.global.repository`.
+The image pull secret name has been changed from `sealed-image-pull-secret` to `<repository-name>-image-pull-secret` where repository name is taken from `.Values.global.repository`.
 
 ## [2.4.6] - 2022-01-19
 
