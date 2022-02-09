@@ -60,14 +60,15 @@ app.kubernetes.io/version: {{ .context.Chart.AppVersion | quote }}
 Create the name for sealed image pull secret
 */}}
 {{- define "sealedImagePullSecret.name" -}}
-{{- print "sealed-image-pull-secret" -}}
+{{- $name := lower .context.Values.global.repository -}}
+{{- printf "%s-image-pull-secret" $name -}}
 {{- end -}}
 
 {{/*
 Create labels specific fro sealed image pull secret object
 */}}
 {{- define "sealedImagePullSecret.labels" -}}
-app.kubernetes.io/name: {{ include "sealedImagePullSecret.name" "" }}
+app.kubernetes.io/name: {{ include "sealedImagePullSecret.name" (dict "context" .context) }}
 helm.sh/chart: {{ include "aruba-uxi.chart" .context }}
 app.kubernetes.io/managed-by: {{ .context.Release.Service }}
 namespace: {{ .context.Release.Namespace }}
