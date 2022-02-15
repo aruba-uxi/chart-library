@@ -14,6 +14,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [3.0.2] - 2022-02-15
+
+### Changed
+
+- Use networking.k8s.io/v1 instead of networking.k8s.io/v1beta1 (deprecated) for ingresses
+- Update github actions to expect changelog to be out of charts folder
+
 ## [3.0.1] - 2022-02-09
 
 ### Changed
