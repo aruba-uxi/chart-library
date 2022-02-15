@@ -76,6 +76,7 @@ aruba-uxi:
       labels:
         example-service-staging: example-service-staging
       ingress:
+        className: nginx
         enabled: true
         hosts:
         - host: example-service.staging.capedev.io
