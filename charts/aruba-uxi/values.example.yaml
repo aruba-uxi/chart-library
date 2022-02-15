@@ -221,7 +221,6 @@ aruba-uxi:
         - host: example-service.local
           paths:
           - path: /
-            pathType: ImplementationSpecific
             backend:
               serviceName: example-service
               servicePort: 8000
