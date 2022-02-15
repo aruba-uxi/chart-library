@@ -145,7 +145,6 @@ In this table `application` refers to each application defined under `applicatio
 | application.ingress.hosts | A list of hosts to add to the legacy ingress. | `[]` | Yes |
 | application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | `[]` | Yes |
 | application.ingress.hosts[].paths.path | The path | `/` | Yes |
-| application.ingress.hosts[].paths.pathType | The path type | `ImplementationSpecific` | Yes |
 | application.ingress.hosts[].paths.backend.serviceName | The service name that the path talks to. | `application.name` | Yes |
 | application.ingress.hosts[].paths.backend.servicePort | The service port that the path talks to. | `application.port` | Yes |
 | application.ingress.tls | A set of TLS configuration settings to add to the lagacy ingress. | `[]` | Yes |

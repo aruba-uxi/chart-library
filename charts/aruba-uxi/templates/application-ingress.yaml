@@ -4,14 +4,17 @@
 {{- $service := default dict $data.service }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
 {{- if $ingress.enabled -}}
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+  {{- if $ingress.className }}
+  annotations:
+    kubernetes.io/ingress.class: {{ $ingress.className }}
+  {{- end }}
 spec:
-  ingressClassName: {{ default "nginx" $ingress.className }}
   {{- if $ingress.tls }}
   tls:
   {{- range $ingress.tls }}
@@ -29,7 +32,6 @@ spec:
       paths:
       {{- range $path := .paths }}
       - path: {{ $path.path }}
-        pathType: {{ default "ImplementationSpecific" $path.pathTpe }}
         backend:
           {{- if $path.backend }}
           serviceName: {{ default $name $path.backend.serviceName }}

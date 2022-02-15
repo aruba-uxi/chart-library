@@ -14,6 +14,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [3.0.3] - 2022-02-15
+
+### Changed
+
+- Use extensions/v1beta1 for ingresses because networking.k8s.io/v1 is incompatible with prod
+- Update ingress config to align with extensions/v1beta1
+- Remove pathType from ingress
+
 ## [3.0.2] - 2022-02-15
 
 ### Changed
