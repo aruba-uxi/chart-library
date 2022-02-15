@@ -24,11 +24,11 @@ jobs:
 
     - name: Git Diff CHANGELOG.md
       run: |
-        echo "::set-output name=result::$(git diff --name-only --exit-code origin/main..HEAD -- charts/aruba-uxi/CHANGELOG.md)"
+        echo "::set-output name=result::$(git diff --name-only --exit-code origin/main..HEAD -- CHANGELOG.md)"
       id: has_changelog_changes
 
     - name: Verify Values Tag == Chart Version
       if: ${{ steps.main_version_number.outputs.result != steps.branch_version_number.outputs.result && !steps.has_changelog_changes.outputs.result }}
       run: |
-        echo "Chart changes were detected but no changes to charts/aruba-uxi/CHANGELOG.md were found. Please document the change"
+        echo "Chart changes were detected but no changes to CHANGELOG.md were found. Please document the change"
         exit 1
