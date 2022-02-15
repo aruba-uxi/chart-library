@@ -31,13 +31,16 @@ spec:
       - path: {{ $path.path }}
         pathType: {{ default "ImplementationSpecific" $path.pathTpe }}
         backend:
-          {{- if $path.backend }}
-          serviceName: {{ default $name $path.backend.serviceName }}
-          servicePort: {{ default 80 $path.backend.servicePort }}
-          {{- else }}
-          serviceName: {{ $name }}
-          servicePort: {{ default 80 $service.port }}
-          {{- end }}
+          service:
+            {{- if $path.backend }}
+            name: {{ default $name $path.backend.serviceName }}
+            port:
+              number: {{ default 80 $path.backend.servicePort }}
+            {{- else }}
+            name: {{ $name }}
+            port:
+              number: {{ default 80 $service.port }}
+            {{- end }}
       {{- end }}
   {{- end }}
 {{- end }}
