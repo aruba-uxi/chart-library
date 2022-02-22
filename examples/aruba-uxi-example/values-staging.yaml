@@ -81,7 +81,6 @@ aruba-uxi:
           - host: example-service.staging.capedev.io
             paths:
               - path: /
-                type: Prefix
     example-worker:
       role: worker
       revisionHistoryLimit: 1

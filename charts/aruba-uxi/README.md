@@ -140,11 +140,12 @@ In this table `application` refers to each application defined under `applicatio
 | application.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<application-name>-sentry-dsn` | | Yes |
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 | application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
-| application.ingress.useLegacyApiVersion | Toogles the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1`. | `false` | No |
+| application.ingress.useLegacyApiVersion | Toogles the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1`. | `false` | Yes |
 | application.ingress.className | Defines the ingressClassName. | `nginx` | Yes |
 | application.ingress.hosts | A list of hosts to add to the legacy ingress. | `[]` | Yes |
 | application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | `[]` | Yes |
 | application.ingress.hosts[].paths.path | The path | `/` | Yes |
+| application.ingress.hosts[].paths.type | The pathType to use for the respective path. | `ImplementaionSpecific` | Yes |
 | application.ingress.hosts[].paths.backend.serviceName | The service name that the path talks to. | `application.name` | Yes |
 | application.ingress.hosts[].paths.backend.servicePort | The service port that the path talks to. | `application.port` | Yes |
 | application.ingress.tls | A set of TLS configuration settings to add to the lagacy ingress. | `[]` | Yes |
