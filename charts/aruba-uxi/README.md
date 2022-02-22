@@ -15,7 +15,7 @@ Typically the `values.yaml` file defines the base values used by helm, and then 
 
 When using this chart library its best to leave the `values.yaml` files empty and define separate values for each environment.
 
-> ****NOTE:**** Yes this does go against helm convention but its the best way we can do that does not cause duplicate data. Environment variables proved to be a bit tricky because in the local environment DATABASE_URL for example, could be defined in `.env` then in the staging environment it moves to `.envSealedSecrets`. It proved too hard to remove the duplicate values, so its best not to define any environment variables in the `values.yaml`.
+> **NOTE:** Yes this does go against helm convention but its the best way we can do that does not cause duplicate data. Environment variables proved to be a bit tricky because in the local environment DATABASE_URL for example, could be defined in `.env` then in the staging environment it moves to `.envSealedSecrets`. It proved too hard to remove the duplicate values, so its best not to define any environment variables in the `values.yaml`.
 
 It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
 
@@ -38,7 +38,7 @@ Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-ux
 
 When naming a sealed secret you need to ensure that the name you use to create the sealed secret and the name you give in the values file is the same.
 
-> ****NOTE:**** The `sealedSecrets.imagePullSecret` name should be called `uxi-sealed-image-pull-secret`
+> **NOTE:** The `sealedSecrets.imagePullSecret` name should be called `uxi-sealed-image-pull-secret`
 
 Once you have created a `SealedSecret` you will need to copy the encoded value for each key defined.
 
@@ -81,7 +81,7 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 | global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
 | global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret`). | `{}` | Yes | Yes |
 
-> ****NOTE:**** The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
+> **NOTE:** The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
 
 ### Application Values
 
