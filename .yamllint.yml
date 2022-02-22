@@ -1,0 +1,10 @@
+extends: default
+
+rules:
+  line-length:
+    max: 100
+  document-start: disable
+
+ignore: |
+  /.github/
+  /venv*/

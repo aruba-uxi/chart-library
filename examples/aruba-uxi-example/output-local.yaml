@@ -52,45 +52,45 @@ spec:
         namespace: default
     spec:
       containers:
-      - name: webapp
-        image: aruba-uxi-example:latest
-        imagePullPolicy: Never
-        env:
-        - name: ENVIRONMENT
-          value: "dev"
-        - name: DD_ENABLED
-          value: "false"        
-        - name: DATABASE_URL
-          value: "postgresql://username:password@db:5432/aruba-uxi-example"
-        - name: DEBUG
-          value: "true"        
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP        
-        ports:
-        - name: http
-          containerPort: 8000
-          protocol: TCP
-        readinessProbe:
-          exec:
-            command: "/readyz"
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            httpHeaders:
-            - name: Host
-              value: livenessProbe
-            - name: Content-Type
-              value: application/json
-            path: /livez
-            port: 8000
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
+        - name: webapp
+          image: aruba-uxi-example:latest
+          imagePullPolicy: Never
+          env:
+            - name: ENVIRONMENT
+              value: "dev"
+            - name: DD_ENABLED
+              value: "false"
+            - name: DATABASE_URL
+              value: "postgresql://username:password@db:5432/aruba-uxi-example"
+            - name: DEBUG
+              value: "true"
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command: "/readyz"
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              httpHeaders:
+                - name: Host
+                  value: livenessProbe
+                - name: Content-Type
+                  value: application/json
+              path: /livez
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3

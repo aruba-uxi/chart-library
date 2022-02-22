@@ -3,7 +3,7 @@
 {{- $svcPort := $data.port }}
 {{- $service := default dict $data.service }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
-{{- if $ingress.enabled -}}
+{{- if $ingress -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:

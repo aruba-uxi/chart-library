@@ -43,14 +43,14 @@ metadata:
     example-service-staging: example-service-staging
     global-label: global-label
 data:
-    config.json: |
-      {
-        foo: bar
-        bing: bang
-        server: {
-          host: hostname
-        }
+  config.json: |
+    {
+      foo: bar
+      bing: bang
+      server: {
+        host: hostname
       }
+    }
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-service.yaml
 apiVersion: v1
@@ -111,107 +111,107 @@ spec:
         global-label: global-label
     spec:
       imagePullSecrets:
-      - name: aruba-uxi-example-image-pull-secret
+        - name: aruba-uxi-example-image-pull-secret
       serviceAccountName: example-service
       containers:
-      - name: webapp
-        image: quay.io/uxi/nginx:latest
-        imagePullPolicy: Always
-        env:
-        - name: ENVIRONMENT
-          value: "staging"
-        - name: DD_ENABLED
-          value: "true"
-        - name: DD_ENV
-          value: "staging"
-        - name: DD_SERVICE
-          value: "example-service"
-        - name: DD_TRACE_ENABLED
-          value: "true"
-        - name: DD_AGENT_HOST
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-        - name: DD_ENTITY_ID
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.uid
-        - name: SENTRY_ENVIRONMENT
-          value: "staging"
-        - name: SENTRY_DSN
-          valueFrom:
-            secretKeyRef:
-              name: example-service-sentry-dsn
-              key: SENTRY_DSN        
-        - name: AWS_DEFAULT_REGION
-          value: "us-west-1"
-        - name: DEBUG
-          value: "false"        
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP        
-        - name: AWS_REGION
-          valueFrom:
-            secretKeyRef:
-              name: aws-access
-              key: AWS_REGION
-        - name: AWS_ACCESS_ID
-          valueFrom:
-            secretKeyRef:
-              name: aws-access
-              key: AWS_ACCESS_ID
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: database-url
-              key: DATABASE_URL
-        ports:
-        - name: http
-          containerPort: 80
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            httpHeaders:
-            - name: Host
-              value: readinessProbe
-            - name: Content-Type
-              value: application/json
-            path: /
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
-        livenessProbe:
-          httpGet:
-            httpHeaders:
-            - name: Host
-              value: livenessProbe
-            - name: Content-Type
-              value: application/json
-            path: /
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
-        volumeMounts:
-        - name: config
-          mountPath: /app/config
-          readOnly: true
-        - name: example-service-account
-          mountPath: /tmp
-          readOnly: true
+        - name: webapp
+          image: quay.io/uxi/nginx:latest
+          imagePullPolicy: Always
+          env:
+            - name: ENVIRONMENT
+              value: "staging"
+            - name: DD_ENABLED
+              value: "true"
+            - name: DD_ENV
+              value: "staging"
+            - name: DD_SERVICE
+              value: "example-service"
+            - name: DD_TRACE_ENABLED
+              value: "true"
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_ENTITY_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+            - name: SENTRY_ENVIRONMENT
+              value: "staging"
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: example-service-sentry-dsn
+                  key: SENTRY_DSN
+            - name: AWS_DEFAULT_REGION
+              value: "us-west-1"
+            - name: DEBUG
+              value: "false"
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: aws-access
+                  key: AWS_REGION
+            - name: AWS_ACCESS_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-access
+                  key: AWS_ACCESS_ID
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: database-url
+                  key: DATABASE_URL
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              httpHeaders:
+                - name: Host
+                  value: readinessProbe
+                - name: Content-Type
+                  value: application/json
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              httpHeaders:
+                - name: Host
+                  value: livenessProbe
+                - name: Content-Type
+                  value: application/json
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+              readOnly: true
+            - name: example-service-account
+              mountPath: /tmp
+              readOnly: true
       volumes:
-      - name: config
-        configMap:
-          name: example-service
-      - name: example-service-account
-        secret:
-          secretName: example-service-account
+        - name: config
+          configMap:
+            name: example-service
+        - name: example-service-account
+          secret:
+            secretName: example-service-account
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
 apiVersion: apps/v1
@@ -245,30 +245,30 @@ spec:
         global-label: global-label
     spec:
       imagePullSecrets:
-      - name: aruba-uxi-example-image-pull-secret
+        - name: aruba-uxi-example-image-pull-secret
       containers:
-      - name: worker
-        image: quay.io/uxi/busybox:latest
-        imagePullPolicy: Always
-        command: ["/bin/sh","-c","while true; do sleep 3600; date; done;"]
-        env:
-        - name: ENVIRONMENT
-          value: "staging"
-        - name: DD_ENABLED
-          value: "false"
-        - name: SENTRY_ENVIRONMENT
-          value: "staging"
-        - name: SENTRY_DSN
-          valueFrom:
-            secretKeyRef:
-              name: example-worker-sentry-dsn
-              key: SENTRY_DSN        
-        - name: DEBUG
-          value: "false"        
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
+        - name: worker
+          image: quay.io/uxi/busybox:latest
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c", "while true; do sleep 3600; date; done;"]
+          env:
+            - name: ENVIRONMENT
+              value: "staging"
+            - name: DD_ENABLED
+              value: "false"
+            - name: SENTRY_ENVIRONMENT
+              value: "staging"
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: example-worker-sentry-dsn
+                  key: SENTRY_DSN
+            - name: DEBUG
+              value: "false"
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
 apiVersion: batch/v1beta1
@@ -292,29 +292,29 @@ spec:
       template:
         spec:
           imagePullSecrets:
-          - name: aruba-uxi-example-image-pull-secret
+            - name: aruba-uxi-example-image-pull-secret
           containers:
-          - name: example-cronjob-consumer
-            image: quay.io/uxi/busybox:latest
-            imagePullPolicy: Always
-            env:
-            - name: ENVIRONMENT
-              value: "staging"
-            - name: DD_ENABLED
-              value: "false"            
-            - name: DEBUG
-              value: "false"            
-            - name: HOST_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP            
-            - name: AWS_REGION
-              valueFrom:
-                secretKeyRef:
-                  name: aws-access
-                  key: AWS_REGION
-            command: ["printenv"]
-            args: ["HOSTNAME"]
+            - name: example-cronjob-consumer
+              image: quay.io/uxi/busybox:latest
+              imagePullPolicy: Always
+              env:
+                - name: ENVIRONMENT
+                  value: "staging"
+                - name: DD_ENABLED
+                  value: "false"
+                - name: DEBUG
+                  value: "false"
+                - name: HOST_IP
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.hostIP
+                - name: AWS_REGION
+                  valueFrom:
+                    secretKeyRef:
+                      name: aws-access
+                      key: AWS_REGION
+              command: ["printenv"]
+              args: ["HOSTNAME"]
           restartPolicy: Never
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
@@ -338,24 +338,29 @@ spec:
       template:
         spec:
           imagePullSecrets:
-          - name: aruba-uxi-example-image-pull-secret
+            - name: aruba-uxi-example-image-pull-secret
           serviceAccountName: example-cronjob-producer
           containers:
-          - name: example-cronjob-producer
-            image: quay.io/uxi/busybox:latest
-            imagePullPolicy: Always
-            env:
-            - name: ENVIRONMENT
-              value: "staging"
-            - name: DD_ENABLED
-              value: "false"            
-            - name: DEBUG
-              value: "false"            
-            - name: HOST_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP            
-            command: ["/bin/sh","-c","echo Hello from the example-cronjob-producer"]
+            - name: example-cronjob-producer
+              image: quay.io/uxi/busybox:latest
+              imagePullPolicy: Always
+              env:
+                - name: ENVIRONMENT
+                  value: "staging"
+                - name: DD_ENABLED
+                  value: "false"
+                - name: DEBUG
+                  value: "false"
+                - name: HOST_IP
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: status.hostIP
+              command:
+                [
+                  "/bin/sh",
+                  "-c",
+                  "echo Hello from the example-cronjob-producer",
+                ]
           restartPolicy: OnFailure
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-ingress.yaml
@@ -376,13 +381,13 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-  - host: example-service.staging.capedev.io
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: example-service
-          servicePort: 80
+    - host: example-service.staging.capedev.io
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: example-service
+              servicePort: 80
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
 apiVersion: bitnami.com/v1alpha1

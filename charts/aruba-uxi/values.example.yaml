@@ -83,7 +83,8 @@ aruba-uxi:
       ## Configures the image and image pull policy (Optional)
       ## Default: uses .global.image
       ##
-      image: {}
+      image:
+        {}
         # repository: nginx
         # pullPolicy: IfNotPresent
         # tag: ""
@@ -105,7 +106,8 @@ aruba-uxi:
       ## Configures the service created (Optional)
       ## Default: ClusterIP on port 80
       ##
-      service: {}
+      service:
+        {}
         # type: ClusterIP
         # port: 80
       ## Enables the liveness probe on the specified path (Optional)
@@ -121,7 +123,8 @@ aruba-uxi:
       ## Configure the pod resources (Optional)
       ## Default: lets kubernetes set the resources
       ##
-      resources: {}
+      resources:
+        {}
         # limits:
         #   cpu: 100m
         #   memory: 256Mi
@@ -143,7 +146,8 @@ aruba-uxi:
       ## Configures the security context for the pods (Optional)
       ## Default: None
       ##
-      securityContext: {}
+      securityContext:
+        {}
         # runAsUser: 1000
         # runAsGroup: 3000
         # fsGroup: 2000
@@ -215,15 +219,14 @@ aruba-uxi:
       ## Configures a legacy ingress on the application (Optional)
       ## Default: None
       ingress:
-        enabled: false
         className: nginx
         hosts:
-        - host: example-service.local
-          paths:
-          - path: /
-            backend:
-              serviceName: example-service
-              servicePort: 8000
+          - host: example-service.local
+            paths:
+              - path: /
+                backend:
+                  serviceName: example-service
+                  servicePort: 8000
         tls: []
         # - secretName: chart-example-tls
         #   hosts:
@@ -233,9 +236,9 @@ aruba-uxi:
       ## Default: None
       ###
       secretMount:
-      - name: secret-name
-        readOnly: true
-        path: /path/to/mount/folder
+        - name: secret-name
+          readOnly: true
+          path: /path/to/mount/folder
     example-worker:
       ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.
@@ -254,7 +257,8 @@ aruba-uxi:
       ## Configures the image and image pull policy (Optional)
       ## Default: uses .global.image
       ##
-      image: {}
+      image:
+        {}
         # repository: nginx
         # pullPolicy: IfNotPresent
         # tag: ""
@@ -279,7 +283,8 @@ aruba-uxi:
       ## Configures the service created (Optional)
       ## Default: ClusterIP on port 80
       ##
-      service: {}
+      service:
+        {}
         # type: ClusterIP
         # port: 80
       ##
@@ -294,7 +299,8 @@ aruba-uxi:
       ## Configure the pod resources (Optional)
       ## Default: lets kubernetes set the resources
       ##
-      resources: {}
+      resources:
+        {}
         # limits:
         #   cpu: 100m
         #   memory: 256Mi
@@ -316,11 +322,12 @@ aruba-uxi:
       ## Configures the security context for the pods (Optional)
       ## Default: None
       ##
-      securityContext: {}
+      securityContext:
+        {}
         # runAsUser: 1000
         # runAsGroup: 3000
         # fsGroup: 2000
-       ## Adds a config map to the application (Optional)
+        ## Adds a config map to the application (Optional)
       ## Default: None
       ###
       configMap:
