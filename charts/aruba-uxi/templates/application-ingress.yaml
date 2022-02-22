@@ -70,6 +70,7 @@ spec:
       paths:
       {{- range $path := .paths }}
       - path: {{ $path.path }}
+        pathType: {{ default "ImplementationSpecific" $path.type }}
         backend:
           {{- if $path.backend }}
           service:

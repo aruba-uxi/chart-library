@@ -51,3 +51,4 @@ jobs:
           just output
           git diff --exit-code -- examples/aruba-uxi-example/output-local.yaml
           git diff --exit-code -- examples/aruba-uxi-example/output-staging.yaml
+          git diff --exit-code -- examples/aruba-uxi-example/output-production.yaml
