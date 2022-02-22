@@ -4,6 +4,6 @@ description: A Helm chart for Aruba UX
 type: application
 version: 1.2.6
 dependencies:
-- name: aruba-uxi
-  version: "*"
-  repository: file://../../charts/aruba-uxi
+  - name: aruba-uxi
+    version: "*"
+    repository: file://../../charts/aruba-uxi

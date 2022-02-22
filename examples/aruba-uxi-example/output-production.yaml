@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
-    example-service-staging: example-service-staging
+    example-service-production: example-service-production
     global-label: global-label
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob-serviceaccount.yaml
@@ -40,7 +40,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
-    example-service-staging: example-service-staging
+    example-service-production: example-service-production
     global-label: global-label
 data:
     config.json: |
@@ -64,7 +64,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
-    example-service-staging: example-service-staging
+    example-service-production: example-service-production
     global-label: global-label
 spec:
   type: ClusterIP
@@ -89,10 +89,10 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
-    example-service-staging: example-service-staging
+    example-service-production: example-service-production
     global-label: global-label
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app.kubernetes.io/name: example-service
@@ -107,7 +107,7 @@ spec:
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
-        example-service-staging: example-service-staging
+        example-service-production: example-service-production
         global-label: global-label
     spec:
       imagePullSecrets:
@@ -116,14 +116,14 @@ spec:
       containers:
       - name: webapp
         image: quay.io/uxi/nginx:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         env:
         - name: ENVIRONMENT
-          value: "staging"
+          value: "production"
         - name: DD_ENABLED
           value: "true"
         - name: DD_ENV
-          value: "staging"
+          value: "production"
         - name: DD_SERVICE
           value: "example-service"
         - name: DD_TRACE_ENABLED
@@ -137,7 +137,7 @@ spec:
             fieldRef:
               fieldPath: metadata.uid
         - name: SENTRY_ENVIRONMENT
-          value: "staging"
+          value: "production"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
@@ -249,15 +249,15 @@ spec:
       containers:
       - name: worker
         image: quay.io/uxi/busybox:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         command: ["/bin/sh","-c","while true; do sleep 3600; date; done;"]
         env:
         - name: ENVIRONMENT
-          value: "staging"
+          value: "production"
         - name: DD_ENABLED
           value: "false"
         - name: SENTRY_ENVIRONMENT
-          value: "staging"
+          value: "production"
         - name: SENTRY_DSN
           valueFrom:
             secretKeyRef:
@@ -282,11 +282,11 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
-    example-cronjob-consumer-staging: example-cronjob-consumer-staging
+    example-cronjob-consumer-production: example-cronjob-consumer-production
     global-label: global-label
 spec:
   schedule: "0 * * * *"
-  suspend: true
+  suspend: false
   jobTemplate:
     spec:
       template:
@@ -296,10 +296,10 @@ spec:
           containers:
           - name: example-cronjob-consumer
             image: quay.io/uxi/busybox:latest
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
-              value: "staging"
+              value: "production"
             - name: DD_ENABLED
               value: "false"            
             - name: DEBUG
@@ -332,7 +332,7 @@ metadata:
     global-label: global-label
 spec:
   schedule: "0 * * * *"
-  suspend: true
+  suspend: false
   jobTemplate:
     spec:
       template:
@@ -343,10 +343,10 @@ spec:
           containers:
           - name: example-cronjob-producer
             image: quay.io/uxi/busybox:latest
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             env:
             - name: ENVIRONMENT
-              value: "staging"
+              value: "production"
             - name: DD_ENABLED
               value: "false"            
             - name: DEBUG
@@ -359,7 +359,7 @@ spec:
           restartPolicy: OnFailure
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-ingress.yaml
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: example-service
@@ -370,21 +370,19 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
-    example-service-staging: example-service-staging
+    example-service-production: example-service-production
     global-label: global-label
+  annotations:
+    kubernetes.io/ingress.class: internal-gateway
 spec:
-  ingressClassName: internal-gateway
   rules:
-  - host: example-service.staging.capedev.io
+  - host: example-service.capenetworks.io
     http:
       paths:
       - path: /
-        pathType: ImplementationSpecific
         backend:
-          service:
-            name: example-service
-            port:
-              number: 80
+          serviceName: example-service
+          servicePort: 80
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
 apiVersion: bitnami.com/v1alpha1
@@ -398,7 +396,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
-    example-service-staging: example-service-staging
+    example-service-production: example-service-production
     global-label: global-label
 spec:
   encryptedData:

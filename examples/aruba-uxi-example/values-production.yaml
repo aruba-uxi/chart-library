@@ -16,10 +16,10 @@ aruba-uxi:
         example-service-account.json: |
           AgCF2ON/DjK0uf8WKIxTwSuVHDdsFVfHqR9pHrj3htxPDo5ePpJYpfFGzcDBLRzcBOCMZq8I3Z9gUDPXoMPZb+aYc76NTNQxzG/NchS4aekTy3K2FiMiTKS9lzz/WI5CvNXhFoEb06uHy6DR8DbzYn+S+cGsOjlNnU6HvZdn8rqEEGC151IhT0FPVQaiPV4PJkXgHuYCKoCUhsgK80pHsWr8AaUf3r3McbcSYC1eXYVaoy6uhbFsMqZHNOenOooMUsl0xJZ1i/RueKiind9URIKTSxDLG5xEDu5isZgrP22xxzZ1HEolMc+UmtPwDHqr90+Dmnto8vOlLnVN8Mwlj78AZe2SjVp39QRtouKKjKPvNacfSoVkHroSssDLnW3gtucBAthzDe1gAitA0xWV02TYbYnpHcFmx18h1b3UBEmZyfzdtpsU/4oDqNCa1zzL/rBjK4slzTlPvajRgP6GdW+311tOE+W7V2cvwro1u/lqX56dDMp+qLm2SAYAVBGsvbUPqxrcHhD9MMm65HrSU7IBtSqk/91KGtxkrC1pTtVHsav7xlgE9Azv+6iViJ70sTsLbA+4et/jKvu7cHKoLNR7UZ5JINnY1SR0rI8cBIBgvhHq/iu0a2y7eM3LmrFhVYpsM0PAaDeDg4Y0o2XIpF1i0wXBrrZaFLInbUN4Z0uj+MD+k37jDBsSx53JqKrph5qiHvdifZYh8gZ+IfFWNjg=
   global:
-    environment: STAGING
+    environment: PRODUCTION
     image:
       repository: quay.io/uxi/aruba-uxi-example
-      pullPolicy: Always
+      pullPolicy: IfNotPresent
     env:
       DEBUG: false
     envFields:
@@ -33,7 +33,7 @@ aruba-uxi:
         repository: quay.io/uxi/nginx
         tag: latest
       revisionHistoryLimit: 1
-      replicaCount: 1
+      replicaCount: 3
       serviceAccount:
         create: true
       port: 80
@@ -74,11 +74,12 @@ aruba-uxi:
         dsn: |
           AgBgVMiB80V/w/D8lGdVkuwGHPFuscgY814y6bq40L309tYy8r5OGNLBmFiwLkq1P1efmwI0F7KH+DnPehTjRgeqTy5bPP6CjwBbj4aG/0H2fBkscuRP2IVPzsE2CPXQzbxzWu0MCTOUbxfpXwYMZWC5BSpb2voOwobi7Si0y8VGDKOmux0HWHFIjhbm1RacajEan6SJLl7zEYvHpREMQHAvdsVCkPM3DPzFA36UW3YMhn2ki1/2LBAZ6LOoxRAU3/CpLrNyfeHcxVtW4RR25TUzOdfcoiqbE5KoZNJNNEaUk7XvijvoklYDEdNjzwq7hpOZ6LDrWzo0+jjJz6uXWMHK6V8GJKwkxL0nz6+904HNpSoT4D9zsK7hHpp1EK3GK04HFUKlxuEXYRkkRjihSpW25eNgZXeRgKM+9hLApL0do/GE2fJU9kSKxtEHpDSBGNycDLLfMsC5gxctubOmJcklPd8qZ1y+gXlFxPQJPG/7zyK9qN4r1VQ1sIuKEnSdOekQ/tBojvJU7VOalxxX5gA0oXlFGf/4YhgJn6fYtj44EsFE1F05U6IxpgH/nn8tdDZd4jH/EqurwcfS7R2uroXx23IpVmR9El4DsvysU751D1ZP9s6eHq9BkiWMQIhL7vnJTPqOBi9kD1x+74WhPpL6L5qJlB1MLB4okDgHE7TdyPKjHT8tSh0qhJlDQ2mfbzKQcFiri89Vbvheyl3hE/y/8g==
       labels:
-        example-service-staging: example-service-staging
+        example-service-production: example-service-production
       ingress:
+        useLegacyApiVersion: true
         className: internal-gateway
         hosts:
-          - host: example-service.staging.capedev.io
+          - host: example-service.capenetworks.io
             paths:
               - path: /
     example-worker:
@@ -98,7 +99,6 @@ aruba-uxi:
         repository: quay.io/uxi/busybox
         tag: latest
       schedule: "0 * * * *"
-      suspend: true
       command: ["/bin/sh", "-c", "echo Hello from the example-cronjob-producer"]
       serviceAccount:
         create: true
@@ -107,7 +107,6 @@ aruba-uxi:
         repository: quay.io/uxi/busybox
         tag: latest
       schedule: "0 * * * *"
-      suspend: true
       command: ["printenv"]
       args: ["HOSTNAME"]
       restartPolicy: Never
@@ -115,4 +114,4 @@ aruba-uxi:
         aws-access:
           - AWS_REGION
       labels:
-        example-cronjob-consumer-staging: example-cronjob-consumer-staging
+        example-cronjob-consumer-production: example-cronjob-consumer-production
