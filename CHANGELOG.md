@@ -14,6 +14,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [3.0.4] - 2022-02-22
+
+### Changed
+
+The ability to use a legacy `apiVersion` for the ingress object. This is to cater for production using an outdate version of kubernetes.
+Staging and Production can not use the same ingress object.
+
 ## [3.0.3] - 2022-02-15
 
 ### Changed

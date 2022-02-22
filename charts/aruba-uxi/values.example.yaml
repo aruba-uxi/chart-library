@@ -219,6 +219,7 @@ aruba-uxi:
       ## Configures a legacy ingress on the application (Optional)
       ## Default: None
       ingress:
+        useLegacyApiVersion: false
         className: nginx
         hosts:
           - host: example-service.local

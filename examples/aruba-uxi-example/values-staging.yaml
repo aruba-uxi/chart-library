@@ -76,6 +76,7 @@ aruba-uxi:
       labels:
         example-service-staging: example-service-staging
       ingress:
+        useLegacyApiVersion: true
         className: internal-gateway
         hosts:
           - host: example-service.staging.capedev.io
