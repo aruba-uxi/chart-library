@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-3.1.0
+    helm.sh/chart: aruba-uxi-4.0.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -30,7 +30,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-3.1.0
+    helm.sh/chart: aruba-uxi-4.0.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -46,7 +46,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-3.1.0
+        helm.sh/chart: aruba-uxi-4.0.0
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -73,8 +73,14 @@ spec:
           containerPort: 8000
           protocol: TCP
         readinessProbe:
-          exec:
-            command: "/readyz"
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: readinessProbe
+            - name: Content-Type
+              value: application/json
+            path: /status
+            port: 8000
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1
@@ -87,7 +93,7 @@ spec:
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: /livez
+            path: /
             port: 8000
           initialDelaySeconds: 10
           periodSeconds: 10

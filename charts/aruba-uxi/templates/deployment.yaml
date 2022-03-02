@@ -3,6 +3,8 @@
 {{- $overrideImage := default dict $data.image }}
 {{- $datadog := default dict $data.datadog }}
 {{- $sentry := default dict $data.sentry }}
+{{- $readinessProbe := default dict $data.readinessProbe }}
+{{- $livenessProbe := default dict $data.livenessProbe }}
 {{- $envBasic := deepCopy (default dict $.Values.global.env) | mustMerge (default dict $data.env) }}
 {{- $envFields := deepCopy (default dict $.Values.global.envFields) | mustMerge (default dict $data.envFields) }}
 {{- $envSealedSecrets := $data.envSealedSecrets }}
@@ -83,47 +85,37 @@ spec:
           containerPort: {{ $data.port }}
           protocol: TCP
         {{- end }}
-        {{- if $data.readinessProbe }}
+        {{- if $readinessProbe.enabled }}
         readinessProbe:
-          {{- if $data.readinessProbe.command }}
-          exec:
-            command: {{ toRawJson $data.readinessProbe.command }}
-          {{- else }}
           httpGet:
             httpHeaders:
             - name: Host
               value: readinessProbe
             - name: Content-Type
               value: application/json
-            path: {{ $data.readinessProbe.path }}
+            path: {{ default "/readyz" $readinessProbe.path }}
             port: {{ $data.port }}
-          {{- end }}
-          initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
-          periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
-          timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
-          successThreshold: {{ default "1" $data.readinessProbe.successThreshold }}
-          failureThreshold: {{ default "3" $data.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ default "10" $readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $readinessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $readinessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $readinessProbe.failureThreshold }}
         {{- end }}
-        {{- if $data.livenessProbe }}
+        {{- if $livenessProbe.enabled }}
         livenessProbe:
-          {{- if $data.livenessProbe.command }}
-          exec:
-            command: {{ toRawJson $data.livenessProbe.command }}
-          {{- else }}
           httpGet:
             httpHeaders:
             - name: Host
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: {{ $data.livenessProbe.path }}
+            path: {{ default "/livez" $livenessProbe.path }}
             port: {{ $data.port }}
-          {{- end }}
-          initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
-          periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
-          timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
-          successThreshold: {{ default "1" $data.livenessProbe.successThreshold }}
-          failureThreshold: {{ default "3" $data.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $livenessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $livenessProbe.failureThreshold }}
         {{- end }}
         {{- with $data.resources }}
         resources:

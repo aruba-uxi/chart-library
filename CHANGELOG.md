@@ -14,7 +14,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
-## [3.0.4] - 2022-02-22
+## [4.0.0] - 2022-03-02
+
+### Changed
+
+- Liveness and readiness probes can be toggled with the `enabled`variable. This allows them to be turned on and off without creating a new PR.
+- Removed the liveness and readiness `command` in favour of only using the `path`.
+
+## [3.1.0] - 2022-02-22
 
 ### Changed
 
