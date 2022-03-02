@@ -93,13 +93,13 @@ spec:
               value: readinessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/readyz" $data.readinessProbe.path }}
+            path: {{ default "/readyz" $readinessProbe.path }}
             port: {{ $data.port }}
-          initialDelaySeconds: {{ default "10" $data.readinessProbe.initialDelaySeconds }}
-          periodSeconds: {{ default "10" $data.readinessProbe.periodSeconds }}
-          timeoutSeconds: {{ default "1" $data.readinessProbe.timeoutSeconds }}
-          successThreshold: {{ default "1" $data.readinessProbe.successThreshold }}
-          failureThreshold: {{ default "3" $data.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ default "10" $readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $readinessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $readinessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $readinessProbe.failureThreshold }}
         {{- end }}
         {{- if $livenessProbe.enabled }}
         livenessProbe:
@@ -109,13 +109,13 @@ spec:
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/livez" $data.livenessProbe.path }}
+            path: {{ default "/livez" $livenessProbe.path }}
             port: {{ $data.port }}
-          initialDelaySeconds: {{ default "10" $data.livenessProbe.initialDelaySeconds }}
-          periodSeconds: {{ default "10" $data.livenessProbe.periodSeconds }}
-          timeoutSeconds: {{ default "1" $data.livenessProbe.timeoutSeconds }}
-          successThreshold: {{ default "1" $data.livenessProbe.successThreshold }}
-          failureThreshold: {{ default "3" $data.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $livenessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $livenessProbe.failureThreshold }}
         {{- end }}
         {{- with $data.resources }}
         resources:

@@ -40,7 +40,7 @@ aruba-uxi:
       livenessProbe:
         enabled: true
       readinessProbe:
-        enabled: false
+        enabled: true
       configMap:
         annotations: {}
         readOnly: false

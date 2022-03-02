@@ -170,20 +170,6 @@ spec:
         - name: http
           containerPort: 80
           protocol: TCP
-        readinessProbe:
-          httpGet:
-            httpHeaders:
-            - name: Host
-              value: readinessProbe
-            - name: Content-Type
-              value: application/json
-            path: /
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
         livenessProbe:
           httpGet:
             httpHeaders:
@@ -191,7 +177,7 @@ spec:
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: /
+            path: /livez
             port: 80
           initialDelaySeconds: 10
           periodSeconds: 10
