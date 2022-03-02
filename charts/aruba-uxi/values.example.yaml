@@ -114,12 +114,24 @@ aruba-uxi:
       ## NB! for 'role:worker' this should be excluded
       ##
       livenessProbe:
+        enabled: true
         path: /livez
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 3
       ## Enables the readiness probe on the specified path (Optional)
       ## NB! for 'role:worker' this should be excluded
       ##
       readinessProbe:
+        enabled: true
         path: /readyz
+        initialDelaySeconds: 10
+        periodSeconds: 10
+        timeoutSeconds: 1
+        successThreshold: 1
+        failureThreshold: 3
       ## Configure the pod resources (Optional)
       ## Default: lets kubernetes set the resources
       ##

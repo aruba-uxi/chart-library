@@ -38,8 +38,10 @@ aruba-uxi:
         create: true
       port: 80
       livenessProbe:
+        enabled: true
         path: /
       readinessProbe:
+        enabled: true
         path: /
       configMap:
         annotations: {}
