@@ -33,6 +33,8 @@ spec:
             image: {{ include "aruba-uxi.image" (dict "context" $ "data" $overrideImage) }}
             imagePullPolicy: {{ include "aruba-uxi.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
             env:
+            - name: APPLICATION_NAME
+              value: {{ $name | quote }}
             - name: ENVIRONMENT
               value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
             - name: DD_ENABLED

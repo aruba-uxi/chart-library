@@ -49,6 +49,8 @@ spec:
         args: {{ toRawJson . }}
         {{- end }}
         env:
+        - name: APPLICATION_NAME
+          value: {{ $name | quote }}
         - name: ENVIRONMENT
           value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
         - name: DD_ENABLED
