@@ -118,6 +118,8 @@ spec:
         image: quay.io/uxi/nginx:latest
         imagePullPolicy: IfNotPresent
         env:
+        - name: APPLICATION_NAME
+          value: "example-service"
         - name: ENVIRONMENT
           value: "production"
         - name: DD_ENABLED
@@ -252,6 +254,8 @@ spec:
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh","-c","while true; do sleep 3600; date; done;"]
         env:
+        - name: APPLICATION_NAME
+          value: "example-worker"
         - name: ENVIRONMENT
           value: "production"
         - name: DD_ENABLED
@@ -298,6 +302,8 @@ spec:
             image: quay.io/uxi/busybox:latest
             imagePullPolicy: IfNotPresent
             env:
+            - name: APPLICATION_NAME
+              value: "example-cronjob-consumer"
             - name: ENVIRONMENT
               value: "production"
             - name: DD_ENABLED
@@ -345,6 +351,8 @@ spec:
             image: quay.io/uxi/busybox:latest
             imagePullPolicy: IfNotPresent
             env:
+            - name: APPLICATION_NAME
+              value: "example-cronjob-producer"
             - name: ENVIRONMENT
               value: "production"
             - name: DD_ENABLED

@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [4.0.1] - 2022-03-04
+
+### Added
+
+Added an environment variable `APPLICATION_NAME` for each application (Service, Worker and Cronjob) where `APPLICATION_NAME={.Values.applications.name}`
+
 ## [4.0.0] - 2022-03-02
 
 ### Changed
