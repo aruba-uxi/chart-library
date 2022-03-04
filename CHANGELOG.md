@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [4.0.1] - 2022-03-04
+
+### Changed
+
+- `.Values.replicaCount` set to 0 was treated as false and not `0`. This is fixed in this PR. The `replicaCount` value can be set to 0 now.
+
 ## [4.0.0] - 2022-03-02
 
 ### Changed
