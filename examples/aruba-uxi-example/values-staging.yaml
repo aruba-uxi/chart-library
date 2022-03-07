@@ -39,8 +39,10 @@ aruba-uxi:
       port: 80
       livenessProbe:
         enabled: true
+        path: /
       readinessProbe:
         enabled: false
+        path: /
       configMap:
         annotations: {}
         readOnly: false
