@@ -58,7 +58,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       location ~ ^/(readyz|livez) {
-        return 404;
+        return 400;
       }
 spec:
   ingressClassName: {{ $ingress.className }}
