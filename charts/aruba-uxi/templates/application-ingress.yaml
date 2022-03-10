@@ -12,10 +12,14 @@ metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
-  {{- if $ingress.className }}
   annotations:
+    {{- if $ingress.className }}
     kubernetes.io/ingress.class: {{ $ingress.className }}
-  {{- end }}
+    {{- end }}
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      location ~ ^/(readyz|livez) {
+        return 404;
+      }
 spec:
   {{- if $ingress.tls }}
   tls:
@@ -51,6 +55,11 @@ metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      location ~ ^/(readyz|livez) {
+        return 404;
+      }
 spec:
   ingressClassName: {{ $ingress.className }}
   {{- if $ingress.tls }}

@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [4.0.3] - 2022-03-10
+
+### Added
+
+- Restrict paths using server-snippet annotation
+
 ## [4.0.2] - 2022-03-04
 
 ### Added
