@@ -80,7 +80,7 @@ aruba-uxi:
       ingress:
         className: internal-gateway
         hosts:
-          - host: example-service.staging.capedev.io
+          - host: example-service.internal.staging.capedev.io
             paths:
               - path: /
     example-worker:
