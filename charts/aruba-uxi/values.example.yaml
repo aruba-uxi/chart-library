@@ -242,6 +242,9 @@ aruba-uxi:
                   serviceName: example-service
                   servicePort: 8000
         tls: []
+        internalPaths:
+          - /readyz
+          - /livez
         # - secretName: chart-example-tls
         #   hosts:
         #     - example-service.local

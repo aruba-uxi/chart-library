@@ -368,13 +368,13 @@ metadata:
     global-label: global-label
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      location ~ ^/(readyz|livez) {
+      location ~ ^(/readyz|/livez) {
         return 404;
       }
 spec:
   ingressClassName: internal-gateway
   rules:
-  - host: example-service.staging.capedev.io
+  - host: example-service.internal.staging.capedev.io
     http:
       paths:
       - path: /

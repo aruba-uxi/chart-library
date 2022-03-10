@@ -159,6 +159,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.ingress.tls | A set of TLS configuration settings to add to the lagacy ingress. | `[]` | Yes |
 | application.ingress.tls.secretName | The secret that contains the TLS certs. | | Yes |
 | application.ingress.tls.hosts | The hosts which use the TLS certs contained in the respective secret. | | Yes |
+| application.ingress.tls.internalPaths | A lists of paths that will be blocked from public access. The path will return a 404 response. | `[/readyz, /livez]` | Yes |
 
 ### Cronjob Values
 

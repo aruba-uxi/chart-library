@@ -79,6 +79,8 @@ aruba-uxi:
         example-service-staging: example-service-staging
       ingress:
         className: internal-gateway
+        internalPaths:
+          - /foo/bar
         hosts:
           - host: example-service.internal.staging.capedev.io
             paths:

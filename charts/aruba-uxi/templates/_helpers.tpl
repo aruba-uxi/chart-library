@@ -167,6 +167,11 @@ Creates the Sentry DSN sealed secret name
 {{/*
 Creates a regex of restricted paths to apply to the ingress
 */}}
-{{- define "ingress.restrictedPaths" -}}
-{{- printf "^(/readyz|/livez)" -}}
+{{- define "ingress.internalPaths" -}}
+{{- $mergedPaths := concat (default list .ingress.restrictedPaths) (list "/readyz" "/livez") -}}
+{{- $paths := join "|" ($mergedPaths | uniq) -}}
+nginx.ingress.kubernetes.io/configuration-snippet: |
+  location ~ ^({{$paths}}) {
+    return 404;
+  }
 {{- end -}}

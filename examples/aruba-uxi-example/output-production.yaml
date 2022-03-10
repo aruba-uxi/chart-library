@@ -383,7 +383,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: internal-gateway
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      location ~ ^/(readyz|livez) {
+      location ~ ^(/readyz|/livez) {
         return 404;
       }
 spec:
