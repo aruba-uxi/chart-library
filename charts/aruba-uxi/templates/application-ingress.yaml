@@ -16,10 +16,7 @@ metadata:
     {{- if $ingress.className }}
     kubernetes.io/ingress.class: {{ $ingress.className }}
     {{- end }}
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      location ~ ^/(readyz|livez) {
-        return 404;
-      }
+    nginx.ingress.kubernetes.io/configuration-snippet: location ~ ^(/readyz|/livez) { return 404;}
 spec:
   {{- if $ingress.tls }}
   tls:
@@ -56,10 +53,7 @@ metadata:
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
   annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      location ~ ^/(readyz|livez) {
-        return 400;
-      }
+    nginx.ingress.kubernetes.io/configuration-snippet: location ~ ^(/readyz|/livez) { return 404;}
 spec:
   ingressClassName: {{ $ingress.className }}
   {{- if $ingress.tls }}

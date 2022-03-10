@@ -163,3 +163,10 @@ Creates the Sentry DSN sealed secret name
 {{- define "sealedSentryDsn.name" -}}
 {{- printf "%s-sentry-dsn" .name -}}
 {{- end -}}
+
+{{/*
+Creates a regex of restricted paths to apply to the ingress
+*/}}
+{{- define "ingress.restrictedPaths" -}}
+{{- printf "^(/readyz|/livez)" -}}
+{{- end -}}
