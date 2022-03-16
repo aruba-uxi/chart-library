@@ -77,11 +77,12 @@ aruba-uxi:
         example-service-production: example-service-production
       ingress:
         useLegacyApiVersion: true
-        className: internal-gateway
         hosts:
-          - host: example-service.capenetworks.io
+          - host: example-service.internal.capenetworks.io
             paths:
               - path: /
+        annotations:
+          kubernetes.io/ingress.class: internal-gateway
     example-worker:
       role: worker
       revisionHistoryLimit: 1
