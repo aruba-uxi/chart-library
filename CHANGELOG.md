@@ -14,11 +14,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
-## [4.0.3] - 2022-03-10
+## [4.1.0] - 2022-03-10
 
 ### Added
 
-- Restrict paths using server-snippet annotation
+- Provide the ability for the client to control ingress annotations through the `ingress.annotations` key
+
+### Changed
+
+- Legacy ingress types do not use the `ingress.className` value anymore. They should control their class name through annotations
 
 ## [4.0.2] - 2022-03-04
 
