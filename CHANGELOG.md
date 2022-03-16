@@ -20,10 +20,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Provide the ability for the client to control ingress annotations through the `ingress.annotations` key
 
-### Changed
-
-- Legacy ingress types do not use the `ingress.className` value anymore. They should control their class name through annotations
-
 ## [4.0.2] - 2022-03-04
 
 ### Added
