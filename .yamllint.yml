@@ -1,8 +1,7 @@
 extends: default
 
 rules:
-  line-length:
-    max: 100
+  line-length: false
   document-start: disable
 
 ignore: |
