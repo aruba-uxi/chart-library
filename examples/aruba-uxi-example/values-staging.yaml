@@ -73,11 +73,11 @@ aruba-uxi:
         example-service-staging: example-service-staging
       ingress:
         className: internal-gateway
-        # annotations:
-        # nginx.ingress.kubernetes.io/configuration-snippet: |
-        #   location ~ ^/(readyz|livez) {
-        #     return 404;
-        #   }
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            location ~ ^/(readyz|livez) {
+              return 404;
+            }
         hosts:
           - host: example-service.internal.staging.capedev.io
             paths:
