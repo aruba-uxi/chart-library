@@ -149,7 +149,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 | application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
 | application.ingress.useLegacyApiVersion | Toggles the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1`. | `false` | Yes |
-| application.ingress.className | Defines the ingress class name. NB: for legacy ingress types, the class name must be provided through the `kubernetes.io/ingress.class` annotation. | | No |
+| application.ingress.className | Defines the ingress class name. | | No |
 | application.ingress.hosts | A list of hosts to add to the legacy ingress. | | No |
 | application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | | No |
 | application.ingress.hosts[].paths.path | The path | | No |

@@ -71,12 +71,16 @@ aruba-uxi:
         example-service-production: example-service-production
       ingress:
         useLegacyApiVersion: true
+        className: internal-gateway
+        annotations:
+          nginx.ingress.kubernetes.io/configuration-snippet: |
+            location ~ ^/(readyz|livez) {
+              return 404;
+            }
         hosts:
           - host: example-service.internal.capenetworks.io
             paths:
               - path: /
-        annotations:
-          kubernetes.io/ingress.class: internal-gateway
     example-worker:
       role: worker
       revisionHistoryLimit: 1
