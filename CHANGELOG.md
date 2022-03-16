@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [4.1.0] - 2022-03-10
+
+### Added
+
+- Provide the ability for the client to control ingress annotations through the `ingress.annotations` key
+
 ## [4.0.2] - 2022-03-04
 
 ### Added

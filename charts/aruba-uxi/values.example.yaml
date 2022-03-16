@@ -242,6 +242,7 @@ aruba-uxi:
                   serviceName: example-service
                   servicePort: 8000
         tls: []
+        annotations: {}
         # - secretName: chart-example-tls
         #   hosts:
         #     - example-service.local

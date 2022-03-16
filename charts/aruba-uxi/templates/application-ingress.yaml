@@ -12,10 +12,13 @@ metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
-  {{- if $ingress.className }}
   annotations:
+    {{- with $ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+    {{- if $ingress.className }}
     kubernetes.io/ingress.class: {{ $ingress.className }}
-  {{- end }}
+    {{- end }}
 spec:
   {{- if $ingress.tls }}
   tls:
@@ -51,6 +54,10 @@ metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+  {{- with $ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   ingressClassName: {{ $ingress.className }}
   {{- if $ingress.tls }}
