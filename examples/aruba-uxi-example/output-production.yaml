@@ -381,6 +381,10 @@ metadata:
     example-service-production: example-service-production
     global-label: global-label
   annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      location ~ ^/(readyz|livez) {
+        return 404;
+      }
     kubernetes.io/ingress.class: internal-gateway
 spec:
   rules:
