@@ -14,6 +14,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [4.1.1] - 2022-03-18
+
+### Changed
+
+- update default replicas to 1
+
+-
+
 ## [4.1.0] - 2022-03-10
 
 ### Added

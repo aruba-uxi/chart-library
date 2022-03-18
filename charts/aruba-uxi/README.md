@@ -116,13 +116,13 @@ In this table `application` refers to each application defined under `applicatio
 | application.livenessProbe.enabled | Enabled or disabled liveness probe  | | No |
 | application.livenessProbe.path | The API path to query for liveness tests | `/livez` | Yes |
 | application.livesnessProbe.initialDelaySeconds | Number of seconds after the container starts before sending the first probe | `10` | Yes |
-| application.livesnessProbe.periodSeconds | How often to perform the probe | `1` | Yes |
+| application.livesnessProbe.periodSeconds | How often to perform the probe | `10` | Yes |
 | application.livesnessProbe.timeoutSeconds | The number of seconds after which the probe should timeout | `1` | Yes |
 | application.livesnessProbe.failureThreshold | The number of times the probe fails before giving up | `3` | Yes |
 | application.readinessProbe.enabled | Enabled or disabled readiness probe  | | No |
 | application.readinessProbe.path | The API path to query for readiness tests | `/readyz` | Yes |
 | application.readinessProbe.initialDelaySeconds | Number of seconds after the container starts before sending the first probe | `10` | Yes |
-| application.readinessProbe.periodSeconds | How often to perform the probe | `1` | Yes |
+| application.readinessProbe.periodSeconds | How often to perform the probe | `10` | Yes |
 | application.readinessProbe.timeoutSeconds | The number of seconds after which the probe should timeout | `1` | Yes |
 | application.readinessProbe.failureThreshold | The number of times the probe fails before giving up | `3` | Yes |
 | application.resources | Resource limits and requests to set on the pod. See [link](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for more details on the structure | `{}` | Yes |
