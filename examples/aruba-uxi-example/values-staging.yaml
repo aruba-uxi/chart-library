@@ -39,18 +39,23 @@ aruba-uxi:
         enabled: false
         path: /
       configMap:
-        annotations: {}
-        readOnly: false
-        path: /app/config
-        data:
-          config.json: |
-            {
-              foo: bar
-              bing: bang
-              server: {
-                host: hostname
+        - create: true
+          annotations: {}
+          readOnly: false
+          path: /app/config
+          data:
+            config.json: |
+              {
+                foo: bar
+                bing: bang
+                server: {
+                  host: hostname
+                }
               }
-            }
+        - name: example-configmap
+          create: false
+          readOnly: true
+          path: /app/config/example-configmap
       secretMount:
         - name: example-service-account
           readOnly: true

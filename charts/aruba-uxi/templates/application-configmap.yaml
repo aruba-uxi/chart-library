@@ -1,17 +1,20 @@
 {{- range $name, $data := .Values.applications }}
 {{- $additionalLabels := deepCopy (default dict $.Values.global.labels) | mustMerge (default dict $data.labels) }}
-{{- if $data.configMap }}
+{{- $configMaps := default dict $data.configMap }}
+{{- range $configMap := $configMaps}}
+{{- if or $configMap.create (not (hasKey $configMap "create")) }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ $name }}
+  name: {{ default $name $configMap.name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
-  {{- with $data.configMap.annotations }}
+  {{- with $configMap.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-data: {{- toYaml $data.configMap.data | nindent 4 }}
+data: {{- toYaml $configMap.data | nindent 4 }}
+{{- end }}
 {{- end }}
 {{- end }}

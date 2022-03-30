@@ -131,8 +131,10 @@ In this table `application` refers to each application defined under `applicatio
 | application.affinity | Affinity to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) for more details on the structure | `{}` | Yes |
 | application.securityContext | Sets the security contextfor the pods. See [link](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for more details on the structure | `{}` | Yes |
 | application.configMap | A config map to create and apply to the application | | Yes |
+| application.configMap.create | Whether to create the config map | `true` | Yes |
+| application.configMap.name | The name of the config map | `configmap` | Yes |
 | application.configMap.annotations | Annotations to add to the config map | `{}` | Yes |
-| application.configMap.readOnly | Whether the configmap is mapped as readonly or not | `true` | Yes |
+| application.configMap.readOnly | Whether the config map is mapped as readonly or not | `true` | Yes |
 | application.configMap.path | The path to map the config map to in the pod | `{}` | Yes |
 | application.configMap.data | The data to add to the config map | `{}` | Yes |
 | application.secretMount | A secret mount to add secrets as a file to the pod | | Yes |
