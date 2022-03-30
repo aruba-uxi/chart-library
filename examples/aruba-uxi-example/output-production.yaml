@@ -57,8 +57,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: example-configmap02
-data.txt:
-  hello config maps
+data:
+  hello: goodbye
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-service.yaml
 apiVersion: v1
