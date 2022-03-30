@@ -130,7 +130,7 @@ spec:
         volumeMounts:
         {{- if $data.configMap }}
         {{- range $configMapData := $data.configMap }}
-        - name: {{ $configMapData.name }}
+        - name: {{ $configMapData.name }}-volume
           mountPath: {{ $configMapData.path }}
           readOnly: {{ or $configMapData.readOnly (not (hasKey $configMapData "readOnly")) }}
         {{- end }}
@@ -158,9 +158,11 @@ spec:
       {{- if or $data.configMap $data.secretMount }}
       volumes:
       {{- if $data.configMap }}
-      - name: config
+      {{- range $configMapData := $data.configMap }}
+      - name: {{ $configMapData.name }}-volume
         configMap:
-          name: {{ $name }}
+          name: {{ $configMapData.name }}
+      {{- end }}
       {{- end }}
       {{- if $data.secretMount }}
       {{- range $secretMountData := $data.secretMount }}

@@ -195,19 +195,22 @@ spec:
           successThreshold: 1
           failureThreshold: 3
         volumeMounts:
-        - name: example-configmap01
+        - name: example-configmap01-volume
           mountPath: /app/config
           readOnly: false
-        - name: example-configmap02
+        - name: example-configmap02-volume
           mountPath: /app/config/example-configmap
           readOnly: true
         - name: example-service-account
           mountPath: /tmp
           readOnly: true
       volumes:
-      - name: config
+      - name: example-configmap01-volume
         configMap:
-          name: example-service
+          name: example-configmap01
+      - name: example-configmap02-volume
+        configMap:
+          name: example-configmap02
       - name: example-service-account
         secret:
           secretName: example-service-account
