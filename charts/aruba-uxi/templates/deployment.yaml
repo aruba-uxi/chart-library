@@ -47,6 +47,8 @@ spec:
         env:
         - name: APPLICATION_NAME
           value: {{ $name | quote }}
+        - name: APPLICATION_VERSION
+          value: {{ include "aruba-uxi.imageTag" (dict "context" $ "data" $overrideImage) }}
         - name: ENVIRONMENT
           value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
         - name: DD_ENABLED

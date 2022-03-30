@@ -14,6 +14,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [5.0.2] - 2022-03-30
+
+### Added
+
+- added the application version in an environment variable (`APPLICATION_VERSION`). This is built with the image tag.
+
+### Changed
+
+- what has been changed
+
 ## [5.0.1] - 2022-03-31
 
 ### Changed

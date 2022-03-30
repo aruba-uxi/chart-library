@@ -128,6 +128,8 @@ spec:
         env:
         - name: APPLICATION_NAME
           value: "example-service"
+        - name: APPLICATION_VERSION
+          value: latest
         - name: ENVIRONMENT
           value: "production"
         - name: DD_ENABLED
@@ -270,6 +272,8 @@ spec:
         env:
         - name: APPLICATION_NAME
           value: "example-worker"
+        - name: APPLICATION_VERSION
+          value: latest
         - name: ENVIRONMENT
           value: "production"
         - name: DD_ENABLED

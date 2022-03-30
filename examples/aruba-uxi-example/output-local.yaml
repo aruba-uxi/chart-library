@@ -66,6 +66,8 @@ spec:
         env:
         - name: APPLICATION_NAME
           value: "example-service"
+        - name: APPLICATION_VERSION
+          value: latest
         - name: ENVIRONMENT
           value: "dev"
         - name: DD_ENABLED
