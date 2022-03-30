@@ -1,4 +1,12 @@
 ---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-configmap02
+data.txt:
+  hello config maps
+---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-service.yaml
 apiVersion: v1
 kind: Service

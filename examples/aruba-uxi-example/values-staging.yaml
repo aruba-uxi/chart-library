@@ -39,7 +39,8 @@ aruba-uxi:
         enabled: false
         path: /
       configMap:
-        - create: true
+        - name: example-configmap01
+          create: true
           annotations: {}
           readOnly: false
           path: /app/config
@@ -52,7 +53,7 @@ aruba-uxi:
                   host: hostname
                 }
               }
-        - name: example-configmap
+        - name: example-configmap02
           create: false
           readOnly: true
           path: /app/config/example-configmap

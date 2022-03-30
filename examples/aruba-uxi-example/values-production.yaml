@@ -37,7 +37,9 @@ aruba-uxi:
       readinessProbe:
         enabled: true
       configMap:
-        - annotations: {}
+        - name: example-configmap01
+          create: true
+          annotations: {}
           readOnly: false
           path: /app/config
           data:
@@ -49,7 +51,7 @@ aruba-uxi:
                   host: hostname
                 }
               }
-        - name: example-configmap
+        - name: example-configmap02
           create: false
           readOnly: true
           path: /app/config/example-configmap

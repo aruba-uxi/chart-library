@@ -32,7 +32,7 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-service
+  name: example-configmap01
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
@@ -51,6 +51,14 @@ data:
           host: hostname
         }
       }
+---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-configmap02
+data.txt:
+  hello config maps
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-service.yaml
 apiVersion: v1
@@ -187,10 +195,10 @@ spec:
           successThreshold: 1
           failureThreshold: 3
         volumeMounts:
-        - name: configmap
+        - name: example-configmap01
           mountPath: /app/config
           readOnly: false
-        - name: example-configmap
+        - name: example-configmap02
           mountPath: /app/config/example-configmap
           readOnly: true
         - name: example-service-account
