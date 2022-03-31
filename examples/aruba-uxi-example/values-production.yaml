@@ -37,18 +37,24 @@ aruba-uxi:
       readinessProbe:
         enabled: true
       configMap:
-        annotations: {}
-        readOnly: false
-        path: /app/config
-        data:
-          config.json: |
-            {
-              foo: bar
-              bing: bang
-              server: {
-                host: hostname
+        - name: example-configmap01
+          create: true
+          annotations: {}
+          readOnly: false
+          path: /app/config
+          data:
+            config.json: |
+              {
+                foo: bar
+                bing: bang
+                server: {
+                  host: hostname
+                }
               }
-            }
+        - name: example-configmap02
+          create: false
+          readOnly: true
+          path: /app/config/example-configmap
       secretMount:
         - name: example-service-account
           readOnly: true

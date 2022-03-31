@@ -14,13 +14,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [5.0.0] - 2022-03-31
+
+### Changed
+
+- We can now create multiple configMaps per application
+- ConfigMaps have new field `create` which defines whether the ConfigMap must be created or not
+- ConfigMaps have new field `name` which affects the ConfigMap name field that the deployment links to
+- Fix logic bug where false values are defaulting to true
+
 ## [4.1.1] - 2022-03-18
 
 ### Changed
 
 - update default replicas to 1
-
--
 
 ## [4.1.0] - 2022-03-10
 

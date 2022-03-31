@@ -167,18 +167,25 @@ aruba-uxi:
       ## Default: None
       ###
       configMap:
-        annotations: {}
-        readOnly: false
-        path: /app/config
-        data:
-          config.json: |
-            {
-              foo: bar
-              bing: bang
-              server: {
-                host: hostname
+        - name: example-configmap01
+          create: true
+          annotations: {}
+          readOnly: false
+          path: /app/config
+          data:
+            config.json: |
+              {
+                foo: bar
+                bing: bang
+                server: {
+                  host: hostname
+                }
               }
-            }
+        - name: example-configmap02
+          create: false
+          annotations: {}
+          readOnly: false
+          path: /app/config
       ## Environment variables set from provided key:value pair (Optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None

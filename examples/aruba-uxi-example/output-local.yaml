@@ -1,4 +1,12 @@
 ---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-configmap02
+data:
+  hello: goodbye
+---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-service.yaml
 apiVersion: v1
 kind: Service
@@ -7,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-4.1.1
+    helm.sh/chart: aruba-uxi-5.0.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -30,7 +38,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-4.1.1
+    helm.sh/chart: aruba-uxi-5.0.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -46,7 +54,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-4.1.1
+        helm.sh/chart: aruba-uxi-5.0.0
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
