@@ -15,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-5.0.1
+    helm.sh/chart: aruba-uxi-5.0.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -38,7 +38,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-5.0.1
+    helm.sh/chart: aruba-uxi-5.0.2
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -54,7 +54,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-5.0.1
+        helm.sh/chart: aruba-uxi-5.0.2
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -66,6 +66,8 @@ spec:
         env:
         - name: APPLICATION_NAME
           value: "example-service"
+        - name: APPLICATION_VERSION
+          value: latest
         - name: ENVIRONMENT
           value: "dev"
         - name: DD_ENABLED

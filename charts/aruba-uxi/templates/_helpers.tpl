@@ -139,13 +139,29 @@ Create the service account name
 {{- end -}}
 
 {{/*
+Returns the image tag
+*/}}
+{{- define "aruba-uxi.imageTag" -}}
+{{- $globalTag := required "An image tag is required. Ensure it is defined in the values.yaml file at least" .context.Values.global.image.tag -}}
+{{- $tag := default $globalTag .data.tag -}}
+{{ print $tag }}
+{{- end -}}
+
+{{/*
+Returns the image repository
+*/}}
+{{- define "aruba-uxi.imageRepository" -}}
+{{- $globalRepository := required "An image repository is required." .context.Values.global.image.repository -}}
+{{- $repository := default $globalRepository .data.repository -}}
+{{ printf $repository }}
+{{- end -}}
+
+{{/*
 Create the image using respository and tag
 */}}
 {{- define "aruba-uxi.image" -}}
-{{- $globalTag := required "An image tag is required. Ensure it is defined in the values.yaml file at least" .context.Values.global.image.tag -}}
-{{- $globalRepository := required "An image repository is required." .context.Values.global.image.repository -}}
-{{- $repository := default $globalRepository .data.repository -}}
-{{- $tag := default $globalTag .data.tag -}}
+{{- $repository :=  include "aruba-uxi.imageRepository" (dict "context" .context "data" .data) -}}
+{{- $tag := include "aruba-uxi.imageTag" (dict "context" .context "data" .data) -}}
 {{ printf "%s:%s" $repository $tag }}
 {{- end -}}
 
