@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [5.0.1] - 2022-03-31
+
+### Changed
+
+- Fix bug where example config map was being generated unwantedly
+
 ## [5.0.0] - 2022-03-31
 
 ### Changed
