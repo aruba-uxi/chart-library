@@ -16,7 +16,7 @@ metadata:
     {{- with $ingress.annotations }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
-    kubernetes.io/ingress.class: {{ $ingress.className }}
+    kubernetes.io/ingress.class: {{ required "The .Values.ingress.className value is required" $ingress.className }}
 spec:
   {{- if $ingress.tls }}
   tls:
@@ -57,7 +57,7 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  ingressClassName: {{ $ingress.className }}
+  ingressClassName: {{ required "The .Values.ingress.className value is required" $ingress.className }}
   {{- if $ingress.tls }}
   tls:
   {{- range $ingress.tls }}
