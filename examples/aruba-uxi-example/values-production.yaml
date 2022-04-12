@@ -77,7 +77,7 @@ aruba-uxi:
         example-service-production: example-service-production
       ingress:
         useLegacyApiVersion: true
-        # className: internal-gateway
+        className: internal-gateway
         annotations:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             location ~ ^/(readyz|livez) {
