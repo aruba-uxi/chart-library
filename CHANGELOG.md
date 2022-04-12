@@ -14,6 +14,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what has been changed
 
+## [5.0.3] - 2022-04-12
+
+- Ingress className must be provided always. A bug was in the charts that allowed it to be excluded
+
 ## [5.0.2] - 2022-03-30
 
 ### Added

@@ -16,9 +16,7 @@ metadata:
     {{- with $ingress.annotations }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
-    {{- if $ingress.className }}
     kubernetes.io/ingress.class: {{ $ingress.className }}
-    {{- end }}
 spec:
   {{- if $ingress.tls }}
   tls:
