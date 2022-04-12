@@ -78,7 +78,7 @@ aruba-uxi:
       labels:
         example-service-staging: example-service-staging
       ingress:
-        className: internal-gateway
+        # className: internal-gateway
         annotations:
           nginx.ingress.kubernetes.io/configuration-snippet: |
             location ~ ^/(readyz|livez) {
