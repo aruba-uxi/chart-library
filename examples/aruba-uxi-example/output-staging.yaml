@@ -133,28 +133,13 @@ spec:
         - name: ENVIRONMENT
           value: "staging"
         - name: DD_ENABLED
-          value: "true"
+          value: "false"
         - name: DD_ENV
           value: "staging"
         - name: DD_SERVICE
           value: "example-service"
         - name: DD_TRACE_ENABLED
-          value: "true"
-        - name: DD_AGENT_HOST
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-        - name: DD_ENTITY_ID
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.uid
-        - name: SENTRY_ENVIRONMENT
-          value: "staging"
-        - name: SENTRY_DSN
-          valueFrom:
-            secretKeyRef:
-              name: example-service-sentry-dsn
-              key: SENTRY_DSN        
+          value: "false"        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
@@ -420,24 +405,6 @@ spec:
             name: example-service
             port:
               number: 80
----
-# Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: example-service-sentry-dsn
-  labels:
-    app.kubernetes.io/name: example-service
-    app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-5.0.5
-    app.kubernetes.io/managed-by: Helm
-    repository: aruba-uxi-example
-    namespace: default
-    example-service-staging: example-service-staging
-    global-label: global-label
-spec:
-  encryptedData:
-    SENTRY_DSN: AgBgVMiB80V/w/D8lGdVkuwGHPFuscgY814y6bq40L309tYy8r5OGNLBmFiwLkq1P1efmwI0F7KH+DnPehTjRgeqTy5bPP6CjwBbj4aG/0H2fBkscuRP2IVPzsE2CPXQzbxzWu0MCTOUbxfpXwYMZWC5BSpb2voOwobi7Si0y8VGDKOmux0HWHFIjhbm1RacajEan6SJLl7zEYvHpREMQHAvdsVCkPM3DPzFA36UW3YMhn2ki1/2LBAZ6LOoxRAU3/CpLrNyfeHcxVtW4RR25TUzOdfcoiqbE5KoZNJNNEaUk7XvijvoklYDEdNjzwq7hpOZ6LDrWzo0+jjJz6uXWMHK6V8GJKwkxL0nz6+904HNpSoT4D9zsK7hHpp1EK3GK04HFUKlxuEXYRkkRjihSpW25eNgZXeRgKM+9hLApL0do/GE2fJU9kSKxtEHpDSBGNycDLLfMsC5gxctubOmJcklPd8qZ1y+gXlFxPQJPG/7zyK9qN4r1VQ1sIuKEnSdOekQ/tBojvJU7VOalxxX5gA0oXlFGf/4YhgJn6fYtj44EsFE1F05U6IxpgH/nn8tdDZd4jH/EqurwcfS7R2uroXx23IpVmR9El4DsvysU751D1ZP9s6eHq9BkiWMQIhL7vnJTPqOBi9kD1x+74WhPpL6L5qJlB1MLB4okDgHE7TdyPKjHT8tSh0qhJlDQ2mfbzKQcFiri89Vbvheyl3hE/y/8g==
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/application-sentry-dsn.yaml
 apiVersion: bitnami.com/v1alpha1
