@@ -12,7 +12,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-- what has been changed
+## [5.0.5] - yyyy-mm-dd
+
+### Changed
+
+If some DD_* env variables are not set it will result in ddtrace or datadog trying to push traces. This PR sets some datadog env variables to always be set.
 
 ## [5.0.4] - 2022-04-12
 
