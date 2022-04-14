@@ -15,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-5.0.4
+    helm.sh/chart: aruba-uxi-5.0.5
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -38,7 +38,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-5.0.4
+    helm.sh/chart: aruba-uxi-5.0.5
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -54,7 +54,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-5.0.4
+        helm.sh/chart: aruba-uxi-5.0.5
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -71,6 +71,12 @@ spec:
         - name: ENVIRONMENT
           value: "dev"
         - name: DD_ENABLED
+          value: "false"
+        - name: DD_ENV
+          value: "dev"
+        - name: DD_SERVICE
+          value: "example-service"
+        - name: DD_TRACE_ENABLED
           value: "false"        
         - name: DATABASE_URL
           value: "postgresql://username:password@db:5432/aruba-uxi-example"

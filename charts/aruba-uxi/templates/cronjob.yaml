@@ -39,13 +39,13 @@ spec:
               value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote }}
             - name: DD_ENABLED
               value: {{ default "false" $datadog.enabled | quote }}
-            {{- if $datadog.enabled }}
             - name: DD_ENV
               value: {{ include "global.environment" (dict "environment" $.Values.global.environment) | quote  }}
             - name: DD_SERVICE
               value: {{ $name | quote }}
             - name: DD_TRACE_ENABLED
               value: {{ default "false" $datadog.traceEnabled | quote }}
+            {{- if $datadog.enabled }}
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:
