@@ -12,6 +12,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+## [5.0.6] - yyyy-mm-dd
+
+### Changed
+
+Replicas being set to 0 were defaulting to 1 because of the way the deployment chart evaluated `replicaCount: 0`. It was returning false and using the default value instead of the actual value of `0`
+
 ## [5.0.5] - yyyy-mm-dd
 
 ### Changed

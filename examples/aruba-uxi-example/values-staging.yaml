@@ -84,6 +84,7 @@ aruba-uxi:
               - path: /
     example-worker:
       role: worker
+      replicaCount: 0
       revisionHistoryLimit: 1
       image:
         repository: quay.io/uxi/busybox
