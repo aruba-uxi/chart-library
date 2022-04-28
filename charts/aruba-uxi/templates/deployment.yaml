@@ -17,7 +17,11 @@ metadata:
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
 spec:
-  replicas: {{ default 1 $data.replicaCount }}
+  {{- if (hasKey $data "replicaCount") }}
+  replicas: {{ $data.replicaCount }}
+  {{- else}}
+  replicas: 1
+  {{- end }}
   selector:
     matchLabels:
       {{- include "aruba-uxi.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
