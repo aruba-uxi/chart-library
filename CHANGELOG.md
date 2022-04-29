@@ -24,7 +24,7 @@ The ability to set `DD_SERVICE` env variable through the `datadog.serviceName` v
 
 Replicas being set to 0 were defaulting to 1 because of the way the deployment chart evaluated `replicaCount: 0`. It was returning false and using the default value instead of the actual value of `0`
 
-## [5.0.5] - yyyy-mm-dd
+## [5.0.5] - 2022-4-19
 
 ### Changed
 
