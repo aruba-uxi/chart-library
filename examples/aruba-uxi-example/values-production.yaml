@@ -70,6 +70,7 @@ aruba-uxi:
       datadog:
         enabled: true
         traceEnabled: true
+        serviceName: another-service-name
       sentry:
         enabled: true
         dsn: AgBgVMiB80V/w/D8lGdVkuwGHPFuscgY814y6bq40L309tYy8r5OGNLBmFiwLkq1P1efmwI0F7KH+DnPehTjRgeqTy5bPP6CjwBbj4aG/0H2fBkscuRP2IVPzsE2CPXQzbxzWu0MCTOUbxfpXwYMZWC5BSpb2voOwobi7Si0y8VGDKOmux0HWHFIjhbm1RacajEan6SJLl7zEYvHpREMQHAvdsVCkPM3DPzFA36UW3YMhn2ki1/2LBAZ6LOoxRAU3/CpLrNyfeHcxVtW4RR25TUzOdfcoiqbE5KoZNJNNEaUk7XvijvoklYDEdNjzwq7hpOZ6LDrWzo0+jjJz6uXWMHK6V8GJKwkxL0nz6+904HNpSoT4D9zsK7hHpp1EK3GK04HFUKlxuEXYRkkRjihSpW25eNgZXeRgKM+9hLApL0do/GE2fJU9kSKxtEHpDSBGNycDLLfMsC5gxctubOmJcklPd8qZ1y+gXlFxPQJPG/7zyK9qN4r1VQ1sIuKEnSdOekQ/tBojvJU7VOalxxX5gA0oXlFGf/4YhgJn6fYtj44EsFE1F05U6IxpgH/nn8tdDZd4jH/EqurwcfS7R2uroXx23IpVmR9El4DsvysU751D1ZP9s6eHq9BkiWMQIhL7vnJTPqOBi9kD1x+74WhPpL6L5qJlB1MLB4okDgHE7TdyPKjHT8tSh0qhJlDQ2mfbzKQcFiri89Vbvheyl3hE/y/8g==
@@ -94,6 +95,9 @@ aruba-uxi:
         repository: quay.io/uxi/busybox
         tag: latest
       command: ["/bin/sh", "-c", "while true; do sleep 3600; date; done;"]
+      datadog:
+        enabled: true
+        traceEnabled: true
       sentry:
         enabled: true
         dsn: AgBsCKUK1LVkqXFrIoqKHzUPCpH0cm2QomH5/d4f+ZgwaBBTKAOmOo0QBZz90BgJDAk3EwArlAw7EgACDkrbVJzHYofs/peFUvB8JO5jYZDjL5HnJ9Uyj1upE1/tBCZhzswKs/WIesRHZKseDgLSmE7//z8F9obVAKn6ECYMB4nhazfzJivDTRsbGZrgb0u0NDFdHRUhpNeBmclrheatz/ZtUL1Vbyvne1zQfRvBz7pGhzxLFFk/q5O//UmqAAWy6WRm6u0mWbvDM8CUmCzPkIBH4+pTuAT+2u/pbSrUGMKf9tEw5brqySPg7c/+jcaJUMY3cCNCIMxf9Zb83CuhqIggZpZfNBaGaYHiAU4BGELCEnk74uW/09A5/Qu1vY7wZYrfMJn3RTz8+jmXGxVyzmPzPyL7veOJwX2ajhRBbUQOtExcd2AFiMwbb3elgGY01rFuxvujq2ppqymGlkwjetWjQWUfKZ91CnBEEfnOz5PWnevoaN7acFzP2aRp7/qpZhN+mcl1jXp0ESVP3BptD8fhNdsnhpEra8dVZLJ2CXGXP+ubZUGrbV6kuccGwkg12dZjwBHYIZQ8akZNZjYRD+x6V6tah0dyVcedJgk7Zlx9mreCg9zW2ZQGL3Bhcjw9ZoxQTLkhWA6zodWxot/n73WIAsQfHYw177VJB9xWnPhZFolgS3iPkRHTalteSvBBsvRmNm8c052CzBY5uhaZp1ugjw==

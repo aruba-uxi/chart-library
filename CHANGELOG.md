@@ -12,7 +12,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-## [5.0.6] - yyyy-mm-dd
+## [5.0.8] - 2022-04-29
+
+### Added
+
+The ability to set `DD_SERVICE` env variable through the `datadog.serviceName` value
+
+## [5.0.6] - 2022-04-27
 
 ### Changed
 
