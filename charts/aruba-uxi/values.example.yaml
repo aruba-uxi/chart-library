@@ -389,7 +389,7 @@ aruba-uxi:
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
       ## - DD_ENV: value from ".global.environment"
-      ## - DD_SERVICE: the name of the application or cronjob
+      ## - DD_SERVICE: ".datadog.serviceName" (default: the name of the application)
       ## - DD_AGENT_HOST: value from pod metadata "status.hostIP"
       ## - DD_ENTITY_ID: value from pod metadata "metadata.uid"
       ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
@@ -471,7 +471,7 @@ aruba-uxi:
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
       ## - DD_ENV: value from ".global.environment"
-      ## - DD_SERVICE: the name of the application or cronjob
+      ## - DD_SERVICE: ".datadog.serviceName" (default: the name of the application)
       ## - DD_AGENT_HOST: value from pod metadata "status.hostIP"
       ## - DD_ENTITY_ID: value from pod metadata "metadata.uid"
       ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
@@ -543,7 +543,7 @@ aruba-uxi:
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
       ## - DD_ENV: value from ".global.environment"
-      ## - DD_SERVICE: the name of the application or cronjob
+      ## - DD_SERVICE: ".datadog.serviceName" (default: the name of the application)
       ## - DD_AGENT_HOST: value from pod metadata "status.hostIP"
       ## - DD_ENTITY_ID: value from "metadata.uid"
       ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
