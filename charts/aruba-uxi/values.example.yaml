@@ -224,6 +224,7 @@ aruba-uxi:
         enabled: false
         traceEnabled: false
         serviceName: example-service
+        env: {}
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"

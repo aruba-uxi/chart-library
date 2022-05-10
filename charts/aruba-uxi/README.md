@@ -1,15 +1,27 @@
 # Aruba UXI Chart
 
-A helm chart for Aruba UXI kubernetes resources
+A helm chart for Aruba UXI kubernetes services. These charts will be used the build the helm charts for a specific service.
 
-- [Helm](#helm)
+- [Environment Variables](#environment-variables)
+- [Value Files](#value-files)
+- [Sealed Secrets](#sealed-secrets)
+- [Application Values](#application-values)
+- [Cronjob Values](#cronjob-values)
 - [Developing Notes](#developing-notes)
 
-## Helm
+## Environment Variables
 
-Helm is used to build this library. These charts will be used the build the helm charts for a specific service.
+The chart library defines a set of automatically populated environment variables.
 
-### Value Files
+- `APPLICATION_NAME`: The name of the application, taken from `.Values.application`
+- `APPLICATION_VERSION`: The version of the application, taken from `.Values.image.tag`
+- `ENVIRONMENT`: The environment, taken from `.Values.global.environment`
+- `DD_ENABLED`: A boolean that can be used to control datadog (see `.Values.application.datadog.enabled`).
+- `DD_SERVICE`: The service name that datadog will use (see `.Values.application.datadog` for more).
+- `DD_ENV`: The environment name that datadog will use, taken from `Values.global.environment`.
+- `DD_TRACE_ENABLED`: A boolean that can be used to control datadog trace (see `.Values.application.datadog.traceEnabled`).
+
+## Value Files
 
 Typically the `values.yaml` file defines the base values used by helm, and then additional values files are created based on the environment specific configs.
 
@@ -19,7 +31,7 @@ When using this chart library its best to leave the `values.yaml` files empty an
 
 It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
 
-### Sealed Secrets
+## Sealed Secrets
 
 ```yaml
 aruba-uxi:
@@ -83,7 +95,7 @@ Global values used by all kubernetes objects. The `Can Override` column in the t
 
 > **NOTE:** The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
 
-### Application Values
+## Application Values
 
 ```yaml
 aruba-uxi:
@@ -144,8 +156,8 @@ In this table `application` refers to each application defined under `applicatio
 | application.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
 | application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
 | application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
-| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
-| application.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
+| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
+| application.datadog.traceEnabled | Enables or disables datadog tracing. Sets the `DD_TRACE_ENABLED` environment variable | `false` | Yes |
 | application.datadog.serviceName | Sets the name of `DD_SERVICE` env variable. | `$name` | Yes |
 | application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sentry.dsn` value to create the sentry DSN sealed secret | `false` | Yes |
 | application.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<application-name>-sentry-dsn` | | Yes |
@@ -164,7 +176,7 @@ In this table `application` refers to each application defined under `applicatio
 | application.ingress.tls.hosts | The hosts which use the TLS certs contained in the respective secret. | | Yes |
 | application.ingress.tls.annotations | A key-value pair of ingress annotations | `{}` | Yes |
 
-### Cronjob Values
+## Cronjob Values
 
 ```yaml
 aruba-uxi:
