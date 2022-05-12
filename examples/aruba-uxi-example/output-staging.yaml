@@ -143,7 +143,7 @@ spec:
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"        
+          value: "false"                        
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -263,7 +263,7 @@ spec:
               name: example-worker-sentry-dsn
               key: SENTRY_DSN        
         - name: DEBUG
-          value: "false"        
+          value: "false"                        
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -310,7 +310,7 @@ spec:
             - name: DD_TRACE_ENABLED
               value: "false"            
             - name: DEBUG
-              value: "false"            
+              value: "false"                                    
             - name: HOST_IP
               valueFrom:
                 fieldRef:
@@ -365,7 +365,7 @@ spec:
             - name: DD_TRACE_ENABLED
               value: "false"            
             - name: DEBUG
-              value: "false"            
+              value: "false"                                    
             - name: HOST_IP
               valueFrom:
                 fieldRef:

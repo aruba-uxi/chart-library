@@ -159,6 +159,10 @@ spec:
           value: "us-west-1"
         - name: DEBUG
           value: "false"        
+        - name: DD_TRACE_PROFILE_ENABLED
+          value: "true"        
+        - name: SENTRY_VARIABLE
+          value: "some_value"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -300,7 +304,7 @@ spec:
               name: example-worker-sentry-dsn
               key: SENTRY_DSN        
         - name: DEBUG
-          value: "false"        
+          value: "false"                        
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -348,6 +352,8 @@ spec:
               value: "false"            
             - name: DEBUG
               value: "false"            
+            - name: SENTRY_VARIABLE
+              value: "example-cronjob-consumer"                        
             - name: HOST_IP
               valueFrom:
                 fieldRef:
@@ -402,7 +408,7 @@ spec:
             - name: DD_TRACE_ENABLED
               value: "false"            
             - name: DEBUG
-              value: "false"            
+              value: "false"                                    
             - name: HOST_IP
               valueFrom:
                 fieldRef:
