@@ -224,7 +224,8 @@ aruba-uxi:
         enabled: false
         traceEnabled: false
         serviceName: example-service
-        env: {}
+        extraEnvironmentVariables:
+          DD_EXRA_ENV_VARIABLE_1: value
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
@@ -232,6 +233,8 @@ aruba-uxi:
       ##
       sentry:
         enabled: false
+        extraEnvironmentVariables:
+          SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
@@ -399,6 +402,8 @@ aruba-uxi:
         enabled: false
         traceEnabled: false
         serviceName: example-worker
+        extraEnvironmentVariables:
+          DD_EXRA_ENV_VARIABLE_1: value1
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
@@ -406,6 +411,8 @@ aruba-uxi:
       ##
       sentry:
         enabled: false
+        extraEnvironmentVariables:
+          SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
@@ -481,6 +488,8 @@ aruba-uxi:
         enabled: false
         traceEnabled: false
         serviceName: example-cronjob-producer
+        extraEnvironmentVariables:
+          DD_EXRA_ENV_VARIABLE_1: value1
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
@@ -488,6 +497,8 @@ aruba-uxi:
       ##
       sentry:
         enabled: false
+        extraEnvironmentVariables:
+          SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None
@@ -553,6 +564,8 @@ aruba-uxi:
         enabled: false
         traceEnabled: false
         serviceName: example-cronjob-consumer
+        extraEnvironmentVariables:
+          DD_EXRA_ENV_VARIABLE_1: value1
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
@@ -560,6 +573,8 @@ aruba-uxi:
       ##
       sentry:
         enabled: false
+        extraEnvironmentVariables:
+          SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
       ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
       ## Default: None

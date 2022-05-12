@@ -12,6 +12,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
+- what changed
+
+## [5.0.9] - 2022-05-15
+
+### Added
+
+- Ability to add extra datadog and sentry environment variables by setting the `extraEnvironmentVariables` value in `.Values.application.datadog` and `.Values.application.sentry` respectively.
+
+```yaml
+datadog:
+  extraEnvironmentVariables:
+    - DD_SOME_KEY: some-value
+```
+
+```yaml
+sentry:
+  extraEnvironmentVariables:
+    - SENTRY_SOME_KEY: some-value
+```
+
+### Changed
+
+- what changed
+
 ## [5.0.8] - 2022-04-29
 
 ### Added

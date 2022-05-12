@@ -159,8 +159,10 @@ In this table `application` refers to each application defined under `applicatio
 | application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
 | application.datadog.traceEnabled | Enables or disables datadog tracing. Sets the `DD_TRACE_ENABLED` environment variable | `false` | Yes |
 | application.datadog.serviceName | Sets the name of `DD_SERVICE` env variable. | `$name` | Yes |
+| application.datadog.extraEnvironmentVariables | Adds extra environment variables specific to datadog | | Yes |
 | application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sentry.dsn` value to create the sentry DSN sealed secret | `false` | Yes |
 | application.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<application-name>-sentry-dsn` | | Yes |
+| application.sentry.extraEnvironmentVariables | Adds extra environment variables related to sentry | | Yes |
 | application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
 | application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
 | application.ingress.useLegacyApiVersion | Toggles the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1`. | `false` | Yes |

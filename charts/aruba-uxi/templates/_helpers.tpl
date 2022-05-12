@@ -77,7 +77,7 @@ namespace: {{ .context.Release.Namespace }}
 {{/*
 Inject extra environment variables
 */}}
-{{- define "aruba-uxi.env-variables" -}}
+{{- define "aruba-uxi.environmentVariables" -}}
 {{- $datadogImplementedEnvironmentVariables := list "DD_ENABLED" "DD_ENV" "DD_SERVICE" "DD_TRACE_ENABLED" -}}
 {{- $sentryImplementedEnvironmentVariables := list "SENTRY_ENVIRONMENT" -}}
 {{- range $key, $val := .data }}
