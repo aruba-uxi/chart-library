@@ -225,7 +225,7 @@ aruba-uxi:
         traceEnabled: false
         serviceName: example-service
         extraEnvironmentVariables:
-          DD_EXRA_ENV_VARIABLE_1: value
+          DD_EXTRA_ENV_VARIABLE_1: value
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
@@ -403,7 +403,7 @@ aruba-uxi:
         traceEnabled: false
         serviceName: example-worker
         extraEnvironmentVariables:
-          DD_EXRA_ENV_VARIABLE_1: value1
+          DD_EXTRA_ENV_VARIABLE_1: value1
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
@@ -489,7 +489,7 @@ aruba-uxi:
         traceEnabled: false
         serviceName: example-cronjob-producer
         extraEnvironmentVariables:
-          DD_EXRA_ENV_VARIABLE_1: value1
+          DD_EXTRA_ENV_VARIABLE_1: value1
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"
@@ -565,7 +565,7 @@ aruba-uxi:
         traceEnabled: false
         serviceName: example-cronjob-consumer
         extraEnvironmentVariables:
-          DD_EXRA_ENV_VARIABLE_1: value1
+          DD_EXTRA_ENV_VARIABLE_1: value1
       ## Enables sentry (Optional)
       ## Setting ".sentry.enabled: true" will add the necessary environment variables:
       ## - SENTRY_ENVIRONMENT: value from ".global.environment"

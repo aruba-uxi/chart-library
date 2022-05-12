@@ -20,6 +20,8 @@ The chart library defines a set of automatically populated environment variables
 - `DD_SERVICE`: The service name that datadog will use (see `.Values.application.datadog` for more).
 - `DD_ENV`: The environment name that datadog will use, taken from `Values.global.environment`.
 - `DD_TRACE_ENABLED`: A boolean that can be used to control datadog trace (see `.Values.application.datadog.traceEnabled`).
+- `SENTRY_ENVIRONMENT`: If `.Values.application.sentry.enabled`) this variable is set the application name.
+- `SENTRY_DSN`: If `.Values.application.sentry.enabled`) this variable is populate from the `.Values.application.sentry.dsn`.
 
 ## Value Files
 
