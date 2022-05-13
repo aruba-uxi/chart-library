@@ -43,27 +43,25 @@ aruba-uxi:
     ...
 ```
 
-Sealed secrets are defined with the `.sealedSecrets` object. A `SealedSecret` kubernetes object is created using the data defined in this map.
-
-| Parameter | Description | Default | Optional |
-|-----|------|---------|---|
-| sealedSecrets.imagePullSecret | The sealed version of the base64 encoded `dockerconfigjson` file used to provide access to our image repository | "" | Yes |
-| sealedSecrets.env | Sealed secrets used to populate environment variables in the applications and containers. A sealed secret is created for each key in the dictionary. See [values.example.yaml](https://github.com/Aruba-UXI/chart-library/blob/main/examples/aruba-uxi-example/values.example.yaml) for usage| {} | Yes |
-
+Sealed secrets are defined with the `.Values.aruba-uxi.sealedSecrets` section. A `SealedSecret` kubernetes object is created using the data defined in this map.
 Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-uxi/knowledge/wiki/Sealed-Secrets) to create a `SealedSecret`.
 
-When naming a sealed secret you need to ensure that the name you use to create the sealed secret and the name you give in the values file is the same.
+> **NOTE:** When naming a sealed secret you need to ensure that the name you use to create the sealed secret and the name you give in the values file is the same.
 
-> **NOTE:** The `sealedSecrets.imagePullSecret` name should be called `uxi-sealed-image-pull-secret`
+#### Image Pull Secrets
+
+The `sealedSecrets.imagePullSecret` is created with the name `<repository-name>-image-pull-secret`.
+
+#### Example
 
 Once you have created a `SealedSecret` you will need to copy the encoded value for each key defined.
 
-For example, to create a sealed secret called `database-url` with the key `DATABASE_URL`, you need to follow the instructions in the link above to create a sealed secret with the following values:
+To create a sealed secret called `database-url` with the key `DATABASE_URL`, you need to follow the instructions in the link above to create a sealed secret with the following values:
 
 - name: `database-url`
-- key `DATABASE_URL`
-- value: The value is the URL taken from wherever the database is hosted
 - namespace: The namespace should be the name of the github repo, unless there are reasons for it to
+- key:`DATABASE_URL`
+- value: The value is the URL taken from wherever the database is hosted
 
 The output should be a sealed secret with an encoded string for the `DATABASE_URL` value. Copy this value and paste it into the values file in the correct section.
 
@@ -83,21 +81,7 @@ aruba-uxi:
     ...
 ```
 
-Global values used by all kubernetes objects. The `Can Override` column in the table identifies which values can be overridden by the applications or cronjobs.
-
-| Parameter | Description | Default | Optional | Can Override |
-|-----|------|---------|---|---|
-| global.repository | The github repository that these charts are kept in | | No | No |
-| global.environment | The environment that the service is being deployed to. Values are converted to lowercase when used. Validation is also done on the values. Valid environments are (`DEV`, `STAGING`, `PRODUCTION`) | | No | No |
-| global.image.repository | The image repository to use for images. | | No | Yes |
-| global.image.tag | The image tag to use. | | No | Yes |
-| global.image.imagePullPolicy | The image pull policy to use. | `"IfNotPresent"` | Yes | Yes |
-| global.env | Basic environment variables. Precedence is given to the overridden values | `{}` | Yes | Yes |
-| global.envFields | Environment variables that pull information from kubernetss object fields. Precedence is given to the overridden values | `{}` | Yes |  Yes |
-| global.envSealedSecrets | Environment variables from sealed secrets. Precedence is given to the overridden values. | `{}` | Yes | Yes |
-| global.labels | Extra labels to apply to all k8s objects (excluding `sealedSecrets.imagePullSecret`). | `{}` | Yes | Yes |
-
-> **NOTE:** The `.global.image.tag` is required in the `values.yaml` file but is option in all overlays.
+Global values used by all kubernetes objects. Some of these values can be overridden (see `values.example.yaml`).
 
 ## Application Values
 
@@ -109,6 +93,9 @@ aruba-uxi:
     example-worker:
       ...
 ```
+
+Creates one or more applications unique by their name. Applications are defined as keys in the applications map.
+The key is used as the name of the application and subsequent objects created
 
 In this table `application` refers to each application defined under `applications`
 

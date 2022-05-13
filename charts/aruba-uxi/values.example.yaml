@@ -1,69 +1,56 @@
 aruba-uxi:
-  ## Sealed secret data used to create the sealed secrets used by applications and cronjobs
-  ##
   sealedSecrets:
-    ## Creates a sealed image pull secret using the data provided (Optional)
+    ## Creates a sealed image pull secret using the data provided
     ## Used by deployments to pull images from our image repository
-    ## Default: None
-    ##
+    ## (optional, default: null)
     imagePullSecret: sealed_version_of_the_base64_encoded_dockerconfigjson
-    ## Creates sealed secrets used to populate environment variables (Optional)
+    ## Creates sealed secrets used to populate environment variables
     ## A sealed secret is created for each env.<value>
-    ## Default: None
-    ##
+    ## (optional, default: null)
     env:
       secret-name-a:
         FOO: sealed_version_of_the_base64_encoded_environment_variable_value
         BAR: sealed_version_of_the_base64_encoded_environment_variable_value
       secret-name-b:
         BIZ: sealed_version_of_the_base64_encoded_environment_variable_value
-    ## Creates sealed secrets used to mount as files (Optional)
+    ## Creates sealed secrets used to mount as files
     ## A sealed secret is created for each secretMount.<value>
-    ## Default: None
-    ##
+    ## (optional, default: null)
     secretMount:
       secret-name:
         filename.json: sealed_version_of_the_base64_encoded_file_contents
-  ## Global values used by all manifests
-  ##
   global:
     ## The github repository that these charts are kept in
     ## This can be defined in the base values.yaml file and forgotten about
-    ##
     repository: aruba-uxi-example
-    ## The environment that the service is deployed in
-    ## Valid values are: DEV|STAGING|PRODUCTION (case insensitive)
+    ## The environment that the service is deployed in. Validation is also done on the values
+    ## Valid values are: (DEV, STAGING, PRODUCTION). An error will be raised for invalid values
     ## The values are converted to lowercase when used in the charts
-    ##
     environment: DEV
-    ## Configures the image repository and pull policy for all pods
+    ## Configures the image repository, tag and pull policy for all pods
+    ## If overridden, in the application or cronjob, precedence is given to the overridden values
     ## The "image.tag" and "image.repository" needs to be define in the values.yaml file too
-    ##
     image:
+      # The image repository to use for images
       repository: aruba-uxi-example
+      # The image tag to use
       tag: 1.2.3
+      # The image pull policy to use (optional, default: IfNotPresent)
       pullPolicy: IfNotPresent
-    ## Basic environment variables (Optional)
-    ## If overridden, in application or cronjobs, precedence is given to the overridden values
-    ## Default: None
-    ##
+    ## Basic environment variables
+    ## If overridden, in the application or cronjob, precedence is given to the overridden values
+    ## (optional, default: {})
     env:
       OVERRIDDEN_VALUE: global-value
-    ## Environment variables set from the deployment fields (Optional)
-    ## If overridden, in application or cronjobs, precedence is given to the overridden values
-    ## Default: None
-    ##
+    ## Environment variables set from the deployment fields
+    ## If overridden, in the application or cronjob, precedence is given to the overridden values
+    ## (optional, default: {})
     envFields:
       HOST_IP: global-value
       OVERRIDDEN_FIELD_VALUE: global-value
-    ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
-    ## Default: Nones
-    ##
+    ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
+    ## (optional, default: null)
     labels: {}
-  ## Creates one or more applications unique by role.
-  ## Applications are defined as keys in the applications map
-  ## The key is used as the name of the application and subsequent objects created
-  ##
   applications:
     example-service:
       ## The application role
@@ -72,15 +59,15 @@ aruba-uxi:
       ## Valid roles: webapp | worker
       ##
       role: webapp
-      ## Sets the replica count (Optional)
+      ## Sets the replica count (optional)
       ## Default: 1
       ##
       revisionHistoryLimit: 3
-      ## Sets number of old ReplicaSets for this deployment to be retained (Optional)
+      ## Sets number of old ReplicaSets for this deployment to be retained (optional)
       ## Default: 3
       ##
       replicaCount: 1
-      ## Configures the image and image pull policy (Optional)
+      ## Configures the image and image pull policy (optional)
       ## Default: uses .global.image
       ##
       image:
@@ -88,14 +75,14 @@ aruba-uxi:
         # repository: nginx
         # pullPolicy: IfNotPresent
         # tag: ""
-      ## Attaches a service account it to the application (Optional)
+      ## Attaches a service account it to the application (optional)
       ## Default: uses the default service account in the namespace
       ##
       serviceAccount:
         create: true
         # name: service-account-name
         # annotations: {}
-      ## Overrides the command from the dockerfile (Optional)
+      ## Overrides the command from the dockerfile (optional)
       ## Default: the Dockerfile command is used
       ##
       command: []
@@ -103,14 +90,14 @@ aruba-uxi:
       ## NB! for 'role: worker' do not set this
       ##
       port: 8000
-      ## Configures the service created (Optional)
+      ## Configures the service created (optional)
       ## Default: ClusterIP on port 80
       ##
       service:
         {}
         # type: ClusterIP
         # port: 80
-      ## Enables the liveness probe on the specified path (Optional)
+      ## Enables the liveness probe on the specified path (optional)
       ## NB! for 'role:worker' this should be excluded
       ##
       livenessProbe:
@@ -121,7 +108,7 @@ aruba-uxi:
         timeoutSeconds: 1
         successThreshold: 1
         failureThreshold: 3
-      ## Enables the readiness probe on the specified path (Optional)
+      ## Enables the readiness probe on the specified path (optional)
       ## NB! for 'role:worker' this should be excluded
       ##
       readinessProbe:
@@ -132,7 +119,7 @@ aruba-uxi:
         timeoutSeconds: 1
         successThreshold: 1
         failureThreshold: 3
-      ## Configure the pod resources (Optional)
+      ## Configure the pod resources (optional)
       ## Default: lets kubernetes set the resources
       ##
       resources:
@@ -143,19 +130,19 @@ aruba-uxi:
         # requests:
         #   cpu: 100m
         #   memory: 128Mi
-      ## Configures the node selectors for the pods (Optional)
+      ## Configures the node selectors for the pods (optional)
       ## Default: None
       ##
       nodeSelector: {}
-      ## Configures the tolerations for the pods (Optional)
+      ## Configures the tolerations for the pods (optional)
       ## Default: None
       ##
       tolerations: []
-      ## Configures the pod affinity for the pods (Optional)
+      ## Configures the pod affinity for the pods (optional)
       ## Default: None
       ##
       affinity: {}
-      ## Configures the security context for the pods (Optional)
+      ## Configures the security context for the pods (optional)
       ## Default: None
       ##
       securityContext:
@@ -163,7 +150,7 @@ aruba-uxi:
         # runAsUser: 1000
         # runAsGroup: 3000
         # fsGroup: 2000
-      ## Adds a config map to the application (Optional)
+      ## Adds a config map to the application (optional)
       ## Default: None
       ###
       configMap:
@@ -186,21 +173,21 @@ aruba-uxi:
           annotations: {}
           readOnly: false
           path: /app/config
-      ## Environment variables set from provided key:value pair (Optional)
+      ## Environment variables set from provided key:value pair (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       env:
         AWS_DEFAULT_REGION: example-service
         OVERRIDDEN_VALUE: example-service
-      ## Environment variables set from the deployment fields (Optional)
+      ## Environment variables set from the deployment fields (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       envFields:
         HOST_IP: example-service
         OVERRIDDEN_FIELD_VALUE: example-service
-      ## Environment variables set from sealed secrets (Optional)
+      ## Environment variables set from sealed secrets (optional)
       ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
@@ -210,7 +197,7 @@ aruba-uxi:
           - BAR
         secret-name-b:
           - BIZ
-      ## Enables datadog metrics (Optional)
+      ## Enables datadog metrics (optional)
       ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
@@ -236,11 +223,11 @@ aruba-uxi:
         env:
           SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
       ## Default: None
       ##
       labels: {}
-      ## Configures a legacy ingress on the application (Optional)
+      ## Configures a legacy ingress on the application (optional)
       ## Default: None
       ingress:
         useLegacyApiVersion: false
@@ -258,7 +245,7 @@ aruba-uxi:
         # - secretName: chart-example-tls
         #   hosts:
         #     - example-service.local
-      ## Mounts one or more sealed secrets to a location on the file system (Optional)
+      ## Mounts one or more sealed secrets to a location on the file system (optional)
       ## Each key in the sealed secret will be mounted as a file under `secretMount.[n].path`
       ## Default: None
       ###
@@ -273,15 +260,15 @@ aruba-uxi:
       ## Valid roles: webapp | worker
       ##
       role: worker
-      ## Sets the replica count (Optional)
+      ## Sets the replica count (optional)
       ## Default: 1
       ##
       revisionHistoryLimit: 3
-      ## Sets number of old ReplicaSets for this deployment to be retained (Optional)
+      ## Sets number of old ReplicaSets for this deployment to be retained (optional)
       ## Default: 3
       ##
       replicaCount: 1
-      ## Configures the image and image pull policy (Optional)
+      ## Configures the image and image pull policy (optional)
       ## Default: uses .global.image
       ##
       image:
@@ -289,25 +276,25 @@ aruba-uxi:
         # repository: nginx
         # pullPolicy: IfNotPresent
         # tag: ""
-      ## Attaches a service account it to the application (Optional)
+      ## Attaches a service account it to the application (optional)
       ## Default: uses the default service account in the namespace
       ##
       serviceAccount:
         # create: false
         name: example-worker-external-service-account
         # annotations: {}
-      ## Overrides the command from the dockerfile (Optional)
+      ## Overrides the command from the dockerfile (optional)
       ## Default: the Dockerfile command is used
       ##
       command: ["printenv"]
-      ## args for the container command (Optional)
+      ## args for the container command (optional)
       ##
       args: ["HOSTNAME", "KUBERNETES_PORT"]
       ## Which port on the pod is exposed.
       ## NB! for 'role: worker' do not set this
       ##
       port: 8000
-      ## Configures the service created (Optional)
+      ## Configures the service created (optional)
       ## Default: ClusterIP on port 80
       ##
       service:
@@ -315,15 +302,15 @@ aruba-uxi:
         # type: ClusterIP
         # port: 80
       ##
-      ## Enables the liveness probe to run the specified command (Optional)
+      ## Enables the liveness probe to run the specified command (optional)
       ##
       livenessProbe:
         command: ["ls -a"]
-      ## Enables the readiness probe to run the specified command (Optional)
+      ## Enables the readiness probe to run the specified command (optional)
       ##
       readinessProbe:
         command: ["ls -a"]
-      ## Configure the pod resources (Optional)
+      ## Configure the pod resources (optional)
       ## Default: lets kubernetes set the resources
       ##
       resources:
@@ -334,19 +321,19 @@ aruba-uxi:
         # requests:
         #   cpu: 100m
         #   memory: 128Mi
-      ## Configures the node selectors for the pods (Optional)
+      ## Configures the node selectors for the pods (optional)
       ## Default: None
       ##
       nodeSelector: {}
-      ## Configures the tolerations for the pods (Optional)
+      ## Configures the tolerations for the pods (optional)
       ## Default: None
       ##
       tolerations: []
-      ## Configures the pod affinity for the pods (Optional)
+      ## Configures the pod affinity for the pods (optional)
       ## Default: None
       ##
       affinity: {}
-      ## Configures the security context for the pods (Optional)
+      ## Configures the security context for the pods (optional)
       ## Default: None
       ##
       securityContext:
@@ -354,7 +341,7 @@ aruba-uxi:
         # runAsUser: 1000
         # runAsGroup: 3000
         # fsGroup: 2000
-        ## Adds a config map to the application (Optional)
+        ## Adds a config map to the application (optional)
       ## Default: None
       ###
       configMap:
@@ -364,21 +351,21 @@ aruba-uxi:
         data:
           config.json: |
             "hello worker"
-      ## Environment variables set from provided key:value pair (Optional)
+      ## Environment variables set from provided key:value pair (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       env:
         AWS_DEFAULT_REGION: example-worker
         OVERRIDDEN_VALUE: example-worker
-      ## Environment variables set from the deployment fields (Optional)
+      ## Environment variables set from the deployment fields (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       envFields:
         HOST_IP: example-worker
         OVERRIDDEN_FIELD_VALUE: example-worker
-      ## Environment variables set from sealed secrets (Optional)
+      ## Environment variables set from sealed secrets (optional)
       ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
@@ -388,7 +375,7 @@ aruba-uxi:
           - BAR
         secret-name-b:
           - BIZ
-      ## Enables datadog metrics (Optional)
+      ## Enables datadog metrics (optional)
       ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
@@ -414,7 +401,7 @@ aruba-uxi:
         env:
           SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
       ## Default: None
       ##
       labels: {}
@@ -427,44 +414,44 @@ aruba-uxi:
       ## The schedule for the cronjob
       ##
       schedule: "*/10 * * * *"
-      ## Suspends the cronjob (Optional)
+      ## Suspends the cronjob (optional)
       ## Default: false
       ##
       suspend: false
-      ## Configures the image and image pull policy (Optional)
+      ## Configures the image and image pull policy (optional)
       ## Default: uses .global.image
       ##
       image: {}
-      ## Overrides the command from the dockerfile (Optional)
+      ## Overrides the command from the dockerfile (optional)
       ## Default: the Dockerfile command is used
       ##
       command: ["run-kinesis", "producer"]
-      ## Attaches a service account it to the application (Optional)
+      ## Attaches a service account it to the application (optional)
       ## Default: uses the default service account in the namespace
       ##
       serviceAccount:
         create: true
         name: example-cronjob-producer-service-account
         # annotations: {}
-      ## Whether the cronjob should restart if a job fails (Optional)
+      ## Whether the cronjob should restart if a job fails (optional)
       ## Default: OnFailure
       ##
       restartPolicy: OnFailure
-      ## Environment variables set from provided key:value pair (Optional)
+      ## Environment variables set from provided key:value pair (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       env:
         AWS_DEFAULT_REGION: example-cronjob-producer
         OVERRIDDEN_VALUE: example-cronjob-producer
-      ## Environment variables set from the deployment fields (Optional)
+      ## Environment variables set from the deployment fields (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       envFields:
         HOST_IP: example-cronjob-producer
         OVERRIDDEN_FIELD_VALUE: example-cronjob-producer
-      ## Environment variables set from sealed secrets (Optional)
+      ## Environment variables set from sealed secrets (optional)
       ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
@@ -474,7 +461,7 @@ aruba-uxi:
           - BAR
         secret-name-b:
           - BIZ
-      ## Enables datadog metrics (Optional)
+      ## Enables datadog metrics (optional)
       ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
@@ -500,7 +487,7 @@ aruba-uxi:
         env:
           SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
       ## Default: None
       ##
       labels: {}
@@ -508,39 +495,39 @@ aruba-uxi:
       ## The schedule for the cronjob
       ##
       schedule: "*/5 * * * *"
-      ## Suspends the cronjob (Optional)
+      ## Suspends the cronjob (optional)
       ## Default: false
       ##
       suspend: false
-      ## Overrides the command from the dockerfile (Optional)
+      ## Overrides the command from the dockerfile (optional)
       ## Default: the Dockerfile command is used
       ##
       command: ["run-kinesis", "consumer"]
-      ## Attaches a service account it to the application (Optional)
+      ## Attaches a service account it to the application (optional)
       ## Default: uses the default service account in the namespace
       ##
       serviceAccount:
         create: false
         name: example-cronjob-consumer-service-account
-      ## Whether the cronjob should restart if a job fails (Optional)
+      ## Whether the cronjob should restart if a job fails (optional)
       ## Default: OnFailure
       ##
       restartPolicy: OnFailure
-      ## Environment variables set from provided key:value pair (Optional)
+      ## Environment variables set from provided key:value pair (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       env:
         AWS_DEFAULT_REGION: example-cronjob-consumer
         OVERRIDDEN_VALUE: example-cronjob-consumer
-      ## Environment variables set from the deployment fields (Optional)
+      ## Environment variables set from the deployment fields (optional)
       ## If overridden, in application or cronjobs, precedence is given to the overridden values
       ## Default: None
       ##
       envFields:
         HOST_IP: example-cronjob-consumer
         OVERRIDDEN_FIELD_VALUE: example-cronjob-consumer
-      ## Environment variables set from sealed secrets (Optional)
+      ## Environment variables set from sealed secrets (optional)
       ## The sealed secret and environment variable must be defined in .sealedSecrets.env
       ## Default: None
       ##
@@ -550,7 +537,7 @@ aruba-uxi:
           - BAR
         secret-name-b:
           - BIZ
-      ## Enables datadog metrics (Optional)
+      ## Enables datadog metrics (optional)
       ## DD_ENABLED environment variable is always set.
       ## The value is taken from ".datadog.enabled" (default: false)
       ## Setting ".datadog.enabled: true" will add the necessary environment variables:
@@ -576,7 +563,7 @@ aruba-uxi:
         env:
           SENTRY_EXRA_ENV_VARIABLE_1: value
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (Optional)
+      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
       ## Default: None
       ##
       labels: {}
