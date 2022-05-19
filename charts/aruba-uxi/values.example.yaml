@@ -262,6 +262,15 @@ aruba-uxi:
         - name: secret-name
           readOnly: true
           path: /path/to/mount/folder
+      ## The Deployment updates Pods in a rolling update fashion when .spec.strategy.type==RollingUpdate.
+      ## You can specify maxUnavailable and maxSurge to control the rolling update process.
+      updateStrategy:
+        # specifies the maximum number of Pods that can be unavailable during the update process.
+        # The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%).
+        maxSurge: 25%
+        # specifies the maximum number of Pods that can be created over the desired number of Pods.
+        # The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%).
+        maxUnavailable: 25%
     example-worker:
       ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.

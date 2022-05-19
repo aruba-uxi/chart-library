@@ -82,6 +82,9 @@ aruba-uxi:
           - host: example-service.internal.staging.capedev.io
             paths:
               - path: /
+      updateStrategy:
+        maxSurge: 1
+        maxUnavailable: 1
     example-worker:
       role: worker
       replicaCount: 0

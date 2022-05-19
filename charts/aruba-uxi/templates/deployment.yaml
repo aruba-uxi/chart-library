@@ -26,6 +26,13 @@ spec:
     matchLabels:
       {{- include "aruba-uxi.selectorLabels" (dict "context" $ "name" $name) | nindent 6 }}
   revisionHistoryLimit: {{ default 3 $data.revisionHistoryLimit }}
+  {{- with $data.updateStrategy }}
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ default "25%" .maxSurge }}
+      maxUnavailable: {{ default "25%" .maxUnavailable }}
+    type: RollingUpdate
+  {{- end }}
   template:
     metadata:
       labels:
