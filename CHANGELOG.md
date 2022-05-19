@@ -32,10 +32,6 @@ sentry:
     - SENTRY_SOME_KEY: some-value
 ```
 
-### Changed
-
-- what changed
-
 ## [5.0.8] - 2022-04-29
 
 ### Added
