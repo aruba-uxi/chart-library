@@ -92,6 +92,9 @@ aruba-uxi:
           - host: example-service.internal.capenetworks.io
             paths:
               - path: /
+      updateStrategy:
+        maxSurge: 50%
+        maxUnavailable: 50%
     example-worker:
       role: worker
       replicaCount: 1
