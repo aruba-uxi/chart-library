@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+## [6.0.0] - 2022-05-20
+
+### Changed
+
+- Liveness and Readiness probes now default to using `/health/live` and `/health/ready`.
+
 ## [5.0.9] - 2022-05-20
 
 ### Added

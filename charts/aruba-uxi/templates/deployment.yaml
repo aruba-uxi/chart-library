@@ -110,7 +110,7 @@ spec:
               value: readinessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/readyz" $readinessProbe.path }}
+            path: {{ default "/health/readyz" $readinessProbe.path }}
             port: {{ $data.port }}
           initialDelaySeconds: {{ default "10" $readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $readinessProbe.periodSeconds }}
@@ -126,7 +126,7 @@ spec:
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/livez" $livenessProbe.path }}
+            path: {{ default "/health/livez" $livenessProbe.path }}
             port: {{ $data.port }}
           initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}

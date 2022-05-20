@@ -85,7 +85,7 @@ aruba-uxi:
         className: internal-gateway
         annotations:
           nginx.ingress.kubernetes.io/configuration-snippet: |
-            location ~ ^/(readyz|livez) {
+            location ~ ^/health/(readyz|livez|status) {
               return 404;
             }
         hosts:

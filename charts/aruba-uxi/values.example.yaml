@@ -88,8 +88,8 @@ aruba-uxi:
       livenessProbe:
         ## Toggles the liveness probe (optional, default: true)
         enabled: true
-        ## The API path to query for liveness testing (optional, default: /livez)
-        path: /livez
+        ## The API path to query for liveness testing (optional, default: /health/livez)
+        path: /health/livez
         ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
         ## How often to perform the probe (optional, default: 10)
@@ -104,8 +104,8 @@ aruba-uxi:
       readinessProbe:
         ## Toggles the readiness probe (optional, default: true)
         enabled: true
-        ## The API path to query for readiness testing (optional, default: /readyz)
-        path: /readyz
+        ## The API path to query for readiness testing (optional, default: /health/readyz)
+        path: /health/readyz
         ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
         ## How often to perform the probe (optional, default: 10)
@@ -206,7 +206,7 @@ aruba-uxi:
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
         ## Adds extra environment variables related to sentry (optional, default: {})
         env:
-          SENTRY_EXRA_ENV_VARIABLE_1: value
+          SENTRY_EXTRA_ENV_VARIABLE_1: value
       ## Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object (optional, default: {})
       labels: {}
       ## Configures an Ingress on the application (optional, default: {})
@@ -322,7 +322,7 @@ aruba-uxi:
         dsn: sealed_version_of_the_base64_encoded_sentry_dsn
         ## Adds extra environment variables related to sentry (optional, default: {})
         env:
-          SENTRY_EXRA_ENV_VARIABLE_1: value
+          SENTRY_EXTRA_ENV_VARIABLE_1: value
       ## Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object (optional, default: {})
       labels: {}
     example-cronjob-consumer: {}
