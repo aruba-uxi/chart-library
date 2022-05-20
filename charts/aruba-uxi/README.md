@@ -2,38 +2,29 @@
 
 A helm chart for Aruba UXI kubernetes services. These charts will be used the build the helm charts for a specific service.
 
-- [Environment Variables](#environment-variables)
-- [Value Files](#value-files)
+- [Auto Populated Environment Variables](#auto-populated-environment-variables)
 - [Sealed Secrets](#sealed-secrets)
+- [Value Files](#value-files)
+- [Global Values](#global-values)
 - [Application Values](#application-values)
 - [Cronjob Values](#cronjob-values)
 - [Developing Notes](#developing-notes)
 
-## Environment Variables
+## Auto Populated Environment Variables
 
 The chart library defines a set of automatically populated environment variables.
 
 - `APPLICATION_NAME`: The name of the application, taken from `.Values.application`
 - `APPLICATION_VERSION`: The version of the application, taken from `.Values.image.tag`
-- `ENVIRONMENT`: The environment, taken from `.Values.global.environment`
-- `DD_ENABLED`: A boolean that can be used to control datadog (see `.Values.application.datadog.enabled`).
-- `DD_SERVICE`: The service name that datadog will use (see `.Values.application.datadog` for more).
-- `DD_ENV`: The environment name that datadog will use, taken from `Values.global.environment`.
-- `DD_TRACE_ENABLED`: A boolean that can be used to control datadog trace (see `.Values.application.datadog.traceEnabled`).
 - `DD_AGENT_HOST`: The hostname of the datadog agent. This is set to the `status.hostIP`.
+- `DD_ENABLED`: A boolean that can be used to control datadog (see `.Values.application.datadog.enabled`).
 - `DD_ENTITY_ID`: A value taken from pod metadata "metadata.uid".
-- `SENTRY_ENVIRONMENT`: If `.Values.application.sentry.enabled`) this variable is set the application name.
+- `DD_ENV`: The environment name that datadog will use, taken from `Values.global.environment`.
+- `DD_SERVICE`: The service name that datadog will use (see `.Values.application.datadog` for more).
+- `DD_TRACE_ENABLED`: A boolean that can be used to control datadog trace (see `.Values.application.datadog.traceEnabled`).
+- `ENVIRONMENT`: The environment, taken from `.Values.global.environment`
 - `SENTRY_DSN`: If `.Values.application.sentry.enabled`) this variable is populate from the `.Values.application.sentry.dsn`.
-
-## Value Files
-
-Typically the `values.yaml` file defines the base values used by helm, and then additional values files are created based on the environment specific configs.
-
-When using this chart library its best to leave the `values.yaml` files empty and define separate values for each environment.
-
-> **NOTE:** Yes this does go against helm convention but its the best way we can do that does not cause duplicate data. Environment variables proved to be a bit tricky because in the local environment DATABASE_URL for example, could be defined in `.env` then in the staging environment it moves to `.envSealedSecrets`. It proved too hard to remove the duplicate values, so its best not to define any environment variables in the `values.yaml`.
-
-It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
+- `SENTRY_ENVIRONMENT`: If `.Values.application.sentry.enabled`) this variable is set the application name.
 
 ## Sealed Secrets
 
@@ -48,7 +39,7 @@ Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-ux
 
 > **NOTE:** When naming a sealed secret you need to ensure that the name you use to create the sealed secret and the name you give in the values file is the same.
 
-#### Image Pull Secrets
+### Image Pull Secrets
 
 The `sealedSecrets.imagePullSecret` is created with the name `<repository-name>-image-pull-secret`.
 
@@ -73,7 +64,37 @@ aruba-uxi:
         DATABASE_URL: sealed_version_of_the_base64_encoded_database_url
 ```
 
-### Global Values
+## Value Files
+
+Helm works by using a default `values.yaml` file and overlaying additional values files provided with the `-f` tag to the helm command.
+
+> **NOTE:** Yes this does go against helm convention but its the best way we can do that does not cause duplicate data. Environment variables proved to be a bit tricky because in the local environment DATABASE_URL for example, could be defined in `.env` then in the staging environment it moves to `.envSealedSecrets`. It proved too hard to remove the duplicate values, so its best not to define any environment variables in the `values.yaml`.
+
+When using this chart library its best to leave the `values.yaml` files empty except for the following values:
+
+- `aruba-uxi.global.image.repository`
+- `aruba-uxi.global.image.tag`
+- `aruba-uxi.global.repository`
+
+The `aruba-uxi.global.image.repository` and `aruba-uxi.global.image.tag` values are used as the default image. These can be overridden in other value files but it has to be present in the base `values.yaml` file.
+
+The `aruba-uxi.global.repository` is only needed once and should not be overridden. It makes sense to add it here.
+
+### Base Values File
+
+It is possible to define some values in the `values.yaml` file. You are welcome to experiment with defining the some values in the `values.yaml` file and overriding them in the environment values file.
+
+```yaml
+# values.yaml
+aruba-uxi:
+  global:
+    repoistory: example-service
+    image:
+      repository: example-service
+      tag: 1.0.0
+```
+
+## Global Values
 
 ```yaml
 aruba-uxi:
@@ -114,54 +135,6 @@ The key is used as the name of the cronjob and subsequent objects created. Some 
 ## Developing Notes
 
 When contributing to this library certain approaches or concepts can be considered to make you life easier.
-
-### Value Files
-
-Helm works by using a default `values.yaml` file and overlaying additional values files provided with the `-f` tag to the helm command.
-
-When using this library the values file is left largely empty except for the following values:
-
-- `aruba-uxi.global.image.repository`
-- `aruba-uxi.global.image.tag`
-- `aruba-uxi.global.repository`
-
-The `aruba-uxi.global.image.repository` and `aruba-uxi.global.image.tag` values are used as the default image. These can be overridden in other value files but it has to be present in the base `values.yaml` file.
-
-The `aruba-uxi.global.repository` is only needed once and should not be overridden. It makes sense to add it here.
-
-For example, the `values.yaml` file defines the default tag:
-
-```yaml
-# values.yaml
-aruba-uxi:
-  global:
-    repoistory: example-service
-    image:
-      repository: example-service
-      tag: 1.0.0
-```
-
-The staging environment overrides the tag to a development tag
-
-```yaml
-# values-staging.yaml
-aruba-uxi:
-  global:
-    image:
-      repository: quay.io/uxi/example-service
-      tag: 1.0.0-dev
-```
-
-The production environment uses the default latest tag
-
-```yaml
-# values-production.yaml
-aruba-uxi:
-  global:
-    image:
-      repository: quay.io/uxi/example-service
-      tag: 1.0.0
-```
 
 ### _helpers.tpl
 
