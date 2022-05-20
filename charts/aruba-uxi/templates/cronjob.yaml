@@ -66,8 +66,8 @@ spec:
             {{- end }}
             {{- if or $envBasic $envFields $envSealedSecrets }}
             {{- include "aruba-uxi.environmentVariables" (dict "data" $envBasic) | indent 12 }}
-            {{- include "aruba-uxi.environmentVariables" (dict "data" $datadog.extraEnvironmentVariables) | indent 12 }}
-            {{- include "aruba-uxi.environmentVariables" (dict "data" $sentry.extraEnvironmentVariables) | indent 12 }}
+            {{- include "aruba-uxi.environmentVariables" (dict "data" $datadog.env) | indent 12 }}
+            {{- include "aruba-uxi.environmentVariables" (dict "data" $sentry.env) | indent 12 }}
             {{- include "aruba-uxi.env-fields" (dict "data" $envFields) | indent 12 }}
             {{- include "aruba-uxi.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 12 }}
             {{- end }}

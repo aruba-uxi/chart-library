@@ -18,17 +18,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Ability to add extra datadog and sentry environment variables by setting the `extraEnvironmentVariables` value in `.Values.application.datadog` and `.Values.application.sentry` respectively.
+- Ability to add extra datadog and sentry environment variables by setting the `env` value in `.Values.application.datadog` and `.Values.application.sentry` respectively.
 
 ```yaml
 datadog:
-  extraEnvironmentVariables:
+  env:
     - DD_SOME_KEY: some-value
 ```
 
 ```yaml
 sentry:
-  extraEnvironmentVariables:
+  env:
     - SENTRY_SOME_KEY: some-value
 ```
 

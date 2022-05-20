@@ -71,12 +71,12 @@ aruba-uxi:
         enabled: true
         traceEnabled: true
         serviceName: another-service-name
-        extraEnvironmentVariables:
+        env:
           DD_TRACE_PROFILE_ENABLED: true
       sentry:
         enabled: true
         dsn: AgBgVMiB80V/w/D8lGdVkuwGHPFuscgY814y6bq40L309tYy8r5OGNLBmFiwLkq1P1efmwI0F7KH+DnPehTjRgeqTy5bPP6CjwBbj4aG/0H2fBkscuRP2IVPzsE2CPXQzbxzWu0MCTOUbxfpXwYMZWC5BSpb2voOwobi7Si0y8VGDKOmux0HWHFIjhbm1RacajEan6SJLl7zEYvHpREMQHAvdsVCkPM3DPzFA36UW3YMhn2ki1/2LBAZ6LOoxRAU3/CpLrNyfeHcxVtW4RR25TUzOdfcoiqbE5KoZNJNNEaUk7XvijvoklYDEdNjzwq7hpOZ6LDrWzo0+jjJz6uXWMHK6V8GJKwkxL0nz6+904HNpSoT4D9zsK7hHpp1EK3GK04HFUKlxuEXYRkkRjihSpW25eNgZXeRgKM+9hLApL0do/GE2fJU9kSKxtEHpDSBGNycDLLfMsC5gxctubOmJcklPd8qZ1y+gXlFxPQJPG/7zyK9qN4r1VQ1sIuKEnSdOekQ/tBojvJU7VOalxxX5gA0oXlFGf/4YhgJn6fYtj44EsFE1F05U6IxpgH/nn8tdDZd4jH/EqurwcfS7R2uroXx23IpVmR9El4DsvysU751D1ZP9s6eHq9BkiWMQIhL7vnJTPqOBi9kD1x+74WhPpL6L5qJlB1MLB4okDgHE7TdyPKjHT8tSh0qhJlDQ2mfbzKQcFiri89Vbvheyl3hE/y/8g==
-        extraEnvironmentVariables:
+        env:
           SENTRY_VARIABLE: some_value
       labels:
         example-service-production: example-service-production
@@ -129,5 +129,5 @@ aruba-uxi:
         example-cronjob-consumer-production: example-cronjob-consumer-production
       datadog:
         enabed: true
-        extraEnvironmentVariables:
+        env:
           SENTRY_VARIABLE: example-cronjob-consumer
