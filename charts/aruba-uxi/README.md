@@ -81,7 +81,7 @@ aruba-uxi:
     ...
 ```
 
-Global values used by all kubernetes objects. Some of these values can be overridden (see `values.example.yaml`).
+Global values used by all kubernetes objects. Some of these values can be overridden (see `values.example.yaml`). If overridden, in the application or cronjob, precedence is given to the overridden values.
 
 ## Application Values
 
@@ -95,79 +95,7 @@ aruba-uxi:
 ```
 
 Creates one or more applications unique by their name. Applications are defined as keys in the applications map.
-The key is used as the name of the application and subsequent objects created
-
-In this table `application` refers to each application defined under `applications`
-
-| Parameter | Description | Default | Optional |
-|-----|------|---------|--------|
-| application.role | The role that this application will serve. Validation is done to make sure the correct role is provided. Valid roles are (`webapp`, `worker`) | | No |
-| application.revisionHistoryLimit | The number of old ReplicaSets to be retained | `3` | Yes |
-| application.replicaCount | The number of pod replicas to create | `1` | Yes |
-| application.image.repository | A specific image that the application should use | `globals.image.repository` | Yes |
-| application.image.tag | The image to use for this specific application | `globals.image.tag` | Yes |
-| application.image.pullPolicy | The image pull policy to use for this application | `globals.image.pullPOlicy` | Yes |
-| application.serviceAccount.create | Creates a service account and adds it to the application. If no name is provided the application name will be used | `false` | Yes |
-| application.serviceAccount.name | The name of the service account to attach to this application| | Yes |
-| application.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
-| application.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
-| application.args | The arguments that used by the override command | `""` | Yes |
-| application.port | The port that must be exposed on the pod. Also used when adding a service to the webapp. Can be excluded when defining a worker | | No |
-| application.service | Configures the service created for webapps | `ClusterIP` | Yes |
-| application.service.type | Configures the service type that is created for webapps | `ClusterIP` | Yes |
-| application.service.port | Configures the service port to expose | `80` | Yes |
-| application.livenessProbe.enabled | Enabled or disabled liveness probe  | | No |
-| application.livenessProbe.path | The API path to query for liveness tests | `/livez` | Yes |
-| application.livesnessProbe.initialDelaySeconds | Number of seconds after the container starts before sending the first probe | `10` | Yes |
-| application.livesnessProbe.periodSeconds | How often to perform the probe | `10` | Yes |
-| application.livesnessProbe.timeoutSeconds | The number of seconds after which the probe should timeout | `1` | Yes |
-| application.livesnessProbe.failureThreshold | The number of times the probe fails before giving up | `3` | Yes |
-| application.readinessProbe.enabled | Enabled or disabled readiness probe  | | No |
-| application.readinessProbe.path | The API path to query for readiness tests | `/readyz` | Yes |
-| application.readinessProbe.initialDelaySeconds | Number of seconds after the container starts before sending the first probe | `10` | Yes |
-| application.readinessProbe.periodSeconds | How often to perform the probe | `10` | Yes |
-| application.readinessProbe.timeoutSeconds | The number of seconds after which the probe should timeout | `1` | Yes |
-| application.readinessProbe.failureThreshold | The number of times the probe fails before giving up | `3` | Yes |
-| application.resources | Resource limits and requests to set on the pod. See [link](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for more details on the structure | `{}` | Yes |
-| application.nodeSelector | Node selector specifications to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) for more details on the structure | `{}` | Yes |
-| application.tolerations | Tolerations to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the structure | `{}` | Yes |
-| application.affinity | Affinity to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) for more details on the structure | `{}` | Yes |
-| application.securityContext | Sets the security contextfor the pods. See [link](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for more details on the structure | `{}` | Yes |
-| application.configMap | A config map to create and apply to the application | | Yes |
-| application.configMap.create | Whether to create the config map | | No |
-| application.configMap.name | The name of the config map | | No |
-| application.configMap.annotations | Annotations to add to the config map | `{}` | Yes |
-| application.configMap.readOnly | Whether the config map is mapped as readonly or not | `true` | Yes |
-| application.configMap.path | The path to map the config map to in the pod | `{}` | Yes |
-| application.configMap.data | The data to add to the config map | `{}` | Yes |
-| application.secretMount | A secret mount to add secrets as a file to the pod | | Yes |
-| application.secretMount.name | The name of the secret volume to be mounted | | Yes |
-| application.secretMount.path | The path to mount the secret on in the pod | `{}` | Yes |
-| application.secretMount.readOnly | Whether the secret is mounted as readonly file or not | `true` | Yes |
-| application.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
-| application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
-| application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
-| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
-| application.datadog.traceEnabled | Enables or disables datadog tracing. Sets the `DD_TRACE_ENABLED` environment variable | `false` | Yes |
-| application.datadog.serviceName | Sets the name of `DD_SERVICE` env variable. | `$name` | Yes |
-| application.datadog.env | Adds extra environment variables specific to datadog | | Yes |
-| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sentry.dsn` value to create the sentry DSN sealed secret | `false` | Yes |
-| application.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<application-name>-sentry-dsn` | | Yes |
-| application.sentry.env | Adds extra environment variables related to sentry | | Yes |
-| application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
-| application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
-| application.ingress.useLegacyApiVersion | Toggles the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1`. | `false` | Yes |
-| application.ingress.className | Defines the ingress class name. | | No |
-| application.ingress.hosts | A list of hosts to add to the legacy ingress. | | No |
-| application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | | No |
-| application.ingress.hosts[].paths.path | The path | | No |
-| application.ingress.hosts[].paths.type | The pathType to use for the respective path. | `ImplementaionSpecific` | Yes |
-| application.ingress.hosts[].paths.backend.serviceName | The service name that the path talks to. | `application.name` | Yes |
-| application.ingress.hosts[].paths.backend.servicePort | The service port that the path talks to. | `application.port` | Yes |
-| application.ingress.tls | A set of TLS configuration settings to add to the legacy ingress. | `[]` | Yes |
-| application.ingress.tls.secretName | The secret that contains the TLS certs. | | Yes |
-| application.ingress.tls.hosts | The hosts which use the TLS certs contained in the respective secret. | | Yes |
-| application.ingress.tls.annotations | A key-value pair of ingress annotations | `{}` | Yes |
+The key is used as the name of the application and subsequent objects created. Some of these values can be overridden (see `values.example.yaml`).
 
 ## Cronjob Values
 
