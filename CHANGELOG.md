@@ -16,6 +16,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [5.0.9] - 2022-05-20
 
+### Added
+
+- the ability to configure the deployment update strategy
+
+```yaml
+  updateStrategy:
+    maxSurge: 50%
+    maxUnavailable: 50%
+```
+
 ### Changed
 
 - Updated docs and values example file
