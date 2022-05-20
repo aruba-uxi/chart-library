@@ -248,6 +248,14 @@ aruba-uxi:
           readOnly: true
           ## The path to mount the secret on in the pod.
           path: /path/to/mount/folder
+      ## Configures the pod update strategy. The Deployment updates Pods in a rolling update fashion when .spec.strategy.type==RollingUpdate (optional, default: {})
+      updateStrategy:
+        # specifies the maximum number of Pods that can be unavailable during the update process.
+        # The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%).
+        maxSurge: 25%
+        # specifies the maximum number of Pods that can be created over the desired number of Pods.
+        # The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%).
+        maxUnavailable: 25%
     example-worker: {}
 
   cronjobs:
