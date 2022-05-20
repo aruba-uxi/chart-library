@@ -100,7 +100,7 @@ metadata:
     example-service-staging: example-service-staging
     global-label: global-label
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app.kubernetes.io/name: example-service
