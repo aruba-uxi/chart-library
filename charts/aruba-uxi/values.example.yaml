@@ -42,67 +42,6 @@ aruba-uxi:
       OVERRIDDEN_FIELD_VALUE: global-value
     ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template. (optional, default: null)
     labels: {}
-
-| application.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
-| application.args | The arguments that used by the override command | `""` | Yes |
-| application.port | The port that must be exposed on the pod. Also used when adding a service to the webapp. Can be excluded when defining a worker | | No |
-| application.service | Configures the service created for webapps | `ClusterIP` | Yes |
-| application.service.type | Configures the service type that is created for webapps | `ClusterIP` | Yes |
-| application.service.port | Configures the service port to expose | `80` | Yes |
-| application.livenessProbe.enabled | Enabled or disabled liveness probe  | | No |
-| application.livenessProbe.path | The API path to query for liveness tests | `/livez` | Yes |
-| application.livesnessProbe.initialDelaySeconds | Number of seconds after the container starts before sending the first probe | `10` | Yes |
-| application.livesnessProbe.periodSeconds | How often to perform the probe | `10` | Yes |
-| application.livesnessProbe.timeoutSeconds | The number of seconds after which the probe should timeout | `1` | Yes |
-| application.livesnessProbe.failureThreshold | The number of times the probe fails before giving up | `3` | Yes |
-| application.readinessProbe.enabled | Enabled or disabled readiness probe  | | No |
-| application.readinessProbe.path | The API path to query for readiness tests | `/readyz` | Yes |
-| application.readinessProbe.initialDelaySeconds | Number of seconds after the container starts before sending the first probe | `10` | Yes |
-| application.readinessProbe.periodSeconds | How often to perform the probe | `10` | Yes |
-| application.readinessProbe.timeoutSeconds | The number of seconds after which the probe should timeout | `1` | Yes |
-| application.readinessProbe.failureThreshold | The number of times the probe fails before giving up | `3` | Yes |
-| application.resources | Resource limits and requests to set on the pod. See [link](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for more details on the structure | `{}` | Yes |
-| application.nodeSelector | Node selector specifications to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) for more details on the structure | `{}` | Yes |
-| application.tolerations | Tolerations to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details on the structure | `{}` | Yes |
-| application.affinity | Affinity to set on the pod. See [link](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) for more details on the structure | `{}` | Yes |
-| application.securityContext | Sets the security contextfor the pods. See [link](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for more details on the structure | `{}` | Yes |
-| application.configMap | A config map to create and apply to the application | | Yes |
-| application.configMap.create | Whether to create the config map | | No |
-| application.configMap.name | The name of the config map | | No |
-| application.configMap.annotations | Annotations to add to the config map | `{}` | Yes |
-| application.configMap.readOnly | Whether the config map is mapped as readonly or not | `true` | Yes |
-| application.configMap.path | The path to map the config map to in the pod | `{}` | Yes |
-| application.configMap.data | The data to add to the config map | `{}` | Yes |
-| application.secretMount | A secret mount to add secrets as a file to the pod | | Yes |
-| application.secretMount.name | The name of the secret volume to be mounted | | Yes |
-| application.secretMount.path | The path to mount the secret on in the pod | `{}` | Yes |
-| application.secretMount.readOnly | Whether the secret is mounted as readonly file or not | `true` | Yes |
-| application.env | Basic environment variables specific for this application. Can override the global.env values | `{}` | Yes |
-| application.envFields | Environment variables that pull information from kubernetss object fields for this application. Can override the global.envField values | `{}` | Yes |
-| application.envSealedSecrets | Environment variables from sealed secrets specific to this application. Can override the global.envSealedSecrets values | `{}` | Yes |
-| application.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables (`DD_ENV`, `DD_SERVICE`, `DD_AGENT_HOST`, `DD_ENTITY_ID`) | `false` | Yes |
-| application.datadog.traceEnabled | Enables or disables datadog tracing. Sets the `DD_TRACE_ENABLED` environment variable | `false` | Yes |
-| application.datadog.serviceName | Sets the name of `DD_SERVICE` env variable. | `$name` | Yes |
-| application.datadog.extraEnvironmentVariables | Adds extra environment variables specific to datadog | | Yes |
-| application.sentry.enabled | Enables sentry on the application. Setting to true will create the necessary environment variables. You need to add the `.sentry.dsn` value to create the sentry DSN sealed secret | `false` | Yes |
-| application.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<application-name>-sentry-dsn` | | Yes |
-| application.sentry.extraEnvironmentVariables | Adds extra environment variables related to sentry | | Yes |
-| application.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
-| application.ingress | Configures the legacy ingress added to an application | `{}` | Yes |
-| application.ingress.useLegacyApiVersion | Toggles the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1`. | `false` | Yes |
-| application.ingress.className | Defines the ingress class name. | | No |
-| application.ingress.hosts | A list of hosts to add to the legacy ingress. | | No |
-| application.ingress.hosts[].paths | A list of paths for each legacy ingress hosts | | No |
-| application.ingress.hosts[].paths.path | The path | | No |
-| application.ingress.hosts[].paths.type | The pathType to use for the respective path. | `ImplementaionSpecific` | Yes |
-| application.ingress.hosts[].paths.backend.serviceName | The service name that the path talks to. | `application.name` | Yes |
-| application.ingress.hosts[].paths.backend.servicePort | The service port that the path talks to. | `application.port` | Yes |
-| application.ingress.tls | A set of TLS configuration settings to add to the legacy ingress. | `[]` | Yes |
-| application.ingress.tls.secretName | The secret that contains the TLS certs. | | Yes |
-| application.ingress.tls.hosts | The hosts which use the TLS certs contained in the respective secret. | | Yes |
-| application.ingress.tls.annotations | A key-value pair of ingress annotations | `{}` | Yes |
-
-
   applications:
     example-service:
       ## The application role
@@ -134,77 +73,94 @@ aruba-uxi:
         annotations: {}
       ## Overrides the command from the dockerfile (optional, default: the Dockerfile command is used)
       command: []
-      ## The port on the pod that is exposed. For 'role: worker' do not set this value.
+      ## The arguments that are used by the override command (optional, default: []).
+      args: []
+      ## The port on the pod that is exposed and used by the Service. For 'role: worker' do not set this value.
       port: 8000
-      ## Configures the service created (optional)
-      ## Default: ClusterIP on port 80
-      ##
+      ## Configures the service for a webapp role (optional, default: {})
       service:
-        {}
-        # type: ClusterIP
-        # port: 80
-      ## Enables the liveness probe on the specified path (optional)
-      ## NB! for 'role:worker' this should be excluded
-      ##
+        ## Configures the service type that is created (optional, default: ClusterIP)
+        type: ClusterIP
+        ## Configures the service port to expose (optional, default: 80)
+        port: 80
+      ## Enables the liveness probe to determine if the pod started up correctly (optional, default: {})
       livenessProbe:
+        ## Toggles the liveness probe (optional, default: true)
         enabled: true
+        ## The API path to query for liveness testing (optional, default: /livez)
         path: /livez
+        ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
+        ## How often to perform the probe (optional, default: 10)
         periodSeconds: 10
+        ## The number of seconds after the probe is sent that it should timeout (optional, default: 1)
         timeoutSeconds: 1
+        ## The number of times the probe should succeed before marking the pod as healthy (optional, default: 1)
         successThreshold: 1
+        ## The number of times the probe fails before giving up and marking the pod as unhealthy (optional, default: 3)
         failureThreshold: 3
-      ## Enables the readiness probe on the specified path (optional)
-      ## NB! for 'role:worker' this should be excluded
-      ##
+      ## Enables the readiness probe to determine if the pod started up correctly and can handle traffic (optional, default: {})
       readinessProbe:
+        ## Toggles the readiness probe (optional, default: true)
         enabled: true
+        ## The API path to query for readiness testing (optional, default: /readyz)
         path: /readyz
+        ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
+        ## How often to perform the probe (optional, default: 10)
         periodSeconds: 10
+        ## The number of seconds after the probe is sent that it should timeout (optional, default: 1)
         timeoutSeconds: 1
+        ## The number of times the probe should succeed before marking the pod as healthy (optional, default: 1)
         successThreshold: 1
+        ## The number of times the probe fails before giving up and marking the pod as unhealthy (optional, default: 3)
         failureThreshold: 3
-      ## Configure the pod resources (optional)
-      ## Default: lets kubernetes set the resources
-      ##
+      ## Configures the resource assigned to the pod (optional, default: {})
+      ## https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
       resources:
-        {}
-        # limits:
-        #   cpu: 100m
-        #   memory: 256Mi
-        # requests:
-        #   cpu: 100m
-        #   memory: 128Mi
-      ## Configures the node selectors for the pods (optional)
-      ## Default: None
-      ##
+        ## The maximum amount of resources the pod can consume before being restarted by the kubelet
+        limits:
+          ## The number of cpu cores that can be used by the pod
+          cpu: 100m
+          ## The amount of memory that can be used by the pod
+          memory: 256Mi
+        ## The number of resources requested by the pod at startup
+        requests:
+          ## The number of cpu cores that the pod requires
+          cpu: 100m
+          ## The amount of memory that the pod requires
+          memory: 128Mi
+      ## Node selector specifications to set on the pod (optional, default: {})
+      ## https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
       nodeSelector: {}
-      ## Configures the tolerations for the pods (optional)
-      ## Default: None
-      ##
+      ## Tolerations to set on the pod (optional, default: {})
+      ## https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
       tolerations: []
-      ## Configures the pod affinity for the pods (optional)
-      ## Default: None
-      ##
+      ## Affinity to set on the pod (optional, default: {}).
+      ## https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
       affinity: {}
-      ## Configures the security context for the pods (optional)
-      ## Default: None
-      ##
+      ## Sets the security context for the pods. (optional, default: {})
+      ## https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
       securityContext:
-        {}
-        # runAsUser: 1000
-        # runAsGroup: 3000
-        # fsGroup: 2000
-      ## Adds a config map to the application (optional)
-      ## Default: None
-      ###
+        ## What user the pod should run with (optional, default: 1000)
+        runAsUser: 1000
+        ## What group the pod should run with (optional, default: 3000)
+        runAsGroup: 3000
+        ## What file system group the pod should run with (optional, default: 2000)
+        fsGroup: 2000
+      ## A list of ConfigMaps to create and apply to the application (optional, default: [])
       configMap:
+        ## The name of the ConfigMap (optional, default: uses the application name)
         - name: example-configmap01
+          ## Whether to create the ConfigMaps or not. If false, it will expect the ConfigMap to be present in the namespace (optional, default: true)
           create: true
+          ## Annotations to add to the ConfigMap (optional, default: {})
           annotations: {}
+          ## Whether the ConfigMap is created as readonly or not (optional, default: false)
           readOnly: false
+          ## The path in the pod that the ConfigMap is mounted
           path: /app/config
+          ## The data to add to the ConfigMap
           data:
             config.json: |
               {
@@ -214,90 +170,82 @@ aruba-uxi:
                   host: hostname
                 }
               }
-        - name: example-configmap02
-          create: false
-          annotations: {}
-          readOnly: false
-          path: /app/config
-      ## Environment variables set from provided key:value pair (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
+      ## Basic environment variables specific for this application, in the form key:value (optional, default: {})
       env:
         AWS_DEFAULT_REGION: example-service
         OVERRIDDEN_VALUE: example-service
-      ## Environment variables set from the deployment fields (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
+      ## Environment variables that are pulled information from kubernetss object fields for this application (optional, default: {})
       envFields:
         HOST_IP: example-service
         OVERRIDDEN_FIELD_VALUE: example-service
-      ## Environment variables set from sealed secrets (optional)
-      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
-      ## Default: None
-      ##
+      ## Environment variables populated from SealedSecrets (optional, default: {})
       envSealedSecrets:
+        ## The name of the SealedSecret, and a list of keys to populate from the SealedSecret
         secret-name-a:
           - FOO
           - BAR
         secret-name-b:
           - BIZ
-      ## Enables datadog metrics (optional)
-      ## DD_ENABLED environment variable is always set.
-      ## The value is taken from ".datadog.enabled" (default: false)
-      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
-      ## - DD_ENV: value from ".global.environment"
-      ## - DD_SERVICE: ".datadog.serviceName" (default: the name of the application)
-      ## - DD_AGENT_HOST: value from pod metadata "status.hostIP"
-      ## - DD_ENTITY_ID: value from pod metadata "metadata.uid"
-      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
-      ##
+      ## Configures datadog on the application (optional, default: {})
       datadog:
+        ## Enables datadog. Sets the DD_ENABLED environment variable along with others. See Readme for more details (optional, default: false)
         enabled: false
+        ## Enables datadog tracing. Sets the DD_TRACE_ENABLED environment variable (optional, default: false)
         traceEnabled: false
+        ## Sets the service name to use when sending datadog metrics. Sets the DD_SERVICE env variable (optional, default: the name of the application)
         serviceName: example-service
+        ## Adds extra environment variables specific to datadog. Some environment variables are set by default. See Readme for more info (optional, default: {})
         env:
           DD_EXTRA_ENV_VARIABLE_1: value
-      ## Enables sentry (Optional)
-      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
-      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
-      ##
+      ## Configures sentry on the application (optional, default: {})
       sentry:
+        ## Enables sentry on the application. Setting to true will create the necessary environment variables. (optional, default: false)
         enabled: false
+        ## Creates a SealedSecret for the SENTRY_DSN from the provided base64 encoded Sentry DSN value. The sealed secret name takes the format <application-name>-sentry-dsn (optional, default: None)
+        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
+        ## Adds extra environment variables related to sentry (optional, default: {})
         env:
           SENTRY_EXRA_ENV_VARIABLE_1: value
-        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
-      ## Default: None
-      ##
+      ## Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object (optional, default: {})
       labels: {}
-      ## Configures a legacy ingress on the application (optional)
-      ## Default: None
+      ## Configures an Ingress on the application (optional, default: {})
       ingress:
+        ## Uses the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1` (optional, default: false)
         useLegacyApiVersion: false
+        ## Defines the Ingress class name to use (optional, default: nginx)
         className: nginx
+        ## A list of hosts to add to the Ingress.
         hosts:
+          ## The hostname
           - host: example-service.local
+            ## A list of paths for each hosts
             paths:
+              ## The path to match (optional, default: /)
               - path: /
+                ## The path type to use for the respective path.
                 type: Prefix
+                ## The backend service that Ingress should routes traffic to.
                 backend:
+                  ## The Service name that the traffic should be routed to (optional, default: the name of the application)
                   serviceName: example-service
+                  ## The Service port that the traffic should be routed to (optional, default application port)
                   servicePort: 8000
-        tls: []
+        ## A list of hosts to configure TLS encryption on (optional, default: [])
+        tls:
+          ## The hosts which use the TLS certs contained in the respective secret
+          - hosts:
+              - example-service.local
+            ## The secret that contains the TLS certificates
+            secretName: example-tls-secret
+        ## A key-value pair of ingress annotations
         annotations: {}
-        # - secretName: chart-example-tls
-        #   hosts:
-        #     - example-service.local
-      ## Mounts one or more sealed secrets to a location on the file system (optional)
-      ## Each key in the sealed secret will be mounted as a file under `secretMount.[n].path`
-      ## Default: None
-      ###
+      ## Mounts one or more sealed secrets to a location on the file system (optional, default: [])
       secretMount:
+        ## The name of the secret volume to be mounted.
         - name: secret-name
+          ## Whether the secret is mounted as readonly file or not (optional, default: true)
           readOnly: true
+          ## The path to mount the secret on in the pod.
           path: /path/to/mount/folder
     example-worker:
       ## The application role
