@@ -28,7 +28,7 @@ aruba-uxi:
         repository: quay.io/uxi/nginx
         tag: latest
       revisionHistoryLimit: 1
-      replicaCount: 1
+      replicaCount: 4
       serviceAccount:
         create: true
       port: 80
@@ -82,6 +82,9 @@ aruba-uxi:
           - host: example-service.internal.staging.capedev.io
             paths:
               - path: /
+      updateStrategy:
+        maxSurge: 1
+        maxUnavailable: 1
     example-worker:
       role: worker
       replicaCount: 0
