@@ -77,9 +77,9 @@ namespace: {{ .context.Release.Namespace }}
 {{/*
 Inject extra environment variables
 */}}
-{{- define "aruba-uxi.env-variables" -}}
+{{- define "aruba-uxi.environmentVariables" -}}
 {{- $datadogImplementedEnvironmentVariables := list "DD_ENABLED" "DD_ENV" "DD_SERVICE" "DD_TRACE_ENABLED" -}}
-{{- $sentryImplementedEnvironmentVariables := list "SENTRY_ENVIRONMENT" -}}
+{{- $sentryImplementedEnvironmentVariables := list "SENTRY_ENVIRONMENT" "SENTRY_DSN" -}}
 {{- range $key, $val := .data }}
 {{- if mustHas $key $datadogImplementedEnvironmentVariables -}}
 {{- fail (printf "Env variable (%s) should not be defined in the env section. See the 'datadog' section in values.example.yaml for more info" $key) -}}

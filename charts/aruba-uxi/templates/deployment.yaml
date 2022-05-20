@@ -83,7 +83,9 @@ spec:
               key: SENTRY_DSN
         {{- end }}
         {{- if or $envBasic $envFields $envSealedSecrets }}
-        {{- include "aruba-uxi.env-variables" (dict "data" $envBasic) | indent 8 }}
+        {{- include "aruba-uxi.environmentVariables" (dict "data" $envBasic) | indent 8 }}
+        {{- include "aruba-uxi.environmentVariables" (dict "data" $datadog.env) | indent 8 }}
+        {{- include "aruba-uxi.environmentVariables" (dict "data" $sentry.env) | indent 8 }}
         {{- include "aruba-uxi.env-fields" (dict "data" $envFields) | indent 8 }}
         {{- include "aruba-uxi.env-sealed-secrets" (dict "name" $name "data" $envSealedSecrets) | indent 8 }}
         {{- end }}
