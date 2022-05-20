@@ -43,6 +43,7 @@ aruba-uxi:
     ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template. (optional, default: null)
     labels: {}
   applications:
+    ## THe name of the application (webapp, worker)
     example-service:
       ## The application role
       ## The difference between a webapp and worker is the worker does not have ports exposed.
@@ -247,317 +248,73 @@ aruba-uxi:
           readOnly: true
           ## The path to mount the secret on in the pod.
           path: /path/to/mount/folder
-    example-worker:
-      ## The application role
-      ## The difference between a webapp and worker is the worker does not have ports exposed.
-      ## I.e a worker does not get a Service manifest defined
-      ## Valid roles: webapp | worker
-      ##
-      role: worker
-      ## Sets the replica count (optional)
-      ## Default: 1
-      ##
-      revisionHistoryLimit: 3
-      ## Sets number of old ReplicaSets for this deployment to be retained (optional)
-      ## Default: 3
-      ##
-      replicaCount: 1
-      ## Configures the image and image pull policy (optional)
-      ## Default: uses .global.image
-      ##
-      image:
-        {}
-        # repository: nginx
-        # pullPolicy: IfNotPresent
-        # tag: ""
-      ## Attaches a service account it to the application (optional)
-      ## Default: uses the default service account in the namespace
-      ##
-      serviceAccount:
-        # create: false
-        name: example-worker-external-service-account
-        # annotations: {}
-      ## Overrides the command from the dockerfile (optional)
-      ## Default: the Dockerfile command is used
-      ##
-      command: ["printenv"]
-      ## args for the container command (optional)
-      ##
-      args: ["HOSTNAME", "KUBERNETES_PORT"]
-      ## Which port on the pod is exposed.
-      ## NB! for 'role: worker' do not set this
-      ##
-      port: 8000
-      ## Configures the service created (optional)
-      ## Default: ClusterIP on port 80
-      ##
-      service:
-        {}
-        # type: ClusterIP
-        # port: 80
-      ##
-      ## Enables the liveness probe to run the specified command (optional)
-      ##
-      livenessProbe:
-        command: ["ls -a"]
-      ## Enables the readiness probe to run the specified command (optional)
-      ##
-      readinessProbe:
-        command: ["ls -a"]
-      ## Configure the pod resources (optional)
-      ## Default: lets kubernetes set the resources
-      ##
-      resources:
-        {}
-        # limits:
-        #   cpu: 100m
-        #   memory: 256Mi
-        # requests:
-        #   cpu: 100m
-        #   memory: 128Mi
-      ## Configures the node selectors for the pods (optional)
-      ## Default: None
-      ##
-      nodeSelector: {}
-      ## Configures the tolerations for the pods (optional)
-      ## Default: None
-      ##
-      tolerations: []
-      ## Configures the pod affinity for the pods (optional)
-      ## Default: None
-      ##
-      affinity: {}
-      ## Configures the security context for the pods (optional)
-      ## Default: None
-      ##
-      securityContext:
-        {}
-        # runAsUser: 1000
-        # runAsGroup: 3000
-        # fsGroup: 2000
-        ## Adds a config map to the application (optional)
-      ## Default: None
-      ###
-      configMap:
-        annotations: {}
-        readOnly: false
-        path: /app/config
-        data:
-          config.json: |
-            "hello worker"
-      ## Environment variables set from provided key:value pair (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
-      env:
-        AWS_DEFAULT_REGION: example-worker
-        OVERRIDDEN_VALUE: example-worker
-      ## Environment variables set from the deployment fields (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
-      envFields:
-        HOST_IP: example-worker
-        OVERRIDDEN_FIELD_VALUE: example-worker
-      ## Environment variables set from sealed secrets (optional)
-      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
-      ## Default: None
-      ##
-      envSealedSecrets:
-        secret-name-a:
-          - FOO
-          - BAR
-        secret-name-b:
-          - BIZ
-      ## Enables datadog metrics (optional)
-      ## DD_ENABLED environment variable is always set.
-      ## The value is taken from ".datadog.enabled" (default: false)
-      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
-      ## - DD_ENV: value from ".global.environment"
-      ## - DD_SERVICE: ".datadog.serviceName" (default: the name of the application)
-      ## - DD_AGENT_HOST: value from pod metadata "status.hostIP"
-      ## - DD_ENTITY_ID: value from pod metadata "metadata.uid"
-      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
-      ##
-      datadog:
-        enabled: false
-        traceEnabled: false
-        serviceName: example-worker
-        env:
-          DD_EXTRA_ENV_VARIABLE_1: value1
-      ## Enables sentry (Optional)
-      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
-      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
-      ##
-      sentry:
-        enabled: false
-        env:
-          SENTRY_EXRA_ENV_VARIABLE_1: value
-        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
-      ## Default: None
-      ##
-      labels: {}
-  ## Creates one or more cronjobs.
-  ## Cronjobs are defined as keys in the applications map
-  ## The key is used as the name of the cronjob and subsequent objects created
-  ##
+    example-worker: {}
+
   cronjobs:
+    ## The name of the cronjob.
     example-cronjob-producer:
-      ## The schedule for the cronjob
-      ##
+      ## The schedule to set for the cronjob to run on.
       schedule: "*/10 * * * *"
-      ## Suspends the cronjob (optional)
-      ## Default: false
-      ##
+      ## Whether the cronjob is suspended or not (optional, default: false)
       suspend: false
-      ## Configures the image and image pull policy (optional)
-      ## Default: uses .global.image
-      ##
-      image: {}
-      ## Overrides the command from the dockerfile (optional)
-      ## Default: the Dockerfile command is used
-      ##
-      command: ["run-kinesis", "producer"]
-      ## Attaches a service account it to the application (optional)
-      ## Default: uses the default service account in the namespace
-      ##
+      ## Configures the image and image pull policy (optional, default: uses .global.image)
+      image:
+        ## The image repository to use for images
+        repository: aruba-uxi-example
+        ## The image tag to use
+        tag: 1.2.3
+        ## The image pull policy to use (optional, default: IfNotPresent)
+        pullPolicy: IfNotPresent
+      ## Overrides the command from the dockerfile (optional, default: the Dockerfile command is used)
+      command: []
+      ## The arguments that are used by the override command (optional, default: []).
+      args: []
+      ## Attaches a service account it to the cronjob (optional, default: uses the default service account in the namespace)
       serviceAccount:
+        ## Whether to create the service account or not (optional, default: true)
         create: true
-        name: example-cronjob-producer-service-account
-        # annotations: {}
-      ## Whether the cronjob should restart if a job fails (optional)
-      ## Default: OnFailure
-      ##
+        ## The name of the service account to attach to this cronjob (optional, default: uses the cronjob name)
+        name: service-account-name
+        ## Any annotations to add the service account that is created (optional, default: {})
+        annotations: {}
+      ## When the cronjob should restarted and how (optional, default: OnFailure)
       restartPolicy: OnFailure
-      ## Environment variables set from provided key:value pair (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
+      ## Basic environment variables specific for this cronjob, in the form key:value (optional, default: {})
       env:
         AWS_DEFAULT_REGION: example-cronjob-producer
         OVERRIDDEN_VALUE: example-cronjob-producer
-      ## Environment variables set from the deployment fields (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
+      ## Environment variables that are pulled information from kubernetss object fields for this cronjob (optional, default: {})
       envFields:
         HOST_IP: example-cronjob-producer
         OVERRIDDEN_FIELD_VALUE: example-cronjob-producer
-      ## Environment variables set from sealed secrets (optional)
-      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
-      ## Default: None
-      ##
+      ## Environment variables populated from SealedSecrets (optional, default: {})
       envSealedSecrets:
+        ## The name of the SealedSecret, and a list of keys to populate from the SealedSecret
         secret-name-a:
           - FOO
           - BAR
         secret-name-b:
           - BIZ
-      ## Enables datadog metrics (optional)
-      ## DD_ENABLED environment variable is always set.
-      ## The value is taken from ".datadog.enabled" (default: false)
-      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
-      ## - DD_ENV: value from ".global.environment"
-      ## - DD_SERVICE: ".datadog.serviceName" (default: the name of the application)
-      ## - DD_AGENT_HOST: value from pod metadata "status.hostIP"
-      ## - DD_ENTITY_ID: value from pod metadata "metadata.uid"
-      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
-      ##
+      ## Configures datadog on the cronjob (optional, default: {})
       datadog:
+        ## Enables datadog. Sets the DD_ENABLED environment variable along with others. See Readme for more details (optional, default: false)
         enabled: false
+        ## Enables datadog tracing. Sets the DD_TRACE_ENABLED environment variable (optional, default: false)
         traceEnabled: false
+        ## Sets the service name to use when sending datadog metrics. Sets the DD_SERVICE env variable (optional, default: the name of the cronjob)
         serviceName: example-cronjob-producer
+        ## Adds extra environment variables specific to datadog. Some environment variables are set by default. See Readme for more info (optional, default: {})
         env:
-          DD_EXTRA_ENV_VARIABLE_1: value1
-      ## Enables sentry (Optional)
-      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
-      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
-      ##
+          DD_EXTRA_ENV_VARIABLE_1: value
+      ## Configures sentry on the cronjob (optional, default: {})
       sentry:
+        ## Enables sentry on the cronjob. Setting to true will create the necessary environment variables. (optional, default: false)
         enabled: false
+        ## Creates a SealedSecret for the SENTRY_DSN from the provided base64 encoded Sentry DSN value. The sealed secret name takes the format <cronjob-name>-sentry-dsn (optional, default: None)
+        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
+        ## Adds extra environment variables related to sentry (optional, default: {})
         env:
           SENTRY_EXRA_ENV_VARIABLE_1: value
-        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
-      ## Default: None
-      ##
+      ## Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object (optional, default: {})
       labels: {}
-    example-cronjob-consumer:
-      ## The schedule for the cronjob
-      ##
-      schedule: "*/5 * * * *"
-      ## Suspends the cronjob (optional)
-      ## Default: false
-      ##
-      suspend: false
-      ## Overrides the command from the dockerfile (optional)
-      ## Default: the Dockerfile command is used
-      ##
-      command: ["run-kinesis", "consumer"]
-      ## Attaches a service account it to the application (optional)
-      ## Default: uses the default service account in the namespace
-      ##
-      serviceAccount:
-        create: false
-        name: example-cronjob-consumer-service-account
-      ## Whether the cronjob should restart if a job fails (optional)
-      ## Default: OnFailure
-      ##
-      restartPolicy: OnFailure
-      ## Environment variables set from provided key:value pair (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
-      env:
-        AWS_DEFAULT_REGION: example-cronjob-consumer
-        OVERRIDDEN_VALUE: example-cronjob-consumer
-      ## Environment variables set from the deployment fields (optional)
-      ## If overridden, in application or cronjobs, precedence is given to the overridden values
-      ## Default: None
-      ##
-      envFields:
-        HOST_IP: example-cronjob-consumer
-        OVERRIDDEN_FIELD_VALUE: example-cronjob-consumer
-      ## Environment variables set from sealed secrets (optional)
-      ## The sealed secret and environment variable must be defined in .sealedSecrets.env
-      ## Default: None
-      ##
-      envSealedSecrets:
-        secret-name-a:
-          - FOO
-          - BAR
-        secret-name-b:
-          - BIZ
-      ## Enables datadog metrics (optional)
-      ## DD_ENABLED environment variable is always set.
-      ## The value is taken from ".datadog.enabled" (default: false)
-      ## Setting ".datadog.enabled: true" will add the necessary environment variables:
-      ## - DD_ENV: value from ".global.environment"
-      ## - DD_SERVICE: ".datadog.serviceName" (default: the name of the application)
-      ## - DD_AGENT_HOST: value from pod metadata "status.hostIP"
-      ## - DD_ENTITY_ID: value from "metadata.uid"
-      ## - DD_TRACE_ENABLED: ".datadog.traceEnabled" (default: false)
-      ##
-      datadog:
-        enabled: false
-        traceEnabled: false
-        serviceName: example-cronjob-consumer
-        env:
-          DD_EXTRA_ENV_VARIABLE_1: value1
-      ## Enables sentry (Optional)
-      ## Setting ".sentry.enabled: true" will add the necessary environment variables:
-      ## - SENTRY_ENVIRONMENT: value from ".global.environment"
-      ## - SENTRY_DSN: value taken from the sentry-dsn sealed secret. You need to add the.sentry.dsn value
-      ##
-      sentry:
-        enabled: false
-        env:
-          SENTRY_EXRA_ENV_VARIABLE_1: value
-        dsn: sealed_version_of_the_base64_encoded_sentry_dsn
-      ## Ability to add extra labels above the default ones add by the `aruba-uxi.labels` template (optional)
-      ## Default: None
-      ##
-      labels: {}
+    example-cronjob-consumer: {}

@@ -108,29 +108,8 @@ aruba-uxi:
       ...
 ```
 
-In this table `cronjob` refers to each cronjob defined under `cronjobs`
-
-| Parameter | Description | Default | Optional |
-|-----|------|---------|--------|
-| cronjob.schedule | The schedule to set for the cronjob to run on | | No |
-| cronjob.suspend | Suspends the cronjob | `false` | Yes |
-| cronjob.image.repository | A specific image that the cronjob should use | `globals.image.repository` | Yes |
-| cronjob.image.tag | The image to use for this specific cronjob | `globals.image.tag` | Yes |
-| cronjob.image.pullPolicy | The image pull policy to use for this cronjob | `globals.image.pullPOlicy` | Yes |
-| cronjob.command | The command that the pod must run. Overrides the docker image command | `""` | Yes |
-| cronjob.args | The arguments that used by the override command | `""` | Yes |
-| cronjob.serviceAccount.create | Creates a service account and adds it to the cronjob. If no name is provided the application name will be used | `false` | Yes |
-| cronjob.serviceAccount.name | The name of the service account to attach to this cronjob| | Yes |
-| cronjob.serviceAccount.annotations | Any annotations to add the service account that is created | | Yes |
-| cronjob.restartPolicy| Whether the cronjob should restart if a job fails | `OnFailure` | Yes |
-| cronjob.env | Basic environment variables specific for this cronjob. Can override the global.env values | `{}` | Yes |
-| cronjob.envFields | Environment variables that pull information from kubernetss object fields for this cronjob. Can override the global.envField values | `{}` | Yes |
-| cronjob.envSealedSecrets | Environment variables from sealed secrets specific to this cronjob. Can override the global.envSealedSecrets values | `{}` | Yes |
-| cronjob.datadog.enabled | Enables datadog metrics. Setting to true will create the necessary environment variables | `false` | Yes |
-| cronjob.datadog.traceEnabled | Enables datadog tracing. | `false` | Yes |
-| cronjob.sentry.enabled | Enables sentry on the cronjob. Setting to true will create the necessary environment variables. You need to add the `.sentry.dsn` value to create the sentry DSN sealed secret | `false` | Yes |
-| cronjob.sentry.dsn | Creates a sealed secret with the sentry DSN from the provided sealed version of the base64 encoded sentry DSN value. The sealed secret name takes the format `<cronjob-name>-sentry-dsn` | | Yes |
-| cronjob.labels | Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object. | `{}` | Yes |
+Creates one or more cronjobs unique by their name. Cronjobs are defined as keys in the cronjob map.
+The key is used as the name of the cronjob and subsequent objects created. Some of these values can be overridden (see `values.example.yaml`).
 
 ## Developing Notes
 
