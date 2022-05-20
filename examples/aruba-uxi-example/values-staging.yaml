@@ -28,7 +28,7 @@ aruba-uxi:
         repository: quay.io/uxi/nginx
         tag: latest
       revisionHistoryLimit: 1
-      replicaCount: 1
+      replicaCount: 4
       serviceAccount:
         create: true
       port: 80
