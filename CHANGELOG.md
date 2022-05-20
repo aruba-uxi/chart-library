@@ -14,7 +14,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
-## [5.0.9] - 2022-05-15
+## [5.0.9] - 2022-05-20
+
+### Changed
+
+- Updated docs and values example file
+
+## [5.0.8] - 2022-05-15
 
 ### Added
 
@@ -32,7 +38,7 @@ sentry:
     - SENTRY_SOME_KEY: some-value
 ```
 
-## [5.0.8] - 2022-04-29
+## [5.0.7] - 2022-04-29
 
 ### Added
 

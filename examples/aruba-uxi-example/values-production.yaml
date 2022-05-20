@@ -28,7 +28,7 @@ aruba-uxi:
         repository: quay.io/uxi/nginx
         tag: latest
       revisionHistoryLimit: 1
-      replicaCount: 3
+      replicaCount: 1
       serviceAccount:
         create: true
       port: 80
@@ -94,6 +94,7 @@ aruba-uxi:
               - path: /
     example-worker:
       role: worker
+      replicaCount: 1
       revisionHistoryLimit: 1
       image:
         repository: quay.io/uxi/busybox
