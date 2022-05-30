@@ -233,18 +233,18 @@ spec:
           - "-s"
           - "-u"
           - "UDP-RECV:8125"
-          - "UNIX-SENDTO:/var/run/dogstatsd/dsd.socket"
+          - "UNIX-SENDTO:/var/run/datadog/dsd.socket"
         ports:
           - containerPort: 8125
             name: dogstatsd
             protocol: UDP
         volumeMounts:
           - name: dsdsocket
-            mountPath: /var/run/dogstatsd
+            mountPath: /var/run/datadog
       volumes:
       - name: dsdsocket
         hostPath:
-          path: /var/run/dogstatsd
+          path: /var/run/datadog
       - name: example-configmap01-volume
         configMap:
           name: example-configmap01
