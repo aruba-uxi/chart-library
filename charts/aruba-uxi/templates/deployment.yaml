@@ -73,7 +73,7 @@ spec:
         {{- if $datadog.enabled }}
         {{- if $datadog.useSocat }}
         - name: DD_AGENT_HOST
-          value: "localhost"
+          value: localhost
         {{- else}}
         - name: DD_AGENT_HOST
           valueFrom:

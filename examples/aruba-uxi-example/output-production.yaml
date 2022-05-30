@@ -146,7 +146,7 @@ spec:
         - name: DD_TRACE_ENABLED
           value: "true"
         - name: DD_AGENT_HOST
-          value: "localhost"
+          value: localhost
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
