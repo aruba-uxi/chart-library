@@ -71,10 +71,15 @@ spec:
         - name: DD_TRACE_ENABLED
           value: {{ default "false" $datadog.traceEnabled | quote }}
         {{- if $datadog.enabled }}
+        {{- if $datadog.useSocat }}
+        - name: DD_AGENT_HOST
+          value: "localhost"
+        {{- else}}
         - name: DD_AGENT_HOST
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
+        {{- end }}
         - name: DD_ENTITY_ID
           valueFrom:
             fieldRef:
@@ -158,6 +163,22 @@ spec:
         {{- end }}
         {{- end }}
         {{- end }}
+      {{- if $datadog.useSocat }}
+      - name: datadog-socat
+        image: alpine/socat
+        args:
+          - "-s"
+          - "-u"
+          - "UDP-RECV:8125"
+          - "UNIX-SENDTO:/var/run/dogstatsd/dsd.socket"
+        ports:
+          - containerPort: 8125
+            name: dogstatsd
+            protocol: UDP
+        volumeMounts:
+          - name: dsdsocket
+            mountPath: /var/run/dogstatsd
+      {{- end }}
       {{- with $data.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -172,6 +193,11 @@ spec:
       {{- end }}
       {{- if or $data.configMap $data.secretMount }}
       volumes:
+      {{- if $datadog.useSocat }}
+      - name: dsdsocket
+        hostPath:
+          path: /var/run/dogstatsd
+      {{- end }}
       {{- if $data.configMap }}
       {{- range $configMapData := $data.configMap }}
       - name: {{ $configMapData.name }}-volume

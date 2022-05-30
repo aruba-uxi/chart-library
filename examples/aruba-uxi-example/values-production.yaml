@@ -69,6 +69,7 @@ aruba-uxi:
           - AWS_ACCESS_ID
       datadog:
         enabled: true
+        useSocat: true
         traceEnabled: true
         serviceName: another-service-name
         env:

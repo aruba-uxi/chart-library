@@ -14,6 +14,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+
+## [6.0.1] - 2022-05-30
+
+### Changed
+
+- added `datadog.useSocat` which switches from using the node HostIP to using a locally deployed socat sidecar. The sidecar will listen on the UDP port and forward statsd traffic to the dogstatsd unix socket which is mounted into the sidecar container.
+
 ## [6.0.0] - 2022-05-20
 
 ### Changed
