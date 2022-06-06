@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+## [6.0.1] - 2022-06-06
+
+### Changed
+
+- Bug fix for incorrect indentation of deployment resource limits
+
 ## [6.0.0] - 2022-05-20
 
 ### Changed
