@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-- Do not provide an ingress resource through the chart-library. Rather let the few applications that will have an ingress define their own. The `.Values.application.ingress` is now deprecated.
+- Do not provide an ingress resource through the chart-library. Rather let the few applications that will have an ingress define their own. The `.Values.application.ingress` is now deprecated. See <https://github.com/aruba-uxi/external-api/pull/208> as an example
 
 ## [6.0.1] - 2022-06-06
 
