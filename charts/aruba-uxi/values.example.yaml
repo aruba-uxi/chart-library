@@ -209,37 +209,6 @@ aruba-uxi:
           SENTRY_EXTRA_ENV_VARIABLE_1: value
       ## Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object (optional, default: {})
       labels: {}
-      ## Configures an Ingress on the application (optional, default: {})
-      ingress:
-        ## Uses the legacy `extensions/v1beta1` kubernetes `apiVersion` for kubernetes clusters that do not support `networking.k8s.io/v1` (optional, default: false)
-        useLegacyApiVersion: false
-        ## Defines the Ingress class name to use (optional, default: nginx)
-        className: nginx
-        ## A list of hosts to add to the Ingress.
-        hosts:
-          ## The hostname
-          - host: example-service.local
-            ## A list of paths for each hosts
-            paths:
-              ## The path to match (optional, default: /)
-              - path: /
-                ## The path type to use for the respective path.
-                type: Prefix
-                ## The backend service that Ingress should routes traffic to.
-                backend:
-                  ## The Service name that the traffic should be routed to (optional, default: the name of the application)
-                  serviceName: example-service
-                  ## The Service port that the traffic should be routed to (optional, default application port)
-                  servicePort: 8000
-        ## A list of hosts to configure TLS encryption on (optional, default: [])
-        tls:
-          ## The hosts which use the TLS certs contained in the respective secret
-          - hosts:
-              - example-service.local
-            ## The secret that contains the TLS certificates
-            secretName: example-tls-secret
-        ## A key-value pair of ingress annotations
-        annotations: {}
       ## Mounts one or more sealed secrets to a location on the file system (optional, default: [])
       secretMount:
         ## The name of the secret volume to be mounted.

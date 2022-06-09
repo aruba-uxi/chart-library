@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+## [7.0.0] - 2022-06-08
+
+### Changed
+
+- Do not provide an ingress resource through the chart-library. Rather let the few applications that will have an ingress define their own. The `.Values.application.ingress` is now deprecated.
+
 ## [6.0.1] - 2022-06-06
 
 ### Changed

@@ -80,18 +80,6 @@ aruba-uxi:
           SENTRY_VARIABLE: some_value
       labels:
         example-service-production: example-service-production
-      ingress:
-        useLegacyApiVersion: true
-        className: internal-gateway
-        annotations:
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            location ~ ^/health/(readyz|livez|status) {
-              return 404;
-            }
-        hosts:
-          - host: example-service.internal.capenetworks.io
-            paths:
-              - path: /
       updateStrategy:
         maxSurge: 50%
         maxUnavailable: 50%

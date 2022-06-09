@@ -71,17 +71,6 @@ aruba-uxi:
           - AWS_ACCESS_ID
       labels:
         example-service-staging: example-service-staging
-      ingress:
-        className: internal-gateway
-        annotations:
-          nginx.ingress.kubernetes.io/configuration-snippet: |
-            location ~ ^/health/(readyz|livez|status) {
-              return 404;
-            }
-        hosts:
-          - host: example-service.internal.staging.capedev.io
-            paths:
-              - path: /
       updateStrategy:
         maxSurge: 1
         maxUnavailable: 1
