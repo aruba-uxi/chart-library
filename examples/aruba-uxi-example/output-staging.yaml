@@ -188,11 +188,11 @@ spec:
           failureThreshold: 3
         resources:
           limits:
-            cpu: 350m
-            memory: 400Mi
+            cpu: 100m
+            memory: 256Mi
           requests:
-            cpu: 20m
-            memory: 300Mi
+            cpu: 100m
+            memory: 128Mi
         volumeMounts:
         - name: example-configmap01-volume
           mountPath: /app/config
@@ -334,6 +334,13 @@ spec:
                   key: AWS_REGION
             command: ["printenv"]
             args: ["HOSTNAME"]
+            resources:
+            limits:
+              cpu: 100m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           restartPolicy: Never
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml

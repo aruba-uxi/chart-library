@@ -294,4 +294,19 @@ aruba-uxi:
           SENTRY_EXTRA_ENV_VARIABLE_1: value
       ## Extra labels to apply to all k8s objects. Includes any extra labels defined in the global object (optional, default: {})
       labels: {}
+      ## Configures the resource assigned to the pod (optional, default: {})
+      ## https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+      resources:
+        ## The maximum amount of resources the pod can consume before being restarted by the kubelet
+        limits:
+          ## The number of cpu cores that can be used by the pod
+          cpu: 100m
+          ## The amount of memory that can be used by the pod
+          memory: 256Mi
+        ## The number of resources requested by the pod at startup
+        requests:
+          ## The number of cpu cores that the pod requires
+          cpu: 100m
+          ## The amount of memory that the pod requires
+          memory: 128Mi
     example-cronjob-consumer: {}
