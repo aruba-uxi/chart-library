@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -22,7 +22,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -36,7 +36,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -68,7 +68,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -93,7 +93,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -116,7 +116,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-7.0.0
+        helm.sh/chart: aruba-uxi-7.0.1
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -188,11 +188,11 @@ spec:
           failureThreshold: 3
         resources:
           limits:
-            cpu: 350m
-            memory: 400Mi
+            cpu: 100m
+            memory: 256Mi
           requests:
-            cpu: 20m
-            memory: 300Mi
+            cpu: 100m
+            memory: 128Mi
         volumeMounts:
         - name: example-configmap01-volume
           mountPath: /app/config
@@ -222,7 +222,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -239,7 +239,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-worker
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-7.0.0
+        helm.sh/chart: aruba-uxi-7.0.1
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -289,7 +289,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-consumer
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -334,6 +334,13 @@ spec:
                   key: AWS_REGION
             command: ["printenv"]
             args: ["HOSTNAME"]
+            resources:
+              limits:
+                cpu: 100m
+                memory: 256Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
           restartPolicy: Never
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
@@ -344,7 +351,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-cronjob-producer
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -393,7 +400,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-worker
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -409,7 +416,7 @@ metadata:
   name: aruba-uxi-example-image-pull-secret
   labels:
     app.kubernetes.io/name: aruba-uxi-example-image-pull-secret
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     namespace: default
 spec:
@@ -421,7 +428,7 @@ spec:
       name: aruba-uxi-example-image-pull-secret
       labels:
       app.kubernetes.io/name: aruba-uxi-example-image-pull-secret
-      helm.sh/chart: aruba-uxi-7.0.0
+      helm.sh/chart: aruba-uxi-7.0.1
       app.kubernetes.io/managed-by: Helm
       namespace: default
     type: kubernetes.io/dockerconfigjson
@@ -434,7 +441,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-access
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -451,7 +458,7 @@ metadata:
   labels:
     app.kubernetes.io/name: database-url
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -467,7 +474,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service-account
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.0
+    helm.sh/chart: aruba-uxi-7.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default

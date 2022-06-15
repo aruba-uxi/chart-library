@@ -74,6 +74,13 @@ aruba-uxi:
       updateStrategy:
         maxSurge: 1
         maxUnavailable: 1
+      resources:
+        limits:
+          cpu: 100m
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
     example-worker:
       role: worker
       replicaCount: 0
@@ -109,3 +116,10 @@ aruba-uxi:
           - AWS_REGION
       labels:
         example-cronjob-consumer-staging: example-cronjob-consumer-staging
+      resources:
+        limits:
+          cpu: 100m
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi

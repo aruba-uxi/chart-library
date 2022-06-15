@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+## [7.0.1] - 2022--6-15
+
+### Added
+
+- ability to set resources on cronjobs
+
 ## [7.0.0] - 2022-06-08
 
 ### Changed
