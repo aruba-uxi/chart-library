@@ -335,12 +335,12 @@ spec:
             command: ["printenv"]
             args: ["HOSTNAME"]
             resources:
-            limits:
-              cpu: 100m
-              memory: 256Mi
-            requests:
-              cpu: 100m
-              memory: 128Mi
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
           restartPolicy: Never
 ---
 # Source: aruba-uxi-example/charts/aruba-uxi/templates/cronjob.yaml
