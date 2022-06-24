@@ -37,15 +37,19 @@ aruba-uxi:
 Sealed secrets are defined with the `.Values.aruba-uxi.sealedSecrets` section. A `SealedSecret` kubernetes object is created using the data defined in this map.
 Follow the instructions in the [Sealed Secrets Wiki](https://github.com/aruba-uxi/knowledge/wiki/Sealed-Secrets) to create a `SealedSecret`.
 
+Once you have created a `SealedSecret` you will need to copy the encoded value for each key defined.
+
 > **NOTE:** When naming a sealed secret you need to ensure that the name you use to create the sealed secret and the name you give in the values file is the same.
 
 ### Image Pull Secrets
 
 The `sealedSecrets.imagePullSecret` is created with the name `<repository-name>-image-pull-secret`.
 
-#### Example
+### Sentry DSN
 
-Once you have created a `SealedSecret` you will need to copy the encoded value for each key defined.
+Sentry DSN sealed secrets are created in the application itself `.Values.aruba-uxi.applications.<application-name>.sentry.dsn`. The sealed secret is created with the name `<application-name>-sentry-dsn`.
+
+### Example
 
 To create a sealed secret called `database-url` with the key `DATABASE_URL`, you need to follow the instructions in the link above to create a sealed secret with the following values:
 
