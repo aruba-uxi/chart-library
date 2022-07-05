@@ -16,7 +16,7 @@ Validates the role
 */}}
 {{- define "application.role" -}}
 {{- $role := lower .role -}}
-{{- $validRoles := list "webapp" "worker" -}}
+{{- $validRoles := list "webapp" "worker" "admin" -}}
 {{- if mustHas $role $validRoles -}}
     {{- printf "%s" $role -}}
 {{- else -}}
