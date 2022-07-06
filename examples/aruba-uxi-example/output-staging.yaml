@@ -99,6 +99,7 @@ metadata:
     namespace: default
     example-service-staging: example-service-staging
     global-label: global-label
+    type: webapp
 spec:
   replicas: 4
   selector:
@@ -227,6 +228,7 @@ metadata:
     repository: aruba-uxi-example
     namespace: default
     global-label: global-label
+    type: worker
 spec:
   replicas: 0
   selector:

@@ -17,9 +17,7 @@ metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
-{{- if mustHas $applicationRole (list "admin") }}
-    type: admin
-{{- end }}
+    type: {{ $applicationRole }}
 spec:
   {{- if (hasKey $data "replicaCount") }}
   replicas: {{ $data.replicaCount }}
