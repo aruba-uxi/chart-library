@@ -14,7 +14,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
-## [7.0.1] - 2022--6-15
+## [7.1.0] - 2022-07-06
+
+### Added
+
+- Added `admin` application role to be used for `exec`ing into pods and running scipts
+
+## [7.0.1] - 2022-06-15
 
 ### Added
 

@@ -1,4 +1,5 @@
 {{- range $name, $data := .Values.applications }}
+{{- $applicationRole := include "application.role" (dict "role" $data.role) }}
 {{- $sealedSecrets := default dict $.Values.sealedSecrets }}
 {{- $overrideImage := default dict $data.image }}
 {{- $datadog := default dict $data.datadog }}
@@ -16,6 +17,7 @@ metadata:
   name: {{ $name }}
   labels:
     {{- include "aruba-uxi.labels" (dict "context" $ "name" $name "additionalLabels" $additionalLabels) | nindent 4 }}
+    type: {{ $applicationRole }}
 spec:
   {{- if (hasKey $data "replicaCount") }}
   replicas: {{ $data.replicaCount }}
@@ -49,6 +51,11 @@ spec:
       - name: {{ include "application.role" (dict "role" $data.role) }}
         image: {{ include "aruba-uxi.image" (dict "context" $ "data" $overrideImage) }}
         imagePullPolicy: {{ include "aruba-uxi.imagePullPolicy" (dict "context" $ "data" $overrideImage) }}
+        {{- if mustHas $applicationRole (list "admin") }}
+        command:
+          - sleep
+          - infinity
+        {{- end }}
         {{- with $data.command }}
         command: {{ toRawJson . }}
         {{- end }}

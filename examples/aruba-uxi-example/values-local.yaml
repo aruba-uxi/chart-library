@@ -23,3 +23,11 @@ aruba-uxi:
         enabled: false
       sentry:
         enabled: false
+    admin:
+      role: admin
+      env:
+        DATABASE_URL: postgresql://username:password@db:5432/aruba-uxi-example
+      datadog:
+        enabled: false
+      sentry:
+        enabled: false

@@ -15,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.1
+    helm.sh/chart: aruba-uxi-7.1.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -34,14 +34,76 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: admin
+  labels:
+    app.kubernetes.io/name: admin
+    app.kubernetes.io/instance: aruba-uxi-example
+    helm.sh/chart: aruba-uxi-7.1.0
+    app.kubernetes.io/managed-by: Helm
+    repository: aruba-uxi-example
+    namespace: default
+    type: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: admin
+      app.kubernetes.io/instance: aruba-uxi-example
+  revisionHistoryLimit: 3
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: admin
+        app.kubernetes.io/instance: aruba-uxi-example
+        helm.sh/chart: aruba-uxi-7.1.0
+        app.kubernetes.io/managed-by: Helm
+        repository: aruba-uxi-example
+        namespace: default
+    spec:
+      containers:
+      - name: admin
+        image: aruba-uxi-example:latest
+        imagePullPolicy: Never
+        command:
+          - sleep
+          - infinity
+        env:
+        - name: APPLICATION_NAME
+          value: "admin"
+        - name: APPLICATION_VERSION
+          value: latest
+        - name: ENVIRONMENT
+          value: "dev"
+        - name: DD_ENABLED
+          value: "false"
+        - name: DD_ENV
+          value: "dev"
+        - name: DD_SERVICE
+          value: "admin"
+        - name: DD_TRACE_ENABLED
+          value: "false"        
+        - name: DATABASE_URL
+          value: "postgresql://username:password@db:5432/aruba-uxi-example"
+        - name: DEBUG
+          value: "true"                        
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+---
+# Source: aruba-uxi-example/charts/aruba-uxi/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: example-service
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-7.0.1
+    helm.sh/chart: aruba-uxi-7.1.0
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
+    type: webapp
 spec:
   replicas: 1
   selector:
@@ -54,7 +116,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-7.0.1
+        helm.sh/chart: aruba-uxi-7.1.0
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
