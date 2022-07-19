@@ -127,6 +127,10 @@ spec:
         {{- end }}
         {{- if $livenessProbe.enabled }}
         livenessProbe:
+          {{- if livenessProbe.execmethod }}
+          exec:
+            command: {{ default "" $livenessProbe.command }}
+          {{- else}}
           httpGet:
             httpHeaders:
             - name: Host
@@ -135,6 +139,7 @@ spec:
               value: application/json
             path: {{ default "/health/livez" $livenessProbe.path }}
             port: {{ $data.port }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
