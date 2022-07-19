@@ -18,8 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Added the ability to configure the liveness and readiness probes with either a command to execute, or the previously default httpGet method. This is set by either setting `execmethod: true` or `httpmethod: true`.
-- Note that once of these _must_ be set for the chart to build and the probe to function as expected.
+- Added the ability to configure the liveness and readiness probes with either a command to execute, or the previously default httpGet method. The choice is made by setting either `execmethod: true` or `httpmethod: true` and further specifying the `path` (for the http-method) or `command` (for the command-method) to call.
 
 ## [7.1.0] - 2022-07-06
 
