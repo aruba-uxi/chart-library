@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+## [7.2.0] - 2022-07-19
+
+### Added
+
+- Added the ability to configure a liveness probe with a command, falling back to the httpGet method if `execmethod: false` or not set.
+
 ## [7.1.0] - 2022-07-06
 
 ### Added
