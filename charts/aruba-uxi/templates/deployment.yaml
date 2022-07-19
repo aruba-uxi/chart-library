@@ -109,7 +109,17 @@ spec:
           containerPort: {{ $data.port }}
           protocol: TCP
         {{- end }}
-        {{- if $readinessProbe.enabled }}
+        {{- if $readinessProbe.execmethod }}
+        readinessProbe:
+          exec:
+            command: {{ default "" $readinessProbe.command }}
+          initialDelaySeconds: { { default "10" $readinessProbe.initialDelaySeconds } }
+          periodSeconds: { { default "10" $readinessProbe.periodSeconds } }
+          timeoutSeconds: { { default "1" $readinessProbe.timeoutSeconds } }
+          successThreshold: { { default "1" $readinessProbe.successThreshold } }
+          failureThreshold: { { default "3" $readinessProbe.failureThreshold } }
+        {{- end }}
+        {{ - if $readinessProbe.httpmethod }}
         readinessProbe:
           httpGet:
             httpHeaders:
@@ -125,26 +135,31 @@ spec:
           successThreshold: {{ default "1" $readinessProbe.successThreshold }}
           failureThreshold: {{ default "3" $readinessProbe.failureThreshold }}
         {{- end }}
-        {{- if $livenessProbe.enabled }}
+        {{- if $livenessProbe.execmethod }}
         livenessProbe:
-          {{- if $livenessProbe.execmethod }}
           exec:
             command: {{ default "" $livenessProbe.command }}
-          {{- else }}
-          httpGet:
-            httpHeaders:
-            - name: Host
-              value: livenessProbe
-            - name: Content-Type
-              value: application/json
-            path: {{ default "/health/livez" $livenessProbe.path }}
-            port: {{ $data.port }}
-          {{- end }}
           initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
           successThreshold: {{ default "1" $livenessProbe.successThreshold }}
           failureThreshold: {{ default "3" $livenessProbe.failureThreshold }}
+        {{- end }}
+        {{ - if $livenessProbe.httpmethod }}
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+              - name: Host
+                value: livenessProbe
+              - name: Content-Type
+                value: application/json
+            path: {{ default "/health/livez" $livenessProbe.path }}
+            port: {{ $data.port }}
+          initialDelaySeconds: { { default "10" $livenessProbe.initialDelaySeconds } }
+          periodSeconds: { { default "10" $livenessProbe.periodSeconds } }
+          timeoutSeconds: { { default "1" $livenessProbe.timeoutSeconds } }
+          successThreshold: { { default "1" $livenessProbe.successThreshold } }
+          failureThreshold: { { default "3" $livenessProbe.failureThreshold } }
         {{- end }}
         {{- with $data.resources }}
         resources:
