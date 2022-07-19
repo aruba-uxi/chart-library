@@ -33,9 +33,9 @@ aruba-uxi:
         create: true
       port: 80
       livenessProbe:
-        enabled: true
+        httpmethod: true
       readinessProbe:
-        enabled: true
+        httpmethod: true
       configMap:
         - name: example-configmap01
           create: true
