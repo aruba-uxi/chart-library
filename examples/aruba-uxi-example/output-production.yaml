@@ -101,12 +101,12 @@ metadata:
     global-label: global-label
     type: webapp
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: example-service
       app.kubernetes.io/instance: aruba-uxi-example
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   strategy:
     rollingUpdate:
       maxSurge: 50%
@@ -162,7 +162,7 @@ spec:
               name: example-service-sentry-dsn
               key: SENTRY_DSN        
         - name: AWS_DEFAULT_REGION
-          value: "us-west-2"
+          value: "us-west-1"
         - name: DEBUG
           value: "false"        
         - name: DD_TRACE_PROFILE_ENABLED
@@ -203,8 +203,8 @@ spec:
             port: 80
           initialDelaySeconds: 10
           periodSeconds: 10
-          timeoutSeconds: 2
-          successThreshold: 2
+          timeoutSeconds: 1
+          successThreshold: 1
           failureThreshold: 3
         livenessProbe:
           httpGet:
@@ -217,8 +217,8 @@ spec:
             port: 80
           initialDelaySeconds: 10
           periodSeconds: 10
-          timeoutSeconds: 2
-          successThreshold: 2
+          timeoutSeconds: 1
+          successThreshold: 1
           failureThreshold: 3
         resources:
           limits:
@@ -263,12 +263,12 @@ metadata:
     global-label: global-label
     type: worker
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: example-worker
       app.kubernetes.io/instance: aruba-uxi-example
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 1
   template:
     metadata:
       labels:
