@@ -174,14 +174,8 @@ spec:
           containerPort: 80
           protocol: TCP
         livenessProbe:
-          httpGet:
-            httpHeaders:
-            - name: Host
-              value: livenessProbe
-            - name: Content-Type
-              value: application/json
-            path: /
-            port: 80
+          exec:
+            command: [bash -c celery --app=server.celery.tasks inspect ping -d celery@$HOSTNAME]
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1
