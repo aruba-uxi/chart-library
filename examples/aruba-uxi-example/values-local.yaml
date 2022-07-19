@@ -12,10 +12,10 @@ aruba-uxi:
       role: webapp
       port: 8000
       livenessProbe:
-        enabled: true
+        httpmethod: true
         path: /
       readinessProbe:
-        enabled: true
+        httpmethod: true
         path: /status
       env:
         DATABASE_URL: postgresql://username:password@db:5432/aruba-uxi-example
