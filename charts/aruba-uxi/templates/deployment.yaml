@@ -126,11 +126,17 @@ spec:
           failureThreshold: {{ default "3" $readinessProbe.failureThreshold }}
         {{- end }}
         {{- if $livenessProbe.enabled }}
+        {{- if livenessProbe.execmethod }}
         livenessProbe:
-          {{- if livenessProbe.execmethod }}
           exec:
             command: {{ default "" $livenessProbe.command }}
-          {{- else}}
+          initialDelaySeconds: { { default "10" $livenessProbe.initialDelaySeconds } }
+          periodSeconds: { { default "10" $livenessProbe.periodSeconds } }
+          timeoutSeconds: { { default "1" $livenessProbe.timeoutSeconds } }
+          successThreshold: { { default "1" $livenessProbe.successThreshold } }
+          failureThreshold: { { default "3" $livenessProbe.failureThreshold } }
+        {{- else}}
+        livenessProbe:
           httpGet:
             httpHeaders:
             - name: Host
@@ -139,12 +145,12 @@ spec:
               value: application/json
             path: {{ default "/health/livez" $livenessProbe.path }}
             port: {{ $data.port }}
-          {{- end }}
           initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
           successThreshold: {{ default "1" $livenessProbe.successThreshold }}
           failureThreshold: {{ default "3" $livenessProbe.failureThreshold }}
+        {{- end }}
         {{- end }}
         {{- with $data.resources }}
         resources:
