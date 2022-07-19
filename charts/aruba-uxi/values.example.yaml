@@ -89,6 +89,7 @@ aruba-uxi:
         ## Toggles the command-type probe (optional, default: true)
         execmethod: true
         ## The command to use for liveness testing (optional, default: "")
+        ## Calling bash with the -c flag allows injection of the $HOSTNAME variable
         command: [
           "bash",
           "-c",
