@@ -155,11 +155,11 @@ spec:
                 value: application/json
             path: {{ default "/health/livez" $livenessProbe.path }}
             port: {{ $data.port }}
-          initialDelaySeconds: { { default "10" $livenessProbe.initialDelaySeconds } }
-          periodSeconds: { { default "10" $livenessProbe.periodSeconds } }
-          timeoutSeconds: { { default "1" $livenessProbe.timeoutSeconds } }
-          successThreshold: { { default "1" $livenessProbe.successThreshold } }
-          failureThreshold: { { default "3" $livenessProbe.failureThreshold } }
+          initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
+          successThreshold: {{ default "1" $livenessProbe.successThreshold }}
+          failureThreshold: {{ default "3" $livenessProbe.failureThreshold }}
         {{- end }}
         {{- with $data.resources }}
         resources:
