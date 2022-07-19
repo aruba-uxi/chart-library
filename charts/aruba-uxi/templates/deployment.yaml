@@ -149,10 +149,10 @@ spec:
         livenessProbe:
           httpGet:
             httpHeaders:
-              - name: Host
-                value: livenessProbe
-              - name: Content-Type
-                value: application/json
+            - name: Host
+              value: livenessProbe
+            - name: Content-Type
+              value: application/json
             path: {{ default "/health/livez" $livenessProbe.path }}
             port: {{ $data.port }}
           initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
