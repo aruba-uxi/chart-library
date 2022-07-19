@@ -119,7 +119,7 @@ spec:
           successThreshold: { { default "1" $readinessProbe.successThreshold } }
           failureThreshold: { { default "3" $readinessProbe.failureThreshold } }
         {{- end }}
-        {{ - if $readinessProbe.httpmethod }}
+        {{- if $readinessProbe.httpmethod }}
         readinessProbe:
           httpGet:
             httpHeaders:
@@ -145,7 +145,7 @@ spec:
           successThreshold: {{ default "1" $livenessProbe.successThreshold }}
           failureThreshold: {{ default "3" $livenessProbe.failureThreshold }}
         {{- end }}
-        {{ - if $livenessProbe.httpmethod }}
+        {{- if $livenessProbe.httpmethod }}
         livenessProbe:
           httpGet:
             httpHeaders:
