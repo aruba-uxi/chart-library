@@ -88,8 +88,12 @@ aruba-uxi:
       livenessProbe:
         ## Toggles the command-type probe (optional, default: true)
         execmethod: true
-        ## The API path to query for liveness testing (optional, default: /health/livez)
-        command: /health/livez
+        ## The command to use for liveness testing (optional, default: "")
+        command: [
+          "bash",
+          "-c",
+          "celery --app=server.celery.tasks inspect ping -d celery@$HOSTNAME"
+        ]
         ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
         ## How often to perform the probe (optional, default: 10)
