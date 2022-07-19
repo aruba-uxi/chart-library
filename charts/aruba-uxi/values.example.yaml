@@ -86,12 +86,10 @@ aruba-uxi:
         port: 80
       ## Enables the liveness probe to determine if the pod started up correctly (optional, default: {})
       livenessProbe:
-        ## Toggles the liveness probe (optional, default: true)
-        enabled: true
         ## Toggles the command-type probe (optional, default: true)
         execmethod: true
         ## The API path to query for liveness testing (optional, default: /health/livez)
-        path: /health/livez
+        command: /health/livez
         ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
         ## How often to perform the probe (optional, default: 10)
@@ -104,8 +102,6 @@ aruba-uxi:
         failureThreshold: 3
       ## Enables the readiness probe to determine if the pod started up correctly and can handle traffic (optional, default: {})
       readinessProbe:
-        ## Toggles the readiness probe (optional, default: true)
-        enabled: true
         ## Toggles the httpGet type probe (optional, default: true)
         httpmethod: true
         ## The API path to query for readiness testing (optional, default: /health/readyz)
