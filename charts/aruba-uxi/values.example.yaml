@@ -86,15 +86,25 @@ aruba-uxi:
         port: 80
       ## Enables the liveness probe to determine if the pod started up correctly (optional, default: {})
       livenessProbe:
-        ## Toggles the command-type probe (optional, default: true)
-        execmethod: true
-        ## The command to use for liveness testing (optional, default: "")
-        ## Calling bash with the -c flag allows injection of the $HOSTNAME variable
-        command: [
-          "bash",
-          "-c",
-          "celery --app=server.celery.tasks inspect ping -d celery@$HOSTNAME"
-        ]
+        ## Toggles the liveness probe (optional, default: true)
+        ## Note that if a liveness probe is enabled, exactly one of the methods must also be enabled.
+        ## i.e. with 'livenessProbe: enabled: true' and 'exec: enabled: true', 'httpGet: enabled' must be set to false
+        enabled: true
+        ## Section to specify the command-type liveness probe
+        exec:
+          ## Toggles the command-type probe (optional, default: true)
+          enabled: true
+          ## The command to use for liveness testing (optional, default: "")
+          ## Calling bash with the -c flag allows injection of environment variables
+          command: [
+            "bash",
+            "-c",
+            "uptime"
+          ]
+        ## Section to specify the httpGet-type liveness probe
+        httpGet:
+          ## Toggles the httpGet-type probe (optional, default: true)
+          enabled: false
         ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
         ## How often to perform the probe (optional, default: 10)
@@ -107,10 +117,20 @@ aruba-uxi:
         failureThreshold: 3
       ## Enables the readiness probe to determine if the pod started up correctly and can handle traffic (optional, default: {})
       readinessProbe:
-        ## Toggles the httpGet type probe (optional, default: true)
-        httpmethod: true
-        ## The API path to query for readiness testing (optional, default: /health/readyz)
-        path: /health/readyz
+        ## Toggles the readiness probe (optional, default: true)
+        ## Note that if a readiness probe is enabled, exactly one of the methods must also be enabled.
+        ## i.e. with `readinessProbe: enabled: true` and `exec: enabled: false', 'httpGet: enabled' must be true
+        enabled: true
+        ## Section to specify the command-type readiness probe
+        exec:
+          ## Toggles the command-type probe (optional, default: true)
+          enabled: false
+        ## Section to specify the httpGet-type readiness probe
+        httpGet:
+          ## Toggles the httpGet type method (optional, default: true)
+          enabled: true
+          ## The API path to query for readiness testing (optional, default: /health/readyz)
+          path: /health/readyz
         ## The Number of seconds after the container starts before sending the first probe (optional, default: 10)
         initialDelaySeconds: 10
         ## How often to perform the probe (optional, default: 10)
