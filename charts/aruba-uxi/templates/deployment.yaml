@@ -140,7 +140,8 @@ spec:
           {{- if $livenessProbe.exec }}
           {{- if $livenessProbe.exec.enabled }}
           exec:
-            command: {{ default "bash -c uptime" $livenessProbe.exec.command }}
+            command: {{ default ["/bin/sh"] $livenessProbe.exec.command }}
+            args: {{ default ["-c", "uptime"] $livenessProbe.exec.args }}
           {{- end }}
           {{- end }}
           {{- if $livenessProbe.httpGet }}
