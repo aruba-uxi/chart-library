@@ -41,7 +41,7 @@ aruba-uxi:
           command: [
             "/bin/sh",
             "-c",
-            "echo"
+            "echo",
             "pod-alive"
           ]
       readinessProbe:
