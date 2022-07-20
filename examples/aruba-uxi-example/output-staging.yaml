@@ -175,7 +175,10 @@ spec:
           protocol: TCP
         livenessProbe:
           exec:
-            command: [bash -c uptime]
+            command:
+              - /bin/sh
+              - -c
+              - uptime
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1

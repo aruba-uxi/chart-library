@@ -140,7 +140,10 @@ spec:
           {{- if $livenessProbe.exec }}
           {{- if $livenessProbe.exec.enabled }}
           exec:
-            command: {{ default "/bin/sh" $livenessProbe.exec.command }}
+            command:
+            {{- range $livenessProbe.exec.command }}
+              - {{ . }}
+            {{- end }}
           {{- end }}
           {{- end }}
           {{- if $livenessProbe.httpGet }}
