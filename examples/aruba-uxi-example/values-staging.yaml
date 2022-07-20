@@ -33,15 +33,22 @@ aruba-uxi:
         create: true
       port: 80
       livenessProbe:
-        execmethod: true
-        command: [
-          "bash",
-          "-c",
-          "celery --app=server.celery.tasks inspect ping -d celery@$HOSTNAME"
-        ]
+        enabled: true
+        httpGet:
+          enabled: false
+        exec:
+          enabled: true
+          command: [
+            "bash",
+            "-c",
+            "celery --app=server.celery.tasks inspect ping -d celery@$HOSTNAME"
+          ]
       readinessProbe:
-        httpmethod: false
-        path: /
+        enabled: false
+        httpGet:
+          enabled: false
+        exec:
+          enabled: false
       configMap:
         - name: example-configmap01
           create: true

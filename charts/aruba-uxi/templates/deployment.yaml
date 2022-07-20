@@ -109,52 +109,44 @@ spec:
           containerPort: {{ $data.port }}
           protocol: TCP
         {{- end }}
-        {{- if $readinessProbe.execmethod }}
+        {{- if $readinessProbe.enabled }}
         readinessProbe:
+          {{- if $readinessProbe.exec.enabled }}
           exec:
-            command: {{ default "" $readinessProbe.command }}
-          initialDelaySeconds: { { default "10" $readinessProbe.initialDelaySeconds } }
-          periodSeconds: { { default "10" $readinessProbe.periodSeconds } }
-          timeoutSeconds: { { default "1" $readinessProbe.timeoutSeconds } }
-          successThreshold: { { default "1" $readinessProbe.successThreshold } }
-          failureThreshold: { { default "3" $readinessProbe.failureThreshold } }
-        {{- end }}
-        {{- if $readinessProbe.httpmethod }}
-        readinessProbe:
+            command: {{ default "bash -c uptime" $readinessProbe.exec.command }}
+          {{- end }}
+          {{- if $readinessProbe.httpGet.enabled }}
           httpGet:
             httpHeaders:
             - name: Host
               value: readinessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/health/readyz" $readinessProbe.path }}
+            path: {{ default "/health/readyz" $readinessProbe.httpGet.path }}
             port: {{ $data.port }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $readinessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $readinessProbe.timeoutSeconds }}
           successThreshold: {{ default "1" $readinessProbe.successThreshold }}
           failureThreshold: {{ default "3" $readinessProbe.failureThreshold }}
         {{- end }}
-        {{- if $livenessProbe.execmethod }}
+        {{- if $livenessProbe.enabled }}
         livenessProbe:
+          {{- if $livenessProbe.exec.enabled }}
           exec:
-            command: {{ default "" $livenessProbe.command }}
-          initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
-          periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
-          timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
-          successThreshold: {{ default "1" $livenessProbe.successThreshold }}
-          failureThreshold: {{ default "3" $livenessProbe.failureThreshold }}
-        {{- end }}
-        {{- if $livenessProbe.httpmethod }}
-        livenessProbe:
+            command: {{ default "bash -c uptime" $livenessProbe.exec.command }}
+          {{- end }}
+          {{- if $livenessProbe.httpGet.enabled }}
           httpGet:
             httpHeaders:
             - name: Host
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/health/livez" $livenessProbe.path }}
+            path: {{ default "/health/livez" $livenessProbe.httpGet.path }}
             port: {{ $data.port }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}
