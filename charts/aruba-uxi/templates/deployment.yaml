@@ -114,7 +114,10 @@ spec:
           {{- if $readinessProbe.exec }}
           {{- if $readinessProbe.exec.enabled }}
           exec:
-            command: {{ default "bash -c uptime" $readinessProbe.exec.command }}
+            command:
+            {{- range $livenessProbe.exec.command }}
+              - {{ . }}
+            {{- end }}
           {{- end }}
           {{- end }}
           {{- if $readinessProbe.httpGet }}
