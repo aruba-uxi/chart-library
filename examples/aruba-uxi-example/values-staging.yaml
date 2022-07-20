@@ -40,7 +40,6 @@ aruba-uxi:
           enabled: true
           command: [
             "bash",
-            "-c",
             "echo",
             "pod-alive"
           ]
