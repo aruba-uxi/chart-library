@@ -41,7 +41,7 @@ aruba-uxi:
           command: [
             "bash",
             "-c",
-            "celery --app=server.celery.tasks inspect ping -d celery@$HOSTNAME"
+            "uptime"
           ]
       readinessProbe:
         enabled: false
