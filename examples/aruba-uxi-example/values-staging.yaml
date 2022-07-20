@@ -39,10 +39,7 @@ aruba-uxi:
         exec:
           enabled: true
           command: [
-            "/bin/sh",
-            "-c",
-            "touch",
-            "/healthcheck"
+            "pwd"
           ]
       readinessProbe:
         enabled: false
