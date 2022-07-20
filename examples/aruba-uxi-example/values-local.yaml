@@ -13,15 +13,11 @@ aruba-uxi:
       port: 8000
       livenessProbe:
         enabled: true
-        exec:
-          enabled: false
         httpGet:
           enabled: true
           path: /
       readinessProbe:
         enabled: true
-        exec:
-          enabled: false
         httpGet:
           enabled: true
           path: /status

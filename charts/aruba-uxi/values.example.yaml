@@ -87,8 +87,8 @@ aruba-uxi:
       ## Enables the liveness probe to determine if the pod started up correctly (optional, default: {})
       livenessProbe:
         ## Toggles the liveness probe (optional, default: true)
-        ## Note that if a liveness probe is enabled, exactly one of the methods must also be enabled.
-        ## i.e. with 'livenessProbe: enabled: true' and 'exec: enabled: true', 'httpGet: enabled' must be set to false
+        ## Note that if a liveness probe is enabled, exactly one of the methods must also be enabled for te probe to function correctly
+        ## i.e. with 'livenessProbe: enabled: true' we must have either 'exec: enabled: true', or 'httpGet: enabled: true'
         enabled: true
         ## Section to specify the command-type liveness probe
         exec:
@@ -118,8 +118,8 @@ aruba-uxi:
       ## Enables the readiness probe to determine if the pod started up correctly and can handle traffic (optional, default: {})
       readinessProbe:
         ## Toggles the readiness probe (optional, default: true)
-        ## Note that if a readiness probe is enabled, exactly one of the methods must also be enabled.
-        ## i.e. with `readinessProbe: enabled: true` and `exec: enabled: false', 'httpGet: enabled' must be true
+        ## Note that if a readiness probe is enabled, exactly one of the methods must also be enabled for the probe to function correctly
+        ## i.e. with 'readinessProbe: enabled: true' we must have either 'exec: enabled: true', or 'httpGet: enabled: true'
         enabled: true
         ## Section to specify the command-type readiness probe
         exec:
