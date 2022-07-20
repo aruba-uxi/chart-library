@@ -175,7 +175,7 @@ spec:
           protocol: TCP
         livenessProbe:
           exec:
-            command: [bash -c celery --app=server.celery.tasks inspect ping -d celery@$HOSTNAME]
+            command: [bash -c uptime]
           initialDelaySeconds: 10
           periodSeconds: 10
           timeoutSeconds: 1

@@ -39,7 +39,9 @@ aruba-uxi:
         exec:
           enabled: true
           command: [
-            "pwd"
+            "bash",
+            "-c",
+            "uptime"
           ]
       readinessProbe:
         enabled: false
