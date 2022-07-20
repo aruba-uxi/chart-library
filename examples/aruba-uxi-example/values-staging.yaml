@@ -41,8 +41,8 @@ aruba-uxi:
           command: [
             "/bin/sh",
             "-c",
-            "echo",
-            "pod-alive"
+            "touch",
+            "/healthcheck"
           ]
       readinessProbe:
         enabled: false
