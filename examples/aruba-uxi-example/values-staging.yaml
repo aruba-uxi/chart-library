@@ -41,7 +41,8 @@ aruba-uxi:
           command: [
             "bash",
             "-c",
-            "uptime"
+            "echo",
+            "pod-alive"
           ]
       readinessProbe:
         enabled: false
