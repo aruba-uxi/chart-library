@@ -38,8 +38,8 @@ aruba-uxi:
           enabled: false
         exec:
           enabled: true
-          command: [
-            "bash",
+          command: ["/bin/sh"]
+          args: [
             "-c",
             "uptime"
           ]
