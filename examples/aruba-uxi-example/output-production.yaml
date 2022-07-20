@@ -160,19 +160,19 @@ spec:
           valueFrom:
             secretKeyRef:
               name: example-service-sentry-dsn
-              key: SENTRY_DSN
+              key: SENTRY_DSN        
         - name: AWS_DEFAULT_REGION
           value: "us-west-1"
         - name: DEBUG
-          value: "false"
+          value: "false"        
         - name: DD_TRACE_PROFILE_ENABLED
-          value: "true"
+          value: "true"        
         - name: SENTRY_VARIABLE
-          value: "some_value"
+          value: "some_value"        
         - name: HOST_IP
           valueFrom:
             fieldRef:
-              fieldPath: status.hostIP
+              fieldPath: status.hostIP        
         - name: AWS_REGION
           valueFrom:
             secretKeyRef:
@@ -316,9 +316,9 @@ spec:
           valueFrom:
             secretKeyRef:
               name: example-worker-sentry-dsn
-              key: SENTRY_DSN
+              key: SENTRY_DSN        
         - name: DEBUG
-          value: "false"
+          value: "false"                        
         - name: HOST_IP
           valueFrom:
             fieldRef:
@@ -363,15 +363,15 @@ spec:
             - name: DD_SERVICE
               value: "example-cronjob-consumer"
             - name: DD_TRACE_ENABLED
-              value: "false"
+              value: "false"            
             - name: DEBUG
-              value: "false"
+              value: "false"            
             - name: SENTRY_VARIABLE
-              value: "example-cronjob-consumer"
+              value: "example-cronjob-consumer"                        
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP
+                  fieldPath: status.hostIP            
             - name: AWS_REGION
               valueFrom:
                 secretKeyRef:
@@ -420,13 +420,13 @@ spec:
             - name: DD_SERVICE
               value: "example-cronjob-producer"
             - name: DD_TRACE_ENABLED
-              value: "false"
+              value: "false"            
             - name: DEBUG
-              value: "false"
+              value: "false"                                    
             - name: HOST_IP
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP
+                  fieldPath: status.hostIP            
             command: ["/bin/sh","-c","echo Hello from the example-cronjob-producer"]
           restartPolicy: OnFailure
 ---
