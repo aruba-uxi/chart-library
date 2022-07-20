@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+## [8.0.0] - 2022-07-19
+
+### Added
+
+- Added the ability to configure the liveness and readiness probes with either a command to execute, or the previously default httpGet method. The choice is made by setting either `execmethod: true` or `httpmethod: true` and further specifying the `path` (for the http-method) or `command` (for the command-method) to call.
+
 ## [7.1.0] - 2022-07-06
 
 ### Added

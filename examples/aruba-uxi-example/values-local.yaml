@@ -13,10 +13,14 @@ aruba-uxi:
       port: 8000
       livenessProbe:
         enabled: true
-        path: /
+        httpGet:
+          enabled: true
+          path: /
       readinessProbe:
         enabled: true
-        path: /status
+        httpGet:
+          enabled: true
+          path: /status
       env:
         DATABASE_URL: postgresql://username:password@db:5432/aruba-uxi-example
       datadog:

@@ -111,14 +111,24 @@ spec:
         {{- end }}
         {{- if $readinessProbe.enabled }}
         readinessProbe:
+          {{- if $readinessProbe.exec }}
+          {{- if $readinessProbe.exec.enabled }}
+          exec:
+            command: {{ default "bash -c uptime" $readinessProbe.exec.command }}
+          {{- end }}
+          {{- end }}
+          {{- if $readinessProbe.httpGet }}
+          {{- if $readinessProbe.httpGet.enabled }}
           httpGet:
             httpHeaders:
             - name: Host
               value: readinessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/health/readyz" $readinessProbe.path }}
+            path: {{ default "/health/readyz" $readinessProbe.httpGet.path }}
             port: {{ $data.port }}
+          {{- end }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $readinessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $readinessProbe.timeoutSeconds }}
@@ -127,14 +137,24 @@ spec:
         {{- end }}
         {{- if $livenessProbe.enabled }}
         livenessProbe:
+          {{- if $livenessProbe.exec }}
+          {{- if $livenessProbe.exec.enabled }}
+          exec:
+            command: {{ default "bash -c uptime" $livenessProbe.exec.command }}
+          {{- end }}
+          {{- end }}
+          {{- if $livenessProbe.httpGet }}
+          {{- if $livenessProbe.httpGet.enabled }}
           httpGet:
             httpHeaders:
             - name: Host
               value: livenessProbe
             - name: Content-Type
               value: application/json
-            path: {{ default "/health/livez" $livenessProbe.path }}
+            path: {{ default "/health/livez" $livenessProbe.httpGet.path }}
             port: {{ $data.port }}
+          {{- end }}
+          {{- end }}
           initialDelaySeconds: {{ default "10" $livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ default "10" $livenessProbe.periodSeconds }}
           timeoutSeconds: {{ default "1" $livenessProbe.timeoutSeconds }}

@@ -34,8 +34,16 @@ aruba-uxi:
       port: 80
       livenessProbe:
         enabled: true
+        httpGet:
+          enabled: true
+        exec:
+          enabled: false
       readinessProbe:
         enabled: true
+        httpGet:
+          enabled: true
+        exec:
+          enabled: false
       configMap:
         - name: example-configmap01
           create: true
