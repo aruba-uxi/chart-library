@@ -39,8 +39,10 @@ aruba-uxi:
         exec:
           enabled: true
           command: [
-            "echo",
-            "pod-alive"
+            "/bin/sh",
+            "-c",
+            "echo"
+            "`pod-alive`"
           ]
       readinessProbe:
         enabled: false
