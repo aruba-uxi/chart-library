@@ -38,11 +38,7 @@ aruba-uxi:
           enabled: false
         exec:
           enabled: true
-          command: [
-            "bash",
-            "-c",
-            "uptime"
-          ]
+          command: ["/bin/sh", "-c", "echo", "alive"]
       readinessProbe:
         enabled: false
         httpGet:
