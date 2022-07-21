@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 
-- Fix to render probe commands as an array instead of a list
+- Fix to render probe commands as an array instead of a string
 
 ## [8.0.0] - 2022-07-19
 
