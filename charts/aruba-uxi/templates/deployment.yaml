@@ -115,7 +115,7 @@ spec:
           {{- if $readinessProbe.exec.enabled }}
           exec:
             command:
-            {{- range $readinessProbe.exec.command }}
+            {{- range $readinessProbe.exec.command | default (list "bash" "-c" "echo" "ready") }}
               - {{ . }}
             {{- end }}
           {{- end }}
@@ -144,7 +144,7 @@ spec:
           {{- if $livenessProbe.exec.enabled }}
           exec:
             command:
-            {{- range $livenessProbe.exec.command }}
+            {{- range $livenessProbe.exec.command | default (list "bash" "-c" "echo" "alive") }}
               - {{ . }}
             {{- end }}
           {{- end }}
