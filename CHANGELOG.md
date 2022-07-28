@@ -30,7 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Added `admin` application role to be used for `exec`ing into pods and running scipts
+- Added `admin` application role to be used for `exec`ing into pods and running scripts
 
 ## [7.0.1] - 2022-06-15
 
@@ -130,7 +130,7 @@ If some DD_* env variables are not set it will result in ddtrace or datadog tryi
 
 ### Changed
 
-- Fix bug where example config map was being generated unwantedly
+- Fix a bug where the example config map was being generated unwantedly
 
 ## [5.0.0] - 2022-03-31
 
@@ -205,7 +205,7 @@ Staging and Production can not use the same ingress object.
 ### Changed
 
 The allow for multiple repos to be deployed to the same namespace, the image pull secret name needed to be changed to something unique to the repo.
-An error was occurring in ArgoCD when an application was trys to create an image pull secret but it already exists from another repo.
+An error was occurring in ArgoCD when an application was trying to create an image pull secret but it already exists from another repo.
 
 The image pull secret name has been changed from `sealed-image-pull-secret` to `<repository-name>-image-pull-secret` where repository name is taken from `.Values.global.repository`.
 
@@ -570,7 +570,7 @@ Added the `.sealedSecrets.sentryDsn` value which (if present) will create a `sen
 
 ### Changed - Sealed Secrets
 
-Sealed secrets were defined globally with the option of overriding them on a per application or cronjob basis. Each global sealed secret was added to all applications and cronjobs. This proved abit complicated because sealed secrets are dependent on the name and namespace. Previously the name was automatically generated based on where its being used.
+Sealed secrets were defined globally with the option of overriding them on a per application or cronjob basis. Each global sealed secret was added to all applications and cronjobs. This proved to be a bit complicated because sealed secrets are dependent on the name and namespace. Previously the name was automatically generated based on where its being used.
 
 To simplify the sealed secret process this change includes:
 
@@ -619,6 +619,6 @@ asimmetric:
 ### Added
 
 - Higher level of abstraction of kubernetes objects
-- The Asimmetric chart library provides a template for deploying, webapps, workers and cronjobs
+- The Asimmetric chart library provides a template for deploying, web applications, workers and cronjobs
 - See [README.md](https://github.com/aruba-uxi/chart-library/blob/main/charts/aruba-uxi/README.md) and [MIGRATION_NOTES.md](https://github.com/aruba-uxi/chart-library/blob/main/MIGRATION_NOTES.md) for information
 - See [WiKi](https://github.com/aruba-uxi/knowledge/wiki/Chart-Library) for a history of the change
