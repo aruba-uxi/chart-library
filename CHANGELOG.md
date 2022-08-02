@@ -619,6 +619,6 @@ asimmetric:
 ### Added
 
 - Higher level of abstraction of kubernetes objects
-- The Asimmetric chart library provides a template for deploying, web applications, workers and cronjobs
+- The Aruba UXI chart library provides a template for deploying, web applications, workers and cronjobs
 - See [README.md](https://github.com/aruba-uxi/chart-library/blob/main/charts/aruba-uxi/README.md) and [MIGRATION_NOTES.md](https://github.com/aruba-uxi/chart-library/blob/main/MIGRATION_NOTES.md) for information
 - See [WiKi](https://github.com/aruba-uxi/knowledge/wiki/Chart-Library) for a history of the change
