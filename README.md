@@ -13,7 +13,7 @@ A repository to store ArubaUXI helm charts.
 
 ## Version Control
 
-Ths repo follows the [SemVer 2](https://semver.org/) version format.
+This repo follows the [SemVer 2](https://semver.org/) version format.
 
 Given a version number `MAJOR.MINOR.PATCH`, increment the:
 
