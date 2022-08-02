@@ -22,3 +22,8 @@ template-aruba-uxi-staging +ARGS='':
 template-aruba-uxi-production +ARGS='':
 	helm dependency update examples/aruba-uxi-example
 	helm template aruba-uxi-example examples/aruba-uxi-example -f examples/aruba-uxi-example/values-production.yaml {{ARGS}}
+
+# Clean temporary files from repo folder
+clean:
+	rm -rf examples/aruba-uxi-example/charts
+	rm examples/aruba-uxi-example/Chart.lock
