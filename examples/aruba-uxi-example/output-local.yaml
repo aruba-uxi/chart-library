@@ -15,7 +15,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-8.0.2
+    helm.sh/chart: aruba-uxi-8.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -38,7 +38,7 @@ metadata:
   labels:
     app.kubernetes.io/name: admin
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-8.0.2
+    helm.sh/chart: aruba-uxi-8.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -55,7 +55,7 @@ spec:
       labels:
         app.kubernetes.io/name: admin
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-8.0.2
+        helm.sh/chart: aruba-uxi-8.0.1
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
@@ -99,7 +99,7 @@ metadata:
   labels:
     app.kubernetes.io/name: example-service
     app.kubernetes.io/instance: aruba-uxi-example
-    helm.sh/chart: aruba-uxi-8.0.2
+    helm.sh/chart: aruba-uxi-8.0.1
     app.kubernetes.io/managed-by: Helm
     repository: aruba-uxi-example
     namespace: default
@@ -116,7 +116,7 @@ spec:
       labels:
         app.kubernetes.io/name: example-service
         app.kubernetes.io/instance: aruba-uxi-example
-        helm.sh/chart: aruba-uxi-8.0.2
+        helm.sh/chart: aruba-uxi-8.0.1
         app.kubernetes.io/managed-by: Helm
         repository: aruba-uxi-example
         namespace: default
