@@ -52,7 +52,7 @@ aruba-uxi:
       ## Valid roles: webapp, worker
       ##
       role: webapp
-      ## The number of previous ReplicaSets to be retained (optional, fefault: 1)
+      ## The number of previous ReplicaSets to be retained (optional, default: 1)
       revisionHistoryLimit: 3
       ## The number of pod replicas to create (optional, default: 3)
       replicaCount: 1
@@ -96,11 +96,7 @@ aruba-uxi:
           enabled: true
           ## The command to use for liveness testing (optional, default: "")
           ## Calling bash with the -c flag allows injection of environment variables
-          command: [
-            "bash",
-            "-c",
-            "uptime"
-          ]
+          command: ["bash", "-c", "uptime"]
         ## Section to specify the httpGet-type liveness probe
         httpGet:
           ## Toggles the httpGet-type probe (optional, default: true)
@@ -200,7 +196,7 @@ aruba-uxi:
       env:
         AWS_DEFAULT_REGION: example-service
         OVERRIDDEN_VALUE: example-service
-      ## Environment variables that are pulled information from kubernetss object fields for this application (optional, default: {})
+      ## Environment variables that are pulled information from kubernetes object fields for this application (optional, default: {})
       envFields:
         HOST_IP: example-service
         OVERRIDDEN_FIELD_VALUE: example-service
@@ -285,7 +281,7 @@ aruba-uxi:
       env:
         AWS_DEFAULT_REGION: example-cronjob-producer
         OVERRIDDEN_VALUE: example-cronjob-producer
-      ## Environment variables that are pulled information from kubernetss object fields for this cronjob (optional, default: {})
+      ## Environment variables that are pulled information from kubernetes object fields for this cronjob (optional, default: {})
       envFields:
         HOST_IP: example-cronjob-producer
         OVERRIDDEN_FIELD_VALUE: example-cronjob-producer
