@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - what changed
 
+## [8.0.2] - 2022-08-dd02
+
+### Changed
+
+- Updated `values.example.yaml` content. Fixed grammar.
+
 ## [8.0.1] - 2022-07-20
 
 ### Changed
